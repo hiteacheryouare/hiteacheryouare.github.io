@@ -9,6 +9,17 @@
   margin-right: auto;
 }
 
+.ParagraphColorGradient {
+  font-family: Arial;
+  font-size: 20px;
+  font-weight: bold;
+  color: #0000f4;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .button1 {
   color: #fff;
   padding: 20px;
