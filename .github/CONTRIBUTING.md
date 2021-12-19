@@ -57,7 +57,7 @@ If your code gets denied or deleted, don't fret! Read the guidelines, and try to
 Thanks! :heart:
 
 
-Ryan Enterprises
+Ryan
 
 
 inspired by the Ruby on Rails contrib guidelines :heart:
