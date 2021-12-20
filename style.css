@@ -43,3 +43,21 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.button2 {
+  color: #fff;
+  padding: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 30px;
+  display: inline-block;
+  border: none;
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(90deg, hsla(170, 75%, 43%, 1), hsla(270, 75%, 43%, 1));
+  background-size: 100%;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;    
+}
+
