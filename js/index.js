@@ -1,7 +1,7 @@
 import '../styles/css/tailwind.css';
 import '../styles/scss/fonts.scss';
 import '../styles/scss/misc.scss';
-import { DEVICE_type } from './UAutility';
+import { DEVICE_type } from 'uadetect';
 const webDev = document.getElementById('webDev');
 const deskDev = document.getElementById('deskDev');
 const frontDev = document.getElementById('frontDev');

@@ -1,7 +1,8 @@
 import '../styles/css/tailwind.css'
 import '../styles/scss/fonts.scss'
 import '../styles/scss/misc.scss'
-import { DEVICE_type } from './UAutility'
+
+import { DetectScreenOrientation, DetectDeviceType, finiteMobileDeviceType, ORIENTATION_isLandscape, DEVICE_type, DEVICE_finiteType } from 'uadetect';
 
 const webDev = document.getElementById('webDev');
 const deskDev = document.getElementById('deskDev');
