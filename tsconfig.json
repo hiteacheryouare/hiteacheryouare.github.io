@@ -6,5 +6,9 @@
     },
     "files": [
         "./ts/index.ts"
+    ],
+    "lib": [
+        "es6",
+        "dom"
     ]
 }
