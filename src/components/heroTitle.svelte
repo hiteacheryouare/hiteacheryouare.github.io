@@ -7,7 +7,7 @@ let props = {
         mode: "loopOnce",
         interval: 50,
         delay: 10,
-        keepCursorOnFinish: true,
+        keepCursorOnFinish: false,
         showCursorOnDelay: false,
         cursor: true,
         disabled: false,
@@ -29,19 +29,19 @@ let props = {
         --cursor-color={props["--cursor-color"]}
         on:done={() => console.log("The animation has finished!")}
         {...props}>
-        <h3 class="font-secondary font-medium text-secondary text-8xl">
+        <h3 class="font-secondary font-bold text-secondary sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl">
             Ryan Mullin
         </h3>
-        <h3 class="font-secondary font-medium text-secondary text-8xl">
+        <h3 class="font-secondary font-bold text-secondary sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl">
             Fearlessly Dymanic
         </h3>
-        <h3 class="font-secondary font-medium text-secondary text-8xl">
+        <h3 class="font-secondary font-bold text-secondary sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl">
             Status Quo Defying
         </h3>
-        <h3 class="font-secondary font-medium text-secondary text-8xl">
+        <h3 class="font-secondary font-bold text-secondary sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl">
             Goal Driven
         </h3>
-        <h3 class="font-secondary font-medium text-secondary text-8xl">
+        <h3 class="font-secondary font-bold text-secondary sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl">
             Ryan Mullin
         </h3>
     </Typewriter>
