@@ -1,30 +1,20 @@
 <script>
 import '../app.css'
-import {
-    robotStatus,
-    DEVICE_type,
-    OS,
-    browser,
-    cookieStatus
-} from 'uadetect'
+import { DEVICE_type } from 'uadetect'
 import Animals from './animals.svelte'
+import HeroTitle from './heroTitle.svelte'
+const pfp = './img/pfp.png'
+if (DEVICE_type === "mobile") {
+    document.getElementById('pfp').style.display = "none"
+}
 </script>
 
 <main>
-    <div class="bg-primary text-secondary pt-8 pb-96 text-center">
-        <h1 class="font-secondary font-bold sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl">
-            UNDER <br> CONSTRUCTION 🚧
-        </h1>
-        <p class="font-secondary font-bold sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl">
-            This Site is Currently Under CONSTRUCTION
-        </p>
-        <Animals />
-        {#if robotStatus === "ROBOT_controlled"}
-           <p class="font-secondary font-bold sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl">
-            Get out of here you stinky robot :(
-           </p> 
-        {/if}
+    <div class="bg-primary p-10 flex items-center justify-between">
+        <HeroTitle />
+        <img src={pfp} alt="Ryan Mullin" id="pfp">
     </div>
+    <img src="./img/pattenpad.svg" alt="abstract pattern">
 </main>
 
 <style>
