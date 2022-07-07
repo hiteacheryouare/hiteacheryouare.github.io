@@ -42,6 +42,9 @@ let props = {
             Goal Driven
         </h3>
         <h3 class="font-secondary font-bold text-secondary sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl">
+            Pushing What's Possible
+        </h3>
+        <h3 class="font-secondary font-bold text-secondary sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl">
             Ryan Mullin
         </h3>
     </Typewriter>
