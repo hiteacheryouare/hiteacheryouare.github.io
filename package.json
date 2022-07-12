@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "bootstrap-icons": "^1.8.3",
+    "svelte2tsx": "^0.5.11",
     "uadetect": "^3.1.2"
   }
 }
