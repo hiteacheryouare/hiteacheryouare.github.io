@@ -29,19 +29,19 @@ let props = {
         --cursor-color={props["--cursor-color"]}
         on:done={() => console.log("The animation has finished!")}
         {...props}>
-        <h3 class="font-secondary font-bold text-secondary sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl">
+        <h3 class="font-secondary font-bold text-secondary sm:text-xl md:text-4xl lg:text-5xl xl:text-7xl">
             Ryan Mullin
         </h3>
-        <h3 class="font-secondary font-bold text-secondary sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl">
+        <h3 class="font-secondary font-bold text-secondary sm:text-2xl md:text-4xl lg:text-5xl xl:text-7xl">
             Fearlessly Dymanic
         </h3>
-        <h3 class="font-secondary font-bold text-secondary sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl">
+        <h3 class="font-secondary font-bold text-secondary sm:text-2xl md:text-4xl lg:text-5xl xl:text-7xl">
             Status Quo Defying
         </h3>
         <h3 class="font-secondary font-bold text-secondary sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl">
             Goal Driven
         </h3>
-        <h3 class="font-secondary font-bold text-secondary sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl">
+        <h3 class="font-secondary font-bold text-secondary sm:text-2xl md:text-4xl lg:text-5xl xl:text-7xl">
             Pushing What's Possible
         </h3>
         <h3 class="font-secondary font-bold text-secondary sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl">

@@ -1,10 +1,12 @@
-<script>
+<script lang="ts">
 import NavBar from "./components/navBar.svelte";
 import './app.css';
 import Hero from "./components/hero.svelte";
 import Spinner from "./components/spinner.svelte";
 import { onMount } from 'svelte';
-let ready = false;
+import SectionOne from "./components/sectionOne.svelte";
+let ready;
+ready = false
 onMount(() => ready = true);
 
 </script>
@@ -14,8 +16,11 @@ onMount(() => ready = true);
         <Spinner />
     {/if}
     {#if ready}
-        <NavBar />
-        <Hero />
+        <div class="bg-primary">
+            <NavBar />
+            <Hero />
+        </div>
+        <SectionOne />
     {/if}
 </main>
 
