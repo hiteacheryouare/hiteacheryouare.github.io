@@ -19,7 +19,7 @@
     "vite": "^2.9.14"
   },
   "dependencies": {
-    "bootstrap-icons": "^1.9.0",
+    "bootstrap-icons": "^1.9.1",
     "svelte2tsx": "^0.5.12",
     "uadetect": "^3.1.2"
   }
