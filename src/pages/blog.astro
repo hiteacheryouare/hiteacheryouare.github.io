@@ -2,7 +2,7 @@
 import info from "../../node_modules/bootstrap-icons/icons/info-circle.svg";
 import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 import Layout from "../layouts/Layout.astro";
-import BsAlert from "../components/bs-ALert.svelte";
+import BsAlert from '../components/bsAlert.svelte'
 const posts = (await Astro.glob("./data/*.{md,mdx}")).sort(
   (a, b) =>
     new Date(b.frontmatter.pubDate).valueOf() -

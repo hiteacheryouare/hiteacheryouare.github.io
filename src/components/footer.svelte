@@ -1,9 +1,8 @@
 <script>
     var year = new Date()
-    import pattern from '../../img/pattern.svg'
 </script>
 <div class="flex">
-    <img src={pattern} alt="" id="pattern">
+    <img src="/pattern.svg" alt="" id="pattern">
 </div>
 
 <footer class="bg-gray-900 dark:bg-black">
