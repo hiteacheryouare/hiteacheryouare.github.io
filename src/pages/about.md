@@ -4,7 +4,7 @@ title: "About Me" #Required
 description: "Ryan Mullin talks about himself." #Required
 author: "Ryan Mullin" #Required
 pubDate: "Oct 06 2022" #Required
-heroImage: "../../node_modules/bootstrap-icons/icons/info-circle.svg" # You need to have an image, but if you dont know how to resolve a path, I can for you
+heroImage: "/pattern.svg" # You need to have an image, but if you dont know how to resolve a path, I can for you
 urlBase: "about" # don't touch
 ---
 
