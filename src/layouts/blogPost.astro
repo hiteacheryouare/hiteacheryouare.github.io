@@ -1,0 +1,94 @@
+---
+import Layout from "./Layout.astro";
+import "../styles/blog.css";
+export interface Props {
+  content: {
+    title: string;
+    description: string;
+    author: string | undefined;
+    pubDate: string;
+    updatedDate?: string;
+    heroImage: string;
+    urlBase: string;
+  };
+}
+const {
+  content: {
+    title,
+    description,
+    author,
+    pubDate,
+    updatedDate,
+    heroImage,
+    urlBase,
+  },
+} = Astro.props;
+import "bootstrap/dist/css/bootstrap.css";
+---
+
+<Layout title={title} description={description}>
+  <main>
+    <article class="p-10">
+      {
+        heroImage && (
+          <img width={720} height={360} src={heroImage} alt="" class="m-auto" />
+        )
+      }
+      <h1
+        class="font-bold font-primary text-3xl p-4 underline underline-offset-1"
+      >
+        {title}
+      </h1>
+      <h1 class="font-semibold font-primary text-2xl pl-4">
+        <span class="font-medium">by </span>{author}
+      </h1>
+      {pubDate && <time class="p-4">{pubDate}</time>}
+      {
+        updatedDate && (
+          <div>
+            Last updated on <time>{updatedDate}</time>
+          </div>
+        )
+      }
+      <hr />
+      <slot />
+    </article>
+  </main>
+  <style>
+    hr {
+      border-top: 1px solid #ddd;
+      margin: 1rem 0;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    h2 {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    h3 {
+      font-size: 1.7rem;
+      font-weight: bold;
+    }
+    h4 {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+    h6 {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    /* begins to set up font sizes relative to base rem – h1 has been used as an example */
+
+    p {
+      -ms-word-break: break-all;
+      word-break: break-all;
+      word-break: break-word;
+      -moz-hyphens: auto;
+      -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+      hyphens: auto;
+    }
+  </style>
+</Layout>

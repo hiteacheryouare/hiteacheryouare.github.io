@@ -1,0 +1,33 @@
+* { 
+    scroll-behavior: smooth;
+}
+
+*::selection {
+    background-color: #000064;
+    color: #00ffff;
+}
+
+blockquote {
+    position: relative;
+    margin: 80px;
+    width: 400px;
+    padding-left: 40px;
+    border-left: 2px solid hsl(0, 0%, 0%);
+}
+
+.gradientText {
+    @apply text-transparent bg-clip-text;
+    @apply bg-gradient-to-br from-red-600 via-blue-600 to-blue-900
+    /* @apply bg-gradient-to-br from-primary via-blue-600 to-blue-400; */
+}
+
+.mainHeader {
+    @apply text-center font-primary font-bold sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl p-4
+}
+
+@media (prefers-color-scheme: dark) {
+    *::selection {
+        background-color: #197278;
+        color: white;
+    }
+}
