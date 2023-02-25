@@ -1,6 +1,7 @@
 import "../../styles/globals.css";
 import 'bootstrap/scss/bootstrap-reboot.scss'
 import Navbar from "../../components/navBar"
+import Footer from "../../components/footer";
 import { Inter_Tight } from '@next/font/google'
 const interTight = Inter_Tight({
     subsets: [
@@ -28,13 +29,18 @@ export default function Layout({
             <head />
 
             <body className={interTight.className}>
-                <Navbar />
-                <div
-                    id="page-top-spacer"
-                    className="h-12"
-                ></div>
-                {children}
-                <div id="page-bottom-spacer" className="h-16"></div>
+                <div className="dark:bg-neutral-900 dark:text-white">
+                    <Navbar />
+                    <div
+                        id="page-top-spacer"
+                        className="h-12"
+                    ></div>
+                    {children}
+                    <div id="page-bottom-spacer" className="h-16"></div>
+                    <div className="">
+                        <Footer />
+                    </div>
+                </div>
             </body>
         </html>
     );

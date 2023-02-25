@@ -4,16 +4,16 @@ import PostHero from "../../components/postHero";
 import Link from "next/link";
 
 export default function Blog() {
-    const posts = getAllPosts(["title", "date", "excerpt", "coverImage", "slug"]);
+    const posts = getAllPosts(["title", "date", "excerpt", "coverImage", "authorName", "slug"]);
     const recentPosts = posts.slice(0, 2);
 
     return (
         <div className="container mx-auto px-5">
             <main>
                 <div className="space-y-4">
-                    <h1 className="text-center text-5xl">NextJS 13 Blog</h1>
+                    <h1 className="text-center text-5xl font-bold">Ryan Mullin&apos;s Blog</h1>
                     <p className="text-center text-xl">
-                        Welcome to a dynamic markdown blog using NextJS 13.
+                        A wonderful collection of my thoughts and feelings
                     </p>
                 </div>
 

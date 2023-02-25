@@ -1,10 +1,10 @@
 ---
-title: 'Learn How to Pre-render Pages Using Static Generation with Next.js'
-excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus.'
-coverImage: '/hh.bmp'
-date: '2020-03-16T05:35:07.322Z'
-authorName: Tim Neutkens
-authorPicture: '/hh.bmp'
+title: 'The New Blog is Alive!'
+excerpt: 'This frankenstein of a blog, portfolio, and landing page is now alive and available on the hiteacheryouare domain!'
+coverImage: '/standard.png'
+date: '2023-02-25T04:26:00Z'
+authorName: Ryan Mullin
+authorPicture: '/FullColorFavi.svg'
 ogImage: '/hh.bmp'
 ---
 

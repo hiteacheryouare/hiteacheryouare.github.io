@@ -25,6 +25,7 @@ export default function PostHero() {
                     width={400}
                     height={400}
                     style={{ width: "100%" }}
+                    className="m-auto"
                 />
 
                 <div className="grid mt-4 md:grid-cols-2 grid-cols-1">

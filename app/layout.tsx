@@ -2,6 +2,8 @@ import 'bootstrap/scss/bootstrap-reboot.scss'
 import 'bootstrap/scss/bootstrap.scss'
 import '../styles/globals.css'
 import { Inter_Tight } from '@next/font/google'
+import Navbar from '../components/navBar'
+import Footer from '../components/footer'
 const interTight = Inter_Tight({
   subsets: [
     "cyrillic",
@@ -21,7 +23,13 @@ export default function RootLayout({
   return (
     <html>
       <head />
-      <body className={interTight.className}>{children}</body>
+      <body className={interTight.className}>
+        <div className='dark:bg-neutral-900 dark:text-white'>
+          <Navbar />
+          {children}
+          <Footer />
+        </div>
+      </body>
     </html>
   )
 }

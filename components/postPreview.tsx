@@ -17,12 +17,15 @@ export default function PostPreview({ post }: { post: Items }) {
                         src={post.coverImage}
                         width={400}
                         height={400}
-                        style={{ width: "100%" }}
+                        style={{ width: "75%" }}
                     />
                 )}
                 <div className="mt-4 space-y-2">
-                    <p className="font-semibold text-xl group-hover:underline">
+                    <p className="font-bold text-xl group-hover:underline">
                         {post.title}
+                    </p>
+                    <p className="text-xl">
+                        <span className="font-normal">by </span> <span className="font-semibold">{post.authorName}</span>
                     </p>
                     <DateFormatter dateString={post.date} />
                     <p>{post.excerpt}</p>
