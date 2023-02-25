@@ -27,6 +27,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
                         <span className="font-normal">by </span> <span className="font-semibold">{post.authorName}</span>
                     </p>
                     <DateFormatter dateString={post.date} />
+                    <hr />
                     <div className="space-10"
                         dangerouslySetInnerHTML={{ __html: content }}
                     />
