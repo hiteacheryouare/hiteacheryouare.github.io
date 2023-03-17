@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image';
-const Footer = () => {
+const Footer = async () => {
     var year = new Date().getFullYear()
+    const res = await fetch("https://random-d.uk/api/quack");
+    const data = await res.json()
   return (
     <footer className="bg-gray-900">
       <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
@@ -23,6 +25,11 @@ const Footer = () => {
             </Link>
           </div>
           <div className="px-5 py-2">
+            <Link href="/projects" className="text-gray-400 hover:text-white">
+              Projects
+            </Link>
+          </div>
+          <div className="px-5 py-2">
             <Link
               href="https://github.com/hiteacheryouare"
               className="text-gray-400 hover:text-white"
@@ -31,9 +38,12 @@ const Footer = () => {
             </Link>
           </div>
         </nav>
-        <p className="mt-8 text-center text-gray-400">
+        <p className="mt-8 mb-8 text-center text-gray-400">
           &copy; {year} The RyanEnterprises Team. All rights reserved.
         </p>
+        <div className="flex content-center justify-center">
+          <img src={data.url} alt="duck" />
+        </div>
       </div>
     </footer>
   );

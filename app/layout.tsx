@@ -1,5 +1,4 @@
-import 'bootstrap/scss/bootstrap-reboot.scss'
-import 'bootstrap/scss/bootstrap.scss'
+import '../styles/bootstrap.scss'
 import '../styles/globals.css'
 import { Inter_Tight } from '@next/font/google'
 import Navbar from '../components/navBar'

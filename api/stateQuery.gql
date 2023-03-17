@@ -1,0 +1,19 @@
+query NewJersey {
+  state(locationCode: { country_code: "US", state_code: "NJ" }) {
+    # State Fields
+    id
+    name
+    country_id
+    cities(page: { first: 1, after: "eyJjdXJzb3IiOjEzNzAyOH0" }) {
+      totalCount
+      edges {
+        cursor
+        node {
+          id
+          name
+        }
+      }
+    }
+    # ...
+  }
+}

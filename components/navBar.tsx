@@ -30,6 +30,9 @@ const Navbar = (): JSX.Element => {
                                 <Link href="/" className="text-white font-bold text-xl">
                                     Home
                                 </Link>
+                                <Link href="/projects" className="text-white font-bold text-xl">
+                                    Projects
+                                </Link>
                                 <Link href="/blog" className="text-white font-bold text-xl">
                                     Blog
                                 </Link>
