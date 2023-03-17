@@ -2,9 +2,10 @@
 
 const { title, description } = Astro.props;
 import { SEO } from 'astro-seo'
-import '../globals.css'
+import '../globals.scss'
 import Footer from '../components/footer.svelte';
 import Nav from '../components/nav.vue';
+import '../styles/bootstrap.scss'
 ---
 
 <!DOCTYPE html>
@@ -31,8 +32,8 @@ import Nav from '../components/nav.vue';
 					optional: {
 						description: description,
 						locale: "en-US",
-						siteName: "The Ryan Enterprises Blog"
-					}
+						siteName: "Ryan Mullin's Blog"
+					},
 				}
 			}
 		/>

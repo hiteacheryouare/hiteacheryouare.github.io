@@ -1,5 +1,4 @@
 <script>
-    import 'bootstrap/dist/css/bootstrap.css'
     export let type;
     export let icon;
     export let iconAlt;
@@ -7,7 +6,7 @@
     export let actionLink;
     export let actionText;
     const load = async () => {
-      await import('bootstrap/dist/js/bootstrap.esm')
+      await import('bootstrap/js/dist/alert')
     }
     import { fade } from 'svelte/transition'
 </script>

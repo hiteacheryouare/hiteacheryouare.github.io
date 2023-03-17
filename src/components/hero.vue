@@ -19,7 +19,7 @@
               <div class="hidden sm:mb-8 sm:flex sm:justify-center">
                 <div class="relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                   <span class="text-gray-600">
-                    Announcing our next round of funding. <a href="#" class="font-semibold text-indigo-600"><span class="absolute inset-0" aria-hidden="true" />Read more <span aria-hidden="true">&rarr;</span></a>
+                    Read the latest post. <a href="#" class="font-semibold text-indigo-600"><span class="absolute inset-0" aria-hidden="true" /><span aria-hidden="true">&rarr;</span></a>
                   </span>
                 </div>
               </div>
