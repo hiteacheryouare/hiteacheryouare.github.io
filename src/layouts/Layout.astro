@@ -4,7 +4,7 @@ const { title, description } = Astro.props;
 import { SEO } from 'astro-seo'
 import '../globals.scss'
 import Footer from '../components/footer.svelte';
-import Nav from '../components/nav.vue';
+import NavBar from '../components/nav.vue';
 import '../styles/bootstrap.scss'
 ---
 
@@ -43,7 +43,7 @@ import '../styles/bootstrap.scss'
 	</head>
 	<body>
 		<nav>
-			<Nav client:load />
+			<NavBar client:load />
 		</nav>
 		<slot />
 		<Footer />

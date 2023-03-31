@@ -1,6 +1,5 @@
 ---
-import info from "../../node_modules/bootstrap-icons/icons/info-circle.svg";
-import '../styles/bootstrap.scss'
+import info from "bootstrap-icons/icons/info-circle.svg";
 import '../styles/blog.scss'
 import Layout from "../layouts/Layout.astro";
 import BsAlert from '../components/bsAlert.svelte'
@@ -9,16 +8,6 @@ const posts = (await Astro.glob("./data/*.{md,mdx}")).sort(
     new Date(b.frontmatter.pubDate).valueOf() -
     new Date(a.frontmatter.pubDate).valueOf()
 );
-posts.map((post) => console.log(post));
-posts.map(
-  (post) =>
-    posts.map(
-      (post) => posts.map((post) => posts.map((post) => void 0), void 0),
-      void 0
-    ),
-  void 0
-),
-  void 0;
 ---
 
 <Layout title="Ryan Mullin - Blog">
@@ -51,7 +40,7 @@ posts.map(
                 {post.frontmatter.title}
               </a>{" "}
               <br />
-              <p class="font-bold font-secondary card-subtitle">{post.frontmatter.author}</p>
+              <p class="font-bold font-secondary card-subtitle text-neutral-800">{post.frontmatter.author}</p>
               <time datetime={post.frontmatter.pubDate} class="card-text text-black">
                 {new Date(post.frontmatter.pubDate).toLocaleDateString(
                   "en-us",

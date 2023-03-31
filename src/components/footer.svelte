@@ -42,4 +42,7 @@
             color: hsl(184, 66%, 28%);
         }
     }
+    * {
+        margin-bottom: 0;
+    }
 </style>
