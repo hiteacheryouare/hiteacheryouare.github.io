@@ -4,8 +4,11 @@ title: "Undeniable proof that rubber ducks can do no wrong" #Required
 description: "Rubber ducks are not only fun to play with, but they can also help you relax and reduce stress." #Required
 author: "Ryan Mullin" #Required
 pubDate: "Mar 17 2023" #Required
-heroImage: "/ducky.png" # You need to have an image, but if you dont know how to resolve a path, I can for you
+heroImage: 
+    src: "/ducky.png"
+    alt: "Rubber duck on a lake"
 urlBase: "rubber-ducks-can-do-no-wrong" # don't touch
+slug: rubber-ducks-can-do-no-wrong
 ---
 # Undeniable proof that rubber ducks can do no wrong
 

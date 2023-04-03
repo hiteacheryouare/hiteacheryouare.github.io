@@ -1,0 +1,7 @@
+$prefix: "ry-";
+$primary: #000064;
+$secondary: #00ffff;
+$info: mix($primary, $secondary);
+$tertiary: #197278;
+
+@import '../../node_modules/bootstrap/scss/bootstrap-reboot.scss';

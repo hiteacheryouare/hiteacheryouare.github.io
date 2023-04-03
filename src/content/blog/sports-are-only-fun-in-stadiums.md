@@ -4,8 +4,11 @@ title: "Sports are only entertaining to watch in the stadium" #Required
 description: "Today I want to share with you my opinion on why sports (for the most part) are only entertaining to watch in the stadium." #Required
 author: "Ryan Mullin" #Required
 pubDate: "Mar 31 2023" #Required
-heroImage: "/r.jpg" # You need to have an image, but if you dont know how to resolve a path, I can for you
+heroImage: 
+    src: "/r.jpg"
+    alt: "Citizens Bank Park" 
 urlBase: "sports-are-only-fun-in-stadiums" # don't touch
+slug: sports-are-only-fun-in-stadiums
 ---
 Hey everyone, welcome back to my blog! Today I want to share with you my opinion on why sports (for the most part) are only entertaining to watch in the stadium. I know some of you might disagree with me, but hear me out.
 

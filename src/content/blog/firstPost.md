@@ -4,8 +4,11 @@ title: "First Post" #Required
 description: "This is the first post of the blog, for real." #Required
 author: "Ryan Mullin" #Required
 pubDate: "Nov 16 2022" #Required
-heroImage: "/FullColor.svg" # You need to have an image, but if you dont know how to resolve a path, I can for you
+heroImage: 
+    src: "/FullColor.svg"
+    alt: "The Ryan Enterprises Logo"
 urlBase: "firstPost" # don't touch
+slug: firstPost
 ---
 
 

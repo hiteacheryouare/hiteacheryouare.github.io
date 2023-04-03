@@ -4,8 +4,11 @@ title: "Vercel is Vendor Locking React" #Required
 description: "Why I'm not a fan of Vercel's Next.js lock-in strategy" #Required
 author: "Ryan Mullin" #Required
 pubDate: "Mar 17 2023" #Required
-heroImage: "/vercel.bmp" # You need to have an image, but if you dont know how to resolve a path, I can for you
+heroImage: 
+    src: "/vercel.bmp"
+    alt: "The vercel logo"
 urlBase: "vercel-vendor-locking-react" # don't touch
+slug: vercel-vendor-locking-react
 ---
 
 # Why I'm not a fan of Vercel's Next.js lock-in strategy
