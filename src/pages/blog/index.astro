@@ -4,6 +4,7 @@ import '../../styles/blog.scss'
 import Layout from "../../layouts/Layout.astro";
 import BsAlert from '../../components/bsAlert.svelte'
 import { getCollection } from 'astro:content'
+import GradientHeader from "../../components/gradientHeader.svelte";
 const posts = await getCollection("blog")
 posts.sort(
   (a, b) =>
@@ -13,9 +14,7 @@ posts.sort(
 ---
 
 <Layout title="Ryan Mullin - Blog">
-  <h1 class="mainHeader">
-    Ryan Mullin's <span class="gradientText">Blog</span>
-  </h1>
+  <GradientHeader title="Blog" client:load />
   <div class="mx-10">
     <BsAlert
       client:idle

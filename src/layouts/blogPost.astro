@@ -65,7 +65,7 @@ const {
     />
   </head>
   <body>
-    <nav>
+    <nav class="p-10">
       <NavBar client:load />
     </nav>
     <main class="dark:bg-black dark:text-white">
@@ -83,7 +83,7 @@ const {
           {title}
         </h1>
         <h1 class="font-semibold font-primary text-2xl">
-          <span class="font-medium">by</span>{author}
+          <span class="font-medium">by </span>{author}
         </h1>
         {pubDate && <time class="">{pubDate}</time>}
         {
