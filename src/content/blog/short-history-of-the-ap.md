@@ -5,7 +5,7 @@ description: "A short essay of the Associated Press, and how they continue to wo
 author: "Ryan Mullin" #Required
 pubDate: "Apr 17 2023" #Required
 heroImage: 
-    src: "https://static.wikia.nocookie.net/logopedia/images/b/b8/AP_logo_2012.svg/revision/latest?cb=20120228201531"
+    src: "/AP_logo_2012.svg"
     alt: "AP logo"
 ---
 
