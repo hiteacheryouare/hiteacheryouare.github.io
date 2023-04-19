@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content';
+const schema = z;
 const blog = defineCollection({
   schema: z.object({
     title: z.string(),
@@ -12,4 +13,19 @@ const blog = defineCollection({
     urlBase: z.string().optional()
   }),
 });
-export const collections = { blog };
+
+const portfolio = defineCollection({
+  schema: schema.object({
+    name: schema.string(),
+    description: schema.string(),
+    date: schema.string(),
+    freelance: schema.boolean().default(false),
+    heroImage: schema.object({
+        src: schema.string().default("/FullColor.svg"),
+        alt: schema.string().default("The Ryan Enterprises Logo"),
+    }).optional(),
+    tags: schema.array(schema.string()).optional()
+  }),
+});
+
+export const collections = { blog, portfolio };
