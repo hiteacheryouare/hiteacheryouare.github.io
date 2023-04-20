@@ -1,0 +1,31 @@
+---
+import { getEntryBySlug, getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("portfolio")
+  return projects.map((project) => {
+    return {
+      params: {
+        project: project.slug
+      },
+    }
+  })
+}
+// 1. Get the article from the incoming server request
+const { project } = Astro.params;
+if (project === undefined) {
+  throw new Error("Slug is required");
+}
+// 2. Query for the entry directly using the request article
+const entry = await getEntryBySlug("portfolio", project);
+// 3. Redirect if the entry does not exist
+if (entry === undefined) {
+  Astro.response.status = 404;
+  return Astro.redirect("/404");
+}
+// 4. (Optional) Render the entry to HTML in the template
+const { Content } = await entry.render();
+import '../../../styles/bootstrap.scss'
+---
+
+<Content />

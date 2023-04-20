@@ -1,0 +1,110 @@
+---
+import { SEO } from "astro-seo";
+import Footer from "../components/footer.svelte";
+import NavBar from "../components/nav.vue";
+import "../globals.scss";
+import Tag from "../components/tag.svelte";
+export interface Props {
+  content: {
+    name: string,
+    description: string,
+    date:string,
+    freelance: boolean,
+    url: string
+    heroImage: {
+        src: string
+        alt: string
+    },
+    tags: string[]
+  };
+}
+const {
+  content: {
+    name,
+    description,
+    date,
+    freelance,
+    url,
+    heroImage,
+    tags
+  },
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/FullColorFavi.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <SEO
+      title={name}
+      description={description}
+      noindex={false}
+      nofollow={false}
+      openGraph={{
+        basic: {
+          title: name,
+          type: "website",
+          image: "/standard.png",
+          url: Astro.request.url,
+        },
+        optional: {
+          description: description,
+          locale: "en-US",
+          siteName: "Ryan Mullin's Blog",
+        },
+      }}
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="p-10">
+      <NavBar client:load />
+    </nav>
+    <main class="dark:bg-black dark:text-white">
+      <article class="p-10">
+        <img
+          width={500}
+          height={500}
+          src={heroImage.src}
+          alt={heroImage.alt}
+          class="m-auto"
+        />
+        <a
+        href={url}
+          class="font-bold font-primary text-3xl pt-4 underline underline-offset-1"
+        >
+          {name}
+      </a>
+        <h1 class="font-semibold font-primary text-2xl">
+          {description}
+        </h1>
+        {date && <time class="">Since {date}</time>}
+        <div class="p-4">
+          {freelance ? 
+          <div class="badge rounded-pill text-bg-primary">
+            Freelanced!
+          </div>
+          : <div class="badge rounded-pill text-bg-primary">
+              Pet Project!
+            </div>
+          }
+        </div>
+          <div class="flex justify-evenly">
+            {tags.map(tag => <Tag text={tag} />)}
+          </div>
+        <hr />
+        <slot />
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>

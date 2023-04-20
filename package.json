@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@astrojs/prefetch": "^0.2.1",
+    "@esbuild/win32-x64": "^0.17.17",
     "@headlessui/react": "^1.7.14",
     "@headlessui/vue": "^1.7.13",
     "@heroicons/vue": "^2.0.17",

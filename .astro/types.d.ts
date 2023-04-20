@@ -107,42 +107,42 @@ declare module 'astro:content' {
   slug: "code-whisperer-is-whispering-in-my-ears",
   body: string,
   collection: "blog",
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] },
 "firstPost.md": {
   id: "firstPost.md",
   slug: "firstPost",
   body: string,
   collection: "blog",
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] },
 "rubber-ducks-can-do-no-wrong.md": {
   id: "rubber-ducks-can-do-no-wrong.md",
   slug: "rubber-ducks-can-do-no-wrong",
   body: string,
   collection: "blog",
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] },
 "short-history-of-the-ap.md": {
   id: "short-history-of-the-ap.md",
   slug: "short-history-of-the-ap",
   body: string,
   collection: "blog",
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] },
 "sports-are-only-fun-in-stadiums.md": {
   id: "sports-are-only-fun-in-stadiums.md",
   slug: "sports-are-only-fun-in-stadiums",
   body: string,
   collection: "blog",
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] },
 "vercel-vendor-locking-react.md": {
   id: "vercel-vendor-locking-react.md",
   slug: "vercel-vendor-locking-react",
   body: string,
   collection: "blog",
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] },
 },
 "portfolio": {
@@ -151,11 +151,11 @@ declare module 'astro:content' {
   slug: "demotivator",
   body: string,
   collection: "portfolio",
-  data: any
+  data: InferEntrySchema<"portfolio">
 } & { render(): Render[".md"] },
 },
 
 	};
 
-	type ContentConfig = never;
+	type ContentConfig = typeof import("../src/content/config");
 }

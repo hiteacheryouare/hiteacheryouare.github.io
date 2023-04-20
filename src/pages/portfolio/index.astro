@@ -1,0 +1,72 @@
+---
+import info from "bootstrap-icons/icons/info-circle.svg";
+import '../../styles/blog.scss'
+import Layout from "../../layouts/Layout.astro";
+import BsAlert from '../../components/bsAlert.svelte'
+import { getCollection } from 'astro:content'
+import GradientHeader from "../../components/gradientHeader.svelte";
+import Tag from "../../components/tag.svelte";
+const projects = await getCollection("portfolio")
+projects.sort(
+  (a, b) =>
+    new Date(b.data.date).valueOf() -
+    new Date(a.data.date).valueOf()
+);
+---
+
+<Layout title="Ryan Mullin - Portfolio">
+  <GradientHeader title="Portfolio" client:load />
+  <div class="mx-10">
+    <BsAlert
+      client:idle
+      type="info"
+      icon={info}
+      iconAlt="Info"
+      text="All projects organized by date. Stay and scroll a while!"
+      actionLink=""
+      actionText=""
+    />
+  </div>
+  <section>
+    <ul class="grid lg:grid-cols-3 portrait:grid-cols-1 grid-cols-2 pr-8">
+      {
+        projects.map((project) => (
+          <li class="card p-6 shadow-md">
+            <div class="rounded-lg p-4">
+              <img src={project.data.heroImage.src} alt="" class="m-auto p-4 card-img-top" />
+              <div class="card-body">
+                <a
+                href={`/portfolio/projects/${project.slug}`}
+                class="font-bold card-title font-secondary"
+              >
+                {project.data.name}
+              </a>{" "}
+              <br />
+              <div class="flex justify-evenly">
+                {project.data.tags.map(tag => <Tag text={tag} />)}
+            </div>
+              <time datetime={project.data.date} class="card-text text-black">
+                {new Date(project.data.date).toLocaleDateString(
+                  "en-us",
+                  {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  }
+                )}
+              </time>
+              <p class="p-4 text-black">{project.data.description}</p>
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Layout>
+
+<style>
+  img {
+    width: 350px;
+  }
+</style>

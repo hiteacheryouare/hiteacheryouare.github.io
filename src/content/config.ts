@@ -19,6 +19,7 @@ const portfolio = defineCollection({
     name: schema.string(),
     description: schema.string(),
     date: schema.string(),
+    url: schema.string().url(),
     freelance: schema.boolean().default(false),
     heroImage: schema.object({
         src: schema.string().default("/FullColor.svg"),
