@@ -102,6 +102,13 @@ declare module 'astro:content' {
 
 	const entryMap: {
 		"blog": {
+"bootstrap-aint-that-bad.md": {
+  id: "bootstrap-aint-that-bad.md",
+  slug: "bootstrap-aint-that-bad",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] },
 "code-whisperer-is-whispering-in-my-ears.md": {
   id: "code-whisperer-is-whispering-in-my-ears.md",
   slug: "code-whisperer-is-whispering-in-my-ears",
@@ -149,6 +156,13 @@ declare module 'astro:content' {
 "demotivator.md": {
   id: "demotivator.md",
   slug: "demotivator",
+  body: string,
+  collection: "portfolio",
+  data: InferEntrySchema<"portfolio">
+} & { render(): Render[".md"] },
+"launchpad.md": {
+  id: "launchpad.md",
+  slug: "launchpad",
   body: string,
   collection: "portfolio",
   data: InferEntrySchema<"portfolio">
