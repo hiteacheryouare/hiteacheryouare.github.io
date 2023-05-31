@@ -1,5 +1,4 @@
 ---
-import info from "bootstrap-icons/icons/info-circle.svg";
 import '../../styles/blog.scss'
 import Layout from "../../layouts/Layout.astro";
 import BsAlert from '../../components/bsAlert.svelte'
@@ -19,8 +18,7 @@ posts.sort(
     <BsAlert
       client:idle
       type="info"
-      icon={info}
-      iconAlt="Info"
+      icon={"info"}
       text="All posts organized by date. Stay and scroll a while!"
       actionLink=""
       actionText=""
@@ -52,7 +50,7 @@ posts.sort(
                   }
                 )}
               </time>
-              <p class="p-4 text-black">{post.data.description}</p>
+              <p class="p-4">{post.data.description}</p>
               </div>
             </div>
           </li>

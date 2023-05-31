@@ -3,5 +3,9 @@ $primary: #000064;
 $secondary: #00ffff;
 $info: mix($primary, $secondary);
 $tertiary: #197278;
-
+@media (prefers-color-scheme: dark) {
+	* {
+		color: white
+	}
+}
 @import '../../node_modules/bootstrap/scss/bootstrap-reboot.scss';

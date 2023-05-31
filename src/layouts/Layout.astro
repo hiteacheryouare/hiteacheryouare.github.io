@@ -5,11 +5,16 @@ import { SEO } from 'astro-seo'
 import '../globals.scss'
 import Footer from '../components/footer.svelte';
 import NavBar from '../components/nav.vue';
-import '../styles/bootstrap.scss'
+import '../styles/bootstrap.scss';
+let bsTheme: "dark" | "light" = 'light';
+var date = new Date();
+if (date.getHours() >= 20)  {
+	bsTheme = "dark"
+}
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme={bsTheme}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />

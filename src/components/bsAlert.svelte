@@ -1,7 +1,6 @@
 <script>
     export let type;
     export let icon;
-    export let iconAlt;
     export let text;
     export let actionLink;
     export let actionText;
@@ -13,7 +12,7 @@
 
 <div transition:fade class="alert alert-{type} d-flex align-items-center alert-dismissible" role="alert" on:mouseover={load} on:focus={load}>
     <span>
-        <img src={icon} alt={iconAlt}>
+        <i class={`bi bi-${icon}`} />
     </span>
       &nbsp;
     <span>

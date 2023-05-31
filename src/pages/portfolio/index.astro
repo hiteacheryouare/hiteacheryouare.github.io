@@ -1,5 +1,4 @@
 ---
-import info from "bootstrap-icons/icons/info-circle.svg";
 import '../../styles/blog.scss'
 import Layout from "../../layouts/Layout.astro";
 import BsAlert from '../../components/bsAlert.svelte'
@@ -20,8 +19,7 @@ projects.sort(
     <BsAlert
       client:idle
       type="info"
-      icon={info}
-      iconAlt="Info"
+      icon={"info"}
       text="All projects organized by date. Stay and scroll a while!"
       actionLink=""
       actionText=""
