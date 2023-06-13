@@ -102,51 +102,9 @@ declare module 'astro:content' {
 
 	const entryMap: {
 		"blog": {
-"bootstrap-aint-that-bad.md": {
-  id: "bootstrap-aint-that-bad.md",
-  slug: "bootstrap-aint-that-bad",
-  body: string,
-  collection: "blog",
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".md"] },
-"code-whisperer-is-whispering-in-my-ears.md": {
-  id: "code-whisperer-is-whispering-in-my-ears.md",
-  slug: "code-whisperer-is-whispering-in-my-ears",
-  body: string,
-  collection: "blog",
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".md"] },
-"firstPost.md": {
-  id: "firstPost.md",
-  slug: "firstPost",
-  body: string,
-  collection: "blog",
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".md"] },
-"rubber-ducks-can-do-no-wrong.md": {
-  id: "rubber-ducks-can-do-no-wrong.md",
-  slug: "rubber-ducks-can-do-no-wrong",
-  body: string,
-  collection: "blog",
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".md"] },
-"short-history-of-the-ap.md": {
-  id: "short-history-of-the-ap.md",
-  slug: "short-history-of-the-ap",
-  body: string,
-  collection: "blog",
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".md"] },
-"sports-are-only-fun-in-stadiums.md": {
-  id: "sports-are-only-fun-in-stadiums.md",
-  slug: "sports-are-only-fun-in-stadiums",
-  body: string,
-  collection: "blog",
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".md"] },
-"vercel-vendor-locking-react.md": {
-  id: "vercel-vendor-locking-react.md",
-  slug: "vercel-vendor-locking-react",
+"redefining-the-blog.md": {
+  id: "redefining-the-blog.md",
+  slug: "redefining-the-blog",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">

@@ -10,7 +10,7 @@ const blog = defineCollection({
         src: z.string().default("/FullColor.svg"),
         alt: z.string().default("The Ryan Enterprises Logo"),
     }).optional(),
-    urlBase: z.string().optional()
+    urlBase: z.string().url().optional()
   }),
 });
 

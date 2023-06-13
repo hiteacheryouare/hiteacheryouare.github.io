@@ -39,8 +39,8 @@ posts.sort(
                 {post.data.title}
               </a>{" "}
               <br />
-              <p class="font-bold font-secondary card-subtitle text-neutral-800">{post.data.author}</p>
-              <time datetime={post.data.pubDate} class="card-text text-black">
+              <p class="font-bold font-secondary card-subtitle">{post.data.author}</p>
+              <time datetime={post.data.pubDate} class="card-text">
                 {new Date(post.data.pubDate).toLocaleDateString(
                   "en-us",
                   {

@@ -15,13 +15,13 @@
       </div>
       <div>
                   <h1 id="pwp" class="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl dark:text-white">Pushing What's Possible <p class="bg-primary text-secondary dark:bg-tertiary dark:text-white rounded"> in every aspect of life.</p></h1>
-                  <p class="mt-6 text-lg leading-8 text-gray-600 sm:text-center" >Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
+                  <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-white sm:text-center" >Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
                   <div class="mt-8 flex gap-x-4 sm:justify-center">
                     <a href="/blog" class="inline-block rounded-lg bg-primary dark:bg-tertiary px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700">
                       Read the blog
                       <span class="text-indigo-200" aria-hidden="true">&rarr;</span>
                     </a>
-                    <a href="/about" class="inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                    <a href="/about" class="inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-900 dark:text-white  ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                       About
                       <span class="text-gray-400" aria-hidden="true">&rarr;</span>
                     </a>

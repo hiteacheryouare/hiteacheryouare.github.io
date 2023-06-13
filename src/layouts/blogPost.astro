@@ -28,6 +28,7 @@ const {
     urlBase,
   },
 } = Astro.props;
+
 ---
 
 <!DOCTYPE html>
@@ -38,25 +39,37 @@ const {
     <link rel="icon" type="image/svg+xml" href="/FullColorFavi.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <SEO
-      title={title}
-      description={description}
-      noindex={false}
-      nofollow={false}
-      openGraph={{
-        basic: {
-          title: title,
-          type: "website",
-          image: "/standard.png",
-          url: Astro.request.url,
-        },
-        optional: {
-          description: description,
-          locale: "en-US",
-          siteName: "Ryan Mullin's Blog",
-        },
-      }}
-    />
+    <script>
+			if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.body.setAttribute('data-bs-theme', 'dark')
+			} else {
+				document.body.setAttribute('data-bs-theme', 'light')
+			}
+		</script>
+		<SEO 
+			title={title}
+			description={description}
+			noindex={false} 
+			nofollow={false}
+			openGraph={
+				{
+					basic: {
+						title: title,
+						type: "website",
+						image: "/standard.png",
+						url: Astro.request.url
+					},
+					optional: {
+						description: description,
+						locale: "en-US",
+						siteName: "Ryan Mullin's Blog"
+					},
+					image: {
+						alt: "double arrow"
+					}
+				}
+			}
+		/>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

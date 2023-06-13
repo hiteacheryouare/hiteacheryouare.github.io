@@ -6,21 +6,24 @@ import '../globals.scss'
 import Footer from '../components/footer.svelte';
 import NavBar from '../components/nav.vue';
 import '../styles/bootstrap.scss';
-let bsTheme: "dark" | "light" = 'light';
-var date = new Date();
-if (date.getHours() >= 20)  {
-	bsTheme = "dark"
-}
+
 ---
 
 <!DOCTYPE html>
-<html lang="en" data-bs-theme={bsTheme}>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/FullColorFavi.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description}>
+		<script>
+			if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.body.setAttribute('data-bs-theme', 'dark')
+			} else {
+				document.body.setAttribute('data-bs-theme', 'light')
+			}
+		</script>
 		<SEO 
 			title={title}
 			description={description}
@@ -39,6 +42,9 @@ if (date.getHours() >= 20)  {
 						locale: "en-US",
 						siteName: "Ryan Mullin's Blog"
 					},
+					image: {
+						alt: "double arrow"
+					}
 				}
 			}
 		/>
