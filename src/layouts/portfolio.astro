@@ -85,20 +85,20 @@ const {
     </nav>
     <main class="dark:bg-black dark:text-white">
       <article class="p-10">
-        <img
-          width={500}
-          height={500}
-          src={heroImage.src}
-          alt={heroImage.alt}
-          class="m-auto"
-        />
         <a
-        href={url}
-          class="font-bold font-primary text-3xl pt-4 underline underline-offset-1"
-        >
-          {name}
-      </a>
-        <h1 class="font-semibold font-primary text-2xl">
+          href={url}
+            class="font-extrabold font-primary text-4xl lg:text-9xl p-8 bg-primary text-secondary rounded-lg selection:bg-secondary selection:text-primary"
+          >
+            {name}
+        </a>
+        <img
+        width={500}
+        height={500}
+        src={heroImage.src}
+        alt={heroImage.alt}
+        class="m-auto"
+        />
+        <h1 class="font-semibold font-primary pl-4 text-sm lg:text-2xl text-secondary bg-primary overflow-hidden">
           {description}
         </h1>
         {date && <time class="">Since {date}</time>}

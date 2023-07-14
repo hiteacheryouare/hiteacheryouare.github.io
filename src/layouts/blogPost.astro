@@ -81,21 +81,21 @@ const {
     <nav class="p-10">
       <NavBar client:load />
     </nav>
-    <main class="dark:bg-black dark:text-white">
+    <main class=" dark:text-white font-primary max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <article class="p-10">
+        <h1
+          class="font-extrabold font-primary text-5xl lg:text-9xl p-8 bg-primary text-secondary rounded-lg selection:bg-secondary selection:text-primary"
+        >
+          {title}
+        </h1>
         <img
           width={720}
           height={360}
           src={heroImage.src}
           alt={heroImage.alt}
-          class="m-auto"
+          class="m-auto p-4"
         />
-        <h1
-          class="font-bold font-primary text-3xl pt-4 underline underline-offset-1"
-        >
-          {title}
-        </h1>
-        <h1 class="font-semibold font-primary text-2xl">
+        <h1 class="font-semibold font-primary text-4xl">
           <span class="font-medium">by </span>{author}
         </h1>
         {pubDate && <time class="">{pubDate}</time>}
@@ -107,9 +107,17 @@ const {
           )
         }
         <hr />
-        <slot />
+        <div class="text-lg leading-relaxed mb-6">
+          <slot />
+        </div>
       </article>
     </main>
     <Footer />
   </body>
 </html>
+
+<style>
+  img {
+    border-radius: 10px;
+  }
+</style>

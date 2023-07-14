@@ -1,11 +1,12 @@
 ---
-layout: "../layouts/blogPost.astro" #dont touch
-title: "About Me" #Required
-description: "Ryan Mullin talks about himself." #Required
-author: "Ryan Mullin" #Required
-pubDate: "Oct 06 2022" #Required
-heroImage: "/pattern.svg" # You need to have an image, but if you dont know how to resolve a path, I can for you
-urlBase: "about" # don't touch
+layout: "../layouts/blogPost.astro"
+title: "About Me"
+description: "Ryan Mullin talks about himself."
+author: "Ryan Mullin"
+pubDate: "Oct 06 2022"
+heroImage: 
+    src: "/pattern.svg"
+    alt: "pattern"
 ---
 
 Hi ![](https://user-images.githubusercontent.com/18350557/176309783-0785949b-9127-417c-8b55-ab5a4333674e.gif)My name is Ryan Mullin

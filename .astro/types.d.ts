@@ -109,6 +109,13 @@ declare module 'astro:content' {
   collection: "blog",
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] },
+"svelte-and-react.md": {
+  id: "svelte-and-react.md",
+  slug: "svelte-and-react",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] },
 },
 "portfolio": {
 "demotivator.md": {
