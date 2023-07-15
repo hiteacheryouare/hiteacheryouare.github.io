@@ -7,6 +7,12 @@
         background-color: $primary;
         color: $secondary;
     }
+    pre, code {
+        span {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        font-family: 'JetBrains Mono', monospace;
+    }
 }
 blockquote {
     position: relative;
