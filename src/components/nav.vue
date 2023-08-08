@@ -56,7 +56,8 @@ import { ref } from 'vue'
     { name: 'Home', href: "/" },
     { name: 'About', href: '/about' },
     { name: 'Blog', href: '/blog' },
-    { name: 'Portfolio', href: "/portfolio/"}
+    { name: 'Portfolio', href: "/portfolio/"},
+    { name: 'Freelance Web Design', href: "/freelance/"}
   ]
   
   const mobileMenuOpen = ref(false)

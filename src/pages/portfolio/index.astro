@@ -19,7 +19,7 @@ projects.sort(
     <BsAlert
       client:idle
       type="info"
-      icon={"info"}
+      icon="info"
       text="All projects organized by date. Stay and scroll a while!"
       actionLink=""
       actionText=""
@@ -35,7 +35,7 @@ projects.sort(
               <div class="card-body">
                 <a
                 href={`/portfolio/projects/${project.slug}`}
-                class="font-bold card-title font-secondary"
+                class="font-bold card-title font-secondary mb-4"
               >
                 {project.data.name}
               </a>{" "}
@@ -43,7 +43,7 @@ projects.sort(
               <div class="flex justify-evenly">
                 {project.data.tags.map(tag => <Tag text={tag} />)}
             </div>
-              <time datetime={project.data.date} class="card-text text-black">
+              <time datetime={project.data.date} class="card-text">
                 {new Date(project.data.date).toLocaleDateString(
                   "en-us",
                   {
@@ -53,7 +53,8 @@ projects.sort(
                   }
                 )}
               </time>
-              <p class="p-4 text-black">{project.data.description}</p>
+              <p class="p-4">{project.data.description}</p>
+              <a href={project.data.url} class="btn btn-primary">View Live Site &rarr;</a>
               </div>
             </div>
           </li>

@@ -83,11 +83,11 @@ const {
     <nav class="p-10">
       <NavBar client:load />
     </nav>
-    <main class="dark:bg-black dark:text-white">
+    <main class="">
       <article class="p-10">
         <a
-          href={url}
-            class="font-extrabold font-primary text-4xl lg:text-9xl p-8 bg-primary text-secondary rounded-lg selection:bg-secondary selection:text-primary"
+            href={url}
+            class="font-extrabold font-primary text-4xl lg:text-6xl p-8 no-underline"
           >
             {name}
         </a>
@@ -96,13 +96,13 @@ const {
         height={500}
         src={heroImage.src}
         alt={heroImage.alt}
-        class="m-auto"
+        class="m-auto p-8"
         />
-        <h1 class="font-semibold font-primary pl-4 text-sm lg:text-2xl text-secondary bg-primary overflow-hidden">
+        <h1 class="font-semibold font-primary pl-4 text-sm lg:text-2xl text-secondary bg-primary selection:text-primary selection:bg-secondary overflow-hidden">
           {description}
         </h1>
         {date && <time class="">Since {date}</time>}
-        <div class="p-4">
+        <div class="p-4 text-5xl">
           {freelance ? 
           <div class="badge rounded-pill text-bg-primary">
             Freelanced!
