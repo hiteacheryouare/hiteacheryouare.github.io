@@ -1,5 +1,4 @@
 @import './styles/reboot.scss';
-@import "../node_modules/bootstrap-icons/font/bootstrap-icons.scss";
 * { 
     scroll-behavior: smooth;
     font-family: 'Raleway', sans-serif;
@@ -30,4 +29,8 @@ blockquote {
 
 .mainHeader {
     @apply text-center font-primary font-bold sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl p-4
+}
+
+.highlightText {
+    @apply italic px-2 rounded bg-primary text-secondary selection:bg-secondary selection:text-primary
 }

@@ -3,6 +3,8 @@ import { SEO } from "astro-seo";
 import Footer from "../components/footer.svelte";
 import NavBar from "../components/nav.vue";
 import "../globals.scss";
+import '../styles/blog.scss'
+
 export interface Props {
   content: {
     title: string;
@@ -82,7 +84,7 @@ const {
     <nav class="p-10">
       <NavBar client:load />
     </nav>
-    <main class=" dark:text-white font-primary max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main >
       <article class="p-10">
         <h1
           class="font-extrabold font-primary text-5xl lg:text-9xl p-8 bg-primary text-secondary rounded-lg selection:bg-secondary selection:text-primary"

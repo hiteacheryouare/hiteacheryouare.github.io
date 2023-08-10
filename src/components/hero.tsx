@@ -24,7 +24,7 @@ export default () => {
 				/>
 		</div>
 			<div className="font-semibold flex content-center justify-center text-xl lg:text-2xl xl:text-4xl pb-10">
-					How can I help you <i className="italic">&nbsp;push what's possbile</i>?
+					How can I help you&nbsp;<i className="highlightText">push what's possbile</i>?
 			</div>
 			<div className="flex content-center justify-center pb-10">
 				<a href="/freelance/" className="btn btn-primary">
