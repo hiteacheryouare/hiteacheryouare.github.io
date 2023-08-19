@@ -36,7 +36,7 @@ export default () => {
 				<option value="ecom">E-Commerce</option>
 				<option value="app">App</option>
 				<option value="portfolio">Portfolio</option>
-				<option value="m/i">Marketing/InhtmlFormation</option>
+				<option value="m/i">Marketing/Information</option>
 				<option value="other">Other/Not Listed</option>
 			</select>
 			<label htmlFor="comments" >Comments</label>
