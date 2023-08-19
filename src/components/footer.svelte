@@ -8,7 +8,7 @@
 <footer class="bg-gray-900 dark:bg-black">
     <div class="flex justify-between content-center">
         <div class="flex justify-between flex-col">
-            <img src="/White.svg" alt="Ryan Enterprises" id="logo">
+            <img src="/white.png" alt="Ryan Enterprises" id="logo">
             <hr />
             <p class="text-white p-4">Copyright &copy; {year.getFullYear()}, Ryan Enterprises. All Rights Reserved</p>
         </div>
@@ -25,7 +25,7 @@
     }
     #logo {
         width: 15rem;
-        padding: 1rem;
+        padding: 2rem;
     }
     a {
         color: white;

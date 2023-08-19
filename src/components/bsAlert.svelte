@@ -1,9 +1,9 @@
-<script>
-    export let type;
-    export let icon;
-    export let text;
-    export let actionLink;
-    export let actionText;
+<script lang="ts">
+    export let type: "primary" | "secondary" | "info" | "success" | "warning" | "danger" | "light" | "dark";
+    export let icon: string;
+    export let text: string;
+    export let actionLink: string;
+    export let actionText: string;
     const load = async () => {
       await import('bootstrap/js/dist/alert')
     }
