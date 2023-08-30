@@ -2,6 +2,7 @@
 import { SEO } from "astro-seo";
 import Footer from "../components/footer.svelte";
 import NavBar from "../components/nav.vue";
+import { ViewTransitions } from "astro:transitions";
 import "../globals.scss";
 import '../styles/blog.scss'
 
@@ -36,6 +37,7 @@ const {
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <ViewTransitions fallback="none" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/FullColorFavi.svg" />
@@ -96,12 +98,13 @@ const {
           height={360}
           src={heroImage.src}
           alt={heroImage.alt}
-          class="m-auto p-4"
+          class="m-auto p-4 card-img-top"
+          transition:name={heroImage.alt ?? "image"}
         />
-        <h1 class="font-semibold font-primary text-4xl">
+        <h1 class="font-semibold font-primary text-4xl" transition:name={author}>
           <span class="font-medium">by </span>{author}
         </h1>
-        {pubDate && <time class="">{pubDate}</time>}
+        {pubDate && <time datetime={pubDate} class="card-text" transition:name={pubDate}>{pubDate}</time>}
         {
           updatedDate && (
             <div>

@@ -30,7 +30,7 @@ posts.sort(
         posts.map((post) => (
           <li class="card p-6 shadow-md">
             <div class="rounded-lg p-4">
-              <img src={post.data.heroImage.src} alt="" class="m-auto p-4 card-img-top" />
+              <img transition:name={post.data.heroImage.alt ?? "image"} src={post.data.heroImage.src} alt="" class="m-auto p-4 card-img-top" />
               <div class="card-body">
                 <a
                 href={`/blog/data/posts/${post.slug ?? post.data.urlBase}`}
@@ -41,16 +41,9 @@ posts.sort(
               <br />
               <p class="font-bold font-secondary card-subtitle">{post.data.author}</p>
               <time datetime={post.data.pubDate} class="card-text">
-                {new Date(post.data.pubDate).toLocaleDateString(
-                  "en-us",
-                  {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  }
-                )}
+                {post.data.pubDate}
               </time>
-              <p class="p-4">{post.data.description}</p>
+              <p class="p-4" transition:name={post.data.description} >{post.data.description}</p>
               </div>
             </div>
           </li>

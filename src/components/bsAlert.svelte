@@ -12,7 +12,7 @@
 
 <div transition:fade class="alert alert-{type} d-flex align-items-center alert-dismissible" role="alert" on:mouseover={load} on:focus={load}>
     <span>
-        <i class={`bi bi-${icon}`} />
+        <i class={`bi bi-${icon} pr-1`} />
     </span>
       &nbsp;
     <span>

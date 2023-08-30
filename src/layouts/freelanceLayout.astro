@@ -6,12 +6,14 @@ import '../globals.scss'
 import NavBar from '../components/nav.vue';
 import '../styles/bootstrap.scss';
 import '../../node_modules/bootstrap-icons/font/bootstrap-icons.scss'
+import { ViewTransitions } from 'astro:transitions';
 
 ---
 
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<ViewTransitions fallback="none"/>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/FullColorFavi.svg" />

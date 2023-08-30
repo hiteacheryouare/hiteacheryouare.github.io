@@ -31,7 +31,7 @@ projects.sort(
         projects.map((project) => (
           <li class="card p-6 shadow-md">
             <div class="rounded-lg p-4">
-              <img src={project.data.heroImage.src} alt="" class="m-auto p-4 card-img-top" />
+              <img src={project.data.heroImage.src} transition:name={project.data.heroImage.alt ?? "image"}  alt="" class="m-auto p-4 card-img-top" />
               <div class="card-body">
                 <a
                 href={`/portfolio/projects/${project.slug}`}

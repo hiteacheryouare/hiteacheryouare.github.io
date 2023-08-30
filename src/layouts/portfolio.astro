@@ -5,6 +5,7 @@ import NavBar from "../components/nav.vue";
 import "../globals.scss";
 import '../styles/blog.scss'
 import Tag from "../components/tag.svelte";
+import { ViewTransitions } from "astro:transitions";
 export interface Props {
   content: {
     name: string,
@@ -37,6 +38,7 @@ const {
 <html lang="en">
 <html lang="en">
   <head>
+    <ViewTransitions fallback="none"/>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/FullColorFavi.svg" />
@@ -97,7 +99,8 @@ const {
         height={500}
         src={heroImage.src}
         alt={heroImage.alt}
-        class="m-auto p-8"
+        class="m-auto p-8 card-img-top"
+        transition:name={heroImage.alt ?? "image"}
         />
         <h1 class="font-semibold font-primary pl-4 text-sm lg:text-2xl text-secondary bg-primary selection:text-primary selection:bg-secondary overflow-hidden">
           {description}
