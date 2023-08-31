@@ -20,11 +20,15 @@ import { ViewTransitions } from 'astro:transitions';
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description}>
 		<script>
-			if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			function setBsDarkMode() {
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 				document.body.setAttribute('data-bs-theme', 'dark')
-			} else {
+				} else {
 				document.body.setAttribute('data-bs-theme', 'light')
+				}
 			}
+			setBsDarkMode()
+			document.addEventListener('astro:after-swap', setBsDarkMode)
 		</script>
 		<SEO 
 			title={title}

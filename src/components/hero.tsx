@@ -2,26 +2,28 @@ import TypeIt from "typeit-react"
 export default () => {
 	return (
 		<>
-		<div className="font-bold flex content-center justify-center text-4xl lg:text-6xl xl:text-8xl p-10">
-			<TypeIt
-					getBeforeInit={(instance) => {
-						instance
-							.type("Your Home for Ryan's ")
-							.pause(750)
-							.type("Blog")
-							.pause(750)
-							.delete(4)
-							.type("Portfolio")
-							.pause(750)
-							.delete(9)
-							.type("Freelance Web Design Services")
-							.pause(750)
-							.delete(36)
-							.type("All Things Ryan.")
-						return instance;
-					}
-					}
-				/>
+		<div className="px-4">
+			<div className="font-bold flex content-center justify-center text-4xl lg:text-6xl xl:text-8xl p-10">
+				<TypeIt
+						getBeforeInit={(instance) => {
+							instance
+								.type("Your Home for Ryan's ")
+								.pause(750)
+								.type("Blog")
+								.pause(750)
+								.delete(4)
+								.type("Portfolio")
+								.pause(750)
+								.delete(9)
+								.type("Freelance Web Design Services")
+								.pause(750)
+								.delete(36)
+								.type("All Things Ryan.")
+							return instance;
+						}
+						}
+					/>
+			</div>
 		</div>
 			<div className="font-semibold flex content-center justify-center text-xl lg:text-2xl xl:text-4xl pb-10">
 					How can I help you&nbsp;<i className="highlightText">push what's possbile</i>?
