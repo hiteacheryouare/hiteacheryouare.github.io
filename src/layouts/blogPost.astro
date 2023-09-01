@@ -5,6 +5,8 @@ import NavBar from "../components/nav.vue";
 import { ViewTransitions } from "astro:transitions";
 import "../globals.scss";
 import '../styles/blog.scss'
+import { Image } from 'astro:assets';
+import pattern from '../img/pattern.svg'
 
 export interface Props {
   content: {
@@ -122,7 +124,15 @@ const {
         </div>
       </article>
     </main>
-    <Footer />
+    <Footer>
+			<Image src={pattern} alt='pattern' id='pattern'  />
+		</Footer>
+		<style>
+			#pattern {
+				background-size: cover;
+				object-fit: fill;
+			}
+		</style>
   </body>
 </html>
 

@@ -2,7 +2,7 @@
     var year = new Date()
 </script>
 <div class="flex">
-    <img src="/pattern.svg" alt="" id="pattern">
+    <slot><img src="/pattern.svg" alt="" id="pattern"></slot>
 </div>
 
 <footer class="bg-gray-900 dark:bg-black">
@@ -19,10 +19,6 @@
 </footer>
 
 <style>
-    #pattern {
-        background-size: cover;
-        object-fit: fill;
-    }
     #logo {
         width: 15rem;
         padding: 2rem;

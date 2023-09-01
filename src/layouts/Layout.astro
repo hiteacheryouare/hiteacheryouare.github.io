@@ -8,6 +8,8 @@ import NavBar from '../components/nav.vue';
 import '../styles/bootstrap.scss';
 import '../../node_modules/bootstrap-icons/font/bootstrap-icons.scss'
 import { ViewTransitions } from 'astro:transitions';
+import { Image } from 'astro:assets';
+import pattern from '../img/pattern.svg'
 
 ---
 
@@ -65,6 +67,15 @@ import { ViewTransitions } from 'astro:transitions';
 			<NavBar client:load />
 		</nav>
 		<slot />
-		<Footer />
+		<Footer>
+			<Image src={pattern} alt='pattern' id='pattern' style={{}} />
+		</Footer>
+		<style>
+			#pattern {
+				background-size: cover;
+				object-fit: fill;
+				width: auto;
+			}
+		</style>
 	</body>
 </html>
