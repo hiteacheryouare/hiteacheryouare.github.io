@@ -36,12 +36,13 @@ projects.sort(
                 <a
                 href={`/portfolio/projects/${project.slug}`}
                 class="font-bold card-title font-secondary mb-4"
+                transition:name={project.data.name}
               >
                 {project.data.name}
               </a>{" "}
               <br />
               <div class="flex justify-evenly">
-                {project.data.tags.map(tag => <Tag text={tag} />)}
+                {project.data.tags.map(tag => <Tag text={tag} transition:name={tag} />)}
             </div>
               <time datetime={project.data.date} class="card-text">
                 {new Date(project.data.date).toLocaleDateString(
@@ -53,7 +54,7 @@ projects.sort(
                   }
                 )}
               </time>
-              <p class="p-4">{project.data.description}</p>
+              <p class="p-4" transition:name={project.data.description}>{project.data.description}</p>
               <a href={project.data.url} class="btn btn-primary">View Live Site &rarr;</a>
               </div>
             </div>

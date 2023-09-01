@@ -35,11 +35,12 @@ posts.sort(
                 <a
                 href={`/blog/data/posts/${post.slug ?? post.data.urlBase}`}
                 class="font-bold card-title font-secondary"
+                transition:name={post.data.title}
               >
                 {post.data.title}
               </a>{" "}
               <br />
-              <p class="font-bold font-secondary card-subtitle">{post.data.author}</p>
+              <p class="font-bold font-secondary card-subtitle"><span>{post.data.author}</span></p>
               <time datetime={post.data.pubDate} class="card-text">
                 {post.data.pubDate}
               </time>

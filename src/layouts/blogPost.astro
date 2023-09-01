@@ -20,6 +20,7 @@ export interface Props {
       alt: string;
     };
     urlBase: string;
+    slug: string
   };
 }
 const {
@@ -31,6 +32,7 @@ const {
     updatedDate,
     heroImage,
     urlBase,
+    slug
   },
 } = Astro.props;
 
@@ -96,6 +98,7 @@ const {
       <article class="p-10">
         <h1
           class="font-extrabold font-primary text-5xl lg:text-9xl p-8 bg-primary text-secondary rounded-lg selection:bg-secondary selection:text-primary"
+          transition:name={title}
         >
           {title}
         </h1>
@@ -107,8 +110,8 @@ const {
           class="m-auto p-4 card-img-top"
           transition:name={heroImage.alt ?? "image"}
         />
-        <h1 class="font-semibold font-primary text-4xl" transition:name={author}>
-          <span class="font-medium">by </span>{author}
+        <h1 class="font-semibold font-primary text-4xl">
+          <span class="font-medium">by </span><span>{author}</span>
         </h1>
         {pubDate && <time datetime={pubDate} class="card-text" transition:name={pubDate}>{pubDate}</time>}
         {
@@ -125,14 +128,16 @@ const {
       </article>
     </main>
     <Footer>
-			<Image src={pattern} alt='pattern' id='pattern'  />
+			<Image src={pattern} alt='pattern' id='pattern' style={{}} />
 		</Footer>
 		<style>
 			#pattern {
 				background-size: cover;
 				object-fit: fill;
+				width: auto;
 			}
 		</style>
+	</body>
   </body>
 </html>
 

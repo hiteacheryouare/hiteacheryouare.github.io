@@ -97,6 +97,7 @@ const {
         <a
             href={url}
             class="font-extrabold font-primary text-4xl lg:text-6xl p-8 no-underline"
+            transition:name={name}
           >
             {name}
         </a>
@@ -108,9 +109,12 @@ const {
         class="m-auto p-8 card-img-top"
         transition:name={heroImage.alt ?? "image"}
         />
-        <h1 class="font-semibold font-primary pl-4 text-sm lg:text-2xl text-secondary bg-primary selection:text-primary selection:bg-secondary overflow-hidden">
+        <p 
+          class="font-semibold font-primary pl-4 text-sm lg:text-2xl text-secondary bg-primary selection:text-primary selection:bg-secondary overflow-hidden"
+          transition:name={description}
+        >
           {description}
-        </h1>
+        </p>
         {date && <time class="">Since {date}</time>}
         <div class="p-4 text-5xl">
           {freelance ? 
@@ -123,20 +127,22 @@ const {
           }
         </div>
           <div class="flex justify-evenly">
-            {tags.map(tag => <Tag text={tag} />)}
+            {tags.map(tag => <Tag text={tag} transition:name={tag} />)}
           </div>
         <hr />
         <slot />
       </article>
     </main>
     <Footer>
-			<Image src={pattern} alt='pattern' id='pattern'  />
+			<Image src={pattern} alt='pattern' id='pattern' style={{}} />
 		</Footer>
 		<style>
 			#pattern {
 				background-size: cover;
 				object-fit: fill;
+				width: auto;
 			}
 		</style>
+	</body>
   </body>
 </html>
