@@ -51,14 +51,7 @@
 import { ref } from 'vue'
   import { Dialog, DialogPanel } from '@headlessui/vue'
   import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
-  
-  const navigation = [
-    { name: 'Home', href: "/" },
-    { name: 'About', href: '/about' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Portfolio', href: "/portfolio/"},
-    { name: 'Freelance Web Design', href: "/freelance/"}
-  ]
+  import { navigation } from '../utils/navigation'
   
   const mobileMenuOpen = ref(false)
 

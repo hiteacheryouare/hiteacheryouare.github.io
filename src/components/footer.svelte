@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
     var year = new Date()
+    import {navigation as footerLinks} from '../utils/navigation'
 </script>
 <div class="flex">
     <slot><img src="/pattern.svg" alt="" id="pattern"></slot>
@@ -8,19 +9,21 @@
 <footer class="bg-gray-900 dark:bg-black">
     <div class="flex justify-between content-center">
         <div class="flex justify-between flex-col">
-            <img src="/white.png" alt="Ryan Enterprises" id="logo">
+            <img src="/faviWhite.svg" alt="two right facing arrows" id="logo">
             <hr />
-            <p class="text-white p-4">Copyright &copy; {year.getFullYear()}, Ryan Enterprises. All Rights Reserved</p>
+            <p class="text-white p-4">Copyright &copy; {year.getFullYear()}, Ryan Mullin. All Rights Reserved</p>
         </div>
         <div class="flex justify-between flex-col p-4 text-white underline">
-            <a href="/">Home</a><a href="/blog">Blog</a><a href="/about">About</a>
+            {#each footerLinks as link}
+                <a href={link.href}>{link.name}</a>
+            {/each}
         </div>
     </div>
 </footer>
 
 <style>
     #logo {
-        width: 15rem;
+        width: 20%;
         padding: 2rem;
     }
     a {

@@ -206,6 +206,13 @@ declare module 'astro:content' {
   collection: "portfolio";
   data: InferEntrySchema<"portfolio">
 } & { render(): Render[".md"] };
+"smartcarbon.md": {
+	id: "smartcarbon.md";
+  slug: "smartcarbon";
+  body: string;
+  collection: "portfolio";
+  data: InferEntrySchema<"portfolio">
+} & { render(): Render[".md"] };
 "tritons.md": {
 	id: "tritons.md";
   slug: "tritons";
