@@ -26,6 +26,11 @@
         width: 20%;
         padding: 2rem;
     }
+    @media (orientation: portrait) {
+        #logo {
+            width: 5rem;
+        }
+    }
     a {
         color: white;
         text-decoration: underline;
