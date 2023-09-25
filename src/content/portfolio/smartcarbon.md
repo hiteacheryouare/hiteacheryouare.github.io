@@ -1,3 +1,19 @@
+---
+layout: "../../layouts/portfolio.astro"
+name: "SmartCarbon"
+description: "An eco-friendly carbon footprint travel calculator that helps you make more sustainable decisions"
+date: "Sept 8 2023"
+freelance: false
+url: "https://camdencatholic.github.io/smartcarbon/"
+heroImage: 
+    src: "https://raw.githubusercontent.com/camdencatholic/smartcarbon/main/public/favi-text.png"
+    alt: "a white globe with the outline of the americas on it on a green-blue gradient witht the text 'smartcarbon'"
+tags: 
+    - next.js
+    - react
+    - tailwind
+    - bootstrap
+---
 # Travel the world, without harming the world.
 
 **SmartCarbon** is a web app that helps prospective travelers be more mindful of their carbon footprint. It uses user input information to run against a dynamically generated algorithm to calculate the estimated carbon footprint of their travel plans.
