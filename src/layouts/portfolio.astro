@@ -58,14 +58,14 @@ const {
       document.addEventListener('astro:after-swap', setBsDarkMode)
 		</script>
 		<SEO 
-			title={name}
+			title={`${name} | Ryan Mullin`}
 			description={description}
 			noindex={false} 
 			nofollow={false}
 			openGraph={
 				{
 					basic: {
-						title: name,
+						title: `${name} | Ryan Mullin`,
 						type: "website",
 						image: heroImage.src,
 						url: Astro.request.url
@@ -73,7 +73,7 @@ const {
 					optional: {
 						description: description,
 						locale: "en-US",
-						siteName: "Ryan Mullin's Blog"
+						siteName: "Ryan Mullin",
 					},
 					image: {
 						alt: heroImage.alt

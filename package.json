@@ -15,7 +15,7 @@
     "@headlessui/react": "^1.7.14",
     "@headlessui/vue": "^1.7.13",
     "@heroicons/vue": "^2.0.17",
-    "@porkyproductions/hat": "^1.4.0",
+    "@porkyproductions/hat": "^1.4.1",
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
     "astro": "^3.0.6",

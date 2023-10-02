@@ -9,55 +9,57 @@ heroImage:
     alt: "pattern"
 ---
 
-Hi ![](https://user-images.githubusercontent.com/18350557/176309783-0785949b-9127-417c-8b55-ab5a4333674e.gif)My name is Ryan Mullin
-===================================================================================================================================
+# The About Page of Ryan Mullin
 
-Web Developer for @PorkyProductions and @RyanEnterprises
---------------------------------------------------------
+![Greetings and salutations!](https://user-images.githubusercontent.com/18350557/176309783-0785949b-9127-417c-8b55-ab5a4333674e.gif)
 
-Author and maintainer of JavaScript libraries such as UADetect, and deMotivator (as well as the PWA, and Desktop apps that go along with it). Fan of JavaScript, TypeScript, node.js, and VSCode.
+Salutations, esteemed observers. Allow me to declare that I am engaged in the creation of software, a craft which occasionally grants me amusement, and even more infrequently, bestows upon me the privilege of crafting software with genuine utility.
 
-*   🌍  I'm based in Philadelphia
-*   🖥️  See my portfolio at [RyanWeb](http://hiteacheryouare.github.io/)
-*   ✉️  You can contact me at [rpmullin@comcast.net](mailto:rpmullin@comcast.net)
-*   🚀  I'm currently working on [UADetect](http://porkyproductions.github.io/UA-detect/)
-*   🧠  I'm learning Svelte
-*   🤝  I'm open to collaborating on anything WebDev related, if you have a cool project, show me!
-*   ⚡  I also swim competitively
-<a href="https://www.github.com/hiteacheryouare" target="_blank" rel="noreferrer"><img
-                  src="https://img.shields.io/github/followers/hiteacheryouare?logo=github&style=for-the-badge&color=0891b2&labelColor=1c1917" /></a><a href="https://www.twitch.tv/hiteacheryouare" target="_blank" rel="noreferrer"><img
-                  src="https://img.shields.io/twitch/status/hiteacheryouare?logo=twitchsx&style=for-the-badge&color=0891b2&labelColor=1c1917&label=TWITCH+STATUS" /></a>
+## 🌐 An Elucidation of My Persona
 
-### Skills
-<p align="left">
-                                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/javascript-colored.svg" width="36" height="36" alt="JavaScript" /></a>
-                                <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/typescript-colored.svg" width="36" height="36" alt="TypeScript" /></a>
-                                <a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/html5-colored.svg" width="36" height="36" alt="HTML5" /></a>
-                                <a href="https://jquery.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/jquery-colored.svg" width="36" height="36" alt="JQuery" /></a>
-                                <a href="https://www.w3.org/TR/CSS/#css" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/css3-colored.svg" width="36" height="36" alt="CSS3" /></a>
-                                <a href="https://sass-lang.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/sass-colored.svg" width="36" height="36" alt="Sass" /></a>
-                                <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/tailwindcss-colored.svg" width="36" height="36" alt="TailwindCSS" /></a>
-                                <a href="https://getbootstrap.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/bootstrap-colored.svg" width="36" height="36" alt="Bootstrap" /></a>
-                                <a href="https://svelte.dev/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/svelte-colored.svg" width="36" height="36" alt="Svelte" /></a>
-                                <a href="https://nodejs.org/en/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/nodejs-colored.svg" width="36" height="36" alt="NodeJS" /></a>
-                                <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/firebase-colored.svg" width="36" height="36" alt="Firebase" /></a>
-                                <a href="https://www.adobe.com/uk/products/photoshop.html" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/photoshop-colored.svg" width="36" height="36" alt="Photoshop" /></a>
-                                <a href="adobe.com/uk/products/illustrator.html" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/illustrator-colored.svg" width="36" height="36" alt="Illustrator" /></a>
-                                <a href="https://www.adobe.com/uk/products/premiere.html" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/premierepro-colored.svg" width="36" height="36" alt="Premiere Pro" /></a>
-                    </p>
+- 🎓 I presently stand as a disciple at the venerable institution known as @camdencatholic, where I diligently endeavor to fathom the mysteries of the universe, alongside the pursuit of other customary knowledge.
+- 💻 Within the ranks of @PorkyProductions, I serve as a web artisan, an occupation where our affection for hedgehogs knows no bounds.
+- 📍 I am domiciled in the city often hailed as the "City of Brotherly Love" and one that cherishes its sporting pastimes with profound ardor—Philadelphia.
+- 📧 I beseech you, summon me henceforth with your electronic missives at [rpmullin17@gmail.com](mailto:rpmullin17@gmail.com).
 
-### Badges
+## 🚀 Ongoing Ventures
 
-<b>My GitHub Stats</b>
+- 🔬 I find myself embroiled in the enigmatic realm of Svelte and Next.js, where I passionately explore and experiment.
+- 🌌 As I traverse the vast cosmos of web development, I remain ever-vigilant, in perpetual quest for captivating projects upon which to collaborate.
 
-<a href="http://www.github.com/hiteacheryouare"><img src="https://github-readme-stats.vercel.app/api?username=hiteacheryouare&show_icons=true&hide=stars,&count_private=true&title_color=0891b2&text_color=ffffff&icon_color=0891b2&bg_color=1c1917&hide_border=true&show_icons=true" alt="hiteacheryouare's GitHub stats" /></a>
+## 💼 Proficiencies and Accomplishments
 
-<a href="http://www.github.com/hiteacheryouare"><img src="https://github-readme-streak-stats.herokuapp.com/?user=hiteacheryouare&stroke=ffffff&background=1c1917&ring=0891b2&fire=0891b2&currStreakNum=ffffff&currStreakLabel=0891b2&sideNums=ffffff&sideLabels=ffffff&dates=ffffff&hide_border=true" /></a>
+I possess an array of skills that I wield with dexterity to conquer the digital dominion:
 
-<a href="http://www.github.com/hiteacheryouare"><img src="https://activity-graph.herokuapp.com/graph?username=hiteacheryouare&bg_color=1c1917&color=ffffff&line=0891b2&point=ffffff&area_color=1c1917&area=true&hide_border=true&custom_title=GitHub%20Commits%20Graph" alt="GitHub Commits Graph" /></a>
+- ☕ Proficiency in the venerable JavaScript.
+- 💼 A command of the esteemed TypeScript.
+- 📝 An adeptness in the art of HTML5.
+- 🍭 A familiarity with the enigmatic jQuery.
+- 🎨 A mastery of the intricate CSS3.
+- 💃 Skill in the elegant discipline of Sass.
+- 🌀 Proficiency in the beguiling TailwindCSS.
+- 📦 Adept at utilizing the Bootstrap framework.
+- 🍡 Adept in the arcane arts of Svelte.
+- ⏭️ Well-versed in the mystifying Next.js.
+- 🚀 Proficiency in the realm of NodeJS.
+- 🔥 Skill in the fiery realm of Firebase.
+- 🎨 Proficiency in the venerable Photoshop.
+- ✏️ Adeptness in the venerable Illustrator.
+- 🎥 Skill in the illustrious Premiere Pro.
 
-<a href="https://github.com/hiteacheryouare" align="left"><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=hiteacheryouare&langs_count=10&title_color=0891b2&text_color=ffffff&icon_color=0891b2&bg_color=1c1917&hide_border=true&locale=en&custom_title=Top%20%Languages" alt="Top Languages" /></a>
+## 🏆 Accolades and Further Feats
 
+Peruse my GitHub achievements, as displayed through these splendid badges and statistical insights:
+
+![GitHub Statistics](https://github-readme-stats.vercel.app/api?username=hiteacheryouare&show_icons=true&hide=stars,&count_private=true&title_color=0891b2&text_color=ffffff&icon_color=0891b2&bg_color=1c1917&hide_border=true&show_icons=true)
+
+![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=hiteacheryouare&stroke=ffffff&background=1c1917&ring=0891b2&fire=0891b2&currStreakNum=ffffff&currStreakLabel=0891b2&sideNums=ffffff&sideLabels=ffffff&dates=ffffff&hide_border=true)
+
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=hiteacheryouare&langs_count=10&title_color=0891b2&text_color=ffffff&icon_color=0891b2&bg_color=1c1917&hide_border=true&locale=en&custom_title=Top%20%Languages)
+
+---
+
+I beseech you to depart henceforth.
 <!--
 **hiteacheryouare/hiteacheryouare** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 

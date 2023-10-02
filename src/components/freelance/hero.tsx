@@ -54,7 +54,7 @@ export default () => (
       <div className="mt-10 flex items-center justify-center gap-x-6">
         <a
           href="/freelance/get-started"
-          className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+          className="btn btn-primary"
         >
           Get started
         </a>

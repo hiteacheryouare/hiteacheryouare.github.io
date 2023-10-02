@@ -1,41 +1,33 @@
-import TypeIt from "typeit-react"
 export default () => {
-	return (
-		<>
-		<div className="px-4">
-			<div className="font-bold flex content-center justify-center text-4xl lg:text-6xl xl:text-8xl p-10">
-				<TypeIt
-						getBeforeInit={(instance) => {
-							instance
-								.type("Your Home for Ryan's ")
-								.pause(750)
-								.type("Blog")
-								.pause(750)
-								.delete(4)
-								.type("Portfolio")
-								.pause(750)
-								.delete(9)
-								.type("Freelance Web Design Services")
-								.pause(750)
-								.delete(36)
-								.type("All Things Ryan.")
-							return instance;
-						}
-						}
-					/>
-			</div>
-		</div>
-			<div className="font-semibold flex content-center justify-center text-xl lg:text-2xl xl:text-4xl pb-10">
-					How can I help you&nbsp;<i className="highlightText">push what's possbile</i>?
-			</div>
-			<div className="flex content-center justify-center pb-10">
-				<a href="/freelance/" className="btn btn-primary">
-						Request a consult &rarr;
-				</a> &nbsp; &nbsp;
-				<a href="/portfolio" className="btn btn-secondary">
-						See the showcase &rarr;
-				</a>
-			</div>
-		</>
-	)
+  return (
+    <>
+      <section className="w-full h-screen py-12 md:py-24 lg:py-32 xl:py-48">
+        <div className="container px-4 md:px-6">
+          <div className="grid gap-6 items-center">
+            <div className="flex flex-col justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl pb-2 dark:text-white">
+                  Everything Ryan, <span className="underline">right here.</span>
+                </h1>
+                <p className="">
+                  <div className="font-semibold flex content-center justify-center text-xl lg:text-2xl xl:text-4xl pb-10">
+                    How can I help you&nbsp;<i className="highlightText">push what's possbile</i>?
+                  </div>
+                </p>
+              </div>
+              <div className="flex content-center justify-center pb-10">
+                <a href="/freelance/" className="btn btn-primary">
+                  Request a consult &rarr;
+                </a> &nbsp; &nbsp;
+                <a href="/portfolio" className="btn btn-secondary">
+                  See the showcase &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </>
+  )
 }

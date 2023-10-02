@@ -31,14 +31,14 @@ import { ViewTransitions } from 'astro:transitions';
 			document.addEventListener('astro:after-swap', setBsDarkMode)
 		</script>
 		<SEO 
-			title={title}
+			title={`${title} | Ryan Mullin`}
 			description={description}
 			noindex={false} 
 			nofollow={false}
 			openGraph={
 				{
 					basic: {
-						title: title,
+						title: `${title} | Ryan Mullin`,
 						type: "website",
 						image: "/standard.png",
 						url: Astro.request.url
@@ -46,7 +46,7 @@ import { ViewTransitions } from 'astro:transitions';
 					optional: {
 						description: description,
 						locale: "en-US",
-						siteName: "Ryan Mullin's Blog"
+						siteName: "Ryan Mullin"
 					},
 					image: {
 						alt: "double arrow"
