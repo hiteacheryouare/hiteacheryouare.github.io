@@ -55,8 +55,6 @@ Here's my stance:
 
 If you ever, **EVER** cross this line, you are doing it wrong. This is a plain and simple fact in my head. 
 
-And guess what, news flash, it's kinda annoying when all you talk about at school when I'm not trying to think about school.
-
 You know, it kinda draws me back to one of my favorite TV shows of this year, [Severance](https://tv.apple.com/us/show/severance/umc.cmc.1srk2goyh2q2zdxcx605w8vtx). Basically the premise is that this company requires its workers to sever their memories between work and personal, so that one side cannot access the other during its allotted time. 
 
 I try to apply this principle to my life. I try to keep my school concerns during school hours, and my personal concerns out of school time. It's simple seperation of concerns.
