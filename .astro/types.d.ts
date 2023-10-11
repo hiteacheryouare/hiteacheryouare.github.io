@@ -183,6 +183,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
+"school-schould-never-be-your-whole-personality.md": {
+	id: "school-schould-never-be-your-whole-personality.md";
+  slug: "school-schould-never-be-your-whole-personality";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 "svelte-and-react.md": {
 	id: "svelte-and-react.md";
   slug: "svelte-and-react";

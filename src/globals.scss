@@ -13,12 +13,29 @@
         font-family: 'JetBrains Mono', monospace;
     }
 }
+
 blockquote {
-    position: relative;
-    margin: 80px;
-    width: 400px;
-    padding-left: 40px;
-    border-left: 2px solid hsl(0, 0%, 0%);
+    padding: 0;
+    padding-inline-start: 16px;
+    margin: -10px -10px 20px;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 100%;
+    height: auto;
+    border-inline-start: 2px solid $primary !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    blockquote {
+        padding: 0;
+        padding-inline-start: 16px;
+        margin: -10px -10px 20px;
+        padding: 10px;
+        border-radius: 5px;
+        max-width: 100%;
+        height: auto;
+        border-inline-start: 2px solid $secondary !important;
+    }
 }
 
 .gradientText {
