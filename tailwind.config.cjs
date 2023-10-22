@@ -5,7 +5,7 @@ module.exports = {
 		fontFamily: {
 			primary: ['Raleway', 'sans-serif'],
 			secondary: ['Poppins', 'sans-serif'],
-			serif: ['serif'],
+			serif: ['Cinzel Decorative', 'serif'],
 		},
 		extend: {
 			colors: {
