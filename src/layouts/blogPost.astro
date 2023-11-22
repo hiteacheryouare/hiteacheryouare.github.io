@@ -7,6 +7,7 @@ import "../globals.scss";
 import '../styles/blog.scss'
 import { Image } from 'astro:assets';
 import pattern from '../img/pattern.svg'
+import signature from '../../public/signature-blue.png'
 
 export interface Props {
   content: {
@@ -126,6 +127,7 @@ const {
         <div class="text-lg leading-relaxed mb-6 first-letter:text-6xl first-letter:font-bold first-letter:font-serif first-letter:selection:bg-primary first-letter:selection:text-secondary">
           <slot />
         </div>
+        <Image src={signature} alt="ryan mullin" style={{ width: "20rem"  }}>
       </article>
     </main>
     <Footer>
