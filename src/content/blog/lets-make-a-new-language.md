@@ -5,7 +5,7 @@ description: "Just for funzies, let's make my dream programming language." #Requ
 author: "Ryan Mullin" #Required
 pubDate: "July 13 2023" #Required
 heroImage: 
-    src: "https://th.bing.com/th/id/OIG.iYLaJzc1XwXWIfQ2qGxp?w=270&h=270&c=6&r=0&o=5&dpr=1.3&pid=ImgGn"
+    src: "https://fthmb.tqn.com/_P_IpRezcdFY2uZZNjKtLpyj2zA=/1500x1000/filters:fill(auto,1)/JavaScript-58acbb8a3df78c345bad32c2.jpg"
     alt: "clip art of a giraffe programming and using a computer"
 ---
 

@@ -5,7 +5,7 @@ description: "A student's perspective on the people who make school their whole 
 author: "Ryan Mullin" #Required
 pubDate: "Oct 10 2023" #Required
 heroImage: 
-    src: "https://th.bing.com/th/id/OIG..PoKL2isG5E2iaWbJ_E7?pid=ImgGn"
+    src: "https://th.bing.com/th/id/OIP.p1_3yqRT1y34Pfxd6kVOtQHaFj?rs=1&pid=ImgDetMain"
     alt: "a giraffe entering a school building, surrealist"
 ---
 

@@ -6,13 +6,11 @@ import svelte from "@astrojs/svelte";
 import react from "@astrojs/react";
 import vue from "@astrojs/vue";
 
-import prefetch from "@astrojs/prefetch";
-
 // https://astro.build/config
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), robotsTxt(), sitemap(), svelte(), react(), vue(), prefetch()],
+  integrations: [tailwind(), robotsTxt(), sitemap(), svelte(), react(), vue()],
   site: 'https://hiteacheryourare.github.io',
-  base: "/"
+  base: "/",
 });
