@@ -5,7 +5,7 @@
           <div class="flex lg:flex-1">
             <a href="/" class="-m-1.5 p-1.5">
               <span class="sr-only">Ryan Enterpriswes</span>
-              <img class="h-8 w-auto" src="../../public/FullColorFavi.svg" alt="" />
+              <img class="h-8 w-auto" src="../img/FullColorFavi.svg" alt="" />
             </a>
           </div>
           <div class="flex lg:hidden">
@@ -24,7 +24,7 @@
             <div class="flex items-center justify-between">
               <a href="/" class="-m-1.5 p-1.5">
                 <span class="sr-only">Ryan Enterprises</span>
-                <img class="h-8 w-auto" src="../../public/FullColorFavi.svg" alt="" />
+                <img class="h-8 w-auto" src="../img/FullColorFavi.svg" alt="" />
               </a>
               <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">
                 <span class="sr-only">Close menu</span>
@@ -53,5 +53,6 @@ import { ref } from 'vue'
   import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
   import { navigation } from '../utils/navigation'
   const mobileMenuOpen = ref(false)
+
 
 </script>
