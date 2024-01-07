@@ -1,0 +1,28 @@
+---
+import "../globals.scss";
+import '../styles/blog.scss';
+---
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/FullColorFavi.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<script>
+			function setBsDarkMode() {
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.body.setAttribute('data-bs-theme', 'dark')
+				} else {
+				document.body.setAttribute('data-bs-theme', 'light')
+				}
+			}
+			setBsDarkMode()
+			document.addEventListener('astro:after-swap', setBsDarkMode)
+		</script>
+		</head>
+	<body>
+		<div class="text-lg leading-relaxed mb-6 first-letter:text-6xl first-letter:font-bold first-letter:font-serif first-letter:selection:bg-primary first-letter:selection:text-secondary p-10">
+			<slot />
+		</div>
+	</body>

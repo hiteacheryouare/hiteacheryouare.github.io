@@ -7,6 +7,8 @@ import NavBar from '../components/nav.vue';
 import '../styles/bootstrap.scss';
 import '../../node_modules/bootstrap-icons/font/bootstrap-icons.scss'
 import { ViewTransitions } from 'astro:transitions';
+import { Image } from 'astro:assets';
+import FullColorFavi from '../img/FullColorFavi.svg'
 
 ---
 
@@ -61,7 +63,9 @@ import { ViewTransitions } from 'astro:transitions';
 		<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<NavBar />
+		<NavBar client:load>
+			<Image src={FullColorFavi} alt='a double arrow' style={{height: '2rem'}}></Image>
+		</NavBar>
 		<slot />
 	</body>
 </html>

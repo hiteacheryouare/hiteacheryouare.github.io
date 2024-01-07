@@ -8,6 +8,7 @@ import Tag from "../components/tag.svelte";
 import { ViewTransitions } from "astro:transitions";
 import { Image } from 'astro:assets';
 import pattern from '../img/pattern.svg'
+import FullColorFavi from '../img/FullColorFavi.svg'
 export interface Props {
   content: {
     name: string,
@@ -91,7 +92,9 @@ const {
   </head>
   <body>
     <nav class="p-10">
-      <NavBar client:load />
+      <NavBar client:load>
+				<Image src={FullColorFavi} alt='a double arrow' style={{height: '2rem'}}></Image>
+			</NavBar>
     </nav>
     <main class="">
       <article class="p-10">

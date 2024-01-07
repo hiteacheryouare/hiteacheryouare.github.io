@@ -4,8 +4,8 @@
         <nav class="flex items-center justify-between p-6 lg:px-8 border-b-2 border-slate-300 dark:border-slate-700" aria-label="Global">
           <div class="flex lg:flex-1">
             <a href="/" class="-m-1.5 p-1.5">
-              <span class="sr-only">Ryan Enterpriswes</span>
-              <img class="h-8 w-auto" src="../img/FullColorFavi.svg" alt="" />
+              <span class="sr-only">Ryan Enterprises</span>
+              <slot></slot>
             </a>
           </div>
           <div class="flex lg:hidden">
@@ -24,7 +24,6 @@
             <div class="flex items-center justify-between">
               <a href="/" class="-m-1.5 p-1.5">
                 <span class="sr-only">Ryan Enterprises</span>
-                <img class="h-8 w-auto" src="../img/FullColorFavi.svg" alt="" />
               </a>
               <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">
                 <span class="sr-only">Close menu</span>

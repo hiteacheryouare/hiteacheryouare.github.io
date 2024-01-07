@@ -8,6 +8,7 @@ import '../styles/blog.scss'
 import { Image } from 'astro:assets';
 import pattern from '../img/pattern.svg'
 import signature from '../../public/signature-blue.png'
+import FullColorFavi from '../img/FullColorFavi.svg'
 
 export interface Props {
   content: {
@@ -94,7 +95,9 @@ const {
   </head>
   <body>
     <nav class="p-10">
-      <NavBar client:load />
+      <NavBar client:load>
+				<Image src={FullColorFavi} alt='a double arrow' style={{height: '2rem'}}></Image>
+			</NavBar>
     </nav>
     <main >
       <article class="p-10">
