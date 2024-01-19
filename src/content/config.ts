@@ -29,4 +29,14 @@ const portfolio = defineCollection({
   }),
 });
 
-export const collections = { blog, portfolio };
+const research = defineCollection({
+  schema: schema.object({
+    title: schema.string(),
+    auhtor: schema.string().default("Ryan Mullin"),
+    publishDate: schema.string(),
+    type: schema.string().regex(/\b(IRR|IWA|Research)\b/),
+    wordCount: schema.number()
+  })
+})
+
+export const collections = { blog, portfolio, research };

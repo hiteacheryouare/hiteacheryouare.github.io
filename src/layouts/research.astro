@@ -1,0 +1,130 @@
+---
+import { SEO } from "astro-seo";
+import Footer from "../components/footer.svelte";
+import NavBar from "../components/nav.vue";
+import { ViewTransitions } from "astro:transitions";
+import "../globals.scss";
+import '../styles/blog.scss'
+import { Image } from 'astro:assets';
+import pattern from '../img/pattern.svg'
+import signature from '../../public/signature-blue.png'
+import FullColorFavi from '../img/FullColorFavi.svg'
+
+export interface Props {
+  content: {
+    title: string;
+    author: string
+    publishDate: string;
+    wordCount: number;
+    type: "IRR" | "IWA" | "Research";
+    slug: string
+  };
+}
+const {
+  content: {
+    title,
+    author,
+    publishDate,
+    wordCount,
+    type,
+    slug
+  },
+} = Astro.props;
+
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <ViewTransitions fallback="none" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/FullColorFavi.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={`${title} | Ryan Mullin Research`} />
+    <script>
+			function setBsDarkMode() {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.body.setAttribute('data-bs-theme', 'dark')
+        } else {
+          document.body.setAttribute('data-bs-theme', 'light')
+        }
+      }
+      setBsDarkMode()
+      document.addEventListener('astro:after-swap', setBsDarkMode)
+		</script>
+		<SEO 
+			title={`${title}| Research | Ryan Mullin`}
+			description={`${title} | Ryan Mullin Research`}
+			noindex={false} 
+			nofollow={false}
+			openGraph={
+				{
+					basic: {
+						title: `${title} | Ryan Mullin`,
+						type: "website",
+						image: "",
+						url: Astro.request.url
+					},
+					optional: {
+						description: title,
+						locale: "en-US",
+						siteName: "Ryan Mullin"
+					},
+					image: {
+						alt: "null"
+					}
+				}
+			}
+		/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="p-10">
+      <NavBar client:load>
+				<Image src={FullColorFavi} alt='a double arrow' style={{height: '2rem'}}></Image>
+			</NavBar>
+    </nav>
+    <main >
+      <article class="p-10">
+        <div class="p-4">
+          <h1
+            class="font-extrabold font-primary text-3xl md:text-5xl p-8 bg-primary text-secondary rounded-lg selection:bg-secondary selection:text-primary"
+            transition:name={title}
+          >
+            {title}
+            <br>
+          </h1>
+        </div>
+        <h1 class="font-semibold font-primary text-4xl">
+          <span class="font-medium">a {type === "IRR" || type === "Research" ? "Research Report" : "Written Argument"} by </span><span>{author}</span>
+        </h1>
+        <h1 class="font-medium font-primary text-2xl">
+          <span>Word Count: {wordCount}</span>
+        </h1>
+        {publishDate && <time datetime={publishDate} class="card-text" transition:name={publishDate}>Published: {publishDate}</time>}
+        <hr />
+        <div class="text-lg leading-10 mb-6 first-letter:text-6xl first-letter:font-bold first-letter:font-serif first-letter:selection:bg-primary first-letter:selection:text-secondary font-['serif']" id="article">
+          <slot />
+        </div>
+      </article>
+    </main>
+	</body>
+  </body>
+</html>
+
+<style>
+  img {
+    border-radius: 10px;
+  }
+  #article {
+    font-family: serif !important;
+  }
+</style>z

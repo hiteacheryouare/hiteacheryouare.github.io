@@ -1,0 +1,15 @@
+---
+import { getEntry } from 'astro:content'
+import Passworder from '../../components/passworder.svelte'
+import Layout from '../../layouts/Layout.astro'
+const article = await getEntry('research', 'the-ineffectiveness-of-climate-change-policies-in-the-us')
+const RederedArticle = await article.render()
+const RenderedArticleContent = RederedArticle.Content
+
+---
+
+<Layout title="The Ineffectiveness of Climate Change Policies in the United States" description="The Ineffectiveness of Climate Change Policies in the United States">
+	<Passworder password={"please"} client:load >
+		<RenderedArticleContent />
+	</Passworder>
+</Layout>

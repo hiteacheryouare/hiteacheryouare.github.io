@@ -248,6 +248,15 @@ declare module 'astro:content' {
   data: InferEntrySchema<"portfolio">
 } & { render(): Render[".md"] };
 };
+"research": {
+"the-ineffectiveness-of-climate-change-policies-in-the-us.md": {
+	id: "the-ineffectiveness-of-climate-change-policies-in-the-us.md";
+  slug: "the-ineffectiveness-of-climate-change-policies-in-the-us";
+  body: string;
+  collection: "research";
+  data: InferEntrySchema<"research">
+} & { render(): Render[".md"] };
+};
 
 	};
 
