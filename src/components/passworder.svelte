@@ -57,7 +57,7 @@
 	</div>
 	<form on:submit|preventDefault={checkAccess}>
 		<div class="p-10">
-			<input type="text" bind:value={currentPW} class="form-control input-group" placeholder="ENTER THE PASSWORD">
+			<input type="password" bind:value={currentPW} class="form-control input-group" placeholder="ENTER THE PASSWORD">
 		</div>
 		<div class="flex content-center justify-center p-4">
 			<button type="submit" class="btn btn-primary">Submit</button>
