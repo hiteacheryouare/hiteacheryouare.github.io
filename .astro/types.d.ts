@@ -175,13 +175,6 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
-"in-defense-of-social-media.md": {
-	id: "in-defense-of-social-media.md";
-  slug: "in-defense-of-social-media";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".md"] };
 "lets-make-a-new-language.md": {
 	id: "lets-make-a-new-language.md";
   slug: "lets-make-a-new-language";
@@ -206,6 +199,13 @@ declare module 'astro:content' {
 "svelte-and-react.md": {
 	id: "svelte-and-react.md";
   slug: "svelte-and-react";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"the-mlb-does-ticketing-right.md": {
+	id: "the-mlb-does-ticketing-right.md";
+  slug: "the-mlb-does-ticketing-right";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
