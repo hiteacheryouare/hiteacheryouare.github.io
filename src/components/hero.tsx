@@ -17,7 +17,7 @@ export default () => {
                 <a href="/freelance/" className="btn btn-primary mb-2 sm:mb-0 sm:mr-2">
                   Request a consult &rarr;
                 </a>
-                <a href="/portfolio" className="btn btn-secondary">
+                <a href="/portfolio" className="btn btn-secondary mb-2 sm:mb-0 sm:mr-2">
                   See the showcase &rarr;
                 </a>
               </div>

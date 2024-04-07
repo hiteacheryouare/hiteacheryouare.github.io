@@ -1,0 +1,83 @@
+---
+import Icon from '../components/icon.svelte';
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import pattern from '../img/pattern.svg'
+---
+
+<Layout title="Home">
+	<main class="p-10">
+		<div class="max-w-3xl mx-auto p-8">
+
+			<!-- Name and Socials Section -->
+			<div class="flex content-center justify-center">
+				<section class="mb-6">
+					<Image src={pattern} alt='pattern' id='topPattern' style={{}} />
+					<h1 class="text-5xl font-bold mb-4 text-center">Ryan Mullin</h1>
+					<hr>
+					<ul class="flex justify-between" id="socials">
+						<li><a href="https://www.instagram.com/rpmullin06/" class=""><Icon name='instagram'></a></li>
+						<li><a href="https://www.linkedin.com/in/rpmullin06/" class=""><Icon name='linkedin'></a></li>
+						<li><a href="https://github.com/hiteacheryouare" class=""><Icon name='github'></a></li>
+						<li><a href="https://www.youtube.com/@ry06" class=""><Icon name='youtube'></a></li>
+						<li><a href="https://discord.com/users/hiteacheryouare" class=""><Icon name='discord'></a></li>
+						<!-- Add more social links if needed -->
+					</ul>
+				</section>
+			</div>
+	
+			<!-- Intro Section -->
+			<section class="mb-6">
+				<h2 class="text-xl font-semibold mb-2">Introduction</h2>
+				<p class="">
+					Hi! I'm Ryan Mullin, a student, lifeguard, web designer, and swimmer. I'm currently pursuing my high school diploma at Camden Catholic High School (the flagship high school of the Diocese of Camden), where I received a $26,000 scholarship to attend. I'm also a part of the Pilarz Scholars program and an ambassador for my school. As a lifeguard at Larchmont Swim Club, I ensure the safety and well-being of the pool members and guests. I also enjoy creating websites for clients as a freelance web designer and developer. Swimming is my passion and I compete on three swim teams: two clubs and my school team. I'm always looking for new opportunities to learn and grow in my fields of interest. Feel free to connect with me! 
+				</p>
+			</section>
+	
+			<!-- Skills Section -->
+			<section class="mb-6">
+				<h2 class="text-xl font-semibold mb-2">Skills</h2>
+				<ul class="list-disc list-inside">
+					<li>NextJS</li>
+					<li>TypeScript</li>
+					<li>Astro</li>
+					<li>Netlify</li>
+					<li>Vercel</li>
+					<li>Bootstrap</li>
+					<li>TailwindCSS</li>
+					<li>Marketing</li>
+					<li>Web Design</li>
+					<li>Web Development</li>
+					<li>Web Applications</li>
+					<li>Strategic Leadership</li>
+					<li>Team Management</li>
+					<li>Easily Adaptable</li>
+					<li>Decision Making</li>
+					<li>Adobe Creative Suite</li>
+					<li>CPR & First Aid</li>
+				</ul>
+			</section>
+	
+			<!-- Experience Section -->
+			<section class="mb-6">
+				<h2 class="text-xl font-semibold mb-2">Experience</h2>
+				<p class="">
+					Since May 2022, I've been guarding lives and ensuring safety at Larchmont Swim Club in Mount Laurel, New Jersey. Simultaneously, I've been honing my skills as a freelance web developer since April 2021, crafting sleek and functional websites using a range of technologies including TypeScript, Next.js, and more. Whether by the pool or behind the screen, I'm dedicated to delivering excellence in all endeavors.
+				</p>
+			</section>
+	
+	
+		
+	
+		</div>
+	</main>
+</Layout>
+
+<style>
+	ul#socials { 
+		padding-left: 0;
+	}
+	#topPattern {
+		padding: 2rem;
+	}
+</style>
