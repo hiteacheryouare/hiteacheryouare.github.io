@@ -210,6 +210,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
+"the-mlb-needs-apple-tv.md": {
+	id: "the-mlb-needs-apple-tv.md";
+  slug: "the-mlb-needs-apple-tv";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 };
 "portfolio": {
 "demotivator.md": {
