@@ -39,7 +39,7 @@ On a more personal note, I'm going to a Phillies game on Friday. It's not schedu
 
 I'll leave it here.
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/MLRn531YO7E?si=sPAPKih7ecnE1rOF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="auto" height="auto" src="https://www.youtube-nocookie.com/embed/MLRn531YO7E?si=sPAPKih7ecnE1rOF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 
