@@ -256,6 +256,13 @@ declare module 'astro:content' {
 } & { render(): Render[".md"] };
 };
 "research": {
+"enhancing-vaccine-communication-to-address-intelligent-disobedience.md": {
+	id: "enhancing-vaccine-communication-to-address-intelligent-disobedience.md";
+  slug: "enhancing-vaccine-communication-to-address-intelligent-disobedience";
+  body: string;
+  collection: "research";
+  data: InferEntrySchema<"research">
+} & { render(): Render[".md"] };
 "the-ineffectiveness-of-climate-change-policies-in-the-us.md": {
 	id: "the-ineffectiveness-of-climate-change-policies-in-the-us.md";
   slug: "the-ineffectiveness-of-climate-change-policies-in-the-us";

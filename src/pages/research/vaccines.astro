@@ -1,0 +1,15 @@
+---
+import { getEntry } from 'astro:content'
+import Passworder from '../../components/passworder.svelte'
+import Layout from '../../layouts/Layout.astro'
+const article = await getEntry('research', 'enhancing-vaccine-communication-to-address-intelligent-disobedience')
+const RederedArticle = await article.render()
+const RenderedArticleContent = RederedArticle.Content
+
+---
+
+<Layout title="Enhancing Vaccine Communication to Address Intelligent Disobedience" description="Enhancing Vaccine Communication to Address Intelligent Disobedience">
+	<Passworder password={"vaccinateme!"} client:load >
+		<RenderedArticleContent />
+	</Passworder>
+</Layout>
