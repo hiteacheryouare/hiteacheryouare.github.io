@@ -24,18 +24,18 @@ The production value that Apple brings to their Friday Night Baseball[^1] is abs
 
 ## Implications
 
-You see, most MLB games these days are broadcast over hyper-local television stations, and theres nothing wrong with that. I dont want to see an LA Angels game when I live near Philadelphia. I'm not sayign every game should be broadcast nationally.
+You see, most MLB games these days are broadcast over hyper-local television stations, and theres nothing wrong with that. I dont want to see an LA Angels game when I live near Philadelphia. I'm not saying every game should be broadcast nationally.
 
-What I am saying is that Apple set a new bar for what a national broadcast of a spoting event should look like. It should have the quality and production value that Apple creates for their Friday Night Baseball series. 
+What I am saying is that Apple set a new bar for what a national broadcast of a sporting event should look like. It should have the quality and production value that Apple creates for their Friday Night Baseball series. 
 
-It's almost like a necessary evil. These games are locked away behind an Apple TV+ paywall, but these broadcasts show what truly can be done for a national sporting broadcast. As a result, the traditional national broadcasts are forced to play catchup
+It's almost like a necessary evil. These games are locked away behind an Apple TV+ paywall, but these broadcasts show what truly can be done for a national sporting broadcast. As a result, the traditional national broadcasts are forced to play catchup.
 
 
 ## Conclusion
 
 So, in conclusion, Apple TV is doing the good work by forcing the industry forward through Friday Night Baseball. 
 
-On a more personal note, I'm going to a Phillies game on Friday. It's not scheduled as a Friday Night Baseball exclusive, but i'll play the intro on my phone before the game.
+On a more personal note, I'm going to a Phillies game on Friday. It's not scheduled as a Friday Night Baseball exclusive, but I'll play the intro on my phone before the game.
 
 I'll leave it here.
 

@@ -22,7 +22,7 @@ Here is a non-comprehensive list of all the things that I like about it.
 
 Ok, I'll admit that sounds like a tagline for [mlb.com](https://mlb.com) 🤪
 
-But really, its the best. I have one MLB.com account, and any tickets for any game that I wish to attend across the whole leauge can be bought on that one account, and it'll show up on the Ballpark app becuase I'm signed into it with my MLB account. It's awesome!
+But really, its the best. I have one MLB.com account, and any tickets for any game that I wish to attend across the whole league can be bought on that one account, and it'll show up on the Ballpark app because I'm signed into it with my MLB account. It's awesome!
 
 For the NFL, for example, I would have to create a ticketmaster account, buy individual tickets for an Eagles game through the Eagles ticketmaster page, and then download them to my Apple Wallet (more on that later). And then if I wanted to go to any other teams game, I'd have to go through this whole process again! How inconveinient!
 
