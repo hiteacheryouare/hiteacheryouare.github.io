@@ -4,9 +4,9 @@ name: "Tritons Swim"
 description: "The Official Website of the Deerwood Tritons Swim Team"
 date: "Apr 3 2023"
 freelance: true
-url: "https://tritonswim.net/"
+url: "https://tritons-swim.netlify.app/archive"
 heroImage: 
-    src: "https://tritonswim.net/seahorse.png"
+    src: "https://tritons-swim.netlify.app/seahorse.png"
     alt: "an angry seahorse"
 tags: 
     - astro
