@@ -5,8 +5,8 @@ description: "Please." #Required
 author: "Ryan Mullin" #Required
 pubDate: "June 16 2024" #Required
 heroImage: 
-    src: "/pattern.svg"
-    alt: "abstract pattern"
+    src: "https://th.bing.com/th/id/OIP.EuwWPN_prsEwo-1XVnXFfQHaEK?rs=1&pid=ImgDetMain"
+    alt: "UV Index Chart"
 ---
 
 Society as a whole needs to stop glamorizing things that aren't meant to be glamorized. Some of it might be painless, and other things might actually cause physical harm. For the past while, I've collected my thoughts on this matter and will demonstrate it through multiple examples.
