@@ -1,5 +1,6 @@
 ---
 import { getEntry, getCollection, render } from "astro:content";
+import BlogPost from "../../../../layouts/blogPost.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog")
@@ -28,4 +29,6 @@ const { Content } = await render(entry);
 import '../../../../styles/reboot.scss'
 ---
 
-<Content />
+<BlogPost content={entry.data}>
+  <Content />
+</BlogPost>
