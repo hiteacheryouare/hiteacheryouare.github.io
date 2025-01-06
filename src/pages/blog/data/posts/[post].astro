@@ -1,12 +1,12 @@
 ---
-import { getEntryBySlug, getCollection } from "astro:content";
+import { getEntry, getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog")
   return posts.map((post) => {
     return {
       params: {
-        post: post.slug
+        post: post.id
       },
     }
   })
@@ -14,17 +14,17 @@ export async function getStaticPaths() {
 // 1. Get the article from the incoming server request
 const { post } = Astro.params;
 if (post === undefined) {
-  throw new Error("Slug is required");
+  throw new Error("ID is required");
 }
 // 2. Query for the entry directly using the request article
-const entry = await getEntryBySlug("blog", post);
+const entry = await getEntry("blog", post);
 // 3. Redirect if the entry does not exist
 if (entry === undefined) {
   Astro.response.status = 404;
   return Astro.redirect("/404");
 }
 // 4. (Optional) Render the entry to HTML in the template
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 import '../../../../styles/reboot.scss'
 ---
 

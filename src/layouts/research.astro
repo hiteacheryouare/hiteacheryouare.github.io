@@ -17,7 +17,7 @@ export interface Props {
     publishDate: string;
     wordCount: number;
     type: "IRR" | "IWA" | "Research";
-    slug: string
+    id: string
   };
 }
 const {
@@ -27,7 +27,7 @@ const {
     publishDate,
     wordCount,
     type,
-    slug
+    id
   },
 } = Astro.props;
 

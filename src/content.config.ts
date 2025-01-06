@@ -1,6 +1,8 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 const schema = z;
 const blog = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: "./src/content/blog" }),
   schema: z.object({
     title: z.string(),
     author: z.string().default("Ryan Mullin"),
@@ -15,6 +17,7 @@ const blog = defineCollection({
 });
 
 const portfolio = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: "./src/data/portfolio" }),
   schema: schema.object({
     name: schema.string(),
     description: schema.string(),
@@ -30,6 +33,7 @@ const portfolio = defineCollection({
 });
 
 const research = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: "./src/data/research" }),
   schema: schema.object({
     title: schema.string(),
     auhtor: schema.string().default("Ryan Mullin"),

@@ -33,7 +33,7 @@ posts.sort(
               <img transition:name={post.data.heroImage.alt ?? "image"} src={post.data.heroImage.src} alt="" class="m-auto p-4 card-img-top" />
               <div class="card-body">
                 <a
-                href={`/blog/data/posts/${post.slug ?? post.data.urlBase}`}
+                href={`/blog/data/posts/${post.id ?? post.data.urlBase}`}
                 class="font-bold card-title font-secondary"
                 transition:name={post.data.title}
               >
