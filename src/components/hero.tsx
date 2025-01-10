@@ -7,7 +7,7 @@ export default () => {
             <div className="flex flex-col justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl pb-2 dark:text-white">
-                  Everything Ryan, <span className="highlightText">right here.</span>
+                  Forever Forward.
                 </h1>
                 <p className="text-base sm:text-lg lg:text-xl xl:text-2xl font-semibold tracking-tight pb-10">
                   The <span className="underline decoration-dashed">Official</span> Website of Ryan Mullin

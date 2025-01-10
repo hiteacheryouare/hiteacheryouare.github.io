@@ -1,8 +1,8 @@
 $prefix: "ry-";
-$primary: #000064;
-$secondary: #00ffff;
+$primary: #fdb913ff;
+$secondary: #645faaff;
 $info: mix($primary, $secondary);
-$tertiary: #197278;
+$tertiary: #c9234aff;
 
 @import '../../node_modules/bootstrap/scss/bootstrap-reboot.scss';
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';

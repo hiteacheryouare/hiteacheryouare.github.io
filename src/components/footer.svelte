@@ -3,7 +3,7 @@
     import {navigation as footerLinks} from '../utils/navigation'
 </script>
 <div class="flex">
-    <slot><img src="/pattern.svg" alt="" id="pattern"></slot>
+    <slot><img src="/waves.png" alt="" id="pattern"></slot>
 </div>
 
 <footer class="bg-gray-900 dark:bg-black">
