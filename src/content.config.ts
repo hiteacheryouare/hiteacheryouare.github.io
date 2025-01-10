@@ -17,7 +17,7 @@ const blog = defineCollection({
 });
 
 const portfolio = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.md', base: "./src/data/portfolio" }),
+  loader: glob({ pattern: '**/[^_]*.md', base: "./src/content/portfolio" }),
   schema: schema.object({
     name: schema.string(),
     description: schema.string(),
@@ -33,7 +33,7 @@ const portfolio = defineCollection({
 });
 
 const research = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.md', base: "./src/data/research" }),
+  loader: glob({ pattern: '**/[^_]*.md', base: "./src/content/research" }),
   schema: schema.object({
     title: schema.string(),
     auhtor: schema.string().default("Ryan Mullin"),
