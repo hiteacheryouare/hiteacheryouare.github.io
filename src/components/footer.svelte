@@ -10,7 +10,7 @@
 <footer class="bg-gray-900 dark:bg-black py-8">
     <div class="container mx-auto flex flex-col items-center">
         <img src="/wordmark-over-comcast-bar-white.png" alt="Ryan Mullin" id="logo" class="mb-4">
-        <div class="flex justify-center space-x-8 mb-4">
+         <div class="flex justify-center space-x-8 mb-4 links-container">
             {#each footerLinks as link}
                 <a href={link.href} class="hover:text-blue-400">{link.name}</a>
             {/each}
@@ -50,5 +50,12 @@
     .container {
         max-width: 1200px;
         padding: 0 1rem;
+    }
+    @media (max-width: 640px) {
+        .links-container {
+            flex-direction: column;
+            space-x-8: 0;
+            space-y-4: 1rem;
+        }
     }
 </style>

@@ -2,11 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/hero'
 import BsAlert from '../components/bsAlert.svelte';
+import HeroHeader from '../components/heroHeader.svelte';
 ---
 
 <Layout title="Home">
 	<main class="">
-		<Hero client:idle />
+		<Hero client:idle>
+			<HeroHeader title="Forever Forward" />
+		</Hero>
 	</main>
 </Layout>
 
