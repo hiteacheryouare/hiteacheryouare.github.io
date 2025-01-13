@@ -26,6 +26,7 @@
     "demotivator": "^11.1.0",
     "jquery": "^3.7.1",
     "sass": "^1.83.1",
+    "sass-migrator": "^2.3.0",
     "tailwindcss": "^3.4.17",
     "typeit-react": "^2.7.8",
     "uadetect": "^6.0.1"
