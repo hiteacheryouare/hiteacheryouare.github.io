@@ -51,3 +51,19 @@ blockquote {
 .highlightText {
     @apply italic px-2 rounded bg-primary text-secondary selection:bg-secondary selection:text-primary
 }
+
+.gradient-bar-ya-ya-yah {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, 
+        #fdb913ff, 
+        #f36f21ff, 
+        #c9234aff, 
+        #645faaff, 
+        #0089cfff, 
+        #0db14bff);
+    color: white;
+    padding: 1rem;
+    font-size: 1.25rem;
+}

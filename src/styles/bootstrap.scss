@@ -1,8 +1,20 @@
 $prefix: "ry-";
-$primary: #fdb913ff;
-$secondary: #1C1400;
+$primary: #645faaff;
+$secondary: #0089cfff;
 $info: mix($primary, $secondary);
 $tertiary: #c9234aff;
+$red: #c9234aff;
+$yellow: #fdb913ff;
+$orange: #f36f21ff;
+$purple: #645faaff;
+$blue: #0089cfff;
+$green: #0db14bff;
+$info: lighten($blue, 10%);
+$success: lighten($green, 10%);
+$warning: lighten($yellow, 10%);
+$danger: lighten($red, 10%);
+$dark: darken($secondary, 10%);
+
 
 @import '../../node_modules/bootstrap/scss/bootstrap-reboot.scss';
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
