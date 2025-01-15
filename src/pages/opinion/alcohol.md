@@ -5,7 +5,7 @@ description: "Four years of deep reflection and observation has led to the creat
 author: "Ryan Mullin" #Required
 pubDate: "Nov 1 2024" #Required
 heroImage: 
-    src: "/pattern.svg"
+    src: "/waves.png"
     alt: "abstract pattern"
 ---
 
