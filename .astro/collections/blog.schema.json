@@ -22,11 +22,11 @@
           "properties": {
             "src": {
               "type": "string",
-              "default": "/FullColor.svg"
+              "default": "/waves.png"
             },
             "alt": {
               "type": "string",
-              "default": "The Ryan Enterprises Logo"
+              "default": "multicolored waves"
             }
           },
           "additionalProperties": false
