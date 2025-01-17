@@ -3,7 +3,7 @@
       <header class="absolute inset-x-0 top-0 z-50">
         <nav class="flex items-center justify-between p-6 lg:px-8 border-b-2 border-slate-300 dark:border-slate-700" aria-label="Global">
           <div class="flex lg:flex-1">
-            <a href="/" class="-m-1.5 p-1.5">
+            <a href="/" class="-m-1.5 p-1.5" style="text-decoration: none;">
               <span class="sr-only">Ryan Enterprises</span>
               <slot></slot>
             </a>
