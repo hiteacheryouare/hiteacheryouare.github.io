@@ -12,7 +12,7 @@
         <img src="/wordmark-over-comcast-bar-white.png" alt="Ryan Mullin" id="logo" class="mb-4">
          <div class="flex justify-center space-x-8 mb-4 links-container">
             {#each footerLinks as link}
-                <a href={link.href} class="hover:text-blue-400">{link.name}</a>
+                <a href={link.href} class="">{link.name}</a>
             {/each}
         </div>
         <hr class="w-full border-t border-gray-700 mb-4" />
@@ -33,16 +33,8 @@
         color: white;
         text-decoration: none;
     }
-    a:hover {
-        color: hsl(247, 79%, 32%);
-    }
     hr {
         border: 1px solid white;
-    }
-    @media (prefers-color-scheme: dark) {
-        a:hover {
-            color: hsl(184, 66%, 28%);
-        }
     }
     * {
         margin-bottom: 0;

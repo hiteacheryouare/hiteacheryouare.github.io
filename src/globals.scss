@@ -14,6 +14,26 @@
     }
 }
 
+a {
+    text-decoration: none;
+    color: lighten($primary, 10%);
+    &:hover {
+        color: $primary;
+        text-decoration: underline;
+        background-image: linear-gradient(to right, 
+            #fdb913ff, 
+            #f36f21ff, 
+            #c9234aff, 
+            #645faaff, 
+            #0089cfff, 
+            #0db14bff
+        );
+        background-size: 100% 2px;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+    }
+}
+
 blockquote {
     padding: 0;
     padding-inline-start: 16px;
