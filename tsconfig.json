@@ -2,7 +2,7 @@
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "target": "ES2017",
+    "target": "ES2018",
     "pretty": true,
     "jsxImportSource": "react"
   },
