@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="38.454075mm"
+   height="38.454075mm"
+   viewBox="0 0 38.454074 38.454075"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="RM-monogram-within-circle-white.svg"
+   inkscape:export-filename="..\PNG\comcast-bar.png"
+   inkscape:export-xdpi="575.91699"
+   inkscape:export-ydpi="575.91699"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="4.1978414"
+     inkscape:cx="53.003432"
+     inkscape:cy="70.155104"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="859"
+     inkscape:window-y="2151"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <rect
+       x="148.56879"
+       y="59.966537"
+       width="132.39803"
+       height="74.789726"
+       id="rect6" />
+    <rect
+       x="136.26051"
+       y="-1.9057415"
+       width="343.03345"
+       height="133.4019"
+       id="rect5" />
+    <rect
+       x="160.08228"
+       y="-97.669243"
+       width="277.76181"
+       height="80.51757"
+       id="rect2" />
+    <rect
+       x="211.53729"
+       y="-77.658958"
+       width="210.58443"
+       height="59.077984"
+       id="rect1" />
+    <linearGradient
+       inkscape:collect="always"
+       id="COMCAST">
+      <stop
+         style="stop-color:#fdb913;stop-opacity:1;"
+         offset="0"
+         id="stop764" />
+      <stop
+         style="stop-color:#f36f21;stop-opacity:1;"
+         offset="0.1776115"
+         id="stop1498" />
+      <stop
+         style="stop-color:#c9234a;stop-opacity:1;"
+         offset="0.41205415"
+         id="stop5856" />
+      <stop
+         style="stop-color:#645faa;stop-opacity:1;"
+         offset="0.61048567"
+         id="stop6584" />
+      <stop
+         style="stop-color:#0089cf;stop-opacity:1;"
+         offset="0.8211664"
+         id="stop8038" />
+      <stop
+         style="stop-color:#0db14b;stop-opacity:1;"
+         offset="1"
+         id="stop766" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#COMCAST"
+       id="linearGradient7"
+       x1="96.738297"
+       y1="97.14521"
+       x2="132.92737"
+       y2="97.14521"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-95.605795,-77.918172)">
+    <text
+       xml:space="preserve"
+       transform="matrix(0.3827245,0,0,0.3827245,47.375277,66.189895)"
+       id="text5"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:37.3333px;font-family:'Inter Tight';-inkscape-font-specification:'Inter Tight Bold';white-space:pre;shape-inside:url(#rect6);display:inline;fill:#f9f9f9;fill-opacity:0;stroke-width:1.00157;stroke-linecap:butt;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0;paint-order:normal"><tspan
+         x="148.56836"
+         y="94.524206"
+         id="tspan4"><tspan
+           style="fill-opacity:1"
+           id="tspan3">RM</tspan></tspan></text>
+    <circle
+       style="fill:#000000;fill-opacity:0;stroke:url(#linearGradient7);stroke-width:2.265;stroke-linecap:butt;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0;paint-order:normal"
+       id="path6"
+       cx="114.83283"
+       cy="97.14521"
+       r="18.094538" />
+  </g>
+</svg>

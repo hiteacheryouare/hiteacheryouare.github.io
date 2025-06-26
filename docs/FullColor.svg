@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg50"
+   width="500.14282"
+   height="103.04726"
+   viewBox="0 0 500.14282 103.04726"
+   sodipodi:docname="FullColor.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs54">
+    <rect
+       x="148.49242"
+       y="154.85638"
+       width="559.32147"
+       height="85.559921"
+       id="rect57258" />
+  </defs>
+  <sodipodi:namedview
+     id="namedview52"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="11.313708"
+     inkscape:cx="36.990524"
+     inkscape:cy="39.818951"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g56"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Image"
+     id="g56"
+     transform="translate(-142.11245,-158.92113)">
+    <path
+       style="fill:#ff9f00;fill-opacity:1;stroke-width:0.00390625"
+       d=""
+       id="path13988" />
+    <path
+       style="fill:#ff9f00;fill-opacity:1;stroke-width:0.00390625"
+       d=""
+       id="path14536" />
+    <path
+       style="fill:#ff9f00;fill-opacity:1;stroke-width:0.00390625"
+       d=""
+       id="path52971" />
+    <path
+       style="fill:#ff9f00;fill-opacity:1;stroke-width:0.00390625"
+       d=""
+       id="path53049" />
+    <path
+       style="fill:#ff9f00;fill-opacity:1;stroke-width:0.00390625"
+       d=""
+       id="path53088" />
+    <path
+       style="fill:#ff9f00;fill-opacity:1;stroke-width:0.00390625"
+       d=""
+       id="path53205" />
+    <path
+       style="fill:#ff9f00;fill-opacity:1;stroke-width:0.00390625"
+       d=""
+       id="path53244" />
+    <text
+       xml:space="preserve"
+       id="text57256"
+       style="font-weight:600;font-size:53.3333px;line-height:1.25;font-family:Raleway;-inkscape-font-specification:'Raleway Semi-Bold';white-space:pre;shape-inside:url(#rect57258);fill:#201190;fill-opacity:1"
+       transform="translate(66.468037,22.627417)"><tspan
+         x="148.49219"
+         y="204.22512"
+         id="tspan1054"><tspan
+           style="font-weight:bold;-inkscape-font-specification:'Raleway Bold'"
+           id="tspan1052">Ryan Enterprises</tspan></tspan></text>
+    <path
+       style="fill:#201191;fill-opacity:1;stroke:#201191;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 148.71945,261.46313 54.624,-49.76264 -54.44722,-52.14912 c -4.08924,-0.56941 -7.03211,0.70349 -4.77297,6.0988 l 46.84582,44.98966 -47.19938,44.37095 c -0.83706,3.84192 -0.0769,6.59777 4.94975,6.45235 z"
+       id="path1157"
+       sodipodi:nodetypes="ccccccc" />
+    <path
+       style="fill:#ff9f00;fill-opacity:1;stroke:#ff9f00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 142.625,244.24999 37.625,-34 -36.875,-34.12499 z"
+       id="path1800"
+       sodipodi:nodetypes="cccc" />
+  </g>
+</svg>
