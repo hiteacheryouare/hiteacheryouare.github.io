@@ -3,7 +3,7 @@ layout: "../../layouts/research.astro"
 title: "Opting Out or Weighing In: Decision Directed SAT Score Submission"
 author: "Ryan Mullin"
 publishDate: "May 2025"
-type: "IWA"
+type: "Research"
 wordCount: 4676
 ---
 > *“Not everything that is faced can be changed, but nothing can be changed until it is faced.”*
