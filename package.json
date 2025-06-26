@@ -28,7 +28,6 @@
     "sass": "^1.89.2",
     "sass-migrator": "^2.3.2",
     "tailwindcss": "^3.4.17",
-    "typeit-react": "^2.7.8",
     "uadetect": "^6.0.1"
   },
   "devDependencies": {
