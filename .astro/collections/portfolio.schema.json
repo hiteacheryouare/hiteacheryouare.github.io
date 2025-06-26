@@ -1,0 +1,58 @@
+{
+  "$ref": "#/definitions/portfolio",
+  "definitions": {
+    "portfolio": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "freelance": {
+          "type": "boolean",
+          "default": false
+        },
+        "heroImage": {
+          "type": "object",
+          "properties": {
+            "src": {
+              "type": "string",
+              "default": "/waves.png"
+            },
+            "alt": {
+              "type": "string",
+              "default": "multicolored waves"
+            }
+          },
+          "additionalProperties": false
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "date",
+        "url"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

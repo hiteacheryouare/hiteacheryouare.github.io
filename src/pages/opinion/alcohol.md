@@ -5,7 +5,7 @@ description: "Four years of deep reflection and observation has led to the creat
 author: "Ryan Mullin" #Required
 pubDate: "Nov 1 2024" #Required
 heroImage: 
-    src: "/pattern.svg"
+    src: "/waves.png"
     alt: "abstract pattern"
 ---
 
@@ -14,7 +14,7 @@ I have thought long and hard about this topic. So much so that it has been cooki
 
 Buckle up; it’s time to learn why high school parties are, in my belief, *immeasurably stupid* beyond all comparison.
 
-# **My Thought Process**
+# My Thought Process
 
 To truly understand my viewpoint, you must first understand why I hold such views. Then, I will detail why I hold those views.
 
@@ -36,7 +36,7 @@ This serves as my cathartic release of all the frustration built up from parties
 
 Buckle up.
 
-# **You Can Have Fun Without Alcohol**
+# You Can Have Fun Without Alcohol
 
 Yes, this is the one that most people will push back on. It’s also the point I have least developed and is probably my weakest one, which is why I have placed it first.
 
@@ -61,7 +61,7 @@ If you still don’t believe me, here is a list of things I have done with my fr
 
 Try them sometime\!
 
-# **Alcohol Harms Your Personal Self-Image and Social Branding**
+# Alcohol Harms Your Personal Self-Image and Social Branding
 
 I feel like I should start this section by defining some terms.
 
@@ -93,7 +93,7 @@ I beg of you to consider the legal and mental implications of portraying yoursel
 
 Because I certainly don’t like to be found around criminals.
 
-# **It Harms the Relationships of Those Who Choose Not to Partake**
+# It Harms the Relationships of Those Who Choose Not to Partake
 
 This one hits especially close to home for me.
 
@@ -115,7 +115,7 @@ It’s a classic case of the silent majority being oppressed.
 
 Nobody wants to be an oppressor.
 
-# **It Is Unhealthy and Unsustainable**
+# It Is Unhealthy and Unsustainable
 
 I’ll address each topic in this section individually.
 
@@ -155,7 +155,7 @@ Take a step back and plan out your life, please.
 
 The planners are the ones who go far.
 
-# **It Serves Little to No Purpose**
+# It Serves Little to No Purpose
 
 Genuine question: what do you hope to get out of these parties?
 
@@ -173,19 +173,8 @@ This is why I get so riled up over it. This is why I hold these opinions so pass
 
 The real memories that you’ll actually remember are the ones you make with genuine friends, having a genuinely good time. There’s no need for fermented, poisonous grape juice to play any role in it.
 
-# **Conclusion**
+# Conclusion
 
 If we, as a culture, moved past partying as a whole, I think everyone would benefit. That’s what I’m here for. That’s why I wrote this article and have the guts to share my position. I want to be the change. I want to show people the life they could have beyond this vile habit.
 
 We need to be proactive about this, because the situation hasn’t gotten any better since it started.
-
-I leave you with this poem.
-
-*Laughter rings clear without shadow’s hold,*  
-*Yet mirrors blur where true faces unfold.*
-
-*It lingers and pulls where trust used to be,*  
-*A hollow exchange for what’s meant to feel free.*
-
-*In light, we rise, unbound by the haze—*  
-*Keeping joy as it is, unbroken, unfazed.*

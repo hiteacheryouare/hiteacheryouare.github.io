@@ -1,0 +1,18 @@
+---
+import { getEntry, render } from 'astro:content'
+import Passworder from '../../components/passworder.svelte'
+import Layout from '../../layouts/Layout.astro'
+import Research from '../../layouts/research.astro'
+const article = await getEntry('research', 'ooowi')
+const RederedArticle = await render(article)
+const RenderedArticleContent = RederedArticle.Content
+
+---
+
+<Layout title="Opting out Or Weighing In: Decision Directed SAT Score Submision" description="">
+	<Passworder password={"ihatemoney"} client:load >
+		<Research content={article.data}>
+			<RenderedArticleContent />
+		</Research>
+	</Passworder>
+</Layout>

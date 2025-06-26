@@ -1,0 +1,38 @@
+{
+  "$ref": "#/definitions/research",
+  "definitions": {
+    "research": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "auhtor": {
+          "type": "string",
+          "default": "Ryan Mullin"
+        },
+        "publishDate": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "pattern": "\\b(IRR|IWA|Research)\\b"
+        },
+        "wordCount": {
+          "type": "number"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "publishDate",
+        "type",
+        "wordCount"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

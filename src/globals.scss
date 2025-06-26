@@ -1,16 +1,36 @@
 @import './styles/reboot.scss';
 * { 
     scroll-behavior: smooth;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Inter Tight', sans-serif;
     &::selection {
         background-color: $primary;
-        color: $secondary;
+        color: $white;
     }
     pre, code {
         span {
             font-family: 'JetBrains Mono', monospace;
         }
         font-family: 'JetBrains Mono', monospace;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: lighten($primary, 10%);
+    &:hover {
+        color: $primary;
+        text-decoration: underline;
+        background-image: linear-gradient(to right, 
+            #fdb913ff, 
+            #f36f21ff, 
+            #c9234aff, 
+            #645faaff, 
+            #0089cfff, 
+            #0db14bff
+        );
+        background-size: 100% 2px;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
     }
 }
 
@@ -49,5 +69,21 @@ blockquote {
 }
 
 .highlightText {
-    @apply italic px-2 rounded bg-primary text-secondary selection:bg-secondary selection:text-primary
+    @apply italic px-2 rounded bg-primary text-white selection:bg-white selection:text-primary
+}
+
+.gradient-bar-ya-ya-yah {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, 
+        #fdb913ff, 
+        #f36f21ff, 
+        #c9234aff, 
+        #645faaff, 
+        #0089cfff, 
+        #0db14bff);
+    color: white;
+    padding: 1rem;
+    font-size: 1.25rem;
 }
