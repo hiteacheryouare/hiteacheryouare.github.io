@@ -1,20 +1,23 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 const schema = z;
 const blog = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: "./src/content/blog" }),
   schema: z.object({
     title: z.string(),
     author: z.string().default("Ryan Mullin"),
     description: z.string(),
     pubDate: z.string(),
     heroImage: z.object({
-        src: z.string().default("/FullColor.svg"),
-        alt: z.string().default("The Ryan Enterprises Logo"),
+        src: z.string().default("/waves.png"),
+        alt: z.string().default("multicolored waves"),
     }).optional(),
     urlBase: z.string().url().optional()
   }),
 });
 
 const portfolio = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: "./src/content/portfolio" }),
   schema: schema.object({
     name: schema.string(),
     description: schema.string(),
@@ -22,14 +25,15 @@ const portfolio = defineCollection({
     url: schema.string().url(),
     freelance: schema.boolean().default(false),
     heroImage: schema.object({
-        src: schema.string().default("/FullColor.svg"),
-        alt: schema.string().default("The Ryan Enterprises Logo"),
+        src: schema.string().default("/waves.png"),
+        alt: schema.string().default("multicolored waves"),
     }).optional(),
     tags: schema.array(schema.string()).optional()
   }),
 });
 
 const research = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: "./src/content/research" }),
   schema: schema.object({
     title: schema.string(),
     auhtor: schema.string().default("Ryan Mullin"),

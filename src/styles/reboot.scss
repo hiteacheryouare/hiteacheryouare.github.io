@@ -1,8 +1,19 @@
 $prefix: "ry-";
-$primary: #000064;
-$secondary: #00ffff;
+$primary: #645faaff;
+$secondary: #03AAFF;
 $info: mix($primary, $secondary);
-$tertiary: #197278;
+$tertiary: #c9234aff;
+$red: #c9234aff;
+$yellow: #fdb913ff;
+$orange: #f36f21ff;
+$purple: #645faaff;
+$blue: #0089cfff;
+$green: #0db14bff;
+$info: lighten($blue, 10%);
+$success: lighten($green, 10%);
+$warning: lighten($yellow, 10%);
+$danger: lighten($red, 10%);
+$dark: darken($secondary, 10%);
 
 
 @media (prefers-color-scheme: dark) {
@@ -76,4 +87,24 @@ table {
 			  border-width: 0 $table-border-width;
 			}
 		  }
+}
+
+a {
+    text-decoration: none;
+    color: lighten($primary, 10%);
+    &:hover {
+        color: $primary;
+        text-decoration: underline;
+        background-image: linear-gradient(to right, 
+            #fdb913ff, 
+            #f36f21ff, 
+            #c9234aff, 
+            #645faaff, 
+            #0089cfff, 
+            #0db14bff
+        );
+        background-size: 100% 2px;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+    }
 }

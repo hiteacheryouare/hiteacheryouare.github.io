@@ -7,20 +7,20 @@ import Footer from '../components/footer.svelte';
 import NavBar from '../components/nav.vue';
 import '../styles/bootstrap.scss';
 import '../../node_modules/bootstrap-icons/font/bootstrap-icons.scss'
-import { ViewTransitions } from 'astro:transitions';
 import { Image } from 'astro:assets';
-import pattern from '../img/pattern.svg'
-import FullColorFavi from '../img/FullColorFavi.svg'
+import pattern from '../img/waves.png'
+import FullColorFavi from '../img/new/RM-monogram-within-circle-blk.svg'
+import { ClientRouter } from 'astro:transitions';
 
 ---
 
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<ViewTransitions fallback="none"/>
+		<ClientRouter />
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/FullColorFavi.svg" />
+		<link rel="icon" type="image/svg+xml" href="/new/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description}>
 		<script>
@@ -63,11 +63,12 @@ import FullColorFavi from '../img/FullColorFavi.svg'
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet"> 
 		<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 	</head>
 	<body>
 		<nav class="p-10">
 			<NavBar client:load>
-				<Image src={FullColorFavi} alt='a double arrow' style={{height: '2rem'}}></Image>
+				<Image src={FullColorFavi} alt='a double arrow' style={{'height': '3rem'}}></Image>
 			</NavBar>
 		</nav>
 		<slot />

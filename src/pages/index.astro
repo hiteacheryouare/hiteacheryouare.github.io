@@ -2,14 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/hero'
 import BsAlert from '../components/bsAlert.svelte';
+import HeroHeader from '../components/heroHeader.svelte';
 ---
 
 <Layout title="Home">
 	<main class="">
-		<div class="p-4">
-			<BsAlert icon='hospital' type='primary' text='Support a close friend of mine in her mission to end childhood cancer.' actionText='Give Now' actionLink='https://www.shellsofhopenj.org/' client:visible />
-		</div>
-		<Hero client:idle />
+		<Hero client:idle>
+			<HeroHeader title="Forever Forward" />
+		</Hero>
 	</main>
 </Layout>
 

@@ -2,29 +2,27 @@
     var year = new Date()
     import {navigation as footerLinks} from '../utils/navigation'
 </script>
-<div class="flex">
-    <slot><img src="/pattern.svg" alt="" id="pattern"></slot>
+
+<div class="flex justify-center">
+    <slot><img src="/waves.png" alt="" id="pattern"></slot>
 </div>
 
-<footer class="bg-gray-900 dark:bg-black">
-    <div class="flex justify-between content-center">
-        <div class="flex justify-between flex-col">
-            <img src="/faviWhite.svg" alt="two right facing arrows" id="logo">
-            <hr />
-            <p class="text-white p-4">Copyright &copy; {year.getFullYear()}, Ryan Mullin. All Rights Reserved</p>
-        </div>
-        <div class="flex justify-between flex-col p-4 text-white underline">
+<footer class="bg-gray-900 dark:bg-black py-8">
+    <div class="container mx-auto flex flex-col items-center">
+        <img src="/wordmark-over-comcast-bar-white.png" alt="Ryan Mullin" id="logo" class="mb-4">
+         <div class="flex justify-center space-x-8 mb-4 links-container">
             {#each footerLinks as link}
-                <a href={link.href}>{link.name}</a>
+                <a href={link.href} class="">{link.name}</a>
             {/each}
         </div>
+        <hr class="w-full border-t border-gray-700 mb-4" />
+        <p class="text-white text-center">&copy; {year.getFullYear()}, Ryan Mullin. All Rights Reserved</p>
     </div>
 </footer>
 
 <style>
     #logo {
-        width: 20%;
-        padding: 2rem;
+        width: 20rem;
     }
     @media (orientation: portrait) {
         #logo {
@@ -33,20 +31,23 @@
     }
     a {
         color: white;
-        text-decoration: underline;
-    }
-    a:hover {
-        color: hsl(247, 79%, 32%)
+        text-decoration: none;
     }
     hr {
         border: 1px solid white;
     }
-    @media (prefers-color-scheme: dark) {
-        a:hover {
-            color: hsl(184, 66%, 28%);
-        }
-    }
     * {
         margin-bottom: 0;
+    }
+    .container {
+        max-width: 1200px;
+        padding: 0 1rem;
+    }
+    @media (max-width: 640px) {
+        .links-container {
+            flex-direction: column;
+            space-x-8: 0;
+            space-y-4: 1rem;
+        }
     }
 </style>
