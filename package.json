@@ -16,7 +16,7 @@
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.2.0",
     "@porkyproductions/hat": "^1.5.0",
-    "@types/react": "^18.3.23",
+    "@types/react": "^19.1.8",
     "@types/react-dom": "^18.3.7",
     "astro": "^5.10.1",
     "astro-seo": "^0.6.1",
@@ -37,8 +37,8 @@
     "@astrojs/tailwind": "^6.0.2",
     "@astrojs/vue": "^5.1.0",
     "astro-robots-txt": "^0.3.12",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "svelte": "^5.34.8",
     "vue": "^3.5.17"
   }
