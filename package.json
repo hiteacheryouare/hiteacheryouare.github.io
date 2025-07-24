@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@astrojs/prefetch": "^0.4.1",
-    "@headlessui/react": "^1.7.19",
+    "@headlessui/react": "^2.2.6",
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.2.0",
     "@porkyproductions/hat": "^1.5.0",
