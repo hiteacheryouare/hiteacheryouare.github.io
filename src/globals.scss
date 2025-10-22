@@ -15,22 +15,43 @@
 }
 
 a {
-    text-decoration: none;
+    position: relative;
     color: lighten($primary, 10%);
-    &:hover {
+    text-decoration: none;
+    transition: color .18s ease;
+
+    &:hover,
+    &:focus {
         color: $primary;
-        text-decoration: underline;
-        background-image: linear-gradient(to right, 
-            #fdb913ff, 
-            #f36f21ff, 
-            #c9234aff, 
-            #645faaff, 
-            #0089cfff, 
+        outline: none;
+    }
+
+    /* animated gradient underline using ::after */
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -2px;
+        height: 2px;
+        background: linear-gradient(
+            to right,
+            #fdb913ff,
+            #f36f21ff,
+            #c9234aff,
+            #645faaff,
+            #0089cfff,
             #0db14bff
         );
-        background-size: 100% 2px;
-        background-position: 0 100%;
-        background-repeat: no-repeat;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .25s cubic-bezier(.2,.8,.2,1);
+        pointer-events: none;
+    }
+
+    &:hover::after,
+    &:focus::after {
+        transform: scaleX(1);
     }
 }
 
