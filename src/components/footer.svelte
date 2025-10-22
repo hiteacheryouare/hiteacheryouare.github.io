@@ -3,10 +3,6 @@
     import {navigation as footerLinks} from '../utils/navigation'
 </script>
 
-<div class="flex justify-center">
-    <slot><img src="/waves.png" alt="" id="pattern"></slot>
-</div>
-
 <footer class="bg-gray-900 dark:bg-black py-8">
     <div class="container mx-auto flex flex-col items-center">
         <img src="/wordmark-over-comcast-bar-white.png" alt="Ryan Mullin" id="logo" class="mb-4">
