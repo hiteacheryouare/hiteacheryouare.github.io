@@ -105,9 +105,9 @@ export default function Home() {
                 experiences. With a focus on modern technologies and clean design, I bring ideas to life through code.
               </p>
               <div className="flex flex-wrap gap-2 pt-4">
-                {["React", "Next.js", "TypeScript", "Tailwind", "Node.js"].map((tech) => (
+                {["React", "Next.js", "TypeScript", "Tailwind", "Node.js"].map((tech: string, i: number) => (
                   <span
-                    key={tech}
+                    key={i}
                     className="px-4 py-2 rounded-full border border-gray-300 text-sm font-mono hover:border-primary hover:text-primary transition-colors cursor-default"
                   >
                     {tech}
