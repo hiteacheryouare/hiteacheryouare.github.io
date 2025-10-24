@@ -14,7 +14,7 @@ export default (props) => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-700 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+    <nav className="fixed top-4 left-4 right-4 z-50 bg-white/60 dark:bg-zinc-800/60 backdrop-blur-lg shadow-xl border border-gray-200/30 dark:border-gray-700/30 rounded-2xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo Section */}
@@ -60,7 +60,7 @@ export default (props) => {
 
       {/* Mobile Navigation Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+        <div className="md:hidden bg-white/60 dark:bg-zinc-800/60 backdrop-blur-lg border-t border-gray-200/30 dark:border-gray-700/30 rounded-b-2xl overflow-hidden">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navLinks.map((link) => (
               <a
