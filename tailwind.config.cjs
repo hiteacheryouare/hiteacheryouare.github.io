@@ -6,12 +6,13 @@ module.exports = {
 			primary: ['Inter Tight', 'sans-serif'],
 			secondary: ['Poppins', 'sans-serif'],
 			serif: ['Cinzel Decorative', 'serif'],
+			mono: ['JetBrains Mono', 'monospace'],
 		},
 		extend: {
 			colors: {
-				'primary': '#645faaff',
+				'primary': '#035bff',
 				'secondary': '#03AAFF',
-				'tertiary': '#c9234aff',
+				'tertiary': '#ff8f3a',
 			},
 		}
 	},
