@@ -1,73 +1,17 @@
 import { useState, useEffect } from 'react';
 
-interface SocialLink {
-  href: string;
-  icon: string;
-}
+import { socialLinks, projects, techStack, contactLinks } from '../utils/socialContacts'
+import { EMAIL_REGEX } from '../utils/EMAIL_REGEX';
 
-interface Project {
-  title: string;
-  description: string;
-  tags: string[];
-  year: string;
-  link?: string;
-}
+var year = new Date().getFullYear();
+
+
 
 export default () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  const socialLinks: SocialLink[] = [
-    {
-      href: 'https://github.com/hiteacheryouare',
-      icon: 'github',
-    },
-    {
-      href: 'https://linkedin.com/in/rpmullin06',
-      icon: 'linkedin',
-    },
-    {
-      href: 'https://instagram.com/rpmullin06',
-      icon: 'instagram',
-    }
-  ];
-
-  const projects: Project[] = [
-    {
-      title: "SmartCarbon",
-      description: "An eco-friendly travel carbon calculator that helps travelers make sustainable decisions by calculating and visualizing their carbon footprint with dynamic algorithms and actionable reduction strategies.",
-      tags: ["Next.js", "React", "TypeScript", "TailwindCSS"],
-      year: "2024",
-    },
-    {
-      title: "Tritons Swim",
-      description: "Complete team website solution for Deerwood Tritons swim team featuring integrated registration system, comprehensive record management, and dynamic team roster displays.",
-      tags: ["Astro", "React", "Svelte", "TailwindCSS", "Bootstrap"],
-      year: "2024",
-    },
-    {
-      title: "The Book Nook Project",
-      description: "Mission-driven nonprofit website connecting underprivileged youth with books, featuring donation tracking, volunteer coordination, and community impact visualization.",
-      tags: ["Astro", "HTML", "TailwindCSS", "Netlify"],
-      year: "2023",
-    },
-    {
-      title: "Launchpad",
-      description: "Modern link-in-bio card generator for personal branding, allowing users to create customizable landing pages with drag-and-drop functionality and real-time preview.",
-      tags: ["Next.js", "React", "TailwindCSS", "Vercel"],
-      year: "2024",
-    },
-  ];
-
-  const techStack = [
-    "JavaScript", 
-    "TypeScript", 
-    "React", 
-    "Next.js", 
-    "Astro", 
-    "Svelte",
-    "TailwindCSS", 
-    "Python"
-  ];
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -79,7 +23,7 @@ export default () => {
   }, []);
 
   return (
-    <main className="min-h-screen relative overflow-hidden bg-white">
+    <main className="min-h-screen relative overflow-hidden ">
       {/* Animated cursor follower */}
       <div
         className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
@@ -89,14 +33,14 @@ export default () => {
       />
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-6 md:px-12 pt-20">
+      <section className="min-h-screen flex items-center justify-center px-6 md:px-12 pt-20 ">
         <div className="max-w-7xl w-full">
           <div className="space-y-8">
             <div className="space-y-4">
               <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight">
                 Hi, I'm Ryan Mullin
                 <br />
-                <span className="text-gray-500">
+                <span className="text-gray-500 dark:text-gray-400">
                   Developer <br />
                   & Student <br />
                   & Swimmer <br />
@@ -104,7 +48,7 @@ export default () => {
               </h1>
               <div className="flex items-center gap-3">
                 <div className="h-px w-12 bg-blue-600" />
-                <p className="text-lg md:text-xl text-gray-600 font-mono">
+                <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 font-mono">
                   CS & Business @ Northeastern University
                 </p>
               </div>
@@ -116,9 +60,7 @@ export default () => {
                 className="group bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium inline-flex items-center transition-colors"
               >
                 View My Work
-                <svg className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
+                <i className="bi bi-chevron-right ml-2 transition-transform group-hover:translate-x-1"></i>
               </a>
               <a 
                 href="#contact"
@@ -147,7 +89,7 @@ export default () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="min-h-screen flex items-center px-6 md:px-12 py-24">
+      <section id="about" className="min-h-screen flex items-center px-6 md:px-12 py-24 ">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
@@ -157,10 +99,10 @@ export default () => {
               <h2 className="text-4xl md:text-6xl font-bold">
                 Building impactful solutions at the intersection of tech and business
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 I'm a Computer Science and Business Administration student at Northeastern University with a passion for FinTech and full-stack development. From building mission-driven nonprofit platforms to managing corporate sponsorship outreach for a 400+ member electric racing team, I thrive on projects that blend technical innovation with real-world impact.
               </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 Whether it's deploying responsive web applications, analyzing carbon footprints, or coordinating high-stakes recruitment events, I bring a unique combination of technical expertise and strategic thinking to every challenge.
               </p>
               <div className="flex flex-wrap gap-2 pt-4">
@@ -200,7 +142,7 @@ export default () => {
             <div className="space-y-4">
               <span className="text-sm font-mono text-blue-600">02 / Selected Work</span>
               <h2 className="text-4xl md:text-6xl font-bold">Featured Projects</h2>
-              <p className="text-lg text-gray-600 max-w-2xl">
+              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl">
                 From nonprofit platforms to eco-tech applications, here's a selection of projects where I've combined technical skills with mission-driven development.
               </p>
             </div>
@@ -221,10 +163,10 @@ export default () => {
                       <h3 className="text-3xl md:text-4xl font-bold group-hover:text-blue-600 transition-colors">
                         {project.title}
                       </h3>
-                      <p className="text-gray-600 leading-relaxed">{project.description}</p>
+                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{project.description}</p>
                       <div className="flex flex-wrap gap-2 pt-4">
                         {project.tags.map((tag) => (
-                          <span key={tag} className="px-3 py-1 rounded-full bg-gray-100 text-xs font-mono group-hover:bg-blue-50 transition-colors">
+                          <span key={tag} className="badge rounded-pill text-bg-primary">
                             {tag}
                           </span>
                         ))}
@@ -237,9 +179,7 @@ export default () => {
                           className="group/btn mt-4 hover:text-blue-600 inline-flex items-center font-medium transition-colors"
                         >
                           View Project
-                          <svg className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
+                          <i className="bi bi-chevron-right ml-2 transition-transform group-hover/btn:translate-x-1"></i>
                         </a>
                       )}
                     </div>
@@ -265,9 +205,7 @@ export default () => {
               >
                 <i className="bi bi-github"></i>
                 View more projects on GitHub
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
+                <i className="bi bi-arrow-right"></i>
               </a>
             </div>
           </div>
@@ -278,82 +216,83 @@ export default () => {
       <section id="contact" className="min-h-screen flex items-center px-6 md:px-12 py-24">
         <div className="max-w-7xl mx-auto w-full">
           <div className="space-y-16">
+        <div className="space-y-4">
+          <span className="text-sm font-mono text-blue-600">03 / Get in Touch</span>
+          <h2 className="text-4xl md:text-6xl font-bold">Let's build something great together</h2>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-16">
+          <div className="space-y-8">
+            <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+          I'm always interested in new opportunities—whether it's a FinTech project, web development work, or collaborative ventures at the intersection of business and technology. Let's connect!
+            </p>
             <div className="space-y-4">
-              <span className="text-sm font-mono text-blue-600">03 / Get in Touch</span>
-              <h2 className="text-4xl md:text-6xl font-bold">Let's build something great together</h2>
+          {contactLinks.map((link, index) => (
+            <a
+              key={index}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="d-flex align-items-center gap-3 text-lg transition-colors group"
+            >
+              <i className={`bi bi-${link.icon} fs-4`}></i>
+              <span className="group-hover:translate-x-1 transition-transform">{link.text}</span>
+            </a>
+          ))}
             </div>
-
-            <div className="grid md:grid-cols-2 gap-16">
-              <div className="space-y-8">
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  I'm always interested in new opportunities—whether it's a FinTech project, web development work, or collaborative ventures at the intersection of business and technology. Let's connect!
-                </p>
-                <div className="space-y-4">
-                  <a
-                    href="mailto:rpmullin17@gmail.com"
-                    className="flex items-center gap-3 text-lg hover:text-blue-600 transition-colors group"
-                  >
-                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    <span className="group-hover:translate-x-1 transition-transform">rpmullin17@gmail.com</span>
-                  </a>
-                  <a 
-                    href="https://linkedin.com/in/rpmullin06" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-lg hover:text-blue-600 transition-colors group"
-                  >
-                    <i className="bi bi-linkedin text-xl"></i>
-                    <span className="group-hover:translate-x-1 transition-transform">linkedin.com/in/rpmullin06</span>
-                  </a>
-                  <a 
-                    href="https://github.com/hiteacheryouare" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-lg hover:text-blue-600 transition-colors group"
-                  >
-                    <i className="bi bi-github text-xl"></i>
-                    <span className="group-hover:translate-x-1 transition-transform">github.com/hiteacheryouare</span>
-                  </a>
-                </div>
-                <div className="pt-4">
-                  <p className="text-sm text-gray-500 font-mono">
-                    📍 Based in Boston, MA & Philadelphia, PA
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-mono text-gray-600">Name</label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-blue-600 focus:outline-none transition-colors"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-mono text-gray-600">Email</label>
-                  <input
-                    type="email"
-                    className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-blue-600 focus:outline-none transition-colors"
-                    placeholder="your@email.com"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-mono text-gray-600">Message</label>
-                  <textarea
-                    rows={4}
-                    className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-blue-600 focus:outline-none transition-colors resize-none"
-                    placeholder="Tell me about your project or opportunity..."
-                  />
-                </div>
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition-colors">
-                  Send Message
-                </button>
-              </div>
+            <div className="pt-4">
+          <p className="text-sm text-gray-500 dark:text-gray-400 font-mono">
+            📍 Based in Boston, MA & Philadelphia, PA
+          </p>
             </div>
+          </div>
+
+          <form className="space-y-6">
+            <div className="mb-3">
+          <label htmlFor="nameInput" className="form-label text-sm font-mono text-gray-600">Name</label>
+          <input
+            id="nameInput"
+            type="text"
+            className="form-control"
+            placeholder="Your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+            </div>
+            <div className="mb-3">
+          <label htmlFor="emailInput" className="form-label text-sm font-mono text-gray-600">Email</label>
+          <input
+            id="emailInput"
+            type="email"
+            className={`form-control ${email ? (EMAIL_REGEX.test(email) ? 'is-valid' : 'is-invalid') : ''}`}
+            placeholder="your@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <div className="invalid-feedback">
+            Please enter a valid email address.
+          </div>
+            </div>
+            <div className="mb-3">
+          <label htmlFor="messageInput" className="form-label text-sm font-mono text-gray-600">Message</label>
+          <textarea
+            id="messageInput"
+            rows={4}
+            className="form-control"
+            placeholder="Tell me about your project or opportunity..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+            </div>
+            <a 
+              href={`mailto:rpmullin17@gmail.com?subject=Contact from ${name}&body=${message}%0D%0A%0D%0AFrom: ${name}%0D%0AEmail: ${email}`} 
+              className="btn btn-primary w-100"
+            >
+          Send Message
+            </a>
+          </form>
+        </div>
           </div>
         </div>
       </section>
@@ -361,7 +300,7 @@ export default () => {
       {/* Footer */}
       <footer className="border-t border-gray-200 px-6 md:px-12 py-12">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-gray-600 font-mono">© 2025 Ryan Mullin. Built with React & TailwindCSS.</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 font-mono">© {year} Ryan Mullin</p>
           <div className="flex items-center gap-6">
             {socialLinks.map((link, index) => (
               <a 

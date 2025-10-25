@@ -50,7 +50,7 @@ import { ClientRouter } from 'astro:transitions';
 					optional: {
 						description: description,
 						locale: "en-US",
-						siteName: "Ryan Mullin's Blog"
+						siteName: "Ryan Mullin's Personal Website"
 					},
 					image: {
 						alt: "double arrow"
@@ -68,7 +68,7 @@ import { ClientRouter } from 'astro:transitions';
 	<body>
 		<nav class="p-10">
 			<NavBar client:load>
-				<Image src={FullColorFavi} alt='a double arrow' style={{'height': '3rem'}}></Image>
+				<Image src={FullColorFavi} alt='fancy RM monogram' style={{'height': '3rem'}}></Image>
 			</NavBar>
 		</nav>
 		<slot />
