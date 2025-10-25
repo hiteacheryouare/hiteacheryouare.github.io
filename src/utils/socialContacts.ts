@@ -1,0 +1,76 @@
+import type { Project, SocialLink } from './types';
+
+export const socialLinks: SocialLink[] = [
+	{
+	  href: 'https://github.com/hiteacheryouare',
+	  icon: 'github',
+	},
+	{
+	  href: 'https://linkedin.com/in/rpmullin06',
+	  icon: 'linkedin',
+	},
+	{
+	  href: 'https://instagram.com/rpmullin06',
+	  icon: 'instagram',
+	},
+	{
+	  href: 'mailto:rpmullin17@gmail.com', 
+	  icon: 'envelope-fill',
+	}
+  ];
+
+  export const projects: Project[] = [
+	{
+	  title: "SmartCarbon",
+	  description: "An eco-friendly travel carbon calculator that helps travelers make sustainable decisions by calculating and visualizing their carbon footprint with dynamic algorithms and actionable reduction strategies.",
+	  tags: ["Next.js", "React", "TypeScript", "TailwindCSS"],
+	  year: "2024",
+	},
+	{
+	  title: "Tritons Swim",
+	  description: "Complete team website solution for Deerwood Tritons swim team featuring integrated registration system, comprehensive record management, and dynamic team roster displays.",
+	  tags: ["Astro", "React", "Svelte", "TailwindCSS", "Bootstrap"],
+	  year: "2024",
+	},
+	{
+	  title: "The Book Nook Project",
+	  description: "Mission-driven nonprofit website connecting underprivileged youth with books, featuring donation tracking, volunteer coordination, and community impact visualization.",
+	  tags: ["Astro", "HTML", "TailwindCSS", "Netlify"],
+	  year: "2023",
+	},
+	{
+	  title: "Launchpad",
+	  description: "Modern link-in-bio card generator for personal branding, allowing users to create customizable landing pages with drag-and-drop functionality and real-time preview.",
+	  tags: ["Next.js", "React", "TailwindCSS", "Vercel"],
+	  year: "2024",
+	},
+  ];
+
+ export  const techStack = [
+	"JavaScript", 
+	"TypeScript", 
+	"React", 
+	"Next.js", 
+	"Astro", 
+	"Svelte",
+	"TailwindCSS", 
+	"Python"
+  ];
+
+  export const contactLinks = [
+	{
+	  href: "mailto:rpmullin17@gmail.com",
+	  icon: "envelope-fill",
+	  text: "rpmullin17@gmail.com"
+	},
+	{
+	  href: "https://linkedin.com/in/rpmullin06",
+	  icon: "linkedin",
+	  text: "linkedin.com/in/rpmullin06"
+	},
+	{
+	  href: "https://github.com/hiteacheryouare",
+	  icon: "github",
+	  text: "github.com/hiteacheryouare"
+	}
+  ];

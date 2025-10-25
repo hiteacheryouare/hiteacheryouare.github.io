@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Resume() {
+export default () => {
   return (
     <div className="max-w-[8.5in] mx-auto bg-white p-8 text-gray-900 font-sans">
       {/* Header */}
