@@ -9,8 +9,6 @@ export default (props) => {
     { name: 'Résumé', href: '/resume' },
     { name: 'Blog', href: '/blog' },
     { name: 'Research', href: '/research' },
-    { name: 'Misc', href: '/misc' },
-    { name: 'Freelance Web Design', href: '/freelance' }
   ];
 
   return (
