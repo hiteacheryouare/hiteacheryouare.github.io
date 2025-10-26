@@ -1,16 +1,67 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/hero'
+import Hero from '../components/hero';
 import BsAlert from '../components/bsAlert.svelte';
-import HeroHeader from '../components/heroHeader.svelte';
+const projects = await getCollection("portfolio");
+projects.sort(
+  (a, b) =>
+    new Date(b.data.date).valueOf() -
+    new Date(a.data.date).valueOf()
+);
 ---
 
 <Layout title="Home">
-	<main class="">
-		<Hero client:idle>
-			<HeroHeader title="Forever Forward" />
-		</Hero>
-	</main>
+  <main class="">
+    <Hero client:idle>
+      {projects.map((project, index) => (
+        <div
+          class="group relative rounded-2xl border border-gray-200 overflow-hidden hover:border-blue-600 hover:shadow-lg transition-all duration-300"
+        >
+          <div class="grid md:grid-cols-2 gap-8 p-8 md:p-12">
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <span class="text-sm font-mono text-gray-500">0{index + 1}</span>
+                <div class="h-px flex-1 bg-gray-200" />
+                <span class="text-sm font-mono text-gray-500">{project.data.date || 'N/A'}</span>
+              </div>
+              <a href={`/portfolio/projects/${project.id}`} class="text-3xl leading-[3.25rem] md:text-4xl md:leading-[3.5rem] font-bold group-hover:text-blue-600 transition-colors">
+                {project.data.name || 'Untitled Project'}
+              </a>
+              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                {project.data.description || 'No description available.'}
+              </p>
+              <div class="flex flex-wrap gap-2 pt-4">
+                {project.data.tags?.map((tag) => (
+                  <span class="badge rounded-pill text-bg-primary">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              {project.data.url && (
+                <a 
+                  href={project.data.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group/btn mt-4 hover:text-blue-600 inline-flex items-center font-medium transition-colors"
+                >
+                  View Project
+                  <i class="bi bi-chevron-right ml-2 transition-transform group-hover/btn:translate-x-1"></i>
+                </a>
+              )}
+            </div>
+            <div class="relative aspect-video rounded-xl bg-gradient-to-br from-blue-50 to-gray-100 overflow-hidden border border-gray-200 flex items-center justify-center">
+              <img
+                src={project.data.heroImage?.src || '/waves.png'}
+                alt={project.data.heroImage?.alt || project.data.name || 'Project Image'}
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      ))}
+    </Hero>
+  </main>
 </Layout>
 
 <style>

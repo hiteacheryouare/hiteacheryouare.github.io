@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { socialLinks, projects, techStack } from '../utils/socialContacts'
+import { socialLinks, techStack } from '../utils/socialContacts'
 import { EMAIL_REGEX } from '../utils/EMAIL_REGEX';
 
-export default () => {
+export default (props) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -134,52 +134,7 @@ export default () => {
             </div>
 
             <div className="grid gap-8">
-              {projects.map((project, index) => (
-                <div
-                  key={index}
-                  className="group relative rounded-2xl border border-gray-200 overflow-hidden hover:border-blue-600 hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="grid md:grid-cols-2 gap-8 p-8 md:p-12">
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3">
-                        <span className="text-sm font-mono text-gray-500">0{index + 1}</span>
-                        <div className="h-px flex-1 bg-gray-200" />
-                        <span className="text-sm font-mono text-gray-500">{project.year}</span>
-                      </div>
-                      <h3 className="text-3xl md:text-4xl font-bold group-hover:text-blue-600 transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{project.description}</p>
-                      <div className="flex flex-wrap gap-2 pt-4">
-                        {project.tags.map((tag) => (
-                          <span key={tag} className="badge rounded-pill text-bg-primary">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      {project.link && (
-                        <a 
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group/btn mt-4 hover:text-blue-600 inline-flex items-center font-medium transition-colors"
-                        >
-                          View Project
-                          <i className="bi bi-chevron-right ml-2 transition-transform group-hover/btn:translate-x-1"></i>
-                        </a>
-                      )}
-                    </div>
-                    <div className="relative aspect-video rounded-xl bg-gradient-to-br from-blue-50 to-gray-100 overflow-hidden border border-gray-200 flex items-center justify-center">
-                      {/* Render project image if provided, otherwise fall back to default wave image in public */}
-                      <img
-                        src={project.image ? project.image : '/waves.png'}
-                        alt={project.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-              ))}
+              {props.children}
             </div>
 
             <div className="text-center pt-8">
