@@ -6,6 +6,7 @@ module.exports = {
 			primary: ['Inter Tight', 'sans-serif'],
 			secondary: ['Poppins', 'sans-serif'],
 			serif: ['Cinzel Decorative', 'serif'],
+			fancySerif: ['DM Serif Text', 'serif'],
 			mono: ['JetBrains Mono', 'monospace'],
 		},
 		extend: {

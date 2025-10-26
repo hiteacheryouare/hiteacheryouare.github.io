@@ -6,8 +6,8 @@ export default (props) => {
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
+    { name: 'Résumé', href: '/resume' },
     { name: 'Blog', href: '/blog' },
-    { name: 'Portfolio', href: '/portfolio' },
     { name: 'Research', href: '/research' },
     { name: 'Misc', href: '/misc' },
     { name: 'Freelance Web Design', href: '/freelance' }
