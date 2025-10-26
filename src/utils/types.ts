@@ -4,9 +4,11 @@ export interface Project {
   tags: string[];
   year: string;
   link?: string;
+  image?: string;
 }
 
 export interface SocialLink {
   href: string;
   icon: string;
+  text?: string;
 }

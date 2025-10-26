@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-
-import { socialLinks, projects, techStack, contactLinks } from '../utils/socialContacts'
+import { socialLinks, projects, techStack } from '../utils/socialContacts'
 import { EMAIL_REGEX } from '../utils/EMAIL_REGEX';
 
 var year = new Date().getFullYear();
@@ -118,18 +117,9 @@ export default () => {
             </div>
             <div className="relative">
               <div className="aspect-square rounded-2xl bg-gradient-to-br from-blue-50 to-gray-100 overflow-hidden border border-gray-200 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="text-6xl mb-4">💻</div>
-                  <p className="text-gray-500 font-mono text-sm">
-                    Northeastern University
-                    <br />
-                    Khoury College of CS
-                    <br />
-                    D'Amore-McKim School of Business
-                  </p>
-                </div>
+                <img src="/ryan_nu.jpg" alt="Ryan Mullin" className="max-w-full h-auto" />
               </div>
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-2xl bg-blue-100 border border-blue-600 -z-10" />
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-2xl bg-primary border border-blue-600 -z-10" />
             </div>
           </div>
         </div>
@@ -184,12 +174,12 @@ export default () => {
                       )}
                     </div>
                     <div className="relative aspect-video rounded-xl bg-gradient-to-br from-blue-50 to-gray-100 overflow-hidden border border-gray-200 flex items-center justify-center">
-                      <div className="text-4xl opacity-20">
-                        {index === 0 && "🌱"}
-                        {index === 1 && "🏊"}
-                        {index === 2 && "📚"}
-                        {index === 3 && "🔗"}
-                      </div>
+                      {/* Render project image if provided, otherwise fall back to default wave image in public */}
+                      <img
+                        src={project.image ? project.image : '/waves.png'}
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                   </div>
                 </div>
@@ -227,7 +217,7 @@ export default () => {
           I'm always interested in new opportunities—whether it's a FinTech project, web development work, or collaborative ventures at the intersection of business and technology. Let's connect!
             </p>
             <div className="space-y-4">
-          {contactLinks.map((link, index) => (
+          {socialLinks.map((link, index) => (
             <a
               key={index}
               href={link.href}
