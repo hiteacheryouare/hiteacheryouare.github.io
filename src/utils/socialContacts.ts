@@ -20,6 +20,16 @@ export const socialLinks: SocialLink[] = [
 			href: 'mailto:rpmullin17@gmail.com', 
 			icon: 'envelope-fill',
 			text: '/rpmullin17@gmail.com'
+		},
+		{
+			href: 'https://www.youtube.com/@ry06',
+			icon: 'youtube',
+			text: '/@ry06'
+		},
+		{
+			href: 'https://discord.com/users/hiteacheryouare',
+			icon: 'discord',
+			text: '/hiteacheryouare'
 		}
 	];
 

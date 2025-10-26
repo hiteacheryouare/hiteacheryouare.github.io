@@ -3,63 +3,32 @@ import Icon from '../components/icon.svelte';
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import pattern from '../img/waves.png'
+import { socialLinks } from '../utils/socialContacts';
 ---
 
 <Layout title="Home">
 	<main class="p-10">
 		<div class="max-w-3xl mx-auto p-8">
-
 			<!-- Name and Socials Section -->
 			<div class="flex content-center justify-center">
 				<section class="mb-6">
-					<Image src={pattern} alt='pattern' id='topPattern' style={{}} />
+					<img src="https://avatars.githubusercontent.com/u/82683251?v=4" alt="Ryan Mullin" class="p-4 w-96 h-96 rounded-full mx-auto mb-4 border border-gray-300">
 					<h1 class="text-5xl font-bold mb-4 text-center">Ryan Mullin</h1>
 					<hr>
 					<ul class="flex justify-between" id="socials">
-						<li><a href="https://www.instagram.com/rpmullin06/" class=""><Icon name='instagram'></a></li>
-						<li><a href="https://www.linkedin.com/in/rpmullin06/" class=""><Icon name='linkedin'></a></li>
-						<li><a href="https://github.com/hiteacheryouare" class=""><Icon name='github'></a></li>
-						<li><a href="https://www.youtube.com/@ry06" class=""><Icon name='youtube'></a></li>
-						<li><a href="https://discord.com/users/hiteacheryouare" class=""><Icon name='discord'></a></li>
-						<!-- Add more social links if needed -->
+						{socialLinks.map((link) => (
+							<li><a href={link.href} class=""><Icon name={link.icon}></Icon></a></li>
+						))}
 					</ul>
 				</section>
 			</div>
 	
 			<!-- Intro Section -->
 			<section class="mb-6">
-				<h2 class="text-xl font-semibold mb-2">Introduction</h2>
+				<h2 class="text-xl font-semibold mb-2">Bio</h2>
 				<p class="">
 					Ryan Mullin is a Computer Science and Business Administration student at Northeastern University's Boston campus, driven by a passion for tech-driven strategy. He combines coding, event planning, and marketing to achieve tangible results. At Camden Catholic High School, Ryan led a team of 10 ambassadors, organized significant events including an Open House with over 1,000 attendees, and contributed to the enrollment of more than 150 new students. He also independently manages social media for clients, growing followers to over 5,000, and develops websites as a freelance developer, notably for The Book Nook Project. His technical skills include JavaScript, TypeScript, HTML/CSS, Canva, and Photoshop. Ryan excels at the intersection of business and technology, focusing on problem-solving, team leadership, and creating impact.
 				</p>
-			</section>
-	
-			<!-- Skills Section -->
-			<section class="mb-6">
-				<h2 class="text-xl font-semibold mb-2">Skills</h2>
-				<ul class="list-disc list-inside">
-					<li>NextJS</li>
-					<li>TypeScript</li>
-					<li>Astro</li>
-					<li>Netlify</li>
-					<li>Vercel</li>
-					<li>Bootstrap</li>
-					<li>TailwindCSS</li>
-					<li>Marketing</li>
-					<li>Event Coordination</li>
-					<li>Digital Media Management</li>
-					<li>Canva</li>
-					<li>Photoshop</li>
-					<li>Web Design</li>
-					<li>Web Development</li>
-					<li>Web Applications</li>
-					<li>Strategic Leadership</li>
-					<li>Team Management</li>
-					<li>Easily Adaptable</li>
-					<li>Decision Making</li>
-					<li>Adobe Creative Suite</li>
-					<li>CPR & First Aid</li>
-				</ul>
 			</section>
 	
 		
