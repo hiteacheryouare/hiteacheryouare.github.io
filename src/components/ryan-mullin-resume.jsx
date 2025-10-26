@@ -1,11 +1,9 @@
-import React from 'react';
-
 export default () => {
   return (
     <div className="max-w-[8.5in] mx-auto bg-white p-8 text-gray-900 font-sans">
       {/* Header */}
       <header className="border-b-2 border-gray-800 pb-4 mb-6">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">RYAN MULLIN</h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-2 font-fancySerif">Ryan Mullin</h1>
         <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-700">
           <span>Mt. Laurel, NJ (Philadelphia Area)</span>
           <span>•</span>
