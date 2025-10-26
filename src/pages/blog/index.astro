@@ -1,9 +1,8 @@
 ---
 import '../../styles/blog.scss'
 import Layout from "../../layouts/Layout.astro";
-import BsAlert from '../../components/bsAlert.svelte'
 import { getCollection } from 'astro:content'
-import GradientHeader from "../../components/gradientHeader.svelte";
+
 const posts = await getCollection("blog")
 posts.sort(
   (a, b) =>
@@ -13,49 +12,124 @@ posts.sort(
 ---
 
 <Layout title="Blog">
-  <GradientHeader title="Blog" client:load />
-  <div class="mx-10">
-    <BsAlert
-      client:idle
-      type="info"
-      icon={"info"}
-      text="All posts organized by date. Stay and scroll a while!"
-      actionLink=""
-      actionText=""
+  <main class="min-h-screen relative overflow-hidden">
+    <!-- Animated cursor follower -->
+    <div
+      id="cursor-follower"
+      class="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
     />
-  </div>
-  <section>
-    <ul class="grid lg:grid-cols-3 portrait:grid-cols-1 grid-cols-2 gap-4 pr-8">
-      {
-        posts.map((post) => (
-          <li class="card p-6 shadow-md">
-            <div class="rounded-lg p-4">
-              <img transition:name={post.data.heroImage.alt ?? "image"} src={post.data.heroImage.src} alt="" class="m-auto p-4 card-img-top" />
-              <div class="card-body">
-                <a
-                href={`/blog/data/posts/${post.id ?? post.data.urlBase}`}
-                class="font-bold card-title font-secondary"
-                transition:name={post.data.title}
-              >
-                {post.data.title}
-              </a>{" "}
-              <br />
-              <p class="font-bold font-secondary card-subtitle"><span>{post.data.author}</span></p>
-              <time datetime={post.data.pubDate} class="card-text">
-                {post.data.pubDate}
-              </time>
-              <p class="p-4" transition:name={post.data.description} >{post.data.description}</p>
-              </div>
+
+    <!-- Hero Section -->
+    <section class="flex items-center justify-center px-6 md:px-12 pt-20">
+      <div class="max-w-7xl w-full">
+        <div class="space-y-8">
+          <div class="space-y-4">
+            <span class="text-sm font-mono text-blue-600">01 / Blog</span>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+              Thoughts <span class="text-gray-500 dark:text-gray-400 font-fancySerif italic">&</span> Ideas
+            </h1>
+            <div class="flex items-center gap-3">
+              <div class="h-px w-12 bg-blue-600" />
+              <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 font-mono">
+                All posts organized by date. Stay and scroll a while!
+              </p>
             </div>
-          </li>
-        ))
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="px-6 md:px-12 py-24">
+      <div class="max-w-7xl mx-auto w-full">
+        <ul class="grid grid-cols-1 gap-8 list-none">
+          {posts.map((post) => (
+            <li class="group">
+              <a
+                href={`/blog/data/posts/${post.id ?? post.data.urlBase}`}
+                class="block h-full"
+              >
+                <article class="h-full flex flex-col rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:border-blue-600 hover:shadow-lg hover:-translate-y-1">
+                  <div class="aspect-video bg-gradient-to-br from-blue-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 overflow-hidden">
+                    <img
+                      transition:name={post.data.heroImage.alt ?? "image"}
+                      src={post.data.heroImage.src}
+                      alt={post.data.heroImage.alt ?? post.data.title}
+                      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+
+                  <div class="flex-1 p-6 space-y-4">
+                    <div class="flex items-center justify-between text-sm font-mono text-gray-500 dark:text-gray-400">
+                      <time datetime={post.data.pubDate}>
+                        {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric'
+                        })}
+                      </time>
+                      <span>{post.data.author}</span>
+                    </div>
+
+                    <!-- Title -->
+                    <h2
+                      transition:name={post.data.title}
+                      class="text-2xl font-bold leading-tight group-hover:text-blue-600 transition-colors"
+                    >
+                      {post.data.title}
+                    </h2>
+
+                    <!-- Description -->
+                    <p
+                      transition:name={post.data.description}
+                      class="text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-3"
+                    >
+                      {post.data.description}
+                    </p>
+
+                    <!-- Read More Arrow -->
+                    <div class="flex items-center gap-2 text-blue-600 font-medium pt-2">
+                      <span>Read More</span>
+                      <i class="bi bi-arrow-right transition-transform group-hover:translate-x-1"></i>
+                    </div>
+                  </div>
+                </article>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {posts.length === 0 && (
+          <div class="text-center py-24">
+            <p class="text-xl text-gray-500 dark:text-gray-400 font-mono">
+              No posts yet. Check back soon!
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Cursor follower effect
+    const cursorFollower = document.getElementById('cursor-follower');
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      if (cursorFollower) {
+        cursorFollower.style.background = `radial-gradient(400px at ${e.clientX}px ${e.clientY}px, rgba(3, 91, 255, 0.08), transparent 50%)`;
       }
-    </ul>
-  </section>
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+  </script>
 </Layout>
 
 <style>
-  img {
-    width: 350px;
+  /* Line clamp utility for description truncation */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 </style>
