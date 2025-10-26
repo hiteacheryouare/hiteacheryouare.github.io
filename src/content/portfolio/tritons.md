@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/portfolio.astro"
 name: "Tritons Swim"
-description: "The Official Website of the Deerwood Tritons Swim Team"
+description: "Complete team website solution for Deerwood Tritons swim team featuring integrated registration system, comprehensive record management, and dynamic team roster displays."
 date: "Apr 3 2023"
 freelance: true
 url: "https://tritons-swim.netlify.app/archive"

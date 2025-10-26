@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/portfolio.astro"
 name: "SmartCarbon"
-description: "An eco-friendly carbon footprint travel calculator that helps you make more sustainable decisions"
+description: "An eco-friendly travel carbon calculator that helps travelers make sustainable decisions by calculating and visualizing their carbon footprint with dynamic algorithms and actionable reduction strategies."
 date: "Sept 8 2023"
 freelance: false
 url: "https://camdencatholic.github.io/smartcarbon/"

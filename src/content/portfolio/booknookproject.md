@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/portfolio.astro"
 name: "The Book Nook Project"
-description: "Empowering Young Minds Through Books"
+description: "Mission-driven nonprofit website connecting underprivileged youth with books, featuring donation tracking, volunteer coordination, and community impact visualization."
 date: "Sept 16 2024"
 freelance: true
 url: "https://thebooknookproject.netlify.app/"
