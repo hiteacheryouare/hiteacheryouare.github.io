@@ -9,6 +9,7 @@ import pattern from '../img/waves.png'
 import signature from '../../public/signature-blue.png'
 import FullColorFavi from '../img/2025/RM-monogram-black-on-transparent.svg'
 import { ClientRouter } from 'astro:transitions';
+import '../../node_modules/bootstrap-icons/font/bootstrap-icons.scss'
 
 export interface Props {
   content: {
@@ -96,48 +97,149 @@ const {
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
   </head>
   <body>
+    <!-- Animated cursor follower -->
+    <div
+      id="cursor-follower"
+      class="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
+    />
+
     <nav class="p-10">
       <NavBar client:load>
 				<Image src={FullColorFavi} alt='a double arrow' style={{height: '3rem'}}></Image>
 			</NavBar>
     </nav>
-    <main >
-      <article class="p-10">
-        <h1
-          class="font-extrabold font-primary text-3xl md:text-5xl p-8 bg-primary text-white rounded-lg selection:bg-white selection:text-primary"
-          transition:name={title}
-        >
-          {title}
-        </h1>
-        <img
-          width={720}
-          height={360}
-          src={heroImage.src}
-          alt={heroImage.alt}
-          class="m-auto p-4 card-img-top"
-          transition:name={heroImage.alt ?? "image"}
-        />
-        <h1 class="font-semibold font-primary text-4xl">
-          <span class="font-medium">by </span><span>{author}</span>
-        </h1>
-        {pubDate && <time datetime={pubDate} class="card-text" transition:name={pubDate}>{pubDate}</time>}
-        {
-          updatedDate && (
-            <div>
-              Last updated on <time>{updatedDate}</time>
+
+    <main class="min-h-screen relative overflow-hidden">
+      <!-- Hero Header Section -->
+      <section class="px-6 md:px-12 pt-12 pb-8">
+        <div class="max-w-5xl mx-auto w-full">
+          <div class="space-y-6">
+            <!-- Breadcrumb -->
+            <a 
+              href="/blog" 
+              class=""
+            >
+              <i class="bi bi-arrow-left transition-transform group-hover:-translate-x-1"></i>
+              Back to Blog
+            </a>
+
+            <!-- Title -->
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
+              transition:name={title}
+            >
+              {title}
+            </h1>
+
+            <!-- Metadata -->
+            <div class="flex flex-wrap items-center gap-4 text-gray-600 dark:text-gray-300">
+              <div class="flex items-center gap-3">
+                <div class="h-px w-12 bg-blue-600" />
+                <span class="font-mono text-sm">
+                  {author && <span class="font-medium">{author}</span>}
+                </span>
+              </div>
+              {pubDate && (
+                <time datetime={pubDate} class="text-sm font-mono" transition:name={pubDate}>
+                  {new Date(pubDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+              )}
+              {updatedDate && (
+                <span class="text-sm font-mono text-gray-500 dark:text-gray-400">
+                  Updated {new Date(updatedDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </span>
+              )}
             </div>
-          )
-        }
-        <hr />
-        <div class="text-lg leading-relaxed mb-6 first-letter:text-6xl first-letter:font-bold first-letter:font-serif first-letter:selection:bg-primary first-letter:selection:text-secondary">
-          <slot />
+          </div>
         </div>
-        <Image src={signature} alt="ryan mullin" style={{ width: "20rem"  }}>
+      </section>
+
+      <!-- Hero Image Section -->
+      <section class="px-6 md:px-12 pb-16">
+        <div class="max-w-5xl mx-auto w-full">
+          <div class="aspect-video bg-gradient-to-br from-blue-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700">
+            <img
+              src={heroImage.src}
+              alt={heroImage.alt}
+              class="w-full h-full object-cover"
+              transition:name={heroImage.alt ?? "image"}
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Article Content -->
+      <article class="px-6 md:px-12 pb-24">
+        <div class="max-w-3xl mx-auto w-full">
+          <div class="prose prose-lg dark:prose-invert max-w-none
+                      prose-headings:font-bold prose-headings:tracking-tight
+                      prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
+                      prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
+                      prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6
+                      prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+                      prose-strong:text-gray-900 dark:prose-strong:text-gray-100 prose-strong:font-semibold
+                      prose-code:text-blue-600 prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
+                      prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-700 prose-pre:rounded-xl
+                      prose-img:rounded-xl prose-img:border prose-img:border-gray-200 dark:prose-img:border-gray-700
+                      prose-blockquote:border-l-4 prose-blockquote:border-blue-600 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600 dark:prose-blockquote:text-gray-400
+                      prose-ul:list-disc prose-ul:pl-6 prose-ul:space-y-2
+                      prose-ol:list-decimal prose-ol:pl-6 prose-ol:space-y-2
+                      first-letter:text-6xl first-letter:font-bold first-letter:float-left first-letter:mr-3 first-letter:leading-none first-letter:font-serif">
+            <slot />
+          </div>
+
+          <!-- Signature -->
+          <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <Image 
+              src={signature} 
+              alt="ryan mullin signature" 
+              style={{ width: "16rem" }}
+              class="opacity-80"
+            />
+          </div>
+
+          <!-- Share Section -->
+          <div class="mt-12 flex items-center justify-between flex-wrap gap-4 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+            <p class="font-mono text-lg text-gray-600 dark:text-gray-400">
+              Wanna share?
+            </p>
+            <div class="flex items-center gap-3">
+              <a
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.request.url)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-blue-600 hover:text-blue-600 transition-colors text-primary"
+                aria-label="Share on X"
+              >
+                <i class="bi bi-twitter-x"></i>
+              </a>
+              <a
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.request.url)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-blue-600 hover:text-blue-600 transition-colors text-primary"
+                aria-label="Share on LinkedIn"
+              >
+                <i class="bi bi-linkedin"></i>
+              </a>
+            </div>
+          </div>
+        </div>
       </article>
     </main>
+
     <Footer>
 			<Image src={pattern} alt='pattern' id='pattern' style={{}} />
 		</Footer>
+
 		<style>
 			#pattern {
 				background-size: cover;
@@ -145,11 +247,18 @@ const {
 				width: auto;
 			}
 		</style>
+
+    <script>
+      // Cursor follower effect
+      const cursorFollower = document.getElementById('cursor-follower');
+      
+      const handleMouseMove = (e: MouseEvent) => {
+        if (cursorFollower) {
+          cursorFollower.style.background = `radial-gradient(400px at ${e.clientX}px ${e.clientY}px, rgba(3, 91, 255, 0.08), transparent 50%)`;
+        }
+      };
+
+      window.addEventListener('mousemove', handleMouseMove);
+    </script>
 	</body>
 </html>
-
-<style>
-  img {
-    border-radius: 10px;
-  }
-</style>
