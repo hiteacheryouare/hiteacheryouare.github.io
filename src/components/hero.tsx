@@ -2,10 +2,6 @@ import { useState, useEffect } from 'react';
 import { socialLinks, projects, techStack } from '../utils/socialContacts'
 import { EMAIL_REGEX } from '../utils/EMAIL_REGEX';
 
-var year = new Date().getFullYear();
-
-
-
 export default () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [name, setName] = useState('');
