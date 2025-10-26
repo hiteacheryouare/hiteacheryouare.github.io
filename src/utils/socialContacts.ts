@@ -2,9 +2,9 @@ import type { Project, SocialLink } from './types';
 
 export const socialLinks: SocialLink[] = [
 		{
-			href: 'https://github.com/hiteacheryouare',
-			icon: 'github',
-			text: '/hiteacheryouare'
+			href: 'mailto:rpmullin17@gmail.com', 
+			icon: 'envelope-fill',
+			text: '/rpmullin17@gmail.com'
 		},
 		{
 			href: 'https://linkedin.com/in/rpmullin06',
@@ -12,14 +12,19 @@ export const socialLinks: SocialLink[] = [
 			text: 'in/rpmullin06'
 		},
 		{
+			href: 'https://github.com/hiteacheryouare',
+			icon: 'github',
+			text: '/hiteacheryouare'
+		},
+		{
 			href: 'https://instagram.com/rpmullin06',
 			icon: 'instagram',
 			text: '/rpmullin06'
 		},
 		{
-			href: 'mailto:rpmullin17@gmail.com', 
-			icon: 'envelope-fill',
-			text: '/rpmullin17@gmail.com'
+			href: "https://www.facebook.com/rpmullin06/",
+			icon: "facebook",
+			text: "/rpmullin06"
 		},
 		{
 			href: 'https://www.youtube.com/@ry06',
@@ -30,6 +35,11 @@ export const socialLinks: SocialLink[] = [
 			href: 'https://discord.com/users/hiteacheryouare',
 			icon: 'discord',
 			text: '/hiteacheryouare'
+		},
+		{
+			href: "https://open.spotify.com/user/rpmullin0917?si=d6a45c9fcac44f6f",
+			icon: "spotify",
+			text: "/rpmullin0917"
 		}
 	];
 
