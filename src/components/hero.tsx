@@ -33,12 +33,12 @@ export default (props) => {
           <div className="space-y-8">
             <div className="space-y-4">
               <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight">
-                Hi, I'm Ryan Mullin
+                <span className=''>Hi</span>, I'm <span className='italic'>Ryan Mullin</span>
                 <br />
                 <span className="text-gray-500 dark:text-gray-400">
                   Developer <br />
-                  & Student <br />
-                  & Swimmer <br />
+                  <span className='italic font-fancySerif'>&</span> Student <br />
+                  <span className='italic font-fancySerif'>&</span> Swimmer <br />
                 </span>
               </h1>
               <div className="flex items-center gap-3">
@@ -52,14 +52,14 @@ export default (props) => {
             <div className="flex flex-wrap items-center gap-4 pt-8">
               <a 
                 href="#work"
-                className="group bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium inline-flex items-center transition-colors"
+                className="btn btn-primary text-lg lg:text-3xl"
               >
                 View My Work
                 <i className="bi bi-chevron-right ml-2 transition-transform group-hover:translate-x-1"></i>
               </a>
               <a 
                 href="#contact"
-                className="px-6 py-3 rounded-lg font-medium border border-gray-300 hover:border-gray-400 transition-colors"
+                className="btn btn-secondary text-lg lg:text-3xl"
               >
                 Get in Touch
               </a>
