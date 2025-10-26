@@ -18,6 +18,27 @@ const mistakes = [
 	"Flaw",
 	"Oversight",
 	"Fallacy",
+	"Goof",
+	"Lapse",
+	"Misstep",
+	"Botch",
+	"Snafu",
+	"Faux pas",
+	"Howler",
+	"Catastrophe",
+	"Debacle",
+	"Fiasco",
+	"Misadventure",
+	"Calamity",
+	"Disaster",
+	"Tragedy",
+	"Screw-up",
+	"Blooper",
+	"Utter disaster",
+	"Train wreck",
+	"Dumpster fire",
+
+
 ]
 const icons = [
 	"cone",
@@ -39,7 +60,71 @@ const icons = [
 	"exclamation-square",
 	"exclamation-square-fill",
 	"hand-thumbs-down",
-	"emoji-frown"
+	"emoji-frown",
+	"explicit",
+	"explicit-fill",
+	"heartbreak",
+	"slash-circle",
+	"slash-circle-fill",
+	"heartbreak-fill",
+	"piggy-bank-fill",
+	"piggy-bank",
+]
+
+const broVariations = [
+	"bro",
+	"brochacho",
+	"brochacho",
+	"brochacho",
+	"brochacho",
+	"brochacho",
+	"brochacho",
+	"brochacho",
+	"broseph",
+	"bruh",
+	"bud",
+	"blud",
+	"buddy",
+	"bucko",
+	"mate",
+	"amigo",
+	"compadre",
+	"brosephina",
+	"brotien shake",
+	"brofessor",
+	"broletariat",
+	"brotagonist",
+	"brohemian rhapsody",
+	"brotanical Garden",
+	"brotato Chip",
+	"brosidon",
+	"brometheus",
+	"C3P-Bro",
+	"broseph stalin",
+	"brojangles",
+	"theodore broosevelt",
+	"bronana"
+]
+
+const exclamationIntensities = [
+	"!!",
+	"!!!",
+	"!!!!",
+	"!!!!!",
+	"!!!!!!!!",
+	"!!!!!!!!!!",
+	"!!!!!!!!!!!",
+	"!!!!!!!!!!!!",
+	"!!!!!!!!!!!!!",
+	"!!!!!!!!!!!!!!",
+	"!!!!!!!!!!!!!!!",
+	"!!!!!!!!!!!!!!!!",
+	"!!!!!!!!!!!!!!!!!",
+	"!!!!!!!!!!!!!!!!!!",
+	"!!!!!!!!!!!!!!!!!!!",
+	"!!!!!!!!!!!!!!!!!!!!",
+	"!!!!!!!!!!!!!!!!!!!!!",
+	"!!!!!!!!!!!!!!!!!!!!!!",
 ]
 ---
 <Layout title="404 not found!!!" description="nope, we cant find da page">
@@ -47,13 +132,13 @@ const icons = [
 		<i class={`bi bi-${randomInArray(icons)}`}></i>
 	</div>
 	<div class='flex content-center justify-center p-4 text-9xl text-red-600'>
-		<h2 class='text-center font-bold text-4xl text-red-600'>{randomInArray(mistakes)}!!!</h2>
+		<h2 class='text-center font-bold text-4xl text-red-600'>{randomInArray(mistakes)}{randomInArray(exclamationIntensities)}</h2>
 	</div>
 	<div class='flex content-center justify-center p-4 text-9xl text-red-600'>
 		<h3 class='text-center font-semibold text-2xl text-red-600'>404 - Page Not Found</h3>
 	</div>
 	<div class='flex content-center justify-center p-4 text-9xl text-red-600'>
-		<h3 class='text-center text-2xl text-red-600'>(that means ur in the wrong spot brochacho)</h3>
+		<h3 class='text-center text-2xl text-red-600'>(that means ur in the wrong spot {randomInArray(broVariations)})</h3>
 	</div>
 	<div class='flex content-center justify-center p-4'>
 		<a href="/" class="btn btn-danger">Go Home</a>
