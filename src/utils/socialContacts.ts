@@ -1,23 +1,27 @@
 import type { Project, SocialLink } from './types';
 
 export const socialLinks: SocialLink[] = [
-	{
-	  href: 'https://github.com/hiteacheryouare',
-	  icon: 'github',
-	},
-	{
-	  href: 'https://linkedin.com/in/rpmullin06',
-	  icon: 'linkedin',
-	},
-	{
-	  href: 'https://instagram.com/rpmullin06',
-	  icon: 'instagram',
-	},
-	{
-	  href: 'mailto:rpmullin17@gmail.com', 
-	  icon: 'envelope-fill',
-	}
-  ];
+		{
+			href: 'https://github.com/hiteacheryouare',
+			icon: 'github',
+			text: '/hiteacheryouare'
+		},
+		{
+			href: 'https://linkedin.com/in/rpmullin06',
+			icon: 'linkedin',
+			text: 'in/rpmullin06'
+		},
+		{
+			href: 'https://instagram.com/rpmullin06',
+			icon: 'instagram',
+			text: '/rpmullin06'
+		},
+		{
+			href: 'mailto:rpmullin17@gmail.com', 
+			icon: 'envelope-fill',
+			text: '/rpmullin17@gmail.com'
+		}
+	];
 
   export const projects: Project[] = [
 	{
@@ -25,18 +29,21 @@ export const socialLinks: SocialLink[] = [
 	  description: "An eco-friendly travel carbon calculator that helps travelers make sustainable decisions by calculating and visualizing their carbon footprint with dynamic algorithms and actionable reduction strategies.",
 	  tags: ["Next.js", "React", "TypeScript", "TailwindCSS"],
 	  year: "2024",
+	  image: "https://raw.githubusercontent.com/camdencatholic/smartcarbon/main/public/favi-text.png"
 	},
 	{
 	  title: "Tritons Swim",
 	  description: "Complete team website solution for Deerwood Tritons swim team featuring integrated registration system, comprehensive record management, and dynamic team roster displays.",
 	  tags: ["Astro", "React", "Svelte", "TailwindCSS", "Bootstrap"],
 	  year: "2024",
+	  image: "https://tritons-swim.netlify.app/seahorse.png"
 	},
 	{
 	  title: "The Book Nook Project",
 	  description: "Mission-driven nonprofit website connecting underprivileged youth with books, featuring donation tracking, volunteer coordination, and community impact visualization.",
 	  tags: ["Astro", "HTML", "TailwindCSS", "Netlify"],
 	  year: "2023",
+	  image: "https://thebooknookproject.netlify.app/hero-img.jpg"
 	},
 	{
 	  title: "Launchpad",
@@ -46,7 +53,7 @@ export const socialLinks: SocialLink[] = [
 	},
   ];
 
- export  const techStack = [
+ export const techStack = [
 	"JavaScript", 
 	"TypeScript", 
 	"React", 
@@ -57,20 +64,3 @@ export const socialLinks: SocialLink[] = [
 	"Python"
   ];
 
-  export const contactLinks = [
-	{
-	  href: "mailto:rpmullin17@gmail.com",
-	  icon: "envelope-fill",
-	  text: "rpmullin17@gmail.com"
-	},
-	{
-	  href: "https://linkedin.com/in/rpmullin06",
-	  icon: "linkedin",
-	  text: "linkedin.com/in/rpmullin06"
-	},
-	{
-	  href: "https://github.com/hiteacheryouare",
-	  icon: "github",
-	  text: "github.com/hiteacheryouare"
-	}
-  ];
