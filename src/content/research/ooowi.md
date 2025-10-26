@@ -266,10 +266,9 @@ Vansuch, Mary. “The Effects of Mandatory and Free College Admission Testing on
 
 1. # Survey Questions
 
-Below is a full copy of the survey distributed to participants, exported from Google Forms[^15].![][image5]  
-![][image6]![][image7]![][image8]![][image9]![][image10]
+Below is a full copy of the survey distributed to participants, exported from Google Forms[^15].
 
-2. # Data Analysis Programs
+1. # Data Analysis Programs
 
 **1\. This Python script takes the data from a CSV file, makes sure the data is properly formatted and calculates total SAT scores. It then groups the data by submission category (all, some, or none) to calculate the average total SAT score and count for each group.**
 

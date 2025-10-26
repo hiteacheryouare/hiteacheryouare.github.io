@@ -1,22 +1,161 @@
 ---
-import GradientHeader from '../../components/gradientHeader.svelte';
 import Layout from '../../layouts/Layout.astro'
+
+const researchPapers = [
+  {
+    title: "Opting Out or Weighing In: Decision Directed SAT Score Submission",
+    href: "/research/ooowi",
+    description: "An analysis of test-optional policies and their impact on college admissions decisions",
+    date: "2024",
+    type: "Research Article"
+  },
+  {
+    title: "The Ineffectiveness of Climate Change Policies in the United States",
+    href: "/research/climate-change",
+    description: "Examining the structural and political barriers to effective climate policy implementation",
+    date: "2024",
+    type: "Written Argument"
+  },
+  {
+    title: "Enhancing Vaccine Communication to Address Intelligent Disobedience",
+    href: "/research/vaccines",
+    description: "Strategies for improving public health messaging and addressing vaccine hesitancy",
+    date: "2024",
+    type: "Research Report"
+  }
+]
 ---
 
 <Layout title="Research">
-	<GradientHeader title="Research" client:load />
-	<hr>
-	<h3 class="text-center p-4 dark:text-white">
-		This is where I will post any research that I conduct.
-	</h3>
-	<hr>
-	<h3 class="text-center p-4">
-		<a href="/research/ooowi">Opting Out or Weighing In: Decision Directed SAT Score Submission</a>
-	</h3>
-	<h3 class="text-center p-4">
-		<a href="/research/climate-change">The Ineffectiveness of Climate Change Policies in the United States</a>
-	</h3>
-	<h3 class="text-center p-4">
-		<a href="/research/vaccines">Enhancing Vaccine Communication to Address Intelligent Disobedience</a>
-	</h3>
+  <main class="min-h-screen relative overflow-hidden">
+    <!-- Animated cursor follower -->
+    <div
+      id="cursor-follower"
+      class="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
+    />
+
+    <!-- Hero Section -->
+    <section class="flex items-center justify-center px-6 md:px-12 pt-20">
+      <div class="max-w-7xl w-full">
+        <div class="space-y-8">
+          <div class="space-y-4">
+            <span class="text-sm font-mono text-blue-600">02 / Research</span>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+              Academic <span class="text-gray-500 dark:text-gray-400 font-fancySerif italic">&</span> Research
+            </h1>
+            <div class="flex items-center gap-3">
+              <div class="h-px w-12 bg-blue-600" />
+              <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 font-mono">
+                Exploring ideas through rigorous analysis and evidence-based inquiry
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Papers Grid -->
+    <section class="px-6 md:px-12 py-24">
+      <div class="max-w-7xl mx-auto w-full">
+        <ul class="grid grid-cols-1 gap-8 list-none">
+          {researchPapers.map((paper, index) => (
+            <li class="group">
+              <a
+                href={paper.href}
+                class="block h-full"
+              >
+                <article class="h-full flex flex-col md:flex-row gap-6 p-6 md:p-8 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:border-blue-600 hover:shadow-lg hover:-translate-y-1">
+                  <!-- Number Badge -->
+                  <div class="flex-shrink-0">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center">
+                      <span class="text-2xl font-bold text-white font-mono">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+                  </div>
+
+                  <!-- Content -->
+                  <div class="flex-1 space-y-3">
+                    <!-- Type Badge -->
+                    <div class="inline-block">
+                      <span class="px-3 py-1 rounded-full border border-blue-600 text-blue-600 text-xs font-mono bg-blue-50 dark:bg-blue-950">
+                        {paper.type}
+                      </span>
+                    </div>
+
+                    <!-- Title -->
+                    <h2 class="text-2xl md:text-3xl font-bold leading-tight group-hover:text-blue-600 transition-colors">
+                      {paper.title}
+                    </h2>
+
+                    <!-- Description -->
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                      {paper.description}
+                    </p>
+
+                    <!-- Meta info -->
+                    <div class="flex items-center gap-4 text-sm font-mono text-gray-500 dark:text-gray-400 pt-2">
+                      <span>{paper.date}</span>
+                      <span>•</span>
+                      <span class="flex items-center gap-2 text-blue-600 font-medium">
+                        Read Paper
+                        <i class="bi bi-arrow-right transition-transform group-hover:translate-x-1"></i>
+                      </span>
+                    </div>
+                  </div>
+                </article>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {researchPapers.length === 0 && (
+          <div class="text-center py-24">
+            <div class="space-y-4">
+              <div class="w-20 h-20 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mx-auto">
+                <i class="bi bi-file-earmark-text text-3xl text-gray-400"></i>
+              </div>
+              <p class="text-xl text-gray-500 dark:text-gray-400 font-mono">
+                No research papers yet. Check back soon!
+              </p>
+            </div>
+          </div>
+        )}
+
+        <!-- Additional Info Section -->
+        <div class="mt-16 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gradient-to-br from-gray-50 to-blue-50/30 dark:from-gray-800/50 dark:to-blue-950/20">
+          <div class="space-y-4">
+            <h3 class="text-2xl font-bold">About My Research</h3>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              This collection represents academic work conducted during my time at Camden Catholic and Northeastern University, exploring topics at the intersection of policy, technology, and social impact. Each paper reflects rigorous research methodology and evidence-based analysis.
+            </p>
+            <div class="flex items-center gap-2 text-sm font-mono text-gray-500 dark:text-gray-400 pt-2">
+              <i class="bi bi-info-circle"></i>
+              <span>All research papers are formatted for academic citation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Cursor follower effect
+    const cursorFollower = document.getElementById('cursor-follower');
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      if (cursorFollower) {
+        cursorFollower.style.background = `radial-gradient(400px at ${e.clientX}px ${e.clientY}px, rgba(3, 91, 255, 0.08), transparent 50%)`;
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+  </script>
 </Layout>
+
+<style>
+  /* Smooth transitions for all interactive elements */
+  a, button {
+    transition: all 0.3s ease;
+  }
+</style>

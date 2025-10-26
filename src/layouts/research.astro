@@ -5,7 +5,7 @@ import NavBar from "../components/nav.tsx";
 import "../globals.scss";
 import '../styles/blog.scss'
 import { Image } from 'astro:assets';
-import pattern from '../img/pattern.svg'
+import pattern from '../img/waves.png'
 import signature from '../../public/signature-blue.png'
 import FullColorFavi from '../img/2025/RM-monogram-black-on-transparent.svg'
 import { ClientRouter } from 'astro:transitions';
@@ -30,6 +30,15 @@ const {
     id
   },
 } = Astro.props;
+
+let typeLabel = "";
+if (type === "IRR") {
+  typeLabel = "Research Report";
+} else if (type === "IWA") {
+  typeLabel = "Written Argument";
+} else if (type === "Research") {
+  typeLabel = "Research Article";
+}
 
 ---
 
@@ -89,44 +98,183 @@ const {
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
   </head>
   <body>
+    <!-- Animated cursor follower -->
+    <div
+      id="cursor-follower"
+      class="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
+    />
+
     <nav class="p-10">
       <NavBar client:load>
 				<Image src={FullColorFavi} alt='a double arrow' style={{height: '3rem'}}></Image>
 			</NavBar>
     </nav>
-    <main >
-      <article class="p-10">
-        <div class="p-4">
-          <h1
-            class="font-extrabold font-primary text-3xl md:text-5xl p-8 bg-primary text-white rounded-lg selection:bg-white selection:text-primary"
-            transition:name={title}
-          >
-            {title}
-            <br>
-          </h1>
+
+    <main class="min-h-screen relative overflow-hidden">
+      <!-- Hero Header Section -->
+      <section class="px-6 md:px-12 pt-12 pb-8">
+        <div class="max-w-5xl mx-auto w-full">
+          <div class="space-y-6">
+            <!-- Breadcrumb -->
+            <a 
+              href="/research" 
+              class=""
+            >
+              <i class="bi bi-arrow-left transition-transform group-hover:-translate-x-1"></i>
+              Back to Research
+            </a>
+
+            <!-- Type Badge -->
+            <div class="inline-block">
+              <span class="px-4 py-2 rounded-full border border-blue-600 text-blue-600 text-sm font-mono bg-blue-50 dark:bg-blue-950">
+                {typeLabel}
+              </span>
+            </div>
+
+            <!-- Title -->
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
+              transition:name={title}
+            >
+              {title}
+            </h1>
+
+            <!-- Metadata -->
+            <div class="flex flex-wrap items-center gap-4 text-gray-600 dark:text-gray-300">
+              <div class="flex items-center gap-3">
+                <div class="h-px w-12 bg-blue-600" />
+                <span class="font-mono text-sm">
+                  <span class="font-medium">{author || "Ryan Mullin"}</span>
+                </span>
+              </div>
+              {publishDate && (
+                <time datetime={publishDate} class="text-sm font-mono" transition:name={publishDate}>
+                  Published {new Date(publishDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+              )}
+              <span class="text-sm font-mono text-gray-500 dark:text-gray-400">
+                {wordCount.toLocaleString()} words
+              </span>
+            </div>
+          </div>
         </div>
-        <h1 class="font-semibold font-primary text-4xl">
-          <span class="font-medium">a {type === "IRR" || type === "Research" ? "Research Report" : "Written Argument"} by </span><span>{author || "Ryan Mullin"}</span>
-        </h1>
-        <h1 class="font-medium font-primary text-2xl">
-          <span>Word Count: {wordCount}</span>
-        </h1>
-        {publishDate && <time datetime={publishDate} class="card-text" transition:name={publishDate}>Published: {publishDate}</time>}
-        <hr />
-        <div class="text-lg leading-10 mb-6 first-letter:text-6xl first-letter:font-bold first-letter:font-serif first-letter:selection:bg-primary first-letter:selection:text-secondary font-['serif']" id="article">
-          <slot />
+      </section>
+
+      <!-- Article Content -->
+      <article class="px-6 md:px-12 pb-24 pt-8">
+        <div class="max-w-4xl mx-auto w-full">
+          <div class="prose prose-lg dark:prose-invert max-w-none
+                      prose-headings:font-bold prose-headings:tracking-tight
+                      prose-h1:text-4xl prose-h1:mt-12 prose-h1:mb-6
+                      prose-h2:text-3xl prose-h2:mt-10 prose-h2:mb-5
+                      prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
+                      prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-[1.8] prose-p:mb-6
+                      prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+                      prose-strong:text-gray-900 dark:prose-strong:text-gray-100 prose-strong:font-semibold
+                      prose-em:italic
+                      prose-code:text-blue-600 prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
+                      prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-700 prose-pre:rounded-xl
+                      prose-img:rounded-xl prose-img:border prose-img:border-gray-200 dark:prose-img:border-gray-700 prose-img:mx-auto
+                      prose-blockquote:border-l-4 prose-blockquote:border-blue-600 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600 dark:prose-blockquote:text-gray-400
+                      prose-ul:list-disc prose-ul:pl-6 prose-ul:space-y-2
+                      prose-ol:list-decimal prose-ol:pl-6 prose-ol:space-y-2
+                      prose-li:text-gray-700 dark:prose-li:text-gray-300
+                      prose-table:border-collapse prose-table:w-full
+                      prose-th:border prose-th:border-gray-300 dark:prose-th:border-gray-700 prose-th:bg-gray-100 dark:prose-th:bg-gray-800 prose-th:p-3 prose-th:text-left prose-th:font-semibold
+                      prose-td:border prose-td:border-gray-300 dark:prose-td:border-gray-700 prose-td:p-3
+                      prose-hr:border-gray-300 dark:prose-hr:border-gray-700
+                      first-letter:text-6xl first-letter:font-bold first-letter:float-left first-letter:mr-3 first-letter:leading-none first-letter:font-serif first-letter:text-gray-900 dark:first-letter:text-gray-100"
+            id="article"
+          >
+            <slot />
+          </div>
+
+          <!-- Signature -->
+          <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <Image 
+              src={signature} 
+              alt="ryan mullin signature" 
+              style={{ width: "16rem" }}
+              class="opacity-80"
+            />
+          </div>
+
+          <!-- Citation & Download Section -->
+          <div class="mt-12 space-y-4">
+            <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+              <h3 class="font-mono text-sm text-gray-600 dark:text-gray-400 mb-3">Cite This Work</h3>
+              <p class="font-mono text-sm text-gray-700 dark:text-gray-300 break-words">
+                {author || "Ryan Mullin"}. ({publishDate ? new Date(publishDate).getFullYear() : "n.d."}). <em>{title}</em>. Retrieved from {Astro.request.url}
+              </p>
+            </div>
+
+            <div class="flex items-center justify-between flex-wrap gap-4 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+              <p class="font-mono text-sm text-gray-600 dark:text-gray-400">
+                Share this research?
+              </p>
+              <div class="flex items-center gap-3 text-primary">
+                <a
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.request.url)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-blue-600 hover:text-blue-600 transition-colors"
+                  aria-label="Share on Twitter"
+                >
+                  <i class="bi bi-twitter-x"></i>
+                </a>
+                <a
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.request.url)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-blue-600 hover:text-blue-600 transition-colors"
+                  aria-label="Share on LinkedIn"
+                >
+                  <i class="bi bi-linkedin"></i>
+                </a>
+                <button
+                  onclick="navigator.clipboard.writeText(window.location.href)"
+                  class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-blue-600 hover:text-blue-600 transition-colors"
+                  aria-label="Copy link"
+                >
+                  <i class="bi bi-link"></i>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
     </main>
+
+
+		<style>
+			#pattern {
+				background-size: cover;
+				object-fit: fill;
+				width: auto;
+			}
+		</style>
+
+    <script>
+      // Cursor follower effect
+      const cursorFollower = document.getElementById('cursor-follower');
+      
+      const handleMouseMove = (e: MouseEvent) => {
+        if (cursorFollower) {
+          cursorFollower.style.background = `radial-gradient(400px at ${e.clientX}px ${e.clientY}px, rgba(3, 91, 255, 0.08), transparent 50%)`;
+        }
+      };
+
+      window.addEventListener('mousemove', handleMouseMove);
+    </script>
 	</body>
-  </body>
 </html>
 
 <style>
   img {
     border-radius: 10px;
   }
-  #article {
-    font-family: serif !important;
-  }
-</style>z
+</style>
