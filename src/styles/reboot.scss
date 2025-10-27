@@ -16,11 +16,6 @@ $danger: lighten($red, 10%);
 $dark: darken($secondary, 10%);
 
 
-@media (prefers-color-scheme: dark) {
-	* {
-		color: white
-	}
-}
 
 
 @import '../../node_modules/bootstrap/scss/bootstrap-reboot.scss';
