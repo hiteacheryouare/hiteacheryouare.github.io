@@ -16,18 +16,18 @@
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.2.0",
     "@porkyproductions/hat": "^1.5.0",
-    "@types/react": "^18.3.23",
+    "@types/react": "^18.3.26",
     "@types/react-dom": "^18.3.7",
-    "astro": "^5.14.8",
+    "astro": "^5.15.1",
     "astro-seo": "^0.6.1",
-    "bootstrap": "^5.3.7",
+    "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
-    "canvas-confetti": "^1.9.3",
+    "canvas-confetti": "^1.9.4",
     "demotivator": "^11.1.0",
     "jquery": "^3.7.1",
-    "sass": "^1.89.2",
-    "sass-migrator": "^2.3.2",
-    "tailwindcss": "^3.4.17",
+    "sass": "^1.93.2",
+    "sass-migrator": "^2.4.2",
+    "tailwindcss": "^3.4.18",
     "uadetect": "^6.0.1"
   },
   "devDependencies": {
@@ -39,7 +39,7 @@
     "astro-robots-txt": "^0.3.12",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "svelte": "^5.34.8",
+    "svelte": "^5.42.2",
     "vue": "^3.5.17"
   }
 }
