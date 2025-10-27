@@ -7,6 +7,15 @@ export default (props) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [hoveredRole, setHoveredRole] = useState('student');
+
+
+  // Image mappings for each role
+  const roleImages = {
+    developer: '/ryan_dev.jpg',
+    student: '/ryan_nu.jpg',
+    swimmer: '/ryan_swim_1.jpg',
+  };
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -18,7 +27,87 @@ export default (props) => {
   }, []);
 
   return (
-    <main className="min-h-screen relative overflow-hidden ">
+    <main className="min-h-screen relative overflow-hidden">
+      <style>{`
+        .whimsy-text {
+          display: inline-block;
+          transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .whimsy-text:hover {
+          transform: rotate(-2deg) scale(1.05);
+        }
+        
+        .ryan-name {
+          display: inline-block;
+          transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .ryan-name:hover {
+          transform: rotate(3deg) translateY(-5px);
+          text-shadow: 4px 4px 0px rgba(3, 91, 255, 0.2);
+        }
+        
+        .role-text {
+          position: relative;
+          display: inline-block;
+          transition: all 0.3s ease;
+        }
+        
+        .role-text::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: -4px;
+          height: 4px;
+          background: linear-gradient(
+            to right,
+            #fdb913ff,
+            #f36f21ff,
+            #c9234aff,
+            #645faaff,
+            #0089cfff,
+            #0db14bff
+          );
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+          pointer-events: none;
+          border-radius: 2px;
+        }
+        
+        .role-text:hover::after {
+          transform: scaleX(1);
+        }
+        
+        .role-text:hover {
+          transform: translateY(-2px);
+        }
+        
+        .ampersand {
+          display: inline-block;
+          transition: transform 0.3s ease;
+        }
+        
+        .ampersand:hover {
+          transform: rotate(15deg) scale(1.15);
+        }
+        
+        .image-transition {
+          transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+        }
+        
+        .image-scale {
+          animation: subtleFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes subtleFloat {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+      `}</style>
+
       {/* Animated cursor follower */}
       <div
         className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
@@ -28,56 +117,89 @@ export default (props) => {
       />
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-6 md:px-12 pt-20 ">
+      <section className="min-h-screen flex items-center justify-center">
         <div className="max-w-7xl w-full">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight">
-                <span className=''>Hi</span>, I'm <span className='italic'>Ryan Mullin</span>
-                <br />
-                <span className="text-gray-500 dark:text-gray-400">
-                  Developer <br />
-                  <span className='italic font-fancySerif'>&</span> Student <br />
-                  <span className='italic font-fancySerif'>&</span> Swimmer <br />
-                </span>
-              </h1>
-              <div className="flex items-center gap-3">
-                <div className="h-px w-12 bg-blue-600" />
-                <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 font-mono">
-                  CS & Business @ Northeastern University
-                </p>
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
+                  <span className="whimsy-text">Hi</span>, I'm{' '}
+                  <span className="italic ryan-name">Ryan Mullin</span>
+                  <br />
+                  <span className="text-gray-500 dark:text-gray-400 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+                    <span 
+                      className="role-text"
+                      onMouseEnter={() => setHoveredRole('developer')}
+                    >
+                      Developer
+                    </span>
+                    <br />
+                    <span className="italic font-fancySerif ampersand">&</span>{' '}
+                    <span 
+                      className="role-text"
+                      onMouseEnter={() => setHoveredRole('student')}
+                    >
+                      Student
+                    </span>
+                    <br />
+                    <span className="italic font-fancySerif ampersand">&</span>{' '}
+                    <span 
+                      className="role-text"
+                      onMouseEnter={() => setHoveredRole('swimmer')}
+                    >
+                      Swimmer
+                    </span>
+                  </span>
+                </h1>
+                <div className="flex items-center gap-3">
+                  <div className="h-px w-12 bg-blue-600" />
+                  <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 font-mono">
+                    CS & Business @ Northeastern University
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-4 pt-8">
+                <a 
+                  href="#work"
+                  className="btn btn-primary text-base md:text-lg"
+                >
+                  View My Work
+                  <i className="bi bi-chevron-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                </a>
+                <a 
+                  href="#contact"
+                  className="btn btn-secondary text-base md:text-lg"
+                >
+                  Get in Touch
+                </a>
+              </div>
+
+              {/* Social Links */}
+              <div className="flex items-center gap-4 pt-8">
+                {socialLinks.map((link, index) => (
+                  <a
+                    href={link.href}
+                    key={index}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full border text-neutral-900 dark:text-white border-gray-300 flex items-center justify-center hover:border-blue-600 hover:text-primary transition-colors"
+                  >
+                    <i className={`bi bi-${link.icon}`}></i>
+                  </a>
+                ))}
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 pt-8">
-              <a 
-                href="#work"
-                className="btn btn-primary text-lg lg:text-3xl"
-              >
-                View My Work
-                <i className="bi bi-chevron-right ml-2 transition-transform group-hover:translate-x-1"></i>
-              </a>
-              <a 
-                href="#contact"
-                className="btn btn-secondary text-lg lg:text-3xl"
-              >
-                Get in Touch
-              </a>
-            </div>
-
-            {/* Social Links */}
-            <div className="flex items-center gap-4 pt-8">
-              {socialLinks.map((link, index) => (
-                <a
-                  href={link.href}
-                  key={index}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:border-blue-600 hover:text-blue-600 transition-colors"
-                >
-                  <i className={`bi bi-${link.icon}`}></i>
-                </a>
-              ))}
+            {/* Dynamic Hero Image */}
+            <div className="relative">
+              <div className="aspect-square rounded-2xl bg-gradient-to-br from-blue-50 to-gray-100 overflow-hidden border border-gray-200 flex items-center justify-center">
+                <img 
+                  src={roleImages[hoveredRole] || 'https://avatars.githubusercontent.com/u/82683251'}
+                  className="max-w-full h-auto image-transition image-scale" 
+                />
+              </div>
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-2xl bg-blue-600 border border-blue-600 -z-10" />
             </div>
           </div>
         </div>
@@ -113,7 +235,7 @@ export default (props) => {
             </div>
             <div className="relative">
               <div className="aspect-square rounded-2xl bg-gradient-to-br from-blue-50 to-gray-100 overflow-hidden border border-gray-200 flex items-center justify-center">
-                <img src="/ryan_nu.jpg" alt="Ryan Mullin" className="max-w-full h-auto" />
+                <img src="https://avatars.githubusercontent.com/u/82683251" alt="Ryan Mullin" className="max-w-full h-auto" />
               </div>
               <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-2xl bg-primary border border-blue-600 -z-10" />
             </div>
