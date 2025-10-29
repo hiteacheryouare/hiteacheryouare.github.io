@@ -126,6 +126,7 @@ import { Dialog } from '@headlessui/react'; // NEVER
 4. **NO `var` keyword** - Exception: Single-use variables without hoisting issues
 5. **NO .sass files** - Use .scss instead
 6. **NO mainstream conventions just because they're popular**
+7. **NO magic** - codemods and random naming conventions that do crazy things just because they are named a certain way should be avoided at all costs. all things should be explicit and easy to understand.
 
 ### Error Handling
 When errors occur:
