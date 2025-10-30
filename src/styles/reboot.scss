@@ -84,43 +84,42 @@ table {
 		  }
 }
 
-a {
-    position: relative;
-    color: lighten($primary, 10%);
-    text-decoration: none;
-    transition: color .18s ease;
+blockquote {
+    padding: 0;
+    padding-inline-start: 16px;
+    margin: -10px -10px 20px;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 100%;
+    height: auto;
+    border-inline-start: 2px solid $primary !important;
+}
 
-    &:hover,
-    &:focus {
-        color: $primary;
-        outline: none;
+@media (prefers-color-scheme: dark) {
+    blockquote {
+        padding: 0;
+        padding-inline-start: 16px;
+        margin: -10px -10px 20px;
+        padding: 10px;
+        border-radius: 5px;
+        max-width: 100%;
+        height: auto;
+        border-inline-start: 2px solid $secondary !important;
     }
+}
 
-    /* animated gradient underline using ::after */
-    &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -2px;
-        height: 2px;
-        background: linear-gradient(
-            to right,
-            #fdb913ff,
-            #f36f21ff,
-            #c9234aff,
-            #645faaff,
-            #0089cfff,
-            #0db14bff
-        );
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform .25s cubic-bezier(.2,.8,.2,1);
-        pointer-events: none;
-    }
-
-    &:hover::after,
-    &:focus::after {
-        transform: scaleX(1);
-    }
+.gradient-bar-ya-ya-yah {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, 
+        #fdb913ff, 
+        #f36f21ff, 
+        #c9234aff, 
+        #645faaff, 
+        #0089cfff, 
+        #0db14bff);
+    color: white;
+    padding: 1rem;
+    font-size: 1.25rem;
 }
