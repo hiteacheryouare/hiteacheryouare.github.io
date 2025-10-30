@@ -10,6 +10,7 @@ import '../../node_modules/bootstrap-icons/font/bootstrap-icons.scss'
 import { Image } from 'astro:assets';
 import pattern from '../img/waves.png'
 import FullColorFavi from '../img/2025/RM-monogram-black-on-transparent.svg'
+import WhiteLogoFavi from '../img/2025/RM-monogram-white-on-transparent.svg'
 import { ClientRouter } from 'astro:transitions';
 
 ---
@@ -69,7 +70,18 @@ import { ClientRouter } from 'astro:transitions';
 	<body>
 		<nav class="p-10">
 			<NavBar client:load>
-				<Image src={FullColorFavi} alt='fancy RM monogram' style={{'height': '3rem'}}></Image>
+				<Image 
+					src={FullColorFavi} 
+					alt='a double arrow' 
+					style={{height: '3rem'}}
+					class="logo-light"
+				/>
+				<Image 
+					src={WhiteLogoFavi} 
+					alt='a double arrow' 
+					style={{height: '3rem'}}
+					class="logo-dark"
+				/>
 			</NavBar>
 		</nav>
 		<slot />
