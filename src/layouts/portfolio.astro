@@ -11,6 +11,7 @@ import FullColorFavi from '../img/2025/RM-monogram-black-on-transparent.svg'
 import WhiteLogoFavi from '../img/2025/RM-monogram-white-on-transparent.svg'
 import { ClientRouter } from 'astro:transitions';
 import '../../node_modules/bootstrap-icons/font/bootstrap-icons.scss'
+import { availabilityStatus } from "../utils/statusIndicator";
 
 export interface Props {
   content: {
@@ -277,9 +278,7 @@ const {
       </article>
     </main>
 
-    <Footer>
-			<Image src={pattern} alt='pattern' id='pattern' style={{}} />
-		</Footer>
+      <Footer availability={availabilityStatus}></Footer>
 
 		<style>
 			#pattern {

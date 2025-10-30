@@ -1,15 +1,8 @@
 import { useState } from 'react';
+import { navLinks } from '../utils/navigation';
 
 export default (props) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Résumé', href: '/resume' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Research', href: '/research' },
-  ];
 
   return (
     <nav className="fixed top-4 left-4 right-4 z-50 bg-white/60 dark:bg-zinc-800/60 backdrop-blur-lg shadow-xl border border-gray-200/30 dark:border-gray-700/30 rounded-2xl">

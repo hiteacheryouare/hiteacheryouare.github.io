@@ -8,10 +8,10 @@ import NavBar from '../components/nav.tsx';
 import '../styles/bootstrap.scss';
 import '../../node_modules/bootstrap-icons/font/bootstrap-icons.scss'
 import { Image } from 'astro:assets';
-import pattern from '../img/waves.png'
 import FullColorFavi from '../img/2025/RM-monogram-black-on-transparent.svg'
 import WhiteLogoFavi from '../img/2025/RM-monogram-white-on-transparent.svg'
 import { ClientRouter } from 'astro:transitions';
+import { availabilityStatus } from '../utils/statusIndicator';
 
 ---
 
@@ -85,9 +85,7 @@ import { ClientRouter } from 'astro:transitions';
 			</NavBar>
 		</nav>
 		<slot />
-		<Footer>
-			<Image src={pattern} alt='pattern' id='pattern' style={{}} />
-		</Footer>
+			<Footer availability={availabilityStatus}></Footer>
 		<style>
 			#pattern {
 				background-size: cover;

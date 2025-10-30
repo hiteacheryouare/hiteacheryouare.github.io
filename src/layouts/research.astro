@@ -4,11 +4,12 @@ import NavBar from "../components/nav.tsx";
 import "../globals.scss";
 import '../styles/blog.scss'
 import { Image } from 'astro:assets';
-import pattern from '../img/waves.png'
 import signature from '../../public/signature-blue.png'
 import FullColorFavi from '../img/2025/RM-monogram-black-on-transparent.svg'
 import WhiteLogoFavi from '../img/2025/RM-monogram-white-on-transparent.svg'
 import { ClientRouter } from 'astro:transitions';
+import { availabilityStatus } from "../utils/statusIndicator";
+import Footer from '../components/footer.svelte';
 
 export interface Props {
   content: {
@@ -259,7 +260,8 @@ if (type === "IRR") {
         </div>
       </article>
     </main>
-
+    
+    <Footer availability={availabilityStatus}></Footer>
 
 		<style>
 			#pattern {
