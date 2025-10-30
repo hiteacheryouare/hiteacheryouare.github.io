@@ -2,16 +2,25 @@
     const styles: string[] = [
         "primary",
         "secondary",
-        "info",
-        "success",
-        "warning",
-        "danger",
-        "light",
         "dark"
+    ]
+
+    const darkCompatibleStyles: string[] = [
+        "light",
+        "primary",
+        "secondary",
     ]
     import {sample} from '../utils/arrayRandomItem'
     export let text: string;
+    let darkMode: boolean = false
+    function detectDarkMode() {
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? (darkMode = true)
+        : (darkMode = false);
+    }
+    detectDarkMode();
+    
 </script>
 
 
-<span class="badge text-bg-{sample(styles)}">{text}</span>
+<span class="badge text-bg-{sample(darkMode ? darkCompatibleStyles : styles)}">{text}</span>

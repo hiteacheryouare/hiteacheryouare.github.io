@@ -184,7 +184,7 @@ const {
             {tags && tags.length > 0 && (
               <div class="flex flex-wrap gap-2 pt-4">
                 {tags.map(tag => (
-                  <Tag text={tag} transition:name={tag} client:load />
+                  <Tag text={tag} transition:name={tag} client:only />
                 ))}
               </div>
             )}
@@ -197,8 +197,8 @@ const {
         <div class="max-w-6xl mx-auto w-full">
           <div class="aspect-video bg-gradient-to-br from-blue-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-2xl">
             <img
-              src={heroImage.src}
-              alt={heroImage.alt}
+              src={!!heroImage.src ? heroImage.src : "/waves.png"}
+              alt={!!heroImage.alt ? heroImage.alt : "Multicolored abstract waves pattern"}
               class="w-full h-full object-cover"
               transition:name={heroImage.alt ?? "image"}
             />
