@@ -16,7 +16,7 @@ projects.sort(
     <Hero client:idle>
       {projects.map((project, index) => (
         <div
-          class="group relative rounded-2xl border border-gray-200 overflow-hidden hover:border-blue-600 hover:shadow-lg transition-all duration-300"
+          class="group relative rounded-2xl border border-gray-200 overflow-hidden hover:border-secondary hover:shadow-lg transition-all duration-300"
         >
           <div class="grid md:grid-cols-2 gap-8 p-8 md:p-12">
             <div class="space-y-4">
@@ -25,7 +25,7 @@ projects.sort(
                 <div class="h-px flex-1 bg-gray-200" />
                 <span class="text-sm font-mono text-gray-500">{project.data.date || 'N/A'}</span>
               </div>
-              <a href={`/portfolio/projects/${project.id}`} class="text-3xl leading-[3.25rem] md:text-4xl md:leading-[3.5rem] font-bold group-hover:text-blue-600 transition-colors">
+              <a href={`/portfolio/projects/${project.id}`} class="text-3xl leading-[3.25rem] md:text-4xl md:leading-[3.5rem] font-bold">
                 {project.data.name || 'Untitled Project'}
               </a>
               <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
@@ -43,7 +43,7 @@ projects.sort(
                   href={project.data.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="group/btn mt-4 hover:text-blue-600 inline-flex items-center font-medium transition-colors"
+                  class="group/btn mt-4 hover:text-secondary inline-flex items-center font-medium transition-colors"
                 >
                   View Project
                   <i class="bi bi-chevron-right ml-2 transition-transform group-hover/btn:translate-x-1"></i>

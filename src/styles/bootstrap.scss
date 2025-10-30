@@ -22,18 +22,19 @@ $dark: darken($secondary, 10%);
 
 a {
     position: relative;
-    color: lighten($primary, 10%);
+    color: $primary;
     text-decoration: none;
-    transition: color .25s ease;
+    transition: color .18s ease;
 
     &:hover,
     &:focus {
-        color: $primary;
+        color: $secondary;
         outline: none;
     }
 
     /* animated gradient underline using ::after */
-    &::after {
+    /* Only apply to links that don't contain images and aren't buttons */
+    &:not(:has(img)):not(.btn)::after {
         content: "";
         position: absolute;
         left: 0;
@@ -55,8 +56,48 @@ a {
         pointer-events: none;
     }
 
-    &:hover::after,
-    &:focus::after {
+    &:not(:has(img)):not(.btn):hover::after,
+    &:not(:has(img)):not(.btn):focus::after {
         transform: scaleX(1);
     }
+}
+
+blockquote {
+    padding: 0;
+    padding-inline-start: 16px;
+    margin: -10px -10px 20px;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 100%;
+    height: auto;
+    border-inline-start: 2px solid $primary !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    blockquote {
+        padding: 0;
+        padding-inline-start: 16px;
+        margin: -10px -10px 20px;
+        padding: 10px;
+        border-radius: 5px;
+        max-width: 100%;
+        height: auto;
+        border-inline-start: 2px solid $secondary !important;
+    }
+}
+
+.gradient-bar-ya-ya-yah {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, 
+        #fdb913ff, 
+        #f36f21ff, 
+        #c9234aff, 
+        #645faaff, 
+        #0089cfff, 
+        #0db14bff);
+    color: white;
+    padding: 1rem;
+    font-size: 1.25rem;
 }

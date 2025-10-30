@@ -147,7 +147,7 @@
 							Need access? 
 							<a 
 								href="mailto:rpmullin17@gmail.com?subject=Access Request&body=Hi Ryan, I'd like to request access to: ." 
-								class="text-blue-600 hover:text-blue-700 font-medium hover:underline inline-flex items-center gap-1"
+								class="text-primary hover:text-blue-900 font-medium hover:underline inline-flex items-center gap-1"
 							>
 								Contact Ryan Mullin
 								<i class="bi bi-envelope-fill"></i>
