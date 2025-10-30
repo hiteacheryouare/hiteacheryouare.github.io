@@ -8,6 +8,7 @@ import Tag from "../components/tag.svelte";
 import { Image } from 'astro:assets';
 import pattern from '../img/waves.png'
 import FullColorFavi from '../img/2025/RM-monogram-black-on-transparent.svg'
+import WhiteLogoFavi from '../img/2025/RM-monogram-white-on-transparent.svg'
 import { ClientRouter } from 'astro:transitions';
 import '../../node_modules/bootstrap-icons/font/bootstrap-icons.scss'
 
@@ -103,8 +104,19 @@ const {
 
     <nav class="p-10">
       <NavBar client:load>
-				<Image src={FullColorFavi} alt='a double arrow' style={{height: '3rem'}}></Image>
-			</NavBar>
+        <Image 
+          src={FullColorFavi} 
+          alt='a double arrow' 
+          style={{height: '3rem'}}
+          class="logo-light"
+        />
+        <Image 
+          src={WhiteLogoFavi} 
+          alt='a double arrow' 
+          style={{height: '3rem'}}
+          class="logo-dark"
+        />
+      </NavBar>
     </nav>
 
     <main class="min-h-screen relative overflow-hidden">
@@ -115,7 +127,7 @@ const {
             <!-- Breadcrumb -->
             <a 
               href="/#work" 
-              class="inline-flex items-center gap-2 text-sm font-mono text-gray-600 dark:text-gray-400 hover:text-primary transition-colors group"
+              class="inline-flex items-center gap-2 text-sm font-mono text-gray-600 dark:text-neutral-300 hover:text-primary transition-colors group"
             >
               <i class="bi bi-arrow-left transition-transform group-hover:-translate-x-1"></i>
               Back to Portfolio
@@ -150,7 +162,7 @@ const {
 
 
             <!-- Metadata -->
-            <div class="flex flex-wrap items-center gap-4 text-gray-600 dark:text-gray-300">
+            <div class="flex flex-wrap items-center gap-4 text-gray-600 dark:text-neutral-200">
               <div class="flex items-center gap-3">
                 <div class="h-px w-12 bg-primary" />
                 <time class="text-sm font-mono">
@@ -161,7 +173,7 @@ const {
 
             <!-- Description -->
             <p 
-              class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 leading-relaxed max-w-4xl"
+              class="text-xl md:text-2xl text-gray-700 dark:text-neutral-200 leading-relaxed max-w-4xl"
               transition:name={description}
             >
               {description}
@@ -200,13 +212,13 @@ const {
                       prose-headings:font-bold prose-headings:tracking-tight
                       prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
                       prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
-                      prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6
+                      prose-p:text-gray-700 dark:prose-p:text-neutral-200 prose-p:leading-relaxed prose-p:mb-6
                       prose-a:text-primary prose-a:no-underline hover:prose-a:underline
                       prose-strong:text-gray-900 dark:prose-strong:text-gray-100 prose-strong:font-semibold
                       prose-code:text-primary prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
                       prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-700 prose-pre:rounded-xl
                       prose-img:rounded-xl prose-img:border prose-img:border-gray-200 dark:prose-img:border-gray-700
-                      prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600 dark:prose-blockquote:text-gray-400
+                      prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600 dark:prose-blockquote:text-neutral-300
                       prose-ul:list-disc prose-ul:pl-6 prose-ul:space-y-2
                       prose-ol:list-decimal prose-ol:pl-6 prose-ol:space-y-2">
             <slot />
@@ -230,7 +242,7 @@ const {
 
           <!-- Share Section -->
           <div class="mt-8 flex items-center justify-between flex-wrap gap-4 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-            <p class="font-mono text-sm text-gray-600 dark:text-gray-400">
+            <p class="font-mono text-sm text-gray-600 dark:text-neutral-300">
               Like this project? Share it!
             </p>
             <div class="flex items-center gap-3">
@@ -238,7 +250,7 @@ const {
                 href={`https://twitter.com/intent/tweet?text=Check out ${name} by @ryanmullin&url=${encodeURIComponent(Astro.request.url)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
+                class="w-10 h-10 rounded-full border border-neutral-200 dark:border-gray-600 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
                 aria-label="Share on Twitter"
               >
                 <i class="bi bi-twitter-x"></i>
@@ -247,14 +259,14 @@ const {
                 href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.request.url)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
+                class="w-10 h-10 rounded-full border border-neutral-200 dark:border-gray-600 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
                 aria-label="Share on LinkedIn"
               >
                 <i class="bi bi-linkedin"></i>
               </a>
               <button
                 onclick="navigator.clipboard.writeText(window.location.href)"
-                class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
+                class="w-10 h-10 rounded-full border border-neutral-200 dark:border-gray-600 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
                 aria-label="Copy link"
               >
                 <i class="bi bi-link"></i>

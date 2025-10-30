@@ -67,7 +67,7 @@
 					<h2 class="font-bold text-4xl md:text-5xl text-red-600">
 						Content Not Found
 					</h2>
-					<p class="text-lg text-gray-600 dark:text-gray-400 font-mono">
+					<p class="text-lg text-gray-600 dark:text-neutral-300 font-mono">
 						The content you're looking for doesn't exist or has been removed.
 					</p>
 				</div>
@@ -119,7 +119,7 @@
 					<!-- Form -->
 					<form on:submit|preventDefault={checkAccess} class="space-y-6">
 						<div>
-							<label for="password-input" class="block text-sm font-mono text-gray-600 dark:text-gray-400 mb-2">
+							<label for="password-input" class="block text-sm font-mono text-gray-600 dark:text-neutral-300 mb-2">
 								Enter Password
 							</label>
 							<input 
@@ -143,7 +143,7 @@
 
 					<!-- Help Text -->
 					<div class="pt-6 border-t border-gray-200 dark:border-gray-700">
-						<p class="text-center text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+						<p class="text-center text-gray-600 dark:text-neutral-300 text-sm leading-relaxed">
 							Need access? 
 							<a 
 								href="mailto:rpmullin17@gmail.com?subject=Access Request&body=Hi Ryan, I'd like to request access to: ." 
@@ -158,7 +158,7 @@
 
 				<!-- Footer Badge -->
 				<div class="bg-gray-50 dark:bg-gray-800/50 px-8 py-4 border-t border-gray-200 dark:border-gray-700">
-					<div class="flex items-center justify-center gap-2 text-sm font-mono text-gray-500 dark:text-gray-400">
+					<div class="flex items-center justify-center gap-2 text-sm font-mono text-gray-500 dark:text-neutral-300">
 						<i class="bi bi-shield-lock-fill"></i>
 						<span>Secure</span>
 					</div>

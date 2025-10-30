@@ -17,7 +17,7 @@ export default () => {
 
       {/* Education */}
       <section className="mb-6">
-        <h2 className="text-xl font-bold text-gray-900 border-b border-gray-400 mb-3">EDUCATION</h2>
+        <h2 className="text-xl font-bold text-gray-900 border-b border-neutral-300 mb-3">EDUCATION</h2>
         <div className="mb-3">
           <div className="flex justify-between items-baseline mb-1">
             <h3 className="font-bold text-gray-900">Northeastern University</h3>
@@ -34,7 +34,7 @@ export default () => {
 
       {/* Technical Skills */}
       <section className="mb-6">
-        <h2 className="text-xl font-bold text-gray-900 border-b border-gray-400 mb-3">TECHNICAL SKILLS</h2>
+        <h2 className="text-xl font-bold text-gray-900 border-b border-neutral-300 mb-3">TECHNICAL SKILLS</h2>
         <div className="space-y-1">
           <p><span className="font-semibold">Languages:</span> JavaScript, TypeScript, HTML/CSS, Python, Pyret</p>
           <p><span className="font-semibold">Frameworks & Libraries:</span> React, Next.js, Astro, Svelte, TailwindCSS, Bootstrap</p>
@@ -45,7 +45,7 @@ export default () => {
 
       {/* Experience */}
       <section className="mb-6">
-        <h2 className="text-xl font-bold text-gray-900 border-b border-gray-400 mb-3">EXPERIENCE</h2>
+        <h2 className="text-xl font-bold text-gray-900 border-b border-neutral-300 mb-3">EXPERIENCE</h2>
         
         {/* NER */}
         <div className="mb-4">
@@ -140,7 +140,7 @@ export default () => {
 
       {/* Projects */}
       <section className="mb-6">
-        <h2 className="text-xl font-bold text-gray-900 border-b border-gray-400 mb-3">PROJECTS</h2>
+        <h2 className="text-xl font-bold text-gray-900 border-b border-neutral-300 mb-3">PROJECTS</h2>
         
         <div className="mb-3">
           <div className="flex justify-between items-baseline">
@@ -211,7 +211,7 @@ export default () => {
 
       {/* Volunteer */}
       <section className="mb-6">
-        <h2 className="text-xl font-bold text-gray-900 border-b border-gray-400 mb-3">VOLUNTEER EXPERIENCE</h2>
+        <h2 className="text-xl font-bold text-gray-900 border-b border-neutral-300 mb-3">VOLUNTEER EXPERIENCE</h2>
         <div className="mb-3">
           <div className="flex justify-between items-baseline mb-1">
             <h3 className="font-bold text-gray-900">Volunteer Swim Instructor</h3>
@@ -227,7 +227,7 @@ export default () => {
 
       {/* Additional */}
       <section>
-        <h2 className="text-xl font-bold text-gray-900 border-b border-gray-400 mb-3">ADDITIONAL</h2>
+        <h2 className="text-xl font-bold text-gray-900 border-b border-neutral-300 mb-3">ADDITIONAL</h2>
         <p className="text-gray-800"><span className="font-semibold">Interests:</span> Podcast production (Between Bells Season 2), swimming, roller coaster enthusiast (56 ridden to date)</p>
         <p className="text-gray-800"><span className="font-semibold">Certifications:</span> American Red Cross Lifeguard, CPR/AED, First Aid</p>
       </section>

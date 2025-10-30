@@ -122,11 +122,11 @@ export default (props) => {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight dark:text-white">
                   <span className="whimsy-text">Hi</span>, I'm{' '}
                   <span className="italic ryan-name">Ryan Mullin</span>
-                  <br />
-                  <span className="text-gray-500 dark:text-gray-400 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+                  
+                  <span className="text-gray-500 dark:text-neutral-300 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
                     <span 
                       className="role-text"
                       onMouseEnter={() => setHoveredRole('developer')}
@@ -153,7 +153,7 @@ export default (props) => {
                 </h1>
                 <div className="flex items-center gap-3">
                   <div className="h-px w-12 bg-primary" />
-                  <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 font-mono">
+                  <p className="text-lg md:text-xl text-gray-600 dark:text-neutral-200 font-mono">
                     CS & Business @ Northeastern University
                   </p>
                 </div>
@@ -183,7 +183,7 @@ export default (props) => {
                     key={index}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full border text-neutral-900 dark:text-white border-gray-300 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
+                    className="w-10 h-10 rounded-full border text-neutral-900 dark:text-white border-neutral-200 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
                   >
                     <i className={`bi bi-${link.icon}`}></i>
                   </a>
@@ -216,17 +216,17 @@ export default (props) => {
               <h2 className="text-4xl md:text-6xl font-bold">
                 Building impactful solutions at the intersection of tech and business
               </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p className="text-lg text-gray-600 dark:text-neutral-200 leading-relaxed">
                 I'm a Computer Science and Business Administration student at Northeastern University with a passion for FinTech and full-stack development. From building mission-driven nonprofit platforms to managing corporate sponsorship outreach for a 400+ member electric racing team, I thrive on projects that blend technical innovation with real-world impact.
               </p>
-              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p className="text-lg text-gray-600 dark:text-neutral-200 leading-relaxed">
                 Whether it's deploying responsive web applications, analyzing carbon footprints, or coordinating high-stakes recruitment events, I bring a unique combination of technical expertise and strategic thinking to every challenge.
               </p>
               <div className="flex flex-wrap gap-2 pt-4">
                 {techStack.map((tech: string, i: number) => (
                   <span
                     key={i}
-                    className="px-4 py-2 rounded-full border border-gray-300 text-sm font-mono hover:border-primary hover:text-primary transition-colors cursor-default"
+                    className="px-4 py-2 rounded-full border border-neutral-200 text-sm font-mono hover:border-primary hover:text-primary transition-colors cursor-default"
                   >
                     {tech}
                   </span>
@@ -250,7 +250,7 @@ export default (props) => {
             <div className="space-y-4">
               <span className="text-sm font-mono text-primary">02 / Selected Work</span>
               <h2 className="text-4xl md:text-6xl font-bold">Featured Projects</h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl">
+              <p className="text-lg text-gray-600 dark:text-neutral-200 max-w-2xl">
                 From nonprofit platforms to eco-tech applications, here's a selection of projects where I've combined technical skills with mission-driven development.
               </p>
             </div>
@@ -264,7 +264,7 @@ export default (props) => {
                 href="https://github.com/hiteacheryouare"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-gray-600 hover:text-primary transition-colors font-medium"
+                className="inline-flex items-center gap-2 text-gray-600 dark:text-neutral-300 hover:text-primary transition-colors font-medium"
               >
                 <i className="bi bi-github"></i>
                 View more projects on GitHub
@@ -286,7 +286,7 @@ export default (props) => {
 
         <div className="grid md:grid-cols-2 gap-16">
           <div className="space-y-8">
-            <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="text-lg text-gray-600 dark:text-neutral-200 leading-relaxed">
           I'm always interested in new opportunities—whether it's a FinTech project, web development work, or collaborative ventures at the intersection of business and technology. Let's connect!
             </p>
             <div className="space-y-4">
@@ -304,7 +304,7 @@ export default (props) => {
           ))}
             </div>
             <div className="pt-4">
-          <p className="text-sm text-gray-500 dark:text-gray-400 font-mono">
+          <p className="text-sm text-gray-500 dark:text-neutral-300 font-mono">
             📍 Proudly based in Boston, MA & Philadelphia, PA
           </p>
             </div>
