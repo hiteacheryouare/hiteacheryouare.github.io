@@ -1,9 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro'
-const randomInRange = (min, max) => Math.round(Math.random() * (max - min) + min);
-const randomInArray = (array) => array[randomInRange(0, array.length - 1)];
-const title = "404 - Page Not Found"
 import '../globals.scss'
+import BsAlert from '../components/bsAlert.svelte'
 const mistakes = [
 	"Blunder",
 	"Mistake",
@@ -37,8 +35,35 @@ const mistakes = [
 	"Utter disaster",
 	"Train wreck",
 	"Dumpster fire",
-
-
+	"Gaffe",
+	"Bungle",
+	"Flub",
+	"Fumble",
+	"Mess-up",
+	"Cockup",
+	"Ballup",
+	"Foul-up",
+	"Mixup",
+	"Glitch",
+	"Hiccup",
+	"Misfire",
+	"Stumble",
+	"Trip-up",
+	"Wrong move",
+	"Misjudgment",
+	"Lapse in judgment",
+	"Miscue",
+	"Misdoing",
+	"Transgression",
+	"Boo-boo",
+	"Oopsie",
+	"Total failure",
+	"Mess",
+	"Shambles",
+	"Wreck",
+	"Breakdown",
+	"Flop",
+	"Washout",
 ]
 const icons = [
 	"cone",
@@ -69,6 +94,13 @@ const icons = [
 	"heartbreak-fill",
 	"piggy-bank-fill",
 	"piggy-bank",
+	"cloud-lightning-rain",
+	"browser-edge",
+	"bug-fill",
+	"bug",
+	"browser-chrome",
+	"browser-firefox",
+	"browser-safari",
 ]
 
 const broVariations = [
@@ -128,19 +160,38 @@ const exclamationIntensities = [
 ]
 ---
 <Layout title="404 not found!!!" description="nope, we cant find da page">
-	<div class='flex content-center justify-center p-4 text-9xl text-red-600'>
-		<i class={`bi bi-${randomInArray(icons)}`}></i>
+	<div class="p-4">
+		<BsAlert 
+			type="info" 
+			icon="info-circle" 
+			text="If you see this page coming from a page that is not exactly this site (i.e. another hiteacheryouare.github.io site), you're on the wrong site becuase of how our URL structure works. Instead of clicking 'go home' below, click the back arrow on your browser"
+			actionLink=""
+			actionText=""
+		/>
 	</div>
 	<div class='flex content-center justify-center p-4 text-9xl text-red-600'>
-		<h2 class='text-center font-bold text-4xl text-red-600'>{randomInArray(mistakes)}{randomInArray(exclamationIntensities)}</h2>
+		<i id="random-icon"></i>
+	</div>
+	<div class='flex content-center justify-center p-4 text-9xl text-red-600'>
+		<h2 id="random-mistake" class='text-center font-bold text-4xl text-red-600'></h2>
 	</div>
 	<div class='flex content-center justify-center p-4 text-9xl text-red-600'>
 		<h3 class='text-center font-semibold text-2xl text-red-600'>404 - Page Not Found</h3>
 	</div>
 	<div class='flex content-center justify-center p-4 text-9xl text-red-600'>
-		<h3 class='text-center text-2xl text-red-600'>(that means ur in the wrong spot {randomInArray(broVariations)})</h3>
+		<h3 id="random-bro" class='text-center text-2xl text-red-600'></h3>
 	</div>
 	<div class='flex content-center justify-center p-4'>
 		<a href="/" class="btn btn-danger">Go Home</a>
 	</div>
 </Layout>
+
+<script define:vars={{ mistakes, icons, broVariations, exclamationIntensities }}>
+	const randomInRange = (min, max) => Math.floor(Math.random() * (max - min) + min);
+	const randomInArray = (array) => array[randomInRange(0, array.length - 1)];
+	
+	// Set random values when page loads
+	document.getElementById('random-icon').className = `bi bi-${randomInArray(icons)}`;
+	document.getElementById('random-mistake').textContent = `${randomInArray(mistakes)}${randomInArray(exclamationIntensities)}`;
+	document.getElementById('random-bro').textContent = `(that means ur in the wrong spot ${randomInArray(broVariations)})`;
+</script>
