@@ -40,6 +40,11 @@ export const socialLinks: SocialLink[] = [
 			href: "https://open.spotify.com/user/rpmullin0917?si=d6a45c9fcac44f6f",
 			icon: "spotify",
 			text: "/rpmullin0917"
+		},
+		{
+			href: "https://www.tiktok.com/@not_ryan_m",
+			icon: "tiktok",
+			text: "/@not_ryan_m"
 		}
 	];
 

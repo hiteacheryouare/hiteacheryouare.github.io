@@ -242,16 +242,16 @@ const {
           </div>
 
           <!-- Share Section -->
-          <div class="mt-8 flex items-center justify-between flex-wrap gap-4 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-            <p class="font-mono text-sm text-gray-600 dark:text-neutral-300">
-              Like this project? Share it!
+          <div class="mt-12 flex items-center justify-between flex-wrap gap-4 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+            <p class="font-mono text-lg text-gray-600 dark:text-neutral-300">
+              Wanna share?
             </p>
             <div class="flex items-center gap-3">
               <a
-                href={`https://twitter.com/intent/tweet?text=Check out ${name} by Ryan Mullin&url=${encodeURIComponent(Astro.request.url)}`}
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(name)}&url=${encodeURIComponent(Astro.request.url)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="w-10 h-10 rounded-full border border-neutral-200 dark:border-gray-600 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
+                class="w-10 h-10 rounded-full border border-neutral-200 dark:border-gray-600 flex items-center justify-center hover:border-primary hover:text-primary transition-colors text-primary"
                 aria-label="Share on X"
               >
                 <i class="bi bi-twitter-x"></i>
@@ -260,18 +260,11 @@ const {
                 href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.request.url)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="w-10 h-10 rounded-full border border-neutral-200 dark:border-gray-600 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
+                class="w-10 h-10 rounded-full border border-neutral-200 dark:border-gray-600 flex items-center justify-center hover:border-primary hover:text-primary transition-colors text-primary"
                 aria-label="Share on LinkedIn"
               >
                 <i class="bi bi-linkedin"></i>
               </a>
-              <button
-                onclick="navigator.clipboard.writeText(window.location.href)"
-                class="w-10 h-10 rounded-full border border-neutral-200 dark:border-gray-600 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
-                aria-label="Copy link"
-              >
-                <i class="bi bi-link"></i>
-              </button>
             </div>
           </div>
         </div>
