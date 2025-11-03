@@ -7,11 +7,11 @@ export default () => {
         <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-700">
           <span>Mt. Laurel, NJ (Philadelphia Area)</span>
           <span>•</span>
-          <span>rpmullin17@gmail.com</span>
+          <span><a href="mailto:rpmullin17@gmail.com">rpmullin17@gmail.com</a></span>
           <span>•</span>
-          <span>linkedin.com/in/rpmullin06</span>
+          <span><a href="https://linkedin.com/in/ryanpmullin">linkedin.com/in/ryanpmullin</a></span>
           <span>•</span>
-          <span>github.com/hiteacheryouare</span>
+          <span><a href="https://github.com/hiteacheryouare">github.com/hiteacheryouare</a></span>
         </div>
       </header>
 

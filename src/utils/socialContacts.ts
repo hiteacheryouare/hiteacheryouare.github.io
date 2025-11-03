@@ -7,9 +7,9 @@ export const socialLinks: SocialLink[] = [
 			text: '/rpmullin17@gmail.com'
 		},
 		{
-			href: 'https://linkedin.com/in/rpmullin06',
+			href: 'https://linkedin.com/in/ryanpmullin',
 			icon: 'linkedin',
-			text: 'in/rpmullin06'
+			text: 'in/ryanpmullin'
 		},
 		{
 			href: 'https://github.com/hiteacheryouare',
