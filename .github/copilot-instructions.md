@@ -180,6 +180,34 @@ This should work with the deployment pipeline we set up in the GitHub Actions wo
 - Automatic deployment via GitHub Actions
 - No special deployment considerations needed in code
 
+## 📦 Dependency & Environment Management
+
+**Local-First, Project-Scoped Everything**
+- Every project should have its own isolated dependency environment
+- No global installations unless absolutely unavoidable
+- Dependencies should live in the project directory where you can see and delete them
+- Reproducibility > convenience
+
+**Preferred Patterns:**
+- ✅ npm with local node_modules
+- ✅ uv for Python (project-scoped virtual environments)
+- ✅ Local package installation that you can `rm -rf` when things break
+
+**Rejected Patterns:**
+- ❌ CDN imports (looking at you, `<script src="https://cdn..."`)
+- ❌ URL-based package imports (Deno's import maps)
+- ❌ Globally-scoped package managers (pip's default behavior)
+- ❌ Forced remote coupling (Go's GitHub requirement)
+
+**Why:**
+- If your internet dies, your project should still work
+- If a CDN goes down, your site shouldn't break
+- If you delete a project folder, all traces should vanish with it
+- Dependencies should be *tangible things you can inspect*, not abstract remote references
+
+**Golden Rule:**
+If I can't `cd` into it, `ls` it, and `rm -rf` it, I don't trust it.
+
 ## Philosophy
 - Pragmatic solutions over dogmatic adherence to "best practices"
 - Avoid bikeshedding at all costs
