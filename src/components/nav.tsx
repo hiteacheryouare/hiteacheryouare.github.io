@@ -22,7 +22,7 @@ export default (props) => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-gray-700 dark:text-neutral-200 hover:text-primary dark:hover:text-secondary px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                  className="text-gray-700 dark:text-neutral-200 hover:text-primary dark:hover:text-primary-dark px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
                 >
                   {link.name}
                 </a>
@@ -34,7 +34,7 @@ export default (props) => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-neutral-200 hover:text-primary dark:hover:text-secondary hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-neutral-200 hover:text-primary dark:hover:text-primary-dark hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
               aria-expanded={isOpen}
             >
                 <i
@@ -54,7 +54,7 @@ export default (props) => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-gray-700 dark:text-neutral-200 hover:text-primary dark:hover:text-secondary hover:bg-gray-100 dark:hover:bg-gray-800 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+                className="text-gray-700 dark:text-neutral-200 hover:text-primary dark:hover:text-primary-dark hover:bg-gray-100 dark:hover:bg-gray-800 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}

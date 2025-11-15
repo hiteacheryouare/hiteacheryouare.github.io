@@ -29,6 +29,12 @@ export default (props) => {
   return (
     <main className="min-h-screen relative overflow-hidden">
       <style>{`
+        :root {
+          --cursor-accent: rgba(3, 91, 255, 0.08);
+        }
+        @media (prefers-color-scheme: dark) {
+          :root { --cursor-accent: rgba(102, 179, 255, 0.12); }
+        }
         .whimsy-text {
           display: inline-block;
           transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -63,12 +69,12 @@ export default (props) => {
           height: 4px;
           background: linear-gradient(
             to right,
-            #fdb913ff,
-            #f36f21ff,
-            #c9234aff,
-            #645faaff,
-            #0089cfff,
-            #0db14bff
+            var(--grad-yellow),
+            var(--grad-orange),
+            var(--grad-red),
+            var(--grad-purple),
+            var(--grad-blue-1),
+            var(--grad-blue-2)
           );
           transform: scaleX(0);
           transform-origin: left;
@@ -109,10 +115,10 @@ export default (props) => {
       `}</style>
 
       {/* Animated cursor follower */}
-      <div
+        <div
         className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
         style={{
-          background: `radial-gradient(400px at ${mousePosition.x}px ${mousePosition.y}px, rgba(3, 91, 255, 0.08), transparent 50%)`,
+          background: `radial-gradient(400px at ${mousePosition.x}px ${mousePosition.y}px, var(--cursor-accent), transparent 50%)`,
         }}
       />
 
@@ -152,7 +158,7 @@ export default (props) => {
                   </span>
                 </h1>
                 <div className="flex items-center gap-3">
-                  <div className="h-px w-12 bg-primary" />
+                  <div className="h-px w-12 bg-primary dark:bg-primary-dark" />
                   <p className="text-lg md:text-xl text-gray-600 dark:text-neutral-200 font-mono">
                     CS & Business @ Northeastern University
                   </p>
@@ -183,7 +189,7 @@ export default (props) => {
                     key={index}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full border text-neutral-900 dark:text-white border-neutral-200 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
+                    className="w-10 h-10 rounded-full border text-neutral-900 dark:text-white border-neutral-200 flex items-center justify-center hover:border-primary hover:text-primary dark:hover:border-primary-dark dark:hover:text-primary-dark transition-colors"
                   >
                     <i className={`bi bi-${link.icon}`}></i>
                   </a>
@@ -199,7 +205,7 @@ export default (props) => {
                   className="max-w-full h-auto image-transition image-scale" 
                 />
               </div>
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-2xl bg-primary border border-primary -z-10" />
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-2xl bg-primary border border-primary dark:bg-primary-dark dark:border-primary-dark -z-10" />
             </div>
           </div>
         </div>
@@ -211,7 +217,7 @@ export default (props) => {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
               <div className="inline-block">
-                <span className="text-sm font-mono text-primary">01 / About</span>
+                <span className="text-sm font-mono text-primary dark:text-primary-dark">01 / About</span>
               </div>
               <h2 className="text-4xl md:text-6xl font-bold">
                 Building impactful solutions at the intersection of tech and business
@@ -226,7 +232,7 @@ export default (props) => {
                 {techStack.map((tech: string, i: number) => (
                   <span
                     key={i}
-                    className="px-4 py-2 rounded-full border border-neutral-200 text-sm font-mono hover:border-primary hover:text-primary transition-colors cursor-default"
+                    className="px-4 py-2 rounded-full border border-neutral-200 text-sm font-mono hover:border-primary hover:text-primary dark:hover:border-primary-dark dark:hover:text-primary-dark transition-colors cursor-default"
                   >
                     {tech}
                   </span>
@@ -237,7 +243,7 @@ export default (props) => {
               <div className="aspect-square rounded-2xl overflow-hidden flex items-center justify-center">
                 <img src="https://avatars.githubusercontent.com/u/82683251" alt="Ryan Mullin" className="max-w-full h-auto rounded-2xl" />
               </div>
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-2xl bg-primary border border-primary -z-10" />
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-2xl bg-primary border border-primary dark:bg-primary-dark dark:border-primary-dark -z-10" />
             </div>
           </div>
         </div>
@@ -248,7 +254,7 @@ export default (props) => {
         <div className="max-w-7xl mx-auto w-full">
           <div className="space-y-16">
             <div className="space-y-4">
-              <span className="text-sm font-mono text-primary">02 / Selected Work</span>
+              <span className="text-sm font-mono text-primary dark:text-primary-dark">02 / Selected Work</span>
               <h2 className="text-4xl md:text-6xl font-bold">Featured Projects</h2>
               <p className="text-lg text-gray-600 dark:text-neutral-200 max-w-2xl">
                 From nonprofit platforms to eco-tech applications, here's a selection of projects where I've combined technical skills with mission-driven development.
@@ -264,7 +270,7 @@ export default (props) => {
                 href="https://github.com/hiteacheryouare"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-gray-600 dark:text-neutral-300 hover:text-primary transition-colors font-medium"
+                className="inline-flex items-center gap-2 text-gray-600 dark:text-neutral-300 hover:text-primary dark:hover:text-primary-dark transition-colors font-medium"
               >
                 <i className="bi bi-github"></i>
                 View more projects on GitHub
@@ -280,7 +286,7 @@ export default (props) => {
         <div className="max-w-7xl mx-auto w-full">
           <div className="space-y-16">
         <div className="space-y-4">
-          <span className="text-sm font-mono text-primary">03 / Get in Touch</span>
+          <span className="text-sm font-mono text-primary dark:text-primary-dark">03 / Get in Touch</span>
           <h2 className="text-4xl md:text-6xl font-bold">Let's build something great together</h2>
         </div>
 

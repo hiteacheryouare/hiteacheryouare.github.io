@@ -146,8 +146,8 @@ const {
 
             <!-- Metadata -->
             <div class="flex flex-wrap items-center gap-4 text-gray-600 dark:text-neutral-200">
-              <div class="flex items-center gap-3">
-                <div class="h-px w-12 bg-primary" />
+                <div class="flex items-center gap-3">
+                <div class="h-px w-12 bg-primary dark:bg-primary-dark" />
                 <span class="font-mono text-sm">
                   {author && <span class="font-medium">{author}</span>}
                 </span>
@@ -197,12 +197,12 @@ const {
                       prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
                       prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
                       prose-p:text-gray-700 dark:prose-p:text-neutral-200 prose-p:leading-relaxed prose-p:mb-6
-                      prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+                      prose-a:text-primary dark:prose-a:text-primary-dark prose-a:no-underline hover:prose-a:underline
                       prose-strong:text-gray-900 dark:prose-strong:text-gray-100 prose-strong:font-semibold
-                      prose-code:text-primary prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
+                      prose-code:text-primary dark:prose-code:text-primary-dark prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
                       prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-700 prose-pre:rounded-xl
                       prose-img:rounded-xl prose-img:border prose-img:border-gray-200 dark:prose-img:border-gray-700
-                      prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600 dark:prose-blockquote:text-neutral-300
+                      prose-blockquote:border-l-4 prose-blockquote:border-primary dark:prose-blockquote:border-primary-dark prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600 dark:prose-blockquote:text-neutral-300
                       prose-ul:list-disc prose-ul:pl-6 prose-ul:space-y-2
                       prose-ol:list-decimal prose-ol:pl-6 prose-ol:space-y-2
                       first-letter:text-6xl first-letter:font-bold first-letter:float-left first-letter:mr-3 first-letter:leading-none first-letter:font-serif">
@@ -220,16 +220,16 @@ const {
           </div>
 
           <!-- Share Section -->
-          <div class="mt-12 flex items-center justify-between flex-wrap gap-4 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+            <div class="mt-12 flex items-center justify-between flex-wrap gap-4 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
             <p class="font-mono text-lg text-gray-600 dark:text-neutral-300">
               Wanna share?
             </p>
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 text-primary dark:text-primary-dark">
               <a
                 href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.request.url)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="w-10 h-10 rounded-full border border-neutral-200 dark:border-gray-600 flex items-center justify-center hover:border-primary hover:text-primary transition-colors text-primary"
+                class="w-10 h-10 rounded-full border border-neutral-200 dark:border-gray-600 flex items-center justify-center hover:border-primary hover:text-primary dark:hover:border-primary-dark dark:hover:text-primary-dark transition-colors text-primary dark:text-primary-dark"
                 aria-label="Share on X"
               >
                 <i class="bi bi-twitter-x"></i>
@@ -238,7 +238,7 @@ const {
                 href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.request.url)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="w-10 h-10 rounded-full border border-neutral-200 dark:border-gray-600 flex items-center justify-center hover:border-primary hover:text-primary transition-colors text-primary"
+                class="w-10 h-10 rounded-full border border-neutral-200 dark:border-gray-600 flex items-center justify-center hover:border-primary hover:text-primary dark:hover:border-primary-dark dark:hover:text-primary-dark transition-colors text-primary dark:text-primary-dark"
                 aria-label="Share on LinkedIn"
               >
                 <i class="bi bi-linkedin"></i>

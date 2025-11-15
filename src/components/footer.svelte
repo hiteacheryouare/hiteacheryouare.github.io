@@ -99,14 +99,14 @@
             <!-- Navigation Links -->
             <div class="space-y-4">
                 <h3 class="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                    <div class="h-px w-8 bg-primary"></div>
+                    <div class="h-px w-8 bg-primary dark:bg-primary-dark"></div>
                     Quick Links
                 </h3>
                 <nav class="flex flex-col space-y-3">
                     {#each footerLinks as link}
                         <a 
                             href={link.href} 
-                            class="text-gray-400 hover:text-secondary transition-colors text-sm font-medium flex items-center gap-2 group"
+                            class="text-gray-400 hover:text-secondary dark:hover:text-primary-dark transition-colors text-sm font-medium flex items-center gap-2 group"
                         >
                             <i class="bi bi-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
                             {link.name}
@@ -118,7 +118,7 @@
             <!-- Social & Contact Section -->
             <div class="space-y-4">
                 <h3 class="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                    <div class="h-px w-8 bg-primary"></div>
+                    <div class="h-px w-8 bg-primary dark:bg-primary-dark"></div>
                     Connect
                 </h3>
                 <div class="flex gap-3 flex-wrap">
@@ -127,7 +127,7 @@
                             href={social.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="w-10 h-10 rounded-full border border-gray-700 hover:border-primary flex items-center justify-center text-gray-400 hover:text-secondary transition-all hover:scale-110"
+                            class="w-10 h-10 rounded-full border border-gray-700 hover:border-primary dark:hover:border-primary-dark flex items-center justify-center text-gray-400 hover:text-secondary dark:hover:text-primary-dark transition-all hover:scale-110"
                             aria-label={social.text || social.icon}
                         >
                             <i class={`bi bi-${social.icon}`}></i>
@@ -137,10 +137,10 @@
                 <div class="pt-4">
                     <a 
                         href="mailto:rpmullin17@gmail.com"
-                        class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-secondary transition-colors group"
+                        class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-secondary dark:hover:text-primary-dark transition-colors group"
                     >
                         <i class="bi bi-envelope-fill"></i>
-                        <span class="border-b border-transparent group-hover:border-secondary transition-colors">
+                        <span class="border-b border-transparent group-hover:border-secondary dark:group-hover:border-primary-dark transition-colors">
                             rpmullin17@gmail.com
                         </span>
                     </a>
@@ -173,10 +173,10 @@
 
         
     </div>
-        <div class="flex content-center justify-center gradient-bar text-white p-2 text-xl">
-			Website built with ❤️ by&nbsp;
-			<a href="https://hiteacheryouare.github.io/freelance/" class="underline text-secondary">Ryan Mullin</a>
-		</div>
+            <div class="flex content-center justify-center gradient-bar text-white p-2 text-xl">
+                Website built with ❤️ by&nbsp;
+                <a href="https://hiteacheryouare.github.io/freelance/" class="underline text-secondary dark:text-primary-dark">Ryan Mullin</a>
+            </div>
 </footer>
 
 <style>
@@ -229,12 +229,12 @@
         justify-content: center;
         align-items: center;
         background: linear-gradient(to right, 
-            #fdb913ff, 
-            #f36f21ff, 
-            #c9234aff, 
-            #645faaff, 
-            #0089cfff, 
-            #0db14bff);
+            var(--grad-yellow), 
+            var(--grad-orange), 
+            var(--grad-red), 
+            var(--grad-purple), 
+            var(--grad-blue-1), 
+            var(--grad-blue-2));
         color: white;
         padding: 0.5rem;
         font-size: 1.25rem;

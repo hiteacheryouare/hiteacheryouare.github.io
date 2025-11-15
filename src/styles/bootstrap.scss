@@ -1,7 +1,9 @@
+@use "sass:color";
 $prefix: "ry-";
 $primary: hsl(219, 100%, 51%);
 $secondary: #03AAFF;
-$info: mix($primary, $secondary);
+$primary-dark: #66b3ff;
+$info: color.mix($primary, $secondary);
 $tertiary: hsl(26, 100%, 61%);
 $red: #c9234aff;
 $yellow: #fdb913ff;
@@ -9,15 +11,15 @@ $orange: #f36f21ff;
 $purple: #645faaff;
 $blue: #0089cfff;
 $green: #0db14bff;
-$info: lighten($blue, 10%);
-$success: lighten($green, 10%);
-$warning: lighten($yellow, 10%);
-$danger: lighten($red, 10%);
-$dark: darken($secondary, 10%);
+$info: color.adjust($blue, $lightness: 10%);
+$success: color.adjust($green, $lightness: 10%);
+$warning: color.adjust($yellow, $lightness: 10%);
+$danger: color.adjust($red, $lightness: 10%);
+$dark: color.adjust($secondary, $lightness: -10%);
 
 
-@import '../../node_modules/bootstrap/scss/bootstrap-reboot.scss';
-@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@use '../../node_modules/bootstrap/scss/bootstrap-reboot' as bsreboot;
+@use '../../node_modules/bootstrap/scss/bootstrap' as bs;
 
 
 a {
@@ -43,12 +45,12 @@ a {
         height: 2px;
         background: linear-gradient(
             to right,
-            #fdb913ff,
-            #f36f21ff,
-            #c9234aff,
-            #645faaff,
-            #0089cfff,
-            #0db14bff
+            var(--grad-yellow),
+            var(--grad-orange),
+            var(--grad-red),
+            var(--grad-purple),
+            var(--grad-blue-1),
+            var(--grad-blue-2)
         );
         transform: scaleX(0);
         transform-origin: left;
@@ -82,7 +84,19 @@ blockquote {
         border-radius: 5px;
         max-width: 100%;
         height: auto;
-        border-inline-start: 2px solid $secondary !important;
+        border-inline-start: 2px solid $primary-dark !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    a {
+        color: $primary-dark;
+
+        &:hover,
+        &:focus {
+            color: $primary-dark;
+            outline: none;
+        }
     }
 }
 
@@ -91,12 +105,12 @@ blockquote {
     justify-content: center;
     align-items: center;
     background: linear-gradient(to right, 
-        #fdb913ff, 
-        #f36f21ff, 
-        #c9234aff, 
-        #645faaff, 
-        #0089cfff, 
-        #0db14bff);
+        var(--grad-yellow), 
+        var(--grad-orange), 
+        var(--grad-red), 
+        var(--grad-purple), 
+        var(--grad-blue-1), 
+        var(--grad-blue-2));
     color: white;
     padding: 1rem;
     font-size: 1.25rem;
