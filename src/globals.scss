@@ -24,52 +24,6 @@
     --grad-blue-2: #0db14bff;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --grad-blue-1: #66b3ff; /* primary-dark */
-        --grad-blue-2: #66b3ff;
-    }
-}
-
-/* Non-invasive dark-mode SVG overrides for inline SVG elements and authored SVG markup.
-   This does not modify any source SVG files; it only forces stop/fill/stroke colors
-   when dark mode is active (prefers-color-scheme or data-bs-theme='dark'). */
-@media (prefers-color-scheme: dark) {
-    svg stop[style*="#0089cf"] { stop-color: #66b3ff !important; }
-    svg stop[style*="#0089cfff"] { stop-color: #66b3ff !important; }
-    svg stop[style*="#035bff"] { stop-color: #66b3ff !important; }
-    svg stop[style*="#035bfff"] { stop-color: #66b3ff !important; }
-    svg stop[style*="#03AAFF"] { stop-color: #66b3ff !important; }
-    svg stop[style*="#03AAFFff"] { stop-color: #66b3ff !important; }
-
-    svg [fill="#0089cf"], svg [fill="#0089cfff"],
-    svg [stroke="#0089cf"], svg [stroke="#0089cfff"] {
-        fill: #66b3ff !important;
-        stroke: #66b3ff !important;
-    }
-
-    svg [fill="#035bff"], svg [fill="#035bfff"],
-    svg [stroke="#035bff"], svg [stroke="#035bfff"] {
-        fill: #66b3ff !important;
-        stroke: #66b3ff !important;
-    }
-
-    /* Fallback: target any inline stop elements with a stop-color attribute */
-    svg stop[stop-color="#0089cf"], svg stop[stop-color="#0089cfff"],
-    svg stop[stop-color="#035bff"], svg stop[stop-color="#035bfff"],
-    svg stop[stop-color="#03AAFF"], svg stop[stop-color="#03AAFFff"] {
-        stop-color: #66b3ff !important;
-    }
-}
-
-/* Also support the data-bs-theme toggle used in layouts */
-[data-bs-theme="dark"] svg stop[style*="#0089cf"] { stop-color: #66b3ff !important; }
-[data-bs-theme="dark"] svg stop[style*="#0089cfff"] { stop-color: #66b3ff !important; }
-[data-bs-theme="dark"] svg stop[style*="#035bff"] { stop-color: #66b3ff !important; }
-[data-bs-theme="dark"] svg stop[style*="#035bfff"] { stop-color: #66b3ff !important; }
-[data-bs-theme="dark"] svg [fill="#0089cf"], [data-bs-theme="dark"] svg [fill="#0089cfff"] {
-    fill: #66b3ff !important;
-}
 
 a {
     position: relative;
