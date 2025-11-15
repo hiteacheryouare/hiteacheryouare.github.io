@@ -165,3 +165,24 @@ blockquote {
 
 [data-bs-theme="dark"] .logo-light { display: none; }
 [data-bs-theme="dark"] .logo-dark { display: block; }
+
+/* 404 page animations (moved from inline style) */
+@keyframes bounce404 {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+.animateBounce { animation: bounce404 2s infinite; }
+
+@keyframes wiggle404 {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+.animateWiggle { animation: wiggle404 1s ease-in-out infinite; }
+
+@keyframes shake404 {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+.animateShakeOnLoad { animation: shake404 .5s ease-in-out; }

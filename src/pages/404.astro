@@ -1,197 +1,150 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import '../globals.scss'
-import BsAlert from '../components/bsAlert.svelte'
+import Layout from '../layouts/Layout.astro';
+import '../globals.scss';
+import BsAlert from '../components/bsAlert.svelte';
+
 const mistakes = [
-	"Blunder",
-	"Mistake",
-	"Error",
-	"Fault",
-	"Inaccuracy",
-	"Omission",
-	"Slip",
-	"Slip-up",
-	"Miscalculation",
-	"Misunderstanding",
-	"Flaw",
-	"Oversight",
-	"Fallacy",
-	"Goof",
-	"Lapse",
-	"Misstep",
-	"Botch",
-	"Snafu",
-	"Faux pas",
-	"Howler",
-	"Catastrophe",
-	"Debacle",
-	"Fiasco",
-	"Misadventure",
-	"Calamity",
-	"Disaster",
-	"Tragedy",
-	"Screw-up",
-	"Blooper",
-	"Utter disaster",
-	"Train wreck",
-	"Dumpster fire",
-	"Gaffe",
-	"Bungle",
-	"Flub",
-	"Fumble",
-	"Mess-up",
-	"Cockup",
-	"Ballup",
-	"Foul-up",
-	"Mixup",
-	"Glitch",
-	"Hiccup",
-	"Misfire",
-	"Stumble",
-	"Trip-up",
-	"Wrong move",
-	"Misjudgment",
-	"Lapse in judgment",
-	"Miscue",
-	"Misdoing",
-	"Transgression",
-	"Boo-boo",
-	"Oopsie",
-	"Total failure",
-	"Mess",
-	"Shambles",
-	"Wreck",
-	"Breakdown",
-	"Flop",
-	"Washout",
-]
+	'Blunder', 'Mistake', 'Error', 'Fault', 'Inaccuracy', 'Omission', 'Slip', 'Slip-up', 'Miscalculation', 'Misunderstanding', 'Flaw', 'Oversight', 'Fallacy', 'Goof', 'Lapse', 'Misstep', 'Botch', 'Snafu', 'Faux pas', 'Howler', 'Catastrophe', 'Debacle', 'Fiasco', 'Misadventure', 'Calamity', 'Disaster', 'Tragedy', 'Screw-up', 'Blooper', 'Utter disaster', 'Train wreck', 'Dumpster fire', 'Gaffe', 'Bungle', 'Flub', 'Fumble', 'Mess-up', 'Cockup', 'Ballup', 'Foul-up', 'Mixup', 'Glitch', 'Hiccup', 'Misfire', 'Stumble', 'Trip-up', 'Wrong move', 'Misjudgment', 'Lapse in judgment', 'Miscue', 'Misdoing', 'Transgression', 'Boo-boo', 'Oopsie', 'Total failure', 'Mess', 'Shambles', 'Wreck', 'Breakdown', 'Flop', 'Washout'
+];
+
 const icons = [
-	"cone",
-	"cone-striped",
-	"dash-circle",
-	"dash-circle-dotted",
-	"dash-circle-fill",
-	"dash-square",
-	"dash-square-dotted",
-	"exclamation-triangle",
-	"exclamation-triangle-fill",
-	"exclamation",
-	"exclamation-circle",
-	"exclamation-diamond",
-	"exclamation-diamond-fill",
-	"exclamation-lg",
-	"exclamation-octagon",
-	"exclamation-octagon-fill",
-	"exclamation-square",
-	"exclamation-square-fill",
-	"hand-thumbs-down",
-	"emoji-frown",
-	"explicit",
-	"explicit-fill",
-	"heartbreak",
-	"slash-circle",
-	"slash-circle-fill",
-	"heartbreak-fill",
-	"piggy-bank-fill",
-	"piggy-bank",
-	"cloud-lightning-rain",
-	"browser-edge",
-	"bug-fill",
-	"bug",
-	"browser-chrome",
-	"browser-firefox",
-	"browser-safari",
-]
+	'cone', 'cone-striped', 'dash-circle', 'dash-circle-dotted', 'dash-circle-fill', 'dash-square', 'dash-square-dotted', 'exclamation-triangle', 'exclamation-triangle-fill', 'exclamation', 'exclamation-circle', 'exclamation-diamond', 'exclamation-diamond-fill', 'exclamation-lg', 'exclamation-octagon', 'exclamation-octagon-fill', 'exclamation-square', 'exclamation-square-fill', 'hand-thumbs-down', 'emoji-frown', 'explicit', 'explicit-fill', 'heartbreak', 'slash-circle', 'slash-circle-fill', 'heartbreak-fill', 'piggy-bank-fill', 'piggy-bank', 'cloud-lightning-rain', 'browser-edge', 'bug-fill', 'bug', 'browser-chrome', 'browser-firefox', 'browser-safari'
+];
 
 const broVariations = [
-	"bro",
-	"brochacho",
-	"brochacho",
-	"brochacho",
-	"brochacho",
-	"brochacho",
-	"brochacho",
-	"brochacho",
-	"broseph",
-	"bruh",
-	"bud",
-	"blud",
-	"buddy",
-	"bucko",
-	"mate",
-	"amigo",
-	"compadre",
-	"brosephina",
-	"brotien shake",
-	"brofessor",
-	"broletariat",
-	"brotagonist",
-	"brohemian rhapsody",
-	"brotanical Garden",
-	"brotato Chip",
-	"brosidon",
-	"brometheus",
-	"C3P-Bro",
-	"broseph stalin",
-	"brojangles",
-	"theodore broosevelt",
-	"bronana"
-]
+	'bro', 'brochacho', 'brochacho', 'brochacho', 'brochacho', 'brochacho', 'brochacho', 'brochacho', 'broseph', 'bruh', 'bud', 'blud', 'buddy', 'bucko', 'mate', 'amigo', 'compadre', 'brosephina', 'brotien shake', 'brofessor', 'broletariat', 'brotagonist', 'brohemian rhapsody', 'brotanical Garden', 'brotato Chip', 'brosidon', 'brometheus', 'C3P-Bro', 'broseph stalin', 'brojangles', 'theodore broosevelt', 'bronana'
+];
 
 const exclamationIntensities = [
-	"!!",
-	"!!!",
-	"!!!!",
-	"!!!!!",
-	"!!!!!!!!",
-	"!!!!!!!!!!",
-	"!!!!!!!!!!!",
-	"!!!!!!!!!!!!",
-	"!!!!!!!!!!!!!",
-	"!!!!!!!!!!!!!!",
-	"!!!!!!!!!!!!!!!",
-	"!!!!!!!!!!!!!!!!",
-	"!!!!!!!!!!!!!!!!!",
-	"!!!!!!!!!!!!!!!!!!",
-	"!!!!!!!!!!!!!!!!!!!",
-	"!!!!!!!!!!!!!!!!!!!!",
-	"!!!!!!!!!!!!!!!!!!!!!",
-	"!!!!!!!!!!!!!!!!!!!!!!",
-]
+	'!!', '!!!', '!!!!', '!!!!!', '!!!!!!!!', '!!!!!!!!!!', '!!!!!!!!!!!', '!!!!!!!!!!!!', '!!!!!!!!!!!!!', '!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!!!!!!!!'
+];
 ---
-<Layout title="404 not found!!!" description="nope, we cant find da page">
-	<div class="p-4">
-		<BsAlert 
-			type="info" 
-			icon="info-circle" 
-			text="If you see this page coming from a page that is not exactly this site (i.e. another hiteacheryouare.github.io site), you're on the wrong site becuase of how our URL structure works. Instead of clicking 'go home' below, click the back arrow on your browser"
-			actionLink=""
-			actionText=""
-		/>
-	</div>
-	<div class='flex content-center justify-center p-4 text-9xl text-red-600'>
-		<i id="random-icon"></i>
-	</div>
-	<div class='flex content-center justify-center p-4 text-9xl text-red-600'>
-		<h2 id="random-mistake" class='text-center font-bold text-4xl text-red-600'></h2>
-	</div>
-	<div class='flex content-center justify-center p-4 text-9xl text-red-600'>
-		<h3 class='text-center font-semibold text-2xl text-red-600'>404 - Page Not Found</h3>
-	</div>
-	<div class='flex content-center justify-center p-4 text-9xl text-red-600'>
-		<h3 id="random-bro" class='text-center text-2xl text-red-600'></h3>
-	</div>
-	<div class='flex content-center justify-center p-4'>
-		<a href="/" class="btn btn-danger">Go Home</a>
-	</div>
-</Layout>
 
-<script define:vars={{ mistakes, icons, broVariations, exclamationIntensities }}>
-	const randomInRange = (min, max) => Math.floor(Math.random() * (max - min) + min);
-	const randomInArray = (array) => array[randomInRange(0, array.length - 1)];
-	
-	// Set random values when page loads
-	document.getElementById('random-icon').className = `bi bi-${randomInArray(icons)}`;
-	document.getElementById('random-mistake').textContent = `${randomInArray(mistakes)}${randomInArray(exclamationIntensities)}`;
-	document.getElementById('random-bro').textContent = `(that means ur in the wrong spot ${randomInArray(broVariations)})`;
-</script>
+<Layout title="404 not found!!!" description="nope, we cant find da page">
+	<main class="min-h-screen relative overflow-hidden">
+		<!-- Animated cursor follower -->
+		<div
+			id="cursor-follower"
+			class="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
+		/>
+
+		<!-- Alert Section -->
+		<section class="px-6 md:px-12 pt-12">
+			<div class="max-w-4xl mx-auto">
+				<BsAlert 
+					type="info" 
+					icon="info-circle" 
+					text="If you see this page coming from a page that is not exactly this site (i.e. another hiteacheryouare.github.io site), you're on the wrong site because of how our URL structure works. Instead of clicking 'go home' below, click the back arrow on your browser"
+					actionLink=""
+					actionText=""
+					client:load
+				/>
+			</div>
+		</section>
+
+		<!-- 404 Content -->
+		<section class="flex items-center justify-center px-6 md:px-12 py-16">
+			<div class="max-w-4xl w-full text-center">
+				<!-- Giant Animated Icon -->
+				<div class="mb-8">
+					<i id="random-icon" class="text-9xl text-red-600 animateBounce inline-block"></i>
+				</div>
+
+				<!-- Error Card -->
+				<div class="card rounded-2xl border border-red-600  shadow-lg p-8 md:p-12 space-y-6 animateShakeOnLoad">
+					<!-- Big Error Text -->
+					<div class="space-y-4">
+						<h1 
+							id="random-mistake" 
+							class="text-4xl md:text-6xl font-bold text-red-600 leading-tight"
+						></h1>
+						
+						<div class="inline-block px-6 py-3 bg-red-100 dark:bg-red-950 rounded-full border-2 border-red-600">
+							<h2 class="text-2xl md:text-3xl font-bold text-red-600 font-mono">
+								404 - Page Not Found
+							</h2>
+						</div>
+					</div>
+
+					<!-- Funny Message -->
+					<p id="random-bro" class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-medium italic"></p>
+
+					<!-- Divider -->
+					<div class="flex items-center gap-3 justify-center py-4">
+						<div class="h-px w-12 bg-red-600"></div>
+						<i class="bi bi-emoji-dizzy text-red-600 text-2xl animateWiggle"></i>
+						<div class="h-px w-12 bg-red-600"></div>
+					</div>
+
+					<!-- Helpful Text -->
+					<p class="text-gray-600 dark:text-gray-400 text-lg">
+						<span class="inline-block animate-wiggle">Try something else?? 🤷‍♂️</span>
+					</p>
+
+					<!-- Action Buttons -->
+					<div class="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+						<a 
+							href="/" 
+							class="btn btn-primary text-lg flex items-center justify-center gap-2"
+						>
+							<i class="bi bi-house-fill"></i>
+							Go Home
+						</a>
+						<button 
+							onclick="window.history.back()" 
+							class="btn btn-secondary text-lg flex items-center justify-center gap-2"
+						>
+							<i class="bi bi-arrow-left"></i>
+							Go Back
+						</button>
+						<button onclick="location.reload()" class="btn btn-outline-danger text-lg flex items-center justify-center gap-2">
+							<i class="bi bi-shuffle"></i>
+								Reroll
+						</button>
+					</div>
+				</div>
+
+				<!-- Fun Stats -->
+				<div class="mt-8 grid grid-cols-3 gap-4 max-w-2xl mx-auto">
+					<div class="p-4 rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+						<div class="text-3xl font-bold text-red-600">404</div>
+						<div class="text-xs text-gray-600 dark:text-gray-400 font-mono">Error Code</div>
+					</div>
+					<div class="p-4 rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+						<div class="text-3xl font-bold text-red-600" id="reload-counter">1</div>
+						<div class="text-xs text-gray-600 dark:text-gray-400 font-mono">Times Refreshed</div>
+					</div>
+					<div class="p-4 rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+						<div class="text-3xl font-bold text-red-600">1,399,464</div>
+						<div class="text-xs text-gray-600 dark:text-gray-400 font-mono">Possibilities</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script define:vars={{ mistakes, icons, broVariations, exclamationIntensities }}>
+		const randomInRange = (min, max) => Math.floor(Math.random() * (max - min) + min);
+		const randomInArray = (arr) => arr[randomInRange(0, arr.length - 1)];
+
+		const applyRandoms = () => {
+			document.getElementById('random-icon').className += ' bi-' + randomInArray(icons);
+			document.getElementById('random-mistake').textContent = randomInArray(mistakes) + randomInArray(exclamationIntensities);
+			document.getElementById('random-bro').textContent = '(that means ur in the wrong spot ' + randomInArray(broVariations) + ')';
+		};
+
+		applyRandoms();
+
+		let reloadCount = parseInt(sessionStorage.getItem('404ReloadCount') || '0') + 1;
+		sessionStorage.setItem('404ReloadCount', reloadCount.toString());
+		document.getElementById('reload-counter').textContent = reloadCount.toString();
+
+		const cursorFollower = document.getElementById('cursor-follower');
+		const handleMouseMove = (e) => {
+			if (cursorFollower) {
+				cursorFollower.style.background = 'radial-gradient(400px at ' + e.clientX + 'px ' + e.clientY + 'px, rgba(220, 38, 38, 0.08), transparent 50%)';
+			}
+		};
+		window.addEventListener('mousemove', handleMouseMove);
+	</script>
+</Layout>
