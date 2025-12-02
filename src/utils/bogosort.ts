@@ -6,7 +6,9 @@ export const bogosort = async (
 	input: number[],
 	onProgress?: ProgressCallback,
 	maxAttempts = 1_000_000,
-	yieldEvery = 100
+	yieldEvery = 100,
+	delayBetweenAttemptsMs = 20,
+	delayAfterSortingMs = 5000
 ): Promise<boolean> => {
 	let arr = input.slice();
 	
@@ -36,7 +38,7 @@ export const bogosort = async (
 		// lodash shuffle returns a NEW array, so reassign
 		arr = shuffle(arr);
 		// Small noticeable delay between attempts
-		await new Promise<void>(resolve => setTimeout(resolve, 20));
+		await new Promise<void>(resolve => setTimeout(resolve, delayBetweenAttemptsMs));
 		
 		// Report progress
 		onProgress?.(attempts, arr);
@@ -51,7 +53,7 @@ export const bogosort = async (
 	onProgress?.(attempts, arr);
 
 	// Delay after finishing sorting
-	await new Promise<void>(resolve => setTimeout(resolve, 5000));
+	await new Promise<void>(resolve => setTimeout(resolve, delayAfterSortingMs));
 	
 	return true;
 };
