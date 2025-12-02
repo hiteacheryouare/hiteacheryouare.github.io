@@ -36,7 +36,7 @@ export const bogosort = async (
 		// lodash shuffle returns a NEW array, so reassign
 		arr = shuffle(arr);
 		// Small noticeable delay between attempts
-		// await new Promise<void>(resolve => setTimeout(resolve, 20));
+		await new Promise<void>(resolve => setTimeout(resolve, 20));
 		
 		// Report progress
 		onProgress?.(attempts, arr);
