@@ -69,7 +69,7 @@ import { availabilityStatus } from '../utils/statusIndicator';
 		<script type="module" src="/themeFavicon.js"></script>
 	</head>
 	<body>
-		<nav class="p-10">
+		<nav class="">
 			<NavBar client:load>
 				<Image 
 					src={FullColorFavi} 
@@ -85,9 +85,13 @@ import { availabilityStatus } from '../utils/statusIndicator';
 				/>
 			</NavBar>
 		</nav>
-		<slot />
+		<main class="site-content">
+			<slot />
+		</main>
 			<Footer availability={availabilityStatus}></Footer>
 		<style>
+			:root { --nav-offset: 4rem; }
+			.site-content { padding-top: var(--nav-offset); }
 			#pattern {
 				background-size: cover;
 				object-fit: fill;
