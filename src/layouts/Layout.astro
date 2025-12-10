@@ -84,11 +84,14 @@ import { availabilityStatus } from '../utils/statusIndicator';
 					class="logo-dark"
 				/>
 			</NavBar>
-			<div class="p-4"></div>
 		</nav>
-		<slot />
+		<main class="site-content">
+			<slot />
+		</main>
 			<Footer availability={availabilityStatus}></Footer>
 		<style>
+			:root { --nav-offset: 4rem; }
+			.site-content { padding-top: var(--nav-offset); }
 			#pattern {
 				background-size: cover;
 				object-fit: fill;

@@ -30,6 +30,12 @@ export default (props) => {
         .mesh-gradient-bg {
           background: linear-gradient(135deg, #fdb913 0%, #f36f21 25%, #c9234a 50%, #645faa 75%, #0089cf 100%);
           position: relative;
+          /* Pull the hero up so the gradient reaches the very top while keeping its content
+             spaced below the fixed navbar which uses --nav-offset. The page wrapper adds
+             padding equal to --nav-offset; we negate that here so the hero's background
+             fills behind the navbar, and then add extra padding for hero content. */
+          margin-top: calc(-1 * var(--nav-offset));
+          padding-top: calc(var(--nav-offset) + 4rem);
           overflow: hidden;
         }
         .mesh-gradient-bg::before {
