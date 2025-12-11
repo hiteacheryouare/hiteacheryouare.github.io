@@ -28,36 +28,30 @@ export default (props) => {
       <style>{`
         /* ===== MESH GRADIENT HERO ===== */
         .mesh-gradient-bg {
-          background: linear-gradient(135deg, #fdb913 0%, #f36f21 25%, #c9234a 50%, #645faa 75%, #0089cf 100%);
           position: relative;
-          /* Pull the hero up so the gradient reaches the very top while keeping its content
-             spaced below the fixed navbar which uses --nav-offset. The page wrapper adds
-             padding equal to --nav-offset; we negate that here so the hero's background
-             fills behind the navbar, and then add extra padding for hero content. */
-          margin-top: calc(-1 * var(--nav-offset));
-          padding-top: calc(var(--nav-offset) + 4rem);
           overflow: hidden;
         }
         .mesh-gradient-bg::before {
           content: "";
           position: absolute;
-          inset: -30%;
+          inset: -50%;
           background: 
-            radial-gradient(ellipse 80% 80% at 0% 0%, #fdb913 0%, #fdb913 30%, transparent 70%),
-            radial-gradient(ellipse 70% 70% at 100% 0%, #0089cf 0%, #0089cf 30%, transparent 70%),
-            radial-gradient(ellipse 80% 80% at 100% 100%, #0db14b 0%, #0db14b 30%, transparent 70%),
-            radial-gradient(ellipse 70% 70% at 0% 100%, #c9234a 0%, #c9234a 30%, transparent 70%);
+            radial-gradient(circle at 0% 0%, #fdb913 0%, #fdb913 20%, transparent 50%),
+            radial-gradient(circle at 100% 0%, #0089cf 0%, #0089cf 20%, transparent 50%),
+            radial-gradient(circle at 100% 100%, #0db14b 0%, #0db14b 20%, transparent 50%),
+            radial-gradient(circle at 0% 100%, #c9234a 0%, #c9234a 20%, transparent 50%);
           animation: meshMove 8s ease-in-out infinite alternate;
         }
         .mesh-gradient-bg::after {
           content: "";
           position: absolute;
-          inset: -30%;
+          inset: -50%;
           background: 
-            radial-gradient(ellipse 60% 60% at 50% 0%, #f36f21 0%, #f36f21 25%, transparent 60%),
-            radial-gradient(ellipse 60% 60% at 50% 100%, #645faa 0%, #645faa 25%, transparent 60%),
-            radial-gradient(ellipse 50% 50% at 20% 50%, #0089cf 0%, #0089cf 20%, transparent 55%),
-            radial-gradient(ellipse 50% 50% at 80% 50%, #fdb913 0%, #fdb913 20%, transparent 55%);
+            radial-gradient(circle at 50% 0%, #f36f21 0%, #f36f21 15%, transparent 45%),
+            radial-gradient(circle at 50% 100%, #645faa 0%, #645faa 15%, transparent 45%),
+            radial-gradient(circle at 0% 50%, #0089cf 0%, #0089cf 15%, transparent 45%),
+            radial-gradient(circle at 100% 50%, #fdb913 0%, #fdb913 15%, transparent 45%),
+            radial-gradient(circle at 50% 50%, #c9234a 0%, #c9234a 10%, transparent 40%);
           animation: meshMove2 10s ease-in-out infinite alternate-reverse;
         }
         @keyframes meshMove {
@@ -80,7 +74,11 @@ export default (props) => {
         }
         .hero-name {
           display: block;
-          color: #ffffff;
+          background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4a 50%, #1a1a2e 100%);
+          background-size: 200% 200%;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
           transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
           cursor: default;
         }
