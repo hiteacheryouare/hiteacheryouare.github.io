@@ -73,9 +73,10 @@ export default (props) => {
         }
         .hero-name {
           display: block;
-          background-size: 200% 200%;
-          -webkit-background-clip: text;
-          background-clip: text;
+          background: none !important;
+          background-image: none !important;
+          -webkit-background-clip: unset !important;
+          background-clip: unset !important;
           -webkit-text-fill-color: #ffffff !important;
           color: #ffffff !important;
           transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -232,7 +233,7 @@ export default (props) => {
             <div className="space-y-4">
               
               <h1 className="hero-title text-white">
-                <span className="hero-name">Ryan Mullin</span>
+                <span className="hero-name" style={{ color: '#ffffff !important', WebkitTextFillColor: '#ffffff !important' }}>Ryan Mullin</span>
               </h1>
               
               <p className="hero-tagline mx-auto text-white font-mono">
