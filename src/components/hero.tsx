@@ -28,38 +28,31 @@ export default (props) => {
       <style>{`
         /* ===== MESH GRADIENT HERO ===== */
         .mesh-gradient-bg {
-          background: linear-gradient(135deg, #fdb913 0%, #f36f21 25%, #c9234a 50%, #645faa 75%, #0089cf 100%);
           position: relative;
-          /* Pull the hero up so the gradient reaches the very top while keeping its content
-             spaced below the fixed navbar which uses --nav-offset. The page wrapper adds
-             padding equal to --nav-offset; we negate that here so the hero's background
-             fills behind the navbar, and then add extra padding for hero content. */
-          margin-top: calc(-1 * var(--nav-offset));
-          padding-top: calc(var(--nav-offset) + 4rem);
           overflow: hidden;
         }
         .mesh-gradient-bg::before {
           content: "";
           position: absolute;
-          inset: -30%;
+          inset: -50%;
           background: 
-            radial-gradient(ellipse 80% 80% at 0% 0%, #fdb913 0%, #fdb913 30%, transparent 70%),
-            radial-gradient(ellipse 70% 70% at 100% 0%, #0089cf 0%, #0089cf 30%, transparent 70%),
-            radial-gradient(ellipse 80% 80% at 100% 100%, #0db14b 0%, #0db14b 30%, transparent 70%),
-            radial-gradient(ellipse 70% 70% at 0% 100%, #c9234a 0%, #c9234a 30%, transparent 70%);
+            radial-gradient(circle at 0% 0%, #fdb913 0%, #fdb913 20%, transparent 50%),
+            radial-gradient(circle at 100% 0%, #0089cf 0%, #0089cf 20%, transparent 50%),
+            radial-gradient(circle at 100% 100%, #0db14b 0%, #0db14b 20%, transparent 50%),
+            radial-gradient(circle at 0% 100%, #c9234a 0%, #c9234a 20%, transparent 50%);
           animation: meshMove 8s ease-in-out infinite alternate;
         }
         .mesh-gradient-bg::after {
           content: "";
           position: absolute;
-          inset: -30%;
+          inset: -50%;
           background: 
-            radial-gradient(ellipse 60% 60% at 50% 0%, #f36f21 0%, #f36f21 25%, transparent 60%),
-            radial-gradient(ellipse 60% 60% at 50% 100%, #645faa 0%, #645faa 25%, transparent 60%),
-            radial-gradient(ellipse 50% 50% at 20% 50%, #0089cf 0%, #0089cf 20%, transparent 55%),
-            radial-gradient(ellipse 50% 50% at 80% 50%, #fdb913 0%, #fdb913 20%, transparent 55%);
-          animation: meshMove2 10s ease-in-out infinite alternate-reverse;
-        }
+            radial-gradient(circle at 50% 0%, #f36f21 0%, #f36f21 15%, transparent 45%),
+            radial-gradient(circle at 50% 100%, #645faa 0%, #645faa 15%, transparent 45%),
+            radial-gradient(circle at 0% 50%, #0089cf 0%, #0089cf 15%, transparent 45%),
+            radial-gradient(circle at 100% 50%, #fdb913 0%, #fdb913 15%, transparent 45%),
+            radial-gradient(circle at 50% 50%, #c9234a 0%, #c9234a 10%, transparent 40%);
+      }
         @keyframes meshMove {
           0% { transform: translate(0, 0) rotate(0deg) scale(1); }
           50% { transform: translate(5%, -4%) rotate(2deg) scale(1.1); }
@@ -80,13 +73,17 @@ export default (props) => {
         }
         .hero-name {
           display: block;
-          color: #ffffff;
+          background: none !important;
+          background-image: none !important;
+          -webkit-background-clip: unset !important;
+          background-clip: unset !important;
+          -webkit-text-fill-color: #ffffff !important;
+          color: #ffffff !important;
           transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
           cursor: default;
         }
         .hero-name:hover {
           transform: scale(1.02);
-          filter: drop-shadow(0 4px 20px rgba(201, 35, 74, 0.4));
         }
         @keyframes shimmer {
           0%, 100% { background-position: 0% 50%; }
@@ -236,7 +233,7 @@ export default (props) => {
             <div className="space-y-4">
               
               <h1 className="hero-title text-white">
-                <span className="hero-name">Ryan Mullin</span>
+                <span className="hero-name" style={{ color: '#ffffff !important', WebkitTextFillColor: '#ffffff !important' }}>Ryan Mullin</span>
               </h1>
               
               <p className="hero-tagline mx-auto text-white font-mono">
