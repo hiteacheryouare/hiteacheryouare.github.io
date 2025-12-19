@@ -1,5 +1,4 @@
-export default () => {
-  return (
+export default () => (
     <div className="max-w-[8.5in] mx-auto bg-white p-8 text-gray-900 font-sans">
       {/* Header */}
       <header className="border-b-2 border-gray-800 pb-4 mb-6">
@@ -17,7 +16,7 @@ export default () => {
 
       {/* Education */}
       <section className="mb-6">
-        <h2 className="text-xl font-bold text-gray-900 border-b border-neutral-300 mb-3">EDUCATION</h2>
+        <h2 className="text-xl font-bold text-gray-900 border-b border-gray-400 mb-3">EDUCATION</h2>
         <div className="mb-3">
           <div className="flex justify-between items-baseline mb-1">
             <h3 className="font-bold text-gray-900">Northeastern University</h3>
@@ -34,7 +33,7 @@ export default () => {
 
       {/* Technical Skills */}
       <section className="mb-6">
-        <h2 className="text-xl font-bold text-gray-900 border-b border-neutral-300 mb-3">TECHNICAL SKILLS</h2>
+        <h2 className="text-xl font-bold text-gray-900 border-b border-gray-400 mb-3">TECHNICAL SKILLS</h2>
         <div className="space-y-1">
           <p><span className="font-semibold">Languages:</span> JavaScript, TypeScript, HTML/CSS, Python, Pyret</p>
           <p><span className="font-semibold">Frameworks & Libraries:</span> React, Next.js, Astro, Svelte, TailwindCSS, Bootstrap</p>
@@ -45,8 +44,22 @@ export default () => {
 
       {/* Experience */}
       <section className="mb-6">
-        <h2 className="text-xl font-bold text-gray-900 border-b border-neutral-300 mb-3">EXPERIENCE</h2>
+        <h2 className="text-xl font-bold text-gray-900 border-b border-gray-400 mb-3">EXPERIENCE</h2>
         
+        {/* Husky Ambassadors */}
+        <div className="mb-4">
+          <div className="flex justify-between items-baseline mb-1">
+            <h3 className="font-bold text-gray-900">Admissions Ambassador</h3>
+            <span className="text-sm text-gray-700">Jan 2026 – Present</span>
+          </div>
+          <p className="italic text-gray-800 mb-2">Northeastern Husky Ambassadors, Boston, MA</p>
+          <ul className="list-disc ml-5 space-y-1 text-gray-800">
+            <li>Represent Northeastern University to prospective students and families, showcasing the experiential learning model and co-op program</li>
+            <li>Conduct campus tours, information sessions, and panel discussions for diverse audiences including high school students and transfer applicants</li>
+            <li>Provide authentic student perspectives on academic programs, student life, and the combined major experience</li>
+          </ul>
+        </div>
+
         {/* NER */}
         <div className="mb-4">
           <div className="flex justify-between items-baseline mb-1">
@@ -58,7 +71,6 @@ export default () => {
             <li>Support corporate sponsorship efforts for a 400+ student Formula SAE Electric team by conducting outreach to engineering, EV, and technology companies</li>
             <li>Identify prospective partners, draft inquiry emails, and initiate contact with industry stakeholders to explore sponsorship opportunities</li>
             <li>Assist the Finance Team in building relationships with companies including Rivian, Tesla, Shield AI, and other industry players</li>
-            <li>Help expand the team's network of corporate supporters that provide funding and technical resources for competitive electric vehicle development</li>
           </ul>
         </div>
 
@@ -140,7 +152,7 @@ export default () => {
 
       {/* Projects */}
       <section className="mb-6">
-        <h2 className="text-xl font-bold text-gray-900 border-b border-neutral-300 mb-3">PROJECTS</h2>
+        <h2 className="text-xl font-bold text-gray-900 border-b border-gray-400 mb-3">PROJECTS</h2>
         
         <div className="mb-3">
           <div className="flex justify-between items-baseline">
@@ -211,7 +223,7 @@ export default () => {
 
       {/* Volunteer */}
       <section className="mb-6">
-        <h2 className="text-xl font-bold text-gray-900 border-b border-neutral-300 mb-3">VOLUNTEER EXPERIENCE</h2>
+        <h2 className="text-xl font-bold text-gray-900 border-b border-gray-400 mb-3">VOLUNTEER EXPERIENCE</h2>
         <div className="mb-3">
           <div className="flex justify-between items-baseline mb-1">
             <h3 className="font-bold text-gray-900">Volunteer Swim Instructor</h3>
@@ -227,10 +239,9 @@ export default () => {
 
       {/* Additional */}
       <section>
-        <h2 className="text-xl font-bold text-gray-900 border-b border-neutral-300 mb-3">ADDITIONAL</h2>
+        <h2 className="text-xl font-bold text-gray-900 border-b border-gray-400 mb-3">ADDITIONAL</h2>
         <p className="text-gray-800"><span className="font-semibold">Interests:</span> Podcast production (Between Bells Season 2), swimming, roller coaster enthusiast (56 ridden to date)</p>
         <p className="text-gray-800"><span className="font-semibold">Certifications:</span> American Red Cross Lifeguard, CPR/AED, First Aid</p>
       </section>
     </div>
   );
-}
