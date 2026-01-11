@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { socialLinks, techStack } from '../utils/socialContacts'
 import { EMAIL_REGEX } from '../utils/EMAIL_REGEX';
 
@@ -8,12 +8,8 @@ export default (props) => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [hoveredRole, setHoveredRole] = useState('student');
-
-  const roleImages = {
-    developer: '/ryan_dev.jpg',
-    student: '/ryan_nu.jpg',
-    swimmer: '/ryan_swim_1.jpg',
-  };
+  const [particles, setParticles] = useState([]);
+  const heroRef = useRef(null);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -21,6 +17,19 @@ export default (props) => {
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    // Generate floating particles
+    const newParticles = Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 4 + 2,
+      duration: Math.random() * 10 + 10,
+      delay: Math.random() * 5,
+    }));
+    setParticles(newParticles);
   }, []);
 
   return (
@@ -52,7 +61,8 @@ export default (props) => {
             radial-gradient(circle at 0% 50%, #0089cf 0%, #0089cf 15%, transparent 45%),
             radial-gradient(circle at 100% 50%, #fdb913 0%, #fdb913 15%, transparent 45%),
             radial-gradient(circle at 50% 50%, #c9234a 0%, #c9234a 10%, transparent 40%);
-      }
+          animation: meshMove2 10s ease-in-out infinite alternate;
+        }
         @keyframes meshMove {
           0% { transform: translate(0, 0) rotate(0deg) scale(1); }
           50% { transform: translate(5%, -4%) rotate(2deg) scale(1.1); }
@@ -64,6 +74,33 @@ export default (props) => {
           100% { transform: translate(3%, -3%) rotate(1deg) scale(1.1); }
         }
 
+        /* ===== FLOATING PARTICLES ===== */
+        .particle {
+          position: absolute;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.3);
+          pointer-events: none;
+          filter: blur(1px);
+        }
+        @keyframes float {
+          0%, 100% { 
+            transform: translateY(0) translateX(0) rotate(0deg);
+            opacity: 0.3;
+          }
+          25% { 
+            transform: translateY(-30px) translateX(15px) rotate(90deg);
+            opacity: 0.6;
+          }
+          50% { 
+            transform: translateY(-60px) translateX(-10px) rotate(180deg);
+            opacity: 0.3;
+          }
+          75% { 
+            transform: translateY(-30px) translateX(-20px) rotate(270deg);
+            opacity: 0.5;
+          }
+        }
+
         /* ===== INTERACTIVE TEXT ===== */
         .hero-title {
           font-weight: 800;
@@ -72,19 +109,52 @@ export default (props) => {
           font-size: clamp(4rem, 12vw, 10rem);
         }
         .hero-name {
-          display: block;
+          display: inline-block;
           background: none !important;
           background-image: none !important;
           -webkit-background-clip: unset !important;
           background-clip: unset !important;
           -webkit-text-fill-color: #ffffff !important;
           color: #ffffff !important;
-          transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
           cursor: default;
+          animation: titlePulse 3s ease-in-out infinite;
         }
         .hero-name:hover {
-          transform: scale(1.02);
+          animation: titleBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
         }
+        
+        .name-char {
+          display: inline-block;
+          animation: charFloat 3s ease-in-out infinite;
+          transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .name-char:hover {
+          transform: translateY(-20px) rotate(10deg) scale(1.3);
+          text-shadow: 0 10px 30px rgba(255, 255, 255, 0.6);
+        }
+        
+        @keyframes titlePulse {
+          0%, 100% { 
+            transform: scale(1);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+          }
+          50% { 
+            transform: scale(1.02);
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.4);
+          }
+        }
+        
+        @keyframes titleBounce {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          25% { transform: translateY(-10px) rotate(-2deg); }
+          75% { transform: translateY(-10px) rotate(2deg); }
+        }
+        
+        @keyframes charFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        
         @keyframes shimmer {
           0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
@@ -97,36 +167,78 @@ export default (props) => {
           letter-spacing: 0.02em;
         }
 
+        .hero-tagline {
+          font-size: clamp(1.125rem, 2vw, 1.5rem);
+          color: #ffffff;
+          max-width: 600px;
+          line-height: 1.6;
+          animation: fadeInUp 1s ease-out, taglineGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes taglineGlow {
+          0%, 100% { 
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+          }
+          50% { 
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+          }
+        }
+
         .role-pill {
           display: inline-block;
           padding: 0.5rem 1.5rem;
-          border: 2px solid rgba(26, 26, 46, 0.3);
+          border: 2px solid rgba(255, 255, 255, 0.4);
           border-radius: 9999px;
           font-size: clamp(0.875rem, 1.5vw, 1.125rem);
           font-weight: 500;
-          color: #1a1a2e;
-          background: rgba(255, 255, 255, 0.6);
+          color: #ffffff;
+          background: rgba(255, 255, 255, 0.15);
           backdrop-filter: blur(8px);
-          transition: all 0.3s ease;
+          transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
           cursor: pointer;
+          position: relative;
+          animation: pillFloat 3s ease-in-out infinite;
         }
         .role-pill:hover {
-          background: rgba(255, 255, 255, 0.9);
-          border-color: #c9234a;
-          transform: translateY(-3px) scale(1.05);
-          box-shadow: 0 10px 40px -5px rgba(201, 35, 74, 0.3);
+          background: rgba(255, 255, 255, 0.3);
+          border-color: #ffffff;
+          transform: translateY(-10px) scale(1.15) rotate(5deg);
+          box-shadow: 
+            0 20px 50px -5px rgba(255, 255, 255, 0.4),
+            0 0 30px rgba(255, 255, 255, 0.6);
         }
         .role-pill.active {
-          background: rgba(255, 255, 255, 0.9);
-          border-color: #c9234a;
-          box-shadow: 0 5px 30px -5px rgba(201, 35, 74, 0.3);
+          background: rgba(255, 255, 255, 0.3);
+          border-color: #ffffff;
+          box-shadow: 0 10px 40px -5px rgba(255, 255, 255, 0.5);
+          animation: pillActive 1s ease-in-out infinite;
         }
-
-        .hero-tagline {
-          font-size: clamp(1.125rem, 2vw, 1.5rem);
-          color: #3a3a5a;
-          max-width: 600px;
-          line-height: 1.6;
+        
+        @keyframes pillFloat {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-5px) rotate(2deg); }
+        }
+        
+        @keyframes pillActive {
+          0%, 100% { 
+            transform: scale(1);
+            box-shadow: 0 10px 40px -5px rgba(255, 255, 255, 0.5);
+          }
+          50% { 
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px -5px rgba(255, 255, 255, 0.7);
+          }
         }
 
         .hero-btn-primary {
@@ -135,34 +247,79 @@ export default (props) => {
           padding: 0.875rem 2rem;
           border-radius: 9999px;
           font-weight: 600;
-          transition: all 0.3s ease;
+          transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
           border: 2px solid white;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+          position: relative;
+          overflow: hidden;
+          animation: btnPulse 2s ease-in-out infinite;
+        }
+        .hero-btn-primary::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.5);
+          transform: translate(-50%, -50%);
+          transition: width 0.6s, height 0.6s;
         }
         .hero-btn-primary:hover {
-          transform: translateY(-3px) scale(1.03);
+          transform: translateY(-5px) scale(1.1) rotate(-2deg);
           box-shadow: 
-            0 15px 40px -10px rgba(0, 0, 0, 0.35),
-            0 0 30px rgba(255, 255, 255, 0.3);
+            0 20px 50px -10px rgba(255, 255, 255, 0.5),
+            0 0 40px rgba(255, 255, 255, 0.4);
+          animation: none;
         }
+        .hero-btn-primary:hover::before {
+          width: 300px;
+          height: 300px;
+        }
+        
+        @keyframes btnPulse {
+          0%, 100% { 
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+          }
+          50% { 
+            box-shadow: 0 4px 30px rgba(255, 255, 255, 0.6);
+          }
+        }
+        
         .hero-btn-secondary {
-          background: rgba(0, 0, 0, 0.15);
+          background: rgba(255, 255, 255, 0.15);
           color: white;
           padding: 0.875rem 2rem;
           border-radius: 9999px;
           font-weight: 600;
           border: 2px solid rgba(255, 255, 255, 0.6);
-          transition: all 0.3s ease;
+          transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
           backdrop-filter: blur(12px);
           text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+          position: relative;
+          overflow: hidden;
+        }
+        .hero-btn-secondary::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+          transition: left 0.5s;
         }
         .hero-btn-secondary:hover {
           border-color: white;
-          background: rgba(255, 255, 255, 0.2);
-          transform: translateY(-3px) scale(1.03);
+          background: rgba(255, 255, 255, 0.3);
+          transform: translateY(-5px) scale(1.1) rotate(2deg);
           box-shadow: 
-            0 15px 40px -10px rgba(0, 0, 0, 0.3),
-            0 0 25px rgba(255, 255, 255, 0.15);
+            0 20px 50px -10px rgba(255, 255, 255, 0.4),
+            0 0 30px rgba(255, 255, 255, 0.3);
+        }
+        .hero-btn-secondary:hover::after {
+          left: 100%;
         }
 
         .social-link-hero {
@@ -174,34 +331,25 @@ export default (props) => {
           align-items: center;
           justify-content: center;
           color: white;
-          background: rgba(0, 0, 0, 0.15);
-          transition: all 0.3s ease;
+          background: rgba(255, 255, 255, 0.15);
+          transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
           backdrop-filter: blur(12px);
+          position: relative;
+          animation: socialFloat 3s ease-in-out infinite;
         }
         .social-link-hero:hover {
           border-color: white;
           color: white;
-          transform: translateY(-3px) scale(1.1);
-          background: rgba(255, 255, 255, 0.25);
+          transform: translateY(-8px) scale(1.2) rotate(15deg);
+          background: rgba(255, 255, 255, 0.3);
           box-shadow: 
-            0 10px 30px -5px rgba(0, 0, 0, 0.3),
-            0 0 20px rgba(255, 255, 255, 0.2);
+            0 15px 40px -5px rgba(255, 255, 255, 0.5),
+            0 0 30px rgba(255, 255, 255, 0.4);
         }
-
-        .hero-image-container {
-          position: relative;
-          border-radius: 1.5rem;
-          overflow: hidden;
-          background: rgba(255, 255, 255, 0.2);
-          border: 2px solid rgba(255, 255, 255, 0.3);
-          backdrop-filter: blur(10px);
-          box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.25);
-        }
-        .hero-image {
-          transition: all 0.5s ease;
-        }
-        .hero-image-glow {
-          display: none;
+        
+        @keyframes socialFloat {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-5px) rotate(5deg); }
         }
         /* ===== REST OF PAGE STYLES ===== */
         .whimsy-text {
@@ -226,14 +374,42 @@ export default (props) => {
       <section className="mesh-gradient-bg min-h-screen flex items-center justify-center relative">
         <div className="absolute inset-0 bg-white/20 backdrop-blur-[1px] pointer-events-none" />
         
-        <div className="max-w-6xl mx-auto w-full px-6 md:px-12 py-20 relative z-10">
+        {/* Floating Particles */}
+        {particles.map((particle) => (
+          <div
+            key={particle.id}
+            className="particle"
+            style={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              animation: `float ${particle.duration}s ease-in-out infinite`,
+              animationDelay: `${particle.delay}s`,
+            }}
+          />
+        ))}
+        
+        <div className="max-w-6xl mx-auto w-full px-6 md:px-12 py-20 relative z-10" ref={heroRef}>
           <div className="flex flex-col items-center text-center space-y-8">
             
-            {/* Main Title - Front and Center */}
+            {/* Main Title - Front and Center with Character Animation */}
             <div className="space-y-4">
               
               <h1 className="hero-title text-white">
-                <span className="hero-name" style={{ color: '#ffffff !important', WebkitTextFillColor: '#ffffff !important' }}>Ryan Mullin</span>
+                <span className="hero-name" style={{ color: '#ffffff !important', WebkitTextFillColor: '#ffffff !important' }}>
+                  {'Ryan Mullin'.split('').map((char, index) => (
+                    <span
+                      key={index}
+                      className="name-char"
+                      style={{
+                        animationDelay: `${index * 0.1}s`,
+                      }}
+                    >
+                      {char === ' ' ? '\u00A0' : char}
+                    </span>
+                  ))}
+                </span>
               </h1>
               
               <p className="hero-tagline mx-auto text-white font-mono">
@@ -246,37 +422,28 @@ export default (props) => {
               <span
                 className={`role-pill ${hoveredRole === 'developer' ? 'active' : ''}`}
                 onMouseEnter={() => setHoveredRole('developer')}
+                style={{ animationDelay: '0s' }}
               >
                 Developer
               </span>
               <span
                 className={`role-pill ${hoveredRole === 'student' ? 'active' : ''}`}
                 onMouseEnter={() => setHoveredRole('student')}
+                style={{ animationDelay: '0.2s' }}
               >
                 Student
               </span>
               <span
                 className={`role-pill ${hoveredRole === 'swimmer' ? 'active' : ''}`}
                 onMouseEnter={() => setHoveredRole('swimmer')}
+                style={{ animationDelay: '0.4s' }}
               >
                 Swimmer
               </span>
             </div>
 
-            {/* Image - Now Secondary */}
-            <div className="w-full max-w-xs pt-4">
-              <div className="hero-image-container aspect-square">
-                <div className="hero-image-glow" />
-                <img
-                  src={roleImages[hoveredRole] || 'https://avatars.githubusercontent.com/u/82683251'}
-                  alt="Ryan Mullin"
-                  className="hero-image w-full h-full object-cover image-scale"
-                />
-              </div>
-            </div>
-
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
               <a href="#work" className="hero-btn-primary">
                 Explore My Work
               </a>
@@ -286,7 +453,7 @@ export default (props) => {
             </div>
 
             {/* Social Links */}
-            <div className="flex gap-4 justify-center pt-2">
+            <div className="flex gap-4 justify-center pt-4">
               {socialLinks.map((link, index) => (
                 <a
                   href={link.href}
@@ -295,6 +462,7 @@ export default (props) => {
                   rel="noopener noreferrer"
                   className="social-link-hero"
                   aria-label={link.text}
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <i className={`bi bi-${link.icon}`}></i>
                 </a>
