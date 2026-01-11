@@ -30,7 +30,7 @@ export default (props) => {
   const heroRef = useRef(null);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
     window.addEventListener('mousemove', handleMouseMove);
@@ -397,6 +397,7 @@ export default (props) => {
           <div
             key={particle.id}
             className="particle"
+            aria-hidden="true"
             style={{
               left: `${particle.x}%`,
               top: `${particle.y}%`,
