@@ -2,13 +2,31 @@ import { useState, useEffect, useRef } from 'react';
 import { socialLinks, techStack } from '../utils/socialContacts'
 import { EMAIL_REGEX } from '../utils/EMAIL_REGEX';
 
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  duration: number;
+  delay: number;
+}
+
+const HERO_NAME = 'Ryan Mullin';
+const NON_BREAKING_SPACE = '\u00A0';
+const PARTICLE_COUNT = 30;
+const MIN_PARTICLE_SIZE = 2;
+const MAX_PARTICLE_SIZE = 6;
+const MIN_DURATION = 10;
+const MAX_DURATION = 20;
+const MAX_DELAY = 5;
+
 export default (props) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [hoveredRole, setHoveredRole] = useState('student');
-  const [particles, setParticles] = useState([]);
+  const [particles, setParticles] = useState<Particle[]>([]);
   const heroRef = useRef(null);
 
   useEffect(() => {
@@ -21,13 +39,13 @@ export default (props) => {
 
   useEffect(() => {
     // Generate floating particles
-    const newParticles = Array.from({ length: 30 }, (_, i) => ({
+    const newParticles = Array.from({ length: PARTICLE_COUNT }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() * 4 + 2,
-      duration: Math.random() * 10 + 10,
-      delay: Math.random() * 5,
+      size: Math.random() * (MAX_PARTICLE_SIZE - MIN_PARTICLE_SIZE) + MIN_PARTICLE_SIZE,
+      duration: Math.random() * (MAX_DURATION - MIN_DURATION) + MIN_DURATION,
+      delay: Math.random() * MAX_DELAY,
     }));
     setParticles(newParticles);
   }, []);
@@ -398,7 +416,7 @@ export default (props) => {
               
               <h1 className="hero-title text-white">
                 <span className="hero-name" style={{ color: '#ffffff !important', WebkitTextFillColor: '#ffffff !important' }}>
-                  {'Ryan Mullin'.split('').map((char, index) => (
+                  {HERO_NAME.split('').map((char, index) => (
                     <span
                       key={index}
                       className="name-char"
@@ -406,7 +424,7 @@ export default (props) => {
                         animationDelay: `${index * 0.1}s`,
                       }}
                     >
-                      {char === ' ' ? '\u00A0' : char}
+                      {char === ' ' ? NON_BREAKING_SPACE : char}
                     </span>
                   ))}
                 </span>
