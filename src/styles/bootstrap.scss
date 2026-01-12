@@ -57,7 +57,11 @@ a {
         transition: transform .25s cubic-bezier(.2,.8,.2,1);
         pointer-events: none;
     }
-
+    &.no-rainbow::after,
+    .no-rainbow &::after {
+        display: none;
+        content: none;
+    }
     &:not(:has(img)):not(.btn):hover::after,
     &:not(:has(img)):not(.btn):focus::after {
         transform: scaleX(1);

@@ -1,14 +1,24 @@
 <script>
 	let allowedAccess = $state(false);
 	let currentPW = $state("");
-	let password = $props();
+	let { passwordHash } = $props();
 	let triesLeft = $state(10);
 	let shakeError = $state(false);
 	import { bogosort } from "../utils/bogosort";
   import BsAlert from "./bsAlert.svelte";
 	
-	const checkAccess = () => {
-		allowedAccess = currentPW === password;
+	const hashPassword = async (password) => {
+		const encoder = new TextEncoder();
+		const data = encoder.encode(password);
+		const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+		const hashArray = Array.from(new Uint8Array(hashBuffer));
+		const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+		return hashHex;
+	};
+	
+	const checkAccess = async () => {
+		const inputHash = await hashPassword(currentPW);
+		allowedAccess = inputHash === passwordHash;
 		if (!allowedAccess) {
 			triesLeft -= 1;
 			shakeError = true;

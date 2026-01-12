@@ -1,26 +1,100 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { socialLinks, techStack } from '../utils/socialContacts'
 import { EMAIL_REGEX } from '../utils/EMAIL_REGEX';
 
+const HERO_NAME = 'Ryan Mullin';
+const NON_BREAKING_SPACE = '\u00A0';
+
+// Mesh network configuration
+const NODE_COUNT = 225;
+const CONNECTION_DISTANCE = 100;
+const NODE_SPEED = 1;
+
 export default (props) => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [hoveredRole, setHoveredRole] = useState('student');
-
-  const roleImages = {
-    developer: '/ryan_dev.jpg',
-    student: '/ryan_nu.jpg',
-    swimmer: '/ryan_swim_1.jpg',
-  };
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Set canvas size
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Initialize nodes
+    const nodes = Array.from({ length: NODE_COUNT }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * NODE_SPEED,
+      vy: (Math.random() - 0.5) * NODE_SPEED,
+    }));
+
+    let animationFrameId: number;
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Update node positions
+      nodes.forEach((node) => {
+        node.x += node.vx;
+        node.y += node.vy;
+
+        // Bounce off edges
+        if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+        if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+
+        // Keep nodes within bounds
+        node.x = Math.max(0, Math.min(canvas.width, node.x));
+        node.y = Math.max(0, Math.min(canvas.height, node.y));
+      });
+
+      // Draw connections
+      ctx.lineWidth = 1;
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < CONNECTION_DISTANCE) {
+            const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.45;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw nodes
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+      nodes.forEach((node) => {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   return (
@@ -28,37 +102,31 @@ export default (props) => {
       <style>{`
         /* ===== MESH GRADIENT HERO ===== */
         .mesh-gradient-bg {
-          background: linear-gradient(135deg, #fdb913 0%, #f36f21 25%, #c9234a 50%, #645faa 75%, #0089cf 100%);
           position: relative;
-          /* Pull the hero up so the gradient reaches the very top while keeping its content
-             spaced below the fixed navbar which uses --nav-offset. The page wrapper adds
-             padding equal to --nav-offset; we negate that here so the hero's background
-             fills behind the navbar, and then add extra padding for hero content. */
-          margin-top: calc(-1 * var(--nav-offset));
-          padding-top: calc(var(--nav-offset) + 4rem);
           overflow: hidden;
         }
         .mesh-gradient-bg::before {
           content: "";
           position: absolute;
-          inset: -30%;
+          inset: -50%;
           background: 
-            radial-gradient(ellipse 80% 80% at 0% 0%, #fdb913 0%, #fdb913 30%, transparent 70%),
-            radial-gradient(ellipse 70% 70% at 100% 0%, #0089cf 0%, #0089cf 30%, transparent 70%),
-            radial-gradient(ellipse 80% 80% at 100% 100%, #0db14b 0%, #0db14b 30%, transparent 70%),
-            radial-gradient(ellipse 70% 70% at 0% 100%, #c9234a 0%, #c9234a 30%, transparent 70%);
+            radial-gradient(circle at 0% 0%, #fdb913 0%, #fdb913 20%, transparent 50%),
+            radial-gradient(circle at 100% 0%, #0089cf 0%, #0089cf 20%, transparent 50%),
+            radial-gradient(circle at 100% 100%, #0db14b 0%, #0db14b 20%, transparent 50%),
+            radial-gradient(circle at 0% 100%, #c9234a 0%, #c9234a 20%, transparent 50%);
           animation: meshMove 8s ease-in-out infinite alternate;
         }
         .mesh-gradient-bg::after {
           content: "";
           position: absolute;
-          inset: -30%;
+          inset: -50%;
           background: 
-            radial-gradient(ellipse 60% 60% at 50% 0%, #f36f21 0%, #f36f21 25%, transparent 60%),
-            radial-gradient(ellipse 60% 60% at 50% 100%, #645faa 0%, #645faa 25%, transparent 60%),
-            radial-gradient(ellipse 50% 50% at 20% 50%, #0089cf 0%, #0089cf 20%, transparent 55%),
-            radial-gradient(ellipse 50% 50% at 80% 50%, #fdb913 0%, #fdb913 20%, transparent 55%);
-          animation: meshMove2 10s ease-in-out infinite alternate-reverse;
+            radial-gradient(circle at 50% 0%, #f36f21 0%, #f36f21 15%, transparent 45%),
+            radial-gradient(circle at 50% 100%, #645faa 0%, #645faa 15%, transparent 45%),
+            radial-gradient(circle at 0% 50%, #0089cf 0%, #0089cf 15%, transparent 45%),
+            radial-gradient(circle at 100% 50%, #fdb913 0%, #fdb913 15%, transparent 45%),
+            radial-gradient(circle at 50% 50%, #c9234a 0%, #c9234a 10%, transparent 40%);
+          animation: meshMove2 10s ease-in-out infinite alternate;
         }
         @keyframes meshMove {
           0% { transform: translate(0, 0) rotate(0deg) scale(1); }
@@ -79,18 +147,23 @@ export default (props) => {
           font-size: clamp(4rem, 12vw, 10rem);
         }
         .hero-name {
-          display: block;
-          color: #ffffff;
-          transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+          display: inline-block;
+          background: none !important;
+          background-image: none !important;
+          -webkit-background-clip: unset !important;
+          background-clip: unset !important;
+          -webkit-text-fill-color: #ffffff !important;
+          color: #ffffff !important;
           cursor: default;
         }
-        .hero-name:hover {
-          transform: scale(1.02);
-          filter: drop-shadow(0 4px 20px rgba(201, 35, 74, 0.4));
+        
+        .name-char {
+          display: inline-block;
+          transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
-        @keyframes shimmer {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
+        .name-char:hover {
+          transform: translateY(-15px) scale(1.2);
+          text-shadow: 0 8px 20px rgba(255, 255, 255, 0.5);
         }
 
         .hero-subtitle {
@@ -100,36 +173,35 @@ export default (props) => {
           letter-spacing: 0.02em;
         }
 
+        .hero-tagline {
+          font-size: clamp(1.125rem, 2vw, 1.5rem);
+          color: #ffffff;
+          max-width: 600px;
+          line-height: 1.6;
+        }
+
         .role-pill {
           display: inline-block;
           padding: 0.5rem 1.5rem;
-          border: 2px solid rgba(26, 26, 46, 0.3);
+          border: 2px solid rgba(255, 255, 255, 0.4);
           border-radius: 9999px;
           font-size: clamp(0.875rem, 1.5vw, 1.125rem);
           font-weight: 500;
-          color: #1a1a2e;
-          background: rgba(255, 255, 255, 0.6);
+          color: #ffffff;
+          background: rgba(255, 255, 255, 0.15);
           backdrop-filter: blur(8px);
-          transition: all 0.3s ease;
-          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
         .role-pill:hover {
-          background: rgba(255, 255, 255, 0.9);
-          border-color: #c9234a;
-          transform: translateY(-3px) scale(1.05);
-          box-shadow: 0 10px 40px -5px rgba(201, 35, 74, 0.3);
+          background: rgba(255, 255, 255, 0.3);
+          border-color: #ffffff;
+          transform: translateY(-5px) scale(1.1);
+          box-shadow: 0 10px 30px -5px rgba(255, 255, 255, 0.4);
         }
         .role-pill.active {
-          background: rgba(255, 255, 255, 0.9);
-          border-color: #c9234a;
-          box-shadow: 0 5px 30px -5px rgba(201, 35, 74, 0.3);
-        }
-
-        .hero-tagline {
-          font-size: clamp(1.125rem, 2vw, 1.5rem);
-          color: #3a3a5a;
-          max-width: 600px;
-          line-height: 1.6;
+          background: rgba(255, 255, 255, 0.25);
+          border-color: #ffffff;
+          box-shadow: 0 5px 20px -5px rgba(255, 255, 255, 0.3);
         }
 
         .hero-btn-primary {
@@ -138,34 +210,31 @@ export default (props) => {
           padding: 0.875rem 2rem;
           border-radius: 9999px;
           font-weight: 600;
-          transition: all 0.3s ease;
+          transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
           border: 2px solid white;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
         }
         .hero-btn-primary:hover {
-          transform: translateY(-3px) scale(1.03);
-          box-shadow: 
-            0 15px 40px -10px rgba(0, 0, 0, 0.35),
-            0 0 30px rgba(255, 255, 255, 0.3);
+          transform: translateY(-3px) scale(1.05);
+          box-shadow: 0 15px 40px -10px rgba(255, 255, 255, 0.5);
         }
+        
         .hero-btn-secondary {
-          background: rgba(0, 0, 0, 0.15);
+          background: rgba(255, 255, 255, 0.15);
           color: white;
           padding: 0.875rem 2rem;
           border-radius: 9999px;
           font-weight: 600;
           border: 2px solid rgba(255, 255, 255, 0.6);
-          transition: all 0.3s ease;
+          transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
           backdrop-filter: blur(12px);
           text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
         }
         .hero-btn-secondary:hover {
           border-color: white;
-          background: rgba(255, 255, 255, 0.2);
-          transform: translateY(-3px) scale(1.03);
-          box-shadow: 
-            0 15px 40px -10px rgba(0, 0, 0, 0.3),
-            0 0 25px rgba(255, 255, 255, 0.15);
+          background: rgba(255, 255, 255, 0.25);
+          transform: translateY(-3px) scale(1.05);
+          box-shadow: 0 15px 40px -10px rgba(255, 255, 255, 0.4);
         }
 
         .social-link-hero {
@@ -177,34 +246,16 @@ export default (props) => {
           align-items: center;
           justify-content: center;
           color: white;
-          background: rgba(0, 0, 0, 0.15);
-          transition: all 0.3s ease;
+          background: rgba(255, 255, 255, 0.15);
+          transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
           backdrop-filter: blur(12px);
         }
         .social-link-hero:hover {
           border-color: white;
           color: white;
-          transform: translateY(-3px) scale(1.1);
+          transform: translateY(-5px) scale(1.15);
           background: rgba(255, 255, 255, 0.25);
-          box-shadow: 
-            0 10px 30px -5px rgba(0, 0, 0, 0.3),
-            0 0 20px rgba(255, 255, 255, 0.2);
-        }
-
-        .hero-image-container {
-          position: relative;
-          border-radius: 1.5rem;
-          overflow: hidden;
-          background: rgba(255, 255, 255, 0.2);
-          border: 2px solid rgba(255, 255, 255, 0.3);
-          backdrop-filter: blur(10px);
-          box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.25);
-        }
-        .hero-image {
-          transition: all 0.5s ease;
-        }
-        .hero-image-glow {
-          display: none;
+          box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.4);
         }
         /* ===== REST OF PAGE STYLES ===== */
         .whimsy-text {
@@ -229,23 +280,35 @@ export default (props) => {
       <section className="mesh-gradient-bg min-h-screen flex items-center justify-center relative">
         <div className="absolute inset-0 bg-white/20 backdrop-blur-[1px] pointer-events-none" />
         
+        {/* Mesh Network Canvas */}
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 pointer-events-none"
+          style={{ zIndex: 1 }}
+        />
+        
         <div className="max-w-6xl mx-auto w-full px-6 md:px-12 py-20 relative z-10">
           <div className="flex flex-col items-center text-center space-y-8">
             
-            {/* Main Title - Front and Center */}
+            {/* Main Title - Front and Center with Character Animation */}
             <div className="space-y-4">
               
               <h1 className="hero-title text-white">
-                <span className="hero-name">Ryan Mullin</span>
+                <span className="hero-name" style={{ color: '#ffffff !important', WebkitTextFillColor: '#ffffff !important' }}>
+                  {HERO_NAME.split('').map((char, index) => (
+                    <span
+                      key={index}
+                      className="name-char"
+                    >
+                      {char === ' ' ? NON_BREAKING_SPACE : char}
+                    </span>
+                  ))}
+                </span>
               </h1>
-              
-              <p className="hero-tagline mx-auto text-white font-mono">
-                CS + Business @ Northeastern
-              </p>
             </div>
 
             {/* Interactive Role Pills */}
-            <div className="flex flex-wrap gap-3 justify-center pt-4">
+            <div className="flex flex-wrap gap-3 justify-center">
               <span
                 className={`role-pill ${hoveredRole === 'developer' ? 'active' : ''}`}
                 onMouseEnter={() => setHoveredRole('developer')}
@@ -266,37 +329,25 @@ export default (props) => {
               </span>
             </div>
 
-            {/* Image - Now Secondary */}
-            <div className="w-full max-w-xs pt-4">
-              <div className="hero-image-container aspect-square">
-                <div className="hero-image-glow" />
-                <img
-                  src={roleImages[hoveredRole] || 'https://avatars.githubusercontent.com/u/82683251'}
-                  alt="Ryan Mullin"
-                  className="hero-image w-full h-full object-cover image-scale"
-                />
-              </div>
-            </div>
-
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <a href="#work" className="hero-btn-primary">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+              <a href="#work" className="hero-btn-primary no-rainbow">
                 Explore My Work
               </a>
-              <a href="#contact" className="hero-btn-secondary">
+              <a href="#contact" className="hero-btn-secondary no-rainbow hover:text-white">
                 Let's Connect
               </a>
             </div>
 
             {/* Social Links */}
-            <div className="flex gap-4 justify-center pt-2">
+            <div className="flex gap-4 justify-center pt-4">
               {socialLinks.map((link, index) => (
                 <a
                   href={link.href}
                   key={index}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="social-link-hero"
+                  className="social-link-hero no-rainbow"
                   aria-label={link.text}
                 >
                   <i className={`bi bi-${link.icon}`}></i>
@@ -395,7 +446,7 @@ export default (props) => {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="d-flex align-items-center gap-3 text-lg transition-colors group"
+                      className="d-flex align-items-center gap-3 text-lg transition-colors group no-rainbow"
                     >
                       <i className={`bi bi-${link.icon} fs-4`}></i>
                       <span className="group-hover:translate-x-1 transition-transform">{link.text}</span>
