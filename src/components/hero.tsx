@@ -6,9 +6,9 @@ const HERO_NAME = 'Ryan Mullin';
 const NON_BREAKING_SPACE = '\u00A0';
 
 // Mesh network configuration
-const NODE_COUNT = 40;
-const CONNECTION_DISTANCE = 150;
-const NODE_SPEED = 0.3;
+const NODE_COUNT = 225;
+const CONNECTION_DISTANCE = 100;
+const NODE_SPEED = 1;
 
 export default (props) => {
   const [name, setName] = useState('');
@@ -68,7 +68,7 @@ export default (props) => {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < CONNECTION_DISTANCE) {
-            const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.3;
+            const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.45;
             ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
@@ -79,7 +79,7 @@ export default (props) => {
       }
 
       // Draw nodes
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
       nodes.forEach((node) => {
         ctx.beginPath();
         ctx.arc(node.x, node.y, 3, 0, Math.PI * 2);
@@ -191,7 +191,6 @@ export default (props) => {
           background: rgba(255, 255, 255, 0.15);
           backdrop-filter: blur(8px);
           transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-          cursor: pointer;
         }
         .role-pill:hover {
           background: rgba(255, 255, 255, 0.3);
@@ -306,14 +305,10 @@ export default (props) => {
                   ))}
                 </span>
               </h1>
-              
-              <p className="hero-tagline mx-auto text-white font-mono">
-                CS + Business @ Northeastern
-              </p>
             </div>
 
             {/* Interactive Role Pills */}
-            <div className="flex flex-wrap gap-3 justify-center pt-4">
+            <div className="flex flex-wrap gap-3 justify-center">
               <span
                 className={`role-pill ${hoveredRole === 'developer' ? 'active' : ''}`}
                 onMouseEnter={() => setHoveredRole('developer')}
