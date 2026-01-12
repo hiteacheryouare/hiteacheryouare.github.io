@@ -1,15 +1,102 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { socialLinks, techStack } from '../utils/socialContacts'
 import { EMAIL_REGEX } from '../utils/EMAIL_REGEX';
 
 const HERO_NAME = 'Ryan Mullin';
 const NON_BREAKING_SPACE = '\u00A0';
 
+// Mesh network configuration
+const NODE_COUNT = 40;
+const CONNECTION_DISTANCE = 150;
+const NODE_SPEED = 0.3;
+
 export default (props) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [hoveredRole, setHoveredRole] = useState('student');
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Set canvas size
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Initialize nodes
+    const nodes = Array.from({ length: NODE_COUNT }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * NODE_SPEED,
+      vy: (Math.random() - 0.5) * NODE_SPEED,
+    }));
+
+    let animationFrameId: number;
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Update node positions
+      nodes.forEach((node) => {
+        node.x += node.vx;
+        node.y += node.vy;
+
+        // Bounce off edges
+        if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+        if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+
+        // Keep nodes within bounds
+        node.x = Math.max(0, Math.min(canvas.width, node.x));
+        node.y = Math.max(0, Math.min(canvas.height, node.y));
+      });
+
+      // Draw connections
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+      ctx.lineWidth = 1;
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < CONNECTION_DISTANCE) {
+            const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.3;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw nodes
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+      nodes.forEach((node) => {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
 
   return (
     <main className="min-h-screen relative overflow-hidden">
@@ -194,6 +281,13 @@ export default (props) => {
       {/* ===== NEW HERO SECTION ===== */}
       <section className="mesh-gradient-bg min-h-screen flex items-center justify-center relative">
         <div className="absolute inset-0 bg-white/20 backdrop-blur-[1px] pointer-events-none" />
+        
+        {/* Mesh Network Canvas */}
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 pointer-events-none"
+          style={{ zIndex: 1 }}
+        />
         
         <div className="max-w-6xl mx-auto w-full px-6 md:px-12 py-20 relative z-10">
           <div className="flex flex-col items-center text-center space-y-8">
