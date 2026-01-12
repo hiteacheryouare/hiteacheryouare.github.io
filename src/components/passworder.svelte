@@ -1,7 +1,7 @@
 <script>
 	let allowedAccess = $state(false);
 	let currentPW = $state("");
-	let password = $props();
+	let { password } = $props();
 	let triesLeft = $state(10);
 	let shakeError = $state(false);
 	import { bogosort } from "../utils/bogosort";
