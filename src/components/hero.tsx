@@ -331,10 +331,10 @@ export default (props) => {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-              <a href="#work" className="hero-btn-primary">
+              <a href="#work" className="hero-btn-primary no-rainbow">
                 Explore My Work
               </a>
-              <a href="#contact" className="hero-btn-secondary">
+              <a href="#contact" className="hero-btn-secondary no-rainbow hover:text-white">
                 Let's Connect
               </a>
             </div>
@@ -347,7 +347,7 @@ export default (props) => {
                   key={index}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="social-link-hero"
+                  className="social-link-hero no-rainbow"
                   aria-label={link.text}
                 >
                   <i className={`bi bi-${link.icon}`}></i>
@@ -446,7 +446,7 @@ export default (props) => {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="d-flex align-items-center gap-3 text-lg transition-colors group"
+                      className="d-flex align-items-center gap-3 text-lg transition-colors group no-rainbow"
                     >
                       <i className={`bi bi-${link.icon} fs-4`}></i>
                       <span className="group-hover:translate-x-1 transition-transform">{link.text}</span>

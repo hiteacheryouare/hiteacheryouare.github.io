@@ -106,7 +106,7 @@
                     {#each footerLinks as link}
                         <a 
                             href={link.href} 
-                            class="text-gray-400 hover:text-secondary dark:hover:text-primary-dark transition-colors text-sm font-medium flex items-center gap-2 group"
+                            class="text-gray-400 hover:text-secondary dark:hover:text-primary-dark transition-colors text-sm font-medium flex items-center gap-2 group no-rainbow "
                         >
                             <i class="bi bi-chevron-right text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
                             {link.name}
@@ -127,7 +127,7 @@
                             href={social.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="w-10 h-10 rounded-full border border-gray-700 hover:border-primary dark:hover:border-primary-dark flex items-center justify-center text-gray-400 hover:text-secondary dark:hover:text-primary-dark transition-all hover:scale-110"
+                            class="w-10 h-10 rounded-full border border-gray-700 hover:border-primary dark:hover:border-primary-dark flex items-center justify-center text-gray-400 hover:text-secondary dark:hover:text-primary-dark transition-all hover:scale-110 no-rainbow"
                             aria-label={social.text || social.icon}
                         >
                             <i class={`bi bi-${social.icon}`}></i>
@@ -175,7 +175,7 @@
     </div>
             <div class="flex content-center justify-center gradient-bar text-white p-2 text-xl">
                 Website built with ❤️ by&nbsp;
-                <a href="https://hiteacheryouare.github.io/freelance/" class="underline text-secondary dark:text-primary-dark">Ryan Mullin</a>
+                <a href="https://hiteacheryouare.github.io/freelance/" class="underline">Ryan Mullin</a>
             </div>
 </footer>
 

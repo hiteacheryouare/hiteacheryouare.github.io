@@ -16,4 +16,4 @@ export const statusConfig = {
         }
 };
 
-export const availabilityStatus: 'available' | 'busy' | 'unavailable' = 'available';
+export const availabilityStatus: 'available' | 'busy' | 'unavailable' = 'busy';
