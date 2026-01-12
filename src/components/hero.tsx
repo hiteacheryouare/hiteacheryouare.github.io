@@ -6,9 +6,15 @@ const HERO_NAME = 'Ryan Mullin';
 const NON_BREAKING_SPACE = '\u00A0';
 
 // Mesh network configuration
-const NODE_COUNT = 225;
-const CONNECTION_DISTANCE = 100;
-const NODE_SPEED = 1;
+let NODE_COUNT = 225;
+let CONNECTION_DISTANCE = 100;
+let NODE_SPEED = 1;
+
+if (window.innerWidth < 768) {
+  NODE_COUNT = 100;
+  CONNECTION_DISTANCE = 75;
+  NODE_SPEED = 0.5;
+}
 
 export default (props) => {
   const [name, setName] = useState('');

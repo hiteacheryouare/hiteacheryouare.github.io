@@ -13,7 +13,7 @@ projects.sort(
 
 <Layout title="Home">
   <main class="">
-    <Hero client:idle>
+    <Hero client:only="react" />
       {projects.map((project, index) => (
         <div
           class="group relative rounded-2xl border border-gray-200 overflow-hidden hover:border-secondary hover:shadow-lg transition-all duration-300"
