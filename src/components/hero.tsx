@@ -40,24 +40,23 @@ export default (props) => {
     }));
 
     // Set canvas size and handle resizing
-    let resizeTimeout: number;
+    let resizeTimeout: ReturnType<typeof setTimeout>;
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       // Debounce node reinitialization to avoid performance issues
       clearTimeout(resizeTimeout);
-      resizeTimeout = window.setTimeout(() => {
+      resizeTimeout = setTimeout(() => {
         const newNodeCount = getNodeCount();
         if (nodes.length !== newNodeCount) {
-          nodes.length = 0;
-          for (let i = 0; i < newNodeCount; i++) {
-            nodes.push({
-              x: Math.random() * canvas.width,
-              y: Math.random() * canvas.height,
-              vx: (Math.random() - 0.5) * NODE_SPEED,
-              vy: (Math.random() - 0.5) * NODE_SPEED,
-            });
-          }
+          // Replace all nodes efficiently
+          const newNodes = Array.from({ length: newNodeCount }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * NODE_SPEED,
+            vy: (Math.random() - 0.5) * NODE_SPEED,
+          }));
+          nodes.splice(0, nodes.length, ...newNodes);
         }
       }, 300);
     };
