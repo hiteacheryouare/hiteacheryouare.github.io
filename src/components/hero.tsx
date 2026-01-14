@@ -27,7 +27,11 @@ export default (props) => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Initialize nodes
+    // Set canvas size first
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Initialize nodes after canvas is sized
     const nodes = Array.from({ length: getNodeCount() }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
@@ -35,25 +39,28 @@ export default (props) => {
       vy: (Math.random() - 0.5) * NODE_SPEED,
     }));
 
-    // Set canvas size
+    // Set canvas size and handle resizing
+    let resizeTimeout: number;
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      // Reinitialize nodes on resize for responsive particle count
-      const newNodeCount = getNodeCount();
-      if (nodes.length !== newNodeCount) {
-        nodes.length = 0;
-        for (let i = 0; i < newNodeCount; i++) {
-          nodes.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * NODE_SPEED,
-            vy: (Math.random() - 0.5) * NODE_SPEED,
-          });
+      // Debounce node reinitialization to avoid performance issues
+      clearTimeout(resizeTimeout);
+      resizeTimeout = window.setTimeout(() => {
+        const newNodeCount = getNodeCount();
+        if (nodes.length !== newNodeCount) {
+          nodes.length = 0;
+          for (let i = 0; i < newNodeCount; i++) {
+            nodes.push({
+              x: Math.random() * canvas.width,
+              y: Math.random() * canvas.height,
+              vx: (Math.random() - 0.5) * NODE_SPEED,
+              vy: (Math.random() - 0.5) * NODE_SPEED,
+            });
+          }
         }
-      }
+      }, 300);
     };
-    resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
     let animationFrameId: number;
@@ -109,6 +116,7 @@ export default (props) => {
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
+      clearTimeout(resizeTimeout);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
