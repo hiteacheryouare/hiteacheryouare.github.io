@@ -368,7 +368,7 @@ export default (props) => {
             </div>
 
             {/* Social Links */}
-            <div className="flex flex-wrap gap-3 md:gap-4 justify-center pt-4 px-4 max-w-md mx-auto">
+            <div className="flex flex-wrap md:flex-nowrap gap-3 md:gap-4 justify-center pt-4 px-4">
               {socialLinks.map((link, index) => (
                 <a
                   href={link.href}
