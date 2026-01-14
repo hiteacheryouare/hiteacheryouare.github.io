@@ -6,7 +6,10 @@ const HERO_NAME = 'Ryan Mullin';
 const NON_BREAKING_SPACE = '\u00A0';
 
 // Mesh network configuration
-const NODE_COUNT = 225;
+const getNodeCount = () => {
+	if (typeof window === 'undefined') return 225;
+	return window.innerWidth < 768 ? 75 : 225;
+};
 const CONNECTION_DISTANCE = 100;
 const NODE_SPEED = 1;
 
@@ -24,21 +27,34 @@ export default (props) => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set canvas size
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
     // Initialize nodes
-    const nodes = Array.from({ length: NODE_COUNT }, () => ({
+    const nodes = Array.from({ length: getNodeCount() }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       vx: (Math.random() - 0.5) * NODE_SPEED,
       vy: (Math.random() - 0.5) * NODE_SPEED,
     }));
+
+    // Set canvas size
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      // Reinitialize nodes on resize for responsive particle count
+      const newNodeCount = getNodeCount();
+      if (nodes.length !== newNodeCount) {
+        nodes.length = 0;
+        for (let i = 0; i < newNodeCount; i++) {
+          nodes.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * NODE_SPEED,
+            vy: (Math.random() - 0.5) * NODE_SPEED,
+          });
+        }
+      }
+    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
     let animationFrameId: number;
 
@@ -110,10 +126,10 @@ export default (props) => {
           position: absolute;
           inset: -50%;
           background: 
-            radial-gradient(circle at 0% 0%, #fdb913 0%, #fdb913 20%, transparent 50%),
-            radial-gradient(circle at 100% 0%, #0089cf 0%, #0089cf 20%, transparent 50%),
-            radial-gradient(circle at 100% 100%, #0db14b 0%, #0db14b 20%, transparent 50%),
-            radial-gradient(circle at 0% 100%, #c9234a 0%, #c9234a 20%, transparent 50%);
+            radial-gradient(circle at 0% 0%, #fdb913 0%, #fdb913 25%, transparent 55%),
+            radial-gradient(circle at 100% 0%, #0089cf 0%, #0089cf 25%, transparent 55%),
+            radial-gradient(circle at 100% 100%, #0db14b 0%, #0db14b 25%, transparent 55%),
+            radial-gradient(circle at 0% 100%, #c9234a 0%, #c9234a 25%, transparent 55%);
           animation: meshMove 8s ease-in-out infinite alternate;
         }
         .mesh-gradient-bg::after {
@@ -121,11 +137,11 @@ export default (props) => {
           position: absolute;
           inset: -50%;
           background: 
-            radial-gradient(circle at 50% 0%, #f36f21 0%, #f36f21 15%, transparent 45%),
-            radial-gradient(circle at 50% 100%, #645faa 0%, #645faa 15%, transparent 45%),
-            radial-gradient(circle at 0% 50%, #0089cf 0%, #0089cf 15%, transparent 45%),
-            radial-gradient(circle at 100% 50%, #fdb913 0%, #fdb913 15%, transparent 45%),
-            radial-gradient(circle at 50% 50%, #c9234a 0%, #c9234a 10%, transparent 40%);
+            radial-gradient(circle at 50% 0%, #f36f21 0%, #f36f21 20%, transparent 50%),
+            radial-gradient(circle at 50% 100%, #645faa 0%, #645faa 20%, transparent 50%),
+            radial-gradient(circle at 0% 50%, #0089cf 0%, #0089cf 20%, transparent 50%),
+            radial-gradient(circle at 100% 50%, #fdb913 0%, #fdb913 20%, transparent 50%),
+            radial-gradient(circle at 50% 50%, #c9234a 0%, #c9234a 15%, transparent 45%);
           animation: meshMove2 10s ease-in-out infinite alternate;
         }
         @keyframes meshMove {
@@ -273,6 +289,11 @@ export default (props) => {
           .hero-subtitle { font-size: 1.125rem; }
           .hero-tagline { font-size: 1rem; }
           .role-pill { font-size: 0.875rem; padding: 0.4rem 1rem; }
+          .social-link-hero {
+            width: 2rem;
+            height: 2rem;
+            font-size: 0.875rem;
+          }
         }
       `}</style>
 
@@ -340,7 +361,7 @@ export default (props) => {
             </div>
 
             {/* Social Links */}
-            <div className="flex gap-4 justify-center pt-4">
+            <div className="flex flex-wrap gap-3 md:gap-4 justify-center pt-4 px-4 max-w-md mx-auto">
               {socialLinks.map((link, index) => (
                 <a
                   href={link.href}
