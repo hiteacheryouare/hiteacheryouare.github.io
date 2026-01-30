@@ -13,7 +13,7 @@
   "dependencies": {
     "@astrojs/prefetch": "^0.4.1",
     "@porkyproductions/hat": "^1.5.0",
-    "@types/react": "^19.2.7",
+    "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
     "astro": "^5.16.6",
     "astro-seo": "^0.8.4",
@@ -34,7 +34,7 @@
     "@astrojs/tailwind": "^6.0.2",
     "astro-robots-txt": "^1.0.0",
     "patch-package": "^8.0.1",
-    "react": "^19.2.3",
+    "react": "^19.2.4",
     "react-dom": "^19.2.3",
     "svelte": "^5.48.0"
   }
