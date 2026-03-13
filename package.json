@@ -13,7 +13,7 @@
   "dependencies": {
     "@astrojs/prefetch": "^0.4.1",
     "@porkyproductions/hat": "^1.5.0",
-    "@types/react": "^19.2.7",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "astro": "^5.16.8",
     "astro-seo": "^0.8.4",
@@ -29,13 +29,13 @@
   },
   "devDependencies": {
     "@astrojs/react": "^4.4.2",
-    "@astrojs/sitemap": "^3.6.1",
+    "@astrojs/sitemap": "^3.7.1",
     "@astrojs/svelte": "^7.2.5",
     "@astrojs/tailwind": "^6.0.2",
     "astro-robots-txt": "^1.0.0",
     "patch-package": "^8.0.1",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "svelte": "^5.46.1"
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "svelte": "^5.53.11"
   }
 }
