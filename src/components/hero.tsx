@@ -6,15 +6,12 @@ const HERO_NAME = 'Ryan Mullin';
 const NON_BREAKING_SPACE = '\u00A0';
 
 // Mesh network configuration
-let NODE_COUNT = 225;
-let CONNECTION_DISTANCE = 100;
-let NODE_SPEED = 1;
-
-if (window.innerWidth < 768) {
-  NODE_COUNT = 100;
-  CONNECTION_DISTANCE = 75;
-  NODE_SPEED = 0.5;
-}
+const getNodeCount = () => {
+	if (typeof window === 'undefined') return 225;
+	return window.innerWidth < 768 ? 75 : 225;
+};
+const CONNECTION_DISTANCE = 100;
+const NODE_SPEED = 1;
 
 export default (props) => {
   const [name, setName] = useState('');
@@ -30,21 +27,40 @@ export default (props) => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set canvas size
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    // Set canvas size first
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-    // Initialize nodes
-    const nodes = Array.from({ length: NODE_COUNT }, () => ({
+    // Initialize nodes after canvas is sized
+    const nodes = Array.from({ length: getNodeCount() }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       vx: (Math.random() - 0.5) * NODE_SPEED,
       vy: (Math.random() - 0.5) * NODE_SPEED,
     }));
+
+    // Set canvas size and handle resizing
+    let resizeTimeout: ReturnType<typeof setTimeout>;
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      // Debounce node reinitialization to avoid performance issues
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const newNodeCount = getNodeCount();
+        if (nodes.length !== newNodeCount) {
+          // Replace all nodes efficiently
+          const newNodes = Array.from({ length: newNodeCount }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * NODE_SPEED,
+            vy: (Math.random() - 0.5) * NODE_SPEED,
+          }));
+          nodes.splice(0, nodes.length, ...newNodes);
+        }
+      }, 300);
+    };
+    window.addEventListener('resize', resizeCanvas);
 
     let animationFrameId: number;
 
@@ -99,6 +115,7 @@ export default (props) => {
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
+      clearTimeout(resizeTimeout);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -116,10 +133,10 @@ export default (props) => {
           position: absolute;
           inset: -50%;
           background: 
-            radial-gradient(circle at 0% 0%, #fdb913 0%, #fdb913 20%, transparent 50%),
-            radial-gradient(circle at 100% 0%, #0089cf 0%, #0089cf 20%, transparent 50%),
-            radial-gradient(circle at 100% 100%, #0db14b 0%, #0db14b 20%, transparent 50%),
-            radial-gradient(circle at 0% 100%, #c9234a 0%, #c9234a 20%, transparent 50%);
+            radial-gradient(circle at 0% 0%, #fdb913 0%, #fdb913 25%, transparent 55%),
+            radial-gradient(circle at 100% 0%, #0089cf 0%, #0089cf 25%, transparent 55%),
+            radial-gradient(circle at 100% 100%, #0db14b 0%, #0db14b 25%, transparent 55%),
+            radial-gradient(circle at 0% 100%, #c9234a 0%, #c9234a 25%, transparent 55%);
           animation: meshMove 8s ease-in-out infinite alternate;
         }
         .mesh-gradient-bg::after {
@@ -127,11 +144,11 @@ export default (props) => {
           position: absolute;
           inset: -50%;
           background: 
-            radial-gradient(circle at 50% 0%, #f36f21 0%, #f36f21 15%, transparent 45%),
-            radial-gradient(circle at 50% 100%, #645faa 0%, #645faa 15%, transparent 45%),
-            radial-gradient(circle at 0% 50%, #0089cf 0%, #0089cf 15%, transparent 45%),
-            radial-gradient(circle at 100% 50%, #fdb913 0%, #fdb913 15%, transparent 45%),
-            radial-gradient(circle at 50% 50%, #c9234a 0%, #c9234a 10%, transparent 40%);
+            radial-gradient(circle at 50% 0%, #f36f21 0%, #f36f21 20%, transparent 50%),
+            radial-gradient(circle at 50% 100%, #645faa 0%, #645faa 20%, transparent 50%),
+            radial-gradient(circle at 0% 50%, #0089cf 0%, #0089cf 20%, transparent 50%),
+            radial-gradient(circle at 100% 50%, #fdb913 0%, #fdb913 20%, transparent 50%),
+            radial-gradient(circle at 50% 50%, #c9234a 0%, #c9234a 15%, transparent 45%);
           animation: meshMove2 10s ease-in-out infinite alternate;
         }
         @keyframes meshMove {
@@ -279,6 +296,11 @@ export default (props) => {
           .hero-subtitle { font-size: 1.125rem; }
           .hero-tagline { font-size: 1rem; }
           .role-pill { font-size: 0.875rem; padding: 0.4rem 1rem; }
+          .social-link-hero {
+            width: 2rem;
+            height: 2rem;
+            font-size: 0.875rem;
+          }
         }
       `}</style>
 
@@ -346,7 +368,7 @@ export default (props) => {
             </div>
 
             {/* Social Links */}
-            <div className="flex gap-4 justify-center pt-4">
+            <div className="flex flex-wrap md:flex-nowrap gap-3 md:gap-4 justify-center pt-4 px-4">
               {socialLinks.map((link, index) => (
                 <a
                   href={link.href}
