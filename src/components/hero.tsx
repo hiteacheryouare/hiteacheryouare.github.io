@@ -5,116 +5,186 @@ import { EMAIL_REGEX } from '../utils/EMAIL_REGEX';
 const HERO_NAME = 'Ryan Mullin';
 const NON_BREAKING_SPACE = '\u00A0';
 
-// Mesh network configuration
 const getNodeCount = () => {
-	if (typeof window === 'undefined') return 225;
-	return window.innerWidth < 768 ? 75 : 225;
+	if (typeof window === 'undefined') return 220;
+	if (window.innerWidth < 768) return 80;
+	if (window.innerWidth < 1280) return 150;
+	return 220;
 };
-const CONNECTION_DISTANCE = 100;
-const NODE_SPEED = 1;
+const CONNECTION_DISTANCE = 110;
+const CONNECTION_DISTANCE_SQ = CONNECTION_DISTANCE * CONNECTION_DISTANCE;
+const NODE_SPEED = 0.7;
+const TARGET_FPS = 45;
+const FRAME_INTERVAL = 1000 / TARGET_FPS;
 
 export default (props) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [hoveredRole, setHoveredRole] = useState('student');
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    // Set canvas size first
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
 
-    // Initialize nodes after canvas is sized
-    const nodes = Array.from({ length: getNodeCount() }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * NODE_SPEED,
-      vy: (Math.random() - 0.5) * NODE_SPEED,
-    }));
+    type Node = { x: number; y: number; vx: number; vy: number };
+    let nodes: Node[] = [];
+    let cssWidth = 0;
+    let cssHeight = 0;
 
-    // Set canvas size and handle resizing
+    const sizeCanvas = () => {
+      cssWidth = window.innerWidth;
+      cssHeight = window.innerHeight;
+      canvas.width = Math.floor(cssWidth * dpr);
+      canvas.height = Math.floor(cssHeight * dpr);
+      canvas.style.width = `${cssWidth}px`;
+      canvas.style.height = `${cssHeight}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    const seedNodes = (count: number) => {
+      nodes = Array.from({ length: count }, () => ({
+        x: Math.random() * cssWidth,
+        y: Math.random() * cssHeight,
+        vx: (Math.random() - 0.5) * NODE_SPEED,
+        vy: (Math.random() - 0.5) * NODE_SPEED,
+      }));
+    };
+
+    sizeCanvas();
+    seedNodes(getNodeCount());
+
     let resizeTimeout: ReturnType<typeof setTimeout>;
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      // Debounce node reinitialization to avoid performance issues
+    const onResize = () => {
+      sizeCanvas();
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
-        const newNodeCount = getNodeCount();
-        if (nodes.length !== newNodeCount) {
-          // Replace all nodes efficiently
-          const newNodes = Array.from({ length: newNodeCount }, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * NODE_SPEED,
-            vy: (Math.random() - 0.5) * NODE_SPEED,
-          }));
-          nodes.splice(0, nodes.length, ...newNodes);
-        }
-      }, 300);
+        const target = getNodeCount();
+        if (nodes.length !== target) seedNodes(target);
+      }, 250);
     };
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('resize', onResize);
 
-    let animationFrameId: number;
+    let running = true;
+    const onVisibility = () => {
+      running = !document.hidden;
+      if (running) lastFrame = performance.now();
+    };
+    document.addEventListener('visibilitychange', onVisibility);
 
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let animationFrameId = 0;
+    let lastFrame = performance.now();
 
-      // Update node positions
-      nodes.forEach((node) => {
-        node.x += node.vx;
-        node.y += node.vy;
+    // Spatial grid bucketing: only check neighbors in same/adjacent cells.
+    // Reduces O(n^2) connection scan to ~O(n).
+    const cellSize = CONNECTION_DISTANCE;
 
-        // Bounce off edges
-        if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
-        if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+    const draw = () => {
+      ctx.clearRect(0, 0, cssWidth, cssHeight);
 
-        // Keep nodes within bounds
-        node.x = Math.max(0, Math.min(canvas.width, node.x));
-        node.y = Math.max(0, Math.min(canvas.height, node.y));
-      });
-
-      // Draw connections
-      ctx.lineWidth = 1;
       for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+        const n = nodes[i];
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0) { n.x = 0; n.vx = -n.vx; }
+        else if (n.x > cssWidth) { n.x = cssWidth; n.vx = -n.vx; }
+        if (n.y < 0) { n.y = 0; n.vy = -n.vy; }
+        else if (n.y > cssHeight) { n.y = cssHeight; n.vy = -n.vy; }
+      }
 
-          if (distance < CONNECTION_DISTANCE) {
-            const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.45;
-            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.stroke();
+      const cols = Math.max(1, Math.ceil(cssWidth / cellSize));
+      const rows = Math.max(1, Math.ceil(cssHeight / cellSize));
+      const grid: number[][] = new Array(cols * rows);
+      for (let i = 0; i < nodes.length; i++) {
+        const cx = Math.min(cols - 1, Math.max(0, Math.floor(nodes[i].x / cellSize)));
+        const cy = Math.min(rows - 1, Math.max(0, Math.floor(nodes[i].y / cellSize)));
+        const idx = cy * cols + cx;
+        (grid[idx] || (grid[idx] = [])).push(i);
+      }
+
+      ctx.lineWidth = 1;
+      // Bucket connections by opacity tier so we can render distance-based
+      // fade with only OPACITY_BUCKETS stroke calls instead of one per line.
+      const OPACITY_BUCKETS = 6;
+      const buckets: number[][] = [];
+      for (let i = 0; i < OPACITY_BUCKETS; i++) buckets.push([]);
+      for (let cy = 0; cy < rows; cy++) {
+        for (let cx = 0; cx < cols; cx++) {
+          const bucket = grid[cy * cols + cx];
+          if (!bucket) continue;
+          for (let dy = 0; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+              if (dy === 0 && dx < 0) continue;
+              const nx = cx + dx, ny = cy + dy;
+              if (nx < 0 || nx >= cols || ny >= rows) continue;
+              const other = grid[ny * cols + nx];
+              if (!other) continue;
+              for (let a = 0; a < bucket.length; a++) {
+                const ia = bucket[a];
+                const startB = (dx === 0 && dy === 0) ? a + 1 : 0;
+                for (let b = startB; b < other.length; b++) {
+                  const ib = other[b];
+                  const ddx = nodes[ia].x - nodes[ib].x;
+                  const ddy = nodes[ia].y - nodes[ib].y;
+                  const dsq = ddx * ddx + ddy * ddy;
+                  if (dsq < CONNECTION_DISTANCE_SQ) {
+                    const t = 1 - Math.sqrt(dsq) / CONNECTION_DISTANCE;
+                    let bi = Math.floor(t * OPACITY_BUCKETS);
+                    if (bi >= OPACITY_BUCKETS) bi = OPACITY_BUCKETS - 1;
+                    const arr = buckets[bi];
+                    arr.push(nodes[ia].x, nodes[ia].y, nodes[ib].x, nodes[ib].y);
+                  }
+                }
+              }
+            }
           }
         }
       }
-
-      // Draw nodes
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
-      nodes.forEach((node) => {
+      for (let bi = 0; bi < OPACITY_BUCKETS; bi++) {
+        const arr = buckets[bi];
+        if (arr.length === 0) continue;
+        const opacity = ((bi + 0.5) / OPACITY_BUCKETS) * 0.5;
+        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
         ctx.beginPath();
-        ctx.arc(node.x, node.y, 3, 0, Math.PI * 2);
-        ctx.fill();
-      });
+        for (let k = 0; k < arr.length; k += 4) {
+          ctx.moveTo(arr[k], arr[k + 1]);
+          ctx.lineTo(arr[k + 2], arr[k + 3]);
+        }
+        ctx.stroke();
+      }
 
-      animationFrameId = requestAnimationFrame(animate);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+      ctx.beginPath();
+      for (let i = 0; i < nodes.length; i++) {
+        ctx.moveTo(nodes[i].x + 3, nodes[i].y);
+        ctx.arc(nodes[i].x, nodes[i].y, 3, 0, Math.PI * 2);
+      }
+      ctx.fill();
     };
 
-    animate();
+    if (reduceMotion) {
+      draw();
+    } else {
+      const animate = (now: number) => {
+        animationFrameId = requestAnimationFrame(animate);
+        if (!running) return;
+        const elapsed = now - lastFrame;
+        if (elapsed < FRAME_INTERVAL) return;
+        lastFrame = now - (elapsed % FRAME_INTERVAL);
+        draw();
+      };
+      animationFrameId = requestAnimationFrame(animate);
+    }
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('resize', onResize);
+      document.removeEventListener('visibilitychange', onVisibility);
       clearTimeout(resizeTimeout);
       cancelAnimationFrame(animationFrameId);
     };
@@ -128,38 +198,50 @@ export default (props) => {
           position: relative;
           overflow: hidden;
         }
-        .mesh-gradient-bg::before {
-          content: "";
-          position: absolute;
-          inset: -50%;
-          background: 
-            radial-gradient(circle at 0% 0%, #fdb913 0%, #fdb913 25%, transparent 55%),
-            radial-gradient(circle at 100% 0%, #0089cf 0%, #0089cf 25%, transparent 55%),
-            radial-gradient(circle at 100% 100%, #0db14b 0%, #0db14b 25%, transparent 55%),
-            radial-gradient(circle at 0% 100%, #c9234a 0%, #c9234a 25%, transparent 55%);
-          animation: meshMove 8s ease-in-out infinite alternate;
+        /* Static brand-color wheel: six gradient-bar colors in a conic.
+           Brand-purple fallback fill on the parent so blurred edges
+           never reveal page bg. Two conics in the SAME hue order
+           (second offset 30°, lower opacity) with NORMAL alpha
+           compositing soften the spokes; movement comes from the
+           particle canvas on top, not from the gradient. */
+        .mesh-gradient-bg {
+          background: var(--grad-purple);
         }
+        .mesh-gradient-bg::before,
         .mesh-gradient-bg::after {
           content: "";
           position: absolute;
-          inset: -50%;
-          background: 
-            radial-gradient(circle at 50% 0%, #f36f21 0%, #f36f21 20%, transparent 50%),
-            radial-gradient(circle at 50% 100%, #645faa 0%, #645faa 20%, transparent 50%),
-            radial-gradient(circle at 0% 50%, #0089cf 0%, #0089cf 20%, transparent 50%),
-            radial-gradient(circle at 100% 50%, #fdb913 0%, #fdb913 20%, transparent 50%),
-            radial-gradient(circle at 50% 50%, #c9234a 0%, #c9234a 15%, transparent 45%);
-          animation: meshMove2 10s ease-in-out infinite alternate;
+          left: -25%;
+          top: -25%;
+          right: -25%;
+          bottom: -25%;
         }
-        @keyframes meshMove {
-          0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-          50% { transform: translate(5%, -4%) rotate(2deg) scale(1.1); }
-          100% { transform: translate(-3%, 3%) rotate(-1deg) scale(1.05); }
+        .mesh-gradient-bg::before {
+          background: conic-gradient(
+            from 0deg at 50% 50%,
+            var(--grad-yellow) 0%,
+            var(--grad-orange) 16.66%,
+            var(--grad-red)    33.33%,
+            var(--grad-purple) 50%,
+            var(--grad-blue-1) 66.66%,
+            var(--grad-blue-2) 83.33%,
+            var(--grad-yellow) 100%
+          );
+          filter: blur(140px);
         }
-        @keyframes meshMove2 {
-          0% { transform: translate(0, 0) rotate(0deg) scale(1.05); }
-          50% { transform: translate(-4%, 5%) rotate(-2deg) scale(1); }
-          100% { transform: translate(3%, -3%) rotate(1deg) scale(1.1); }
+        .mesh-gradient-bg::after {
+          background: conic-gradient(
+            from 30deg at 50% 50%,
+            var(--grad-yellow) 0%,
+            var(--grad-orange) 16.66%,
+            var(--grad-red)    33.33%,
+            var(--grad-purple) 50%,
+            var(--grad-blue-1) 66.66%,
+            var(--grad-blue-2) 83.33%,
+            var(--grad-yellow) 100%
+          );
+          filter: blur(140px);
+          opacity: 0.5;
         }
 
         /* ===== INTERACTIVE TEXT ===== */
@@ -335,28 +417,6 @@ export default (props) => {
               </h1>
             </div>
 
-            {/* Interactive Role Pills */}
-            <div className="flex flex-wrap gap-3 justify-center">
-              <span
-                className={`role-pill ${hoveredRole === 'developer' ? 'active' : ''}`}
-                onMouseEnter={() => setHoveredRole('developer')}
-              >
-                Developer
-              </span>
-              <span
-                className={`role-pill ${hoveredRole === 'student' ? 'active' : ''}`}
-                onMouseEnter={() => setHoveredRole('student')}
-              >
-                Student
-              </span>
-              <span
-                className={`role-pill ${hoveredRole === 'swimmer' ? 'active' : ''}`}
-                onMouseEnter={() => setHoveredRole('swimmer')}
-              >
-                Swimmer
-              </span>
-            </div>
-
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
               <a href="#work" className="hero-btn-primary no-rainbow">
@@ -391,17 +451,14 @@ export default (props) => {
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
-              <div className="inline-block">
-                <span className="text-sm font-mono text-primary">01 / About</span>
-              </div>
               <h2 className="text-4xl md:text-6xl font-bold">
-                Building impactful solutions at the intersection of tech and business
+                Hey, I'm Ryan!
               </h2>
               <p className="text-lg text-gray-600 dark:text-neutral-200 leading-relaxed">
-                I'm a Computer Science and Business Administration student at Northeastern University with a passion for FinTech and full-stack development. From building mission-driven nonprofit platforms to managing corporate sponsorship outreach for a 400+ member electric racing team, I thrive on projects that blend technical innovation with real-world impact.
+                I like to build cool things using cool tools, and sometimes I make things that make me laugh.
               </p>
               <p className="text-lg text-gray-600 dark:text-neutral-200 leading-relaxed">
-                Whether it's deploying responsive web applications, analyzing carbon footprints, or coordinating high-stakes recruitment events, I bring a unique combination of technical expertise and strategic thinking to every challenge.
+                I'm a sophomore at Northeastern doing the combined CS &amp; Business program (Khoury + D'Amore-McKim), concentrating in FinTech. Two-time Dean's List, 4.0 right now. Outside of class I'm shipping software, running corporate sponsorship at Northeastern Electric Racing, and head-guarding at Larchmont Swim Club.
               </p>
               <div className="flex flex-wrap gap-2 pt-4">
                 {techStack.map((tech, i) => (
@@ -429,10 +486,9 @@ export default (props) => {
         <div className="max-w-7xl mx-auto w-full">
           <div className="space-y-16">
             <div className="space-y-4">
-              <span className="text-sm font-mono text-primary">02 / Selected Work</span>
-              <h2 className="text-4xl md:text-6xl font-bold">Featured Projects</h2>
+              <h2 className="text-4xl md:text-6xl font-bold">Some of my faves</h2>
               <p className="text-lg text-gray-600 dark:text-neutral-200 max-w-2xl">
-                From nonprofit platforms to eco-tech applications, here's a selection of projects where I've combined technical skills with mission-driven development.
+                Some are for clients, some I built because I like it.
               </p>
             </div>
             <div className="grid gap-8">
@@ -459,33 +515,20 @@ export default (props) => {
         <div className="max-w-7xl mx-auto w-full">
           <div className="space-y-16">
             <div className="space-y-4">
-              <span className="text-sm font-mono text-primary">03 / Get in Touch</span>
-              <h2 className="text-4xl md:text-6xl font-bold">Let's build something great together</h2>
+              <h2 className="text-4xl md:text-6xl font-bold">Want to chat?</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-16">
               <div className="space-y-8">
                 <p className="text-lg text-gray-600 dark:text-neutral-200 leading-relaxed">
-                  I'm always interested in new opportunities—whether it's a FinTech project, web development work, or collaborative ventures at the intersection of business and technology. Let's connect!
+                  Looking for a co-op? Have freelance work? We both know you have something to say!
                 </p>
-                <div className="space-y-4">
-                  {socialLinks.map((link, index) => (
-                    <a
-                      key={index}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="d-flex align-items-center gap-3 text-lg transition-colors group no-rainbow"
-                    >
-                      <i className={`bi bi-${link.icon} fs-4`}></i>
-                      <span className="group-hover:translate-x-1 transition-transform">{link.text}</span>
-                    </a>
-                  ))}
-                </div>
-                <div className="pt-4">
-                  <p className="text-sm text-gray-500 dark:text-neutral-300 font-mono">
-                    📍 Proudly based in Boston, MA & Philadelphia, PA
-                  </p>
-                </div>
+                <a
+                  href="mailto:rpmullin17@gmail.com"
+                  className="inline-flex items-center gap-3 text-lg group no-rainbow"
+                >
+                  <i className="bi bi-envelope-fill fs-4"></i>
+                  <span className="group-hover:translate-x-1 transition-transform">rpmullin17@gmail.com</span>
+                </a>
               </div>
               <form className="space-y-6">
                 <div className="mb-3">
