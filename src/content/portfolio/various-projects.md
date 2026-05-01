@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/portfolio.astro"
 name: "Various CS Projects"
-description: "A collection of diverse computer science projects working on skills in web development, data analysis, and algorithm design, all completed as part of coursework at Northeastern University and personal learning."
+description: "Coursework + personal projects from Northeastern."
 date: "Sept 4 2025"
 freelance: false
 url: "https://www.khoury.northeastern.edu/"

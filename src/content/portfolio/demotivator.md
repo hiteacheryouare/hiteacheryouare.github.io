@@ -1,41 +1,33 @@
 ---
 layout: "../../layouts/portfolio.astro"
 name: "(de)Motivator"
-description: "A powerful web app to lower your self esteem"
+description: "A long-running side project that does exactly one thing: lower your self-esteem on demand. Press the button, get insulted."
 date: "Apr 16 2021"
 freelance: false
 url: "https://demotivator.web.app"
-heroImage: 
+heroImage:
     src: "https://demotivator.web.app/assets/dmv-logo-CraZEmCY.png"
     alt: "large, red button"
-tags: 
+tags:
     - svelte
     - vite
     - tailwind
     - bootstrap
     - capacitor
     - firebase
+    - turborepo
 ---
 
-# The Utterly Incomparable (de)Motivator: A Pinnacle of Self-Deprecation
+# (de)Motivator
 
-Are you weary of feeling even remotely positive about yourself? Do you yearn to take your self-esteem to unprecedented depths of despair? Then look no further than [(de)Motivator](https://demotivator.web.app/), the unparalleled application that will revolutionize the way you perceive yourself.
+A long-running side project that does exactly one thing: lower your self-esteem on demand. Press the button, get insulted.
 
-(de)Motivator is the _epitome_ of self-deprecation. With the mere press of a button, you will be greeted with a random insult that will effectively undermine any sense of self-worth you may have had. But that is merely the tip of the iceberg. (de)Motivator also features MEGAMODE, where you can select your own pace and be inundated with a deluge of insults that will leave you feeling like a worthless and insignificant speck of dust.
+It started in 2021 as a single-page HTML site and has since grown into:
 
-Not only is (de)Motivator incredibly efficacious in the demolition of your self-esteem, but it also includes an account system that meticulously tracks how many insults you have been subjected to. This way, you can keep tabs on your progress and fully comprehend just how far you have plummeted.
+- A web app with a steadily expanding insult library
+- **MEGAMODE**
+- An account system (Firebase Auth) with a per-user counter — some users are well into the thousands
+- A mobile build, via Capacitor, wrapping the same Svelte codebase into native iOS/Android shells
+- So many other things
 
-But don't just take my word for it, experience [(de)Motivator](https://demotivator.web.app/) for yourself and witness the marvels it can achieve. Trust me, you will be eternally grateful to PorkyProductions for creating this masterpiece of an application. It is like sliced bread, but instead of providing sustenance for your corporeal form, it provides sustenance for your inner demons.
-
-## Pros
-
-- Provides a simple, push-button way to lower self esteem
-- Generates random insults for fresh doses of negativity
-- MEGAMODE feature for rapid-fire insults
-- Account system to track progress in self-deprecation
-
-## Cons
-
-- May have negative impact on mental health and self-esteem
-- Can be triggering for individuals with a history of abuse or negative self-talk
-- May not be suitable for all audiences
+The whole thing lives in a Turborepo monorepo so the shared insult engine, the web app, and the mobile shell can all evolve together. Probably the dumbest thing I've ever shipped, but its my first baby and so I love it!

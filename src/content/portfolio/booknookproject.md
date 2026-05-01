@@ -1,14 +1,14 @@
 ---
 layout: "../../layouts/portfolio.astro"
 name: "The Book Nook Project"
-description: "Mission-driven nonprofit website connecting underprivileged youth with books, featuring donation tracking, volunteer coordination, and community impact visualization."
+description: "Built and shipped the website for a Philadelphia-area nonprofit getting books into the hands of underprivileged kids."
 date: "Sept 16 2024"
 freelance: true
 url: "https://thebooknookproject.netlify.app/"
-heroImage: 
+heroImage:
     src: "https://thebooknookproject.netlify.app/hero-img.jpg"
     alt: "a large stack of books"
-tags: 
+tags:
     - astro
     - svelte
     - html
@@ -17,10 +17,8 @@ tags:
     - netlify
 ---
 
+# The Book Nook Project
 
-The Book Nook Project is a mission to empower underprivileged children with books, founded by Jamie Dunn. They partner with organizations such as LUCY Outreach, Mighty Writers, Osborn Family Health Center, Providence House, Women Against Abuse, Cradles to Crayons, Angels Outreach, and the Philadelphia District Attorney's Office to provide books in various forms. The project was inspired by Andrea Elliott's book, 'Invisible Child', highlighting the impact of reading on Dunn's life and her desire to help children in impoverished areas.
+The Book Nook Project is a nonprofit founded by Jamie Dunn that gets books into the hands of underprivileged children, working through partners like LUCY Outreach, Mighty Writers, the Osborn Family Health Center, Providence House, Women Against Abuse, Cradles to Crayons, Angels Outreach, and the Philadelphia District Attorney's Office.
 
-The site is built with Astro, primarily using HTML with TailwindCSS and parts of Bootstrap.
-
-
-View the live site at [https://thebooknookproject.netlify.app/](https://thebooknookproject.netlify.app/)
+I built and shipped the website as freelance work (truly free because it was free of charge), working directly with Jamie.
