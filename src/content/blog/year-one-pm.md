@@ -13,7 +13,7 @@ This post is a postmortem of that year, and organized around three things: the y
 
 ## The Year
 
-![boston harbor at night](/IMG_1577.png)
+![boston harbor at night](/IMG_1577.webp)
 
 ### It Was Harder Than I Expected
 
@@ -39,7 +39,7 @@ The second is that I'm heading into this summer as a **head lifeguard and colleg
 
 ## Development: How It Changed
 
-![boston public library courtyard](/IMG_1657.png)
+![boston public library courtyard](/IMG_1657.webp)
 
 ### Where I Started
 
@@ -61,7 +61,7 @@ The harder part (and this is something I don't hear other devs talk about enough
 
 ## The Week of Ship
 
-![fenway park](/IMG_1693.png)
+![fenway park](/IMG_1693.webp)
 
 This past week was the first week I've had at home without classes since the school year started. I used it to actually finish and deploy the projects I've been building all year. I called it the **Week of Ship**, and here's how it went:
 
@@ -91,7 +91,7 @@ This one was quieter. I stripped out a lot of the filler and fluff. I also updat
 
 ## The Stack
 
-![historic matthews arena in a hockey configuration lit up red before a game](/IMG_1782.png)
+![historic matthews arena in a hockey configuration lit up red before a game](/IMG_1782.webp)
 
 My current default stack, as of today:
 
@@ -112,7 +112,7 @@ My current default stack, as of today:
 
 ## What's Next
 
-![Paul Revere statue in Boston's North End](/IMG_1865.png)
+![Paul Revere statue in Boston's North End](/IMG_1865.webp)
 
 ### (de)Motivator: The SvelteKit Port
 
@@ -132,7 +132,7 @@ The thing I'm most anxious about: CS 3000 — Object Oriented Design in Java. I 
 
 ## The End (of this academic year)
 
-![The Boston Skyline seen from the Seaport Neighborhood during a snowy winter day](../../../public/IMG_2176.png)
+![The Boston Skyline seen from the Seaport Neighborhood during a snowy winter day](../../../public/IMG_2176.webp)
 
 I'm looking forward to a relaxing while still productive (just in other ways that are not school) summer at pools and at the beach. Either way, I still love this. Even after the hardest year of my life academically, I'm sitting here writing a blog post about the code I shipped this week.
 
