@@ -112,7 +112,7 @@ My current default stack, as of today:
 
 ## What's Next
 
-![Paul Revere statue in Boston's North End](/IMG_1865.webp)
+![Paul Revere statue in Boston's North End](/IMG_1865.png)
 
 ### (de)Motivator: The SvelteKit Port
 
