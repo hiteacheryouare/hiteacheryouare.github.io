@@ -28,7 +28,7 @@
     "uadetect": "^6.0.1"
   },
   "devDependencies": {
-    "@astrojs/react": "^5.0.3",
+    "@astrojs/react": "^5.0.4",
     "@astrojs/sitemap": "^3.7.2",
     "@astrojs/svelte": "^7.2.5",
     "@astrojs/tailwind": "^6.0.2",
@@ -36,6 +36,6 @@
     "patch-package": "^8.0.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.5",
-    "svelte": "^5.55.4"
+    "svelte": "^5.55.5"
   }
 }
