@@ -30,7 +30,7 @@
   "devDependencies": {
     "@astrojs/react": "^5.0.4",
     "@astrojs/sitemap": "^3.7.2",
-    "@astrojs/svelte": "^8.0.5",
+    "@astrojs/svelte": "^8.1.0",
     "@astrojs/tailwind": "^6.0.2",
     "astro-robots-txt": "^1.0.0",
     "patch-package": "^8.0.1",
