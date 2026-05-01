@@ -10,7 +10,6 @@ import signature from '../../public/signature-blue.png'
 import FullColorFavi from '../img/2025/RM-monogram-black-on-transparent.svg'
 import WhiteLogoFavi from '../img/2025/RM-monogram-white-on-transparent.svg'
 import { ClientRouter } from 'astro:transitions';
-import { availabilityStatus } from "../utils/statusIndicator";
 import '../../node_modules/bootstrap-icons/font/bootstrap-icons.scss'
 
 export interface Props {
@@ -249,7 +248,7 @@ const {
       </article>
     </main>
 
-    <Footer availability={availabilityStatus}></Footer>
+    <Footer></Footer>
 		<style>
 			#pattern {
 				background-size: cover;

@@ -2,8 +2,6 @@
     const year = new Date().getFullYear();
     import { navLinks as footerLinks } from '../utils/navigation';
     import { socialLinks } from '../utils/socialContacts';
-    import { statusConfig } from '../utils/statusIndicator';
-    export let availability: 'available' | 'busy' | 'unavailable';
     import {sample as randomInArray} from '../utils/arrayRandomItem';
 
     const giraffeFacts =  [
@@ -73,8 +71,6 @@
     } else {
         animalFact = `${randomInArray(hedgehogFacts)} 🦔`;
     }
-    
-    $: currentStatus = statusConfig[availability];
 </script>
 
 <footer class="relative overflow-hidden bg-gray-900 dark:bg-black border-t border-gray-800">
@@ -157,16 +153,10 @@
                     © {year} Ryan Mullin. All rights reserved.
                 </p>
 
-                <!-- Location & Status -->
-                <div class="flex items-center gap-6 text-sm">
-                    <div class="flex items-center gap-2 text-white">
-                        <i class="bi bi-geo-alt-fill text-white"></i>
-                        <span class="font-mono">Boston, MA & Philadelphia, PA</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <div class={`w-2 h-2 rounded-full ${currentStatus.color} ${currentStatus.animate ? 'animate-pulse' : ''}`}></div>
-                        <span class="text-white font-mono text-xs">{currentStatus.text}</span>
-                    </div>
+                <!-- Location -->
+                <div class="flex items-center gap-2 text-sm text-white">
+                    <i class="bi bi-geo-alt-fill text-white"></i>
+                    <span class="font-mono">Boston, MA & Philadelphia, PA</span>
                 </div>
             </div>
         </div>

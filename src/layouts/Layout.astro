@@ -11,7 +11,6 @@ import { Image } from 'astro:assets';
 import FullColorFavi from '../img/2025/RM-monogram-black-on-transparent.svg'
 import WhiteLogoFavi from '../img/2025/RM-monogram-white-on-transparent.svg'
 import { ClientRouter } from 'astro:transitions';
-import { availabilityStatus } from '../utils/statusIndicator';
 
 ---
 
@@ -88,7 +87,7 @@ import { availabilityStatus } from '../utils/statusIndicator';
 		<main class="site-content">
 			<slot />
 		</main>
-			<Footer availability={availabilityStatus}></Footer>
+			<Footer></Footer>
 		<style>
 			:root { --nav-offset: 4rem; }
 			.site-content { padding-top: var(--nav-offset); }
