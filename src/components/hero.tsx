@@ -452,10 +452,10 @@ export default (props) => {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
               <h2 className="text-4xl md:text-6xl font-bold">
-                Hey, I'm Ryan!
+                HI!!!
               </h2>
               <p className="text-lg text-gray-600 dark:text-neutral-200 leading-relaxed">
-                I like to build cool things using cool tools, and sometimes I make things that make me laugh.
+                I like to build cool things using cool tools, and sometimes I make things that make me laugh. I hope you do too.
               </p>
               <p className="text-lg text-gray-600 dark:text-neutral-200 leading-relaxed">
                 I'm a sophomore at Northeastern doing the combined CS &amp; Business program (Khoury + D'Amore-McKim), concentrating in FinTech. Two-time Dean's List, 4.0 right now. Outside of class I'm shipping software, running corporate sponsorship at Northeastern Electric Racing, and head-guarding at Larchmont Swim Club.
