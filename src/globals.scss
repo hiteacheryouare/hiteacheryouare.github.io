@@ -38,8 +38,8 @@ a {
     }
 
     /* animated gradient underline using ::after */
-    /* Only apply to links that don't contain images and aren't buttons */
-    &:not(:has(img)):not(.btn)::after {
+    /* Only apply to links that don't contain images or SVGs and aren't buttons */
+    &:not(:has(img)):not(:has(svg)):not(.btn)::after {
         content: "";
         position: absolute;
         left: 0;
@@ -61,8 +61,8 @@ a {
         pointer-events: none;
     }
 
-    &:not(:has(img)):not(.btn):hover::after,
-    &:not(:has(img)):not(.btn):focus::after {
+    &:not(:has(img)):not(:has(svg)):not(.btn):hover::after,
+    &:not(:has(img)):not(:has(svg)):not(.btn):focus::after {
         transform: scaleX(1);
     }
 }
@@ -114,11 +114,52 @@ blockquote {
     font-size: 1.25rem;
 }
 
-.logo-light { display: block; }
-.logo-dark { display: none; }
+@keyframes drawLogo {
+    0% {
+        stroke-dashoffset: 1;
+        fill-opacity: 0;
+        stroke-opacity: 1;
+    }
+    80% {
+        stroke-dashoffset: 0;
+        fill-opacity: 0;
+        stroke-opacity: 1;
+    }
+    100% {
+        stroke-dashoffset: 0;
+        fill-opacity: 1;
+        stroke-opacity: 0;
+    }
+}
 
-[data-bs-theme="dark"] .logo-light { display: none; }
-[data-bs-theme="dark"] .logo-dark { display: block; }
+.logo-path {
+    fill: #000;
+    stroke: #000;
+    stroke-width: 7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill-opacity: 0;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: drawLogo 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+[data-bs-theme="dark"] .logo-path {
+    fill: #fff;
+    stroke: #fff;
+}
+
+nav a svg {
+    transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+nav a:hover svg {
+    transform: scale(1.06);
+}
+
+nav a:has(svg)::after {
+    display: none;
+}
 
 /* 404 page animations (moved from inline style) */
 @keyframes bounce404 {
