@@ -35,7 +35,7 @@
     "astro-robots-txt": "^1.0.0",
     "patch-package": "^8.0.1",
     "react": "^19.2.7",
-    "react-dom": "^19.2.6",
+    "react-dom": "^19.2.7",
     "svelte": "^5.56.2"
   }
 }
