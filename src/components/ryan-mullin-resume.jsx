@@ -38,8 +38,8 @@ export default () => (
         <h2 className="text-xl font-bold text-gray-900 border-b border-gray-400 mb-3">TECHNICAL SKILLS</h2>
         <div className="space-y-1">
           <p><span className="font-semibold">Languages:</span> JavaScript, TypeScript, HTML/CSS, Python</p>
-          <p><span className="font-semibold">Frameworks &amp; Libraries:</span> Next.js, React, TailwindCSS, Bootstrap, JSON, Astro, Svelte</p>
-          <p><span className="font-semibold">Tools &amp; Platforms:</span> Git, GitHub, Vercel, Netlify, Firebase, Capacitor</p>
+          <p><span className="font-semibold">Frameworks &amp; Libraries:</span> Next.js, React, TailwindCSS, Bootstrap, JSON, Astro, Svelte, WXT</p>
+          <p><span className="font-semibold">Tools &amp; Platforms:</span> Git, GitHub, Vercel, Netlify, Firebase, Capacitor, Turborepo, Claude Code, Codex, GitHub Copilot</p>
           <p><span className="font-semibold">Design &amp; Media:</span> Canva, Adobe Photoshop, Photopea, Kdenlive, Adobe Premiere Pro</p>
         </div>
       </section>
