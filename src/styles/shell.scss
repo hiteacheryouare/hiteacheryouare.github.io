@@ -1,0 +1,771 @@
+// The shell: identity and navigation live permanently in the left column, so
+// no page has to reintroduce Ryan before getting to its content.
+
+:root {
+	--paper: #ffffff;
+	--paper-sunk: #f7f7f8;
+	--ink: #0f1013;
+	--ink-2: #3d4147;
+	--ink-3: #6b7076;
+	--rule: rgba(15, 16, 19, 0.14);
+	--rule-soft: rgba(15, 16, 19, 0.08);
+
+	--side-width: 19.5rem;
+	--rail-width: 4.75rem;
+	--rail-mark: 8px;
+	--shell-ease: cubic-bezier(0.4, 0, 0.2, 1);
+	--shell-duration: 0.45s;
+}
+
+[data-bs-theme='dark'] {
+	--paper: #101216;
+	--paper-sunk: #16181d;
+	--ink: #f2f3f5;
+	--ink-2: #b9bec6;
+	--ink-3: #878d96;
+	--rule: rgba(242, 243, 245, 0.16);
+	--rule-soft: rgba(242, 243, 245, 0.09);
+}
+
+body {
+	background: var(--paper);
+	color: var(--ink);
+}
+
+.shell {
+	--side-current: var(--side-width);
+	min-height: 100vh;
+}
+
+.shell.is-collapsed {
+	--side-current: var(--rail-width);
+}
+
+// --- left column ---------------------------------------------------------
+
+.sidebar {
+	position: fixed;
+	inset: 0 auto 0 0;
+	z-index: 40;
+	width: var(--side-current);
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	padding: 1.75rem 1.5rem;
+	overflow: hidden auto;
+	background: var(--paper-sunk);
+	border-right: 1px solid var(--rule);
+	transition: width var(--shell-duration) var(--shell-ease),
+		padding var(--shell-duration) var(--shell-ease);
+}
+
+.shell.is-collapsed .sidebar {
+	padding-inline: 0;
+	align-items: center;
+}
+
+.main-column {
+	margin-inline-start: var(--side-current);
+	min-width: 0;
+	padding: clamp(1.75rem, 4vw, 3.25rem) clamp(1.5rem, 4vw, 3.5rem);
+	transition: margin-inline-start var(--shell-duration) var(--shell-ease);
+}
+
+.sidebar-id {
+	display: flex;
+	align-items: center;
+	gap: 0.7rem;
+	flex-shrink: 0;
+
+	svg {
+		height: 2rem;
+		width: auto;
+		flex-shrink: 0;
+		transition: height var(--shell-duration) var(--shell-ease);
+	}
+
+	b {
+		font-size: 1.0625rem;
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		line-height: 1.15;
+		white-space: nowrap;
+	}
+}
+
+.sidebar-blurb {
+	font-size: 0.9375rem;
+	line-height: 1.6;
+	color: var(--ink-2);
+
+	p:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.sidebar-reach {
+	margin-top: auto;
+	font-size: 0.8125rem;
+	line-height: 1.7;
+	color: var(--ink-3);
+
+	b {
+		display: block;
+		color: var(--ink);
+		font-weight: 500;
+		margin-bottom: 0.2rem;
+	}
+}
+
+// Everything that is only meaningful at full width fades out on the way in.
+.sidebar-blurb,
+.sidebar-reach,
+.sidebar-id b {
+	opacity: 1;
+	transition: opacity 0.22s ease 0.12s;
+}
+
+.shell.is-collapsed {
+	.sidebar-blurb,
+	.sidebar-reach,
+	.sidebar-id b {
+		opacity: 0;
+		transition-delay: 0s;
+		pointer-events: none;
+	}
+
+	.sidebar-blurb,
+	.sidebar-reach,
+	.sidebar-id b {
+		display: none;
+	}
+
+	.sidebar-id {
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.sidebar-id svg {
+		height: 1.75rem;
+	}
+}
+
+// --- the rainbow rail ----------------------------------------------------
+//
+// Each nav item owns one brand colour, shown only when that item is current.
+// Collapsing levels every row to the same height and drops the dividing rules,
+// so the six markers stack edge to edge and the rainbow assembles itself.
+
+.sidebar-nav {
+	display: flex;
+	flex-direction: column;
+	border-top: 1px solid var(--rule);
+	overflow: hidden;
+	transition: width var(--shell-duration) var(--shell-ease),
+		border-color 0.22s ease;
+
+	a {
+		position: relative;
+		display: flex;
+		align-items: center;
+		min-height: 2.5rem;
+		padding-inline-start: 1.125rem;
+		font-size: 0.9375rem;
+		color: var(--ink-2);
+		white-space: nowrap;
+		border-bottom: 1px solid var(--rule-soft);
+		transition: min-height var(--shell-duration) var(--shell-ease),
+			padding var(--shell-duration) var(--shell-ease),
+			border-color 0.22s ease,
+			color 0.18s ease;
+	}
+
+	a::before {
+		content: '';
+		position: absolute;
+		inset: 0 auto 0 0;
+		width: 3px;
+		background: var(--mark);
+		opacity: 0;
+		transition: opacity 0.3s ease, width var(--shell-duration) var(--shell-ease);
+	}
+
+	a.is-here {
+		color: var(--ink);
+		font-weight: 500;
+	}
+
+	a.is-here::before {
+		opacity: 1;
+	}
+}
+
+.shell.is-collapsed .sidebar-nav {
+	width: var(--rail-mark);
+	border-top-color: transparent;
+
+	a {
+		min-height: 1.75rem;
+		padding-inline-start: 0;
+		border-bottom-width: 0;
+	}
+
+	a::before {
+		width: var(--rail-mark);
+		opacity: 1;
+	}
+}
+
+// Staggered so the bar paints downward in brand order rather than snapping in.
+@for $i from 1 through 6 {
+	.sidebar-nav a:nth-child(#{$i})::before {
+		transition-delay: #{(6 - $i) * 0.035}s;
+	}
+
+	.shell.is-collapsed .sidebar-nav a:nth-child(#{$i})::before {
+		transition-delay: #{($i - 1) * 0.045}s;
+	}
+}
+
+.sidebar-toggle {
+	flex-shrink: 0;
+	align-self: flex-start;
+	margin-inline-start: auto;
+	padding: 0.25rem;
+	border: 0;
+	background: none;
+	color: var(--ink-3);
+	font-size: 1.25rem;
+	line-height: 1;
+	cursor: pointer;
+
+	&:hover,
+	&:focus-visible {
+		color: var(--ink);
+	}
+}
+
+.shell.is-collapsed .sidebar-toggle {
+	align-self: center;
+	margin-inline-start: 0;
+}
+
+// --- content -------------------------------------------------------------
+
+.page-open {
+	max-width: 46ch;
+	margin-bottom: clamp(2rem, 5vw, 3.5rem);
+
+	h1 {
+		font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+		font-weight: 600;
+		letter-spacing: -0.03em;
+		line-height: 1.12;
+		margin-bottom: 1rem;
+	}
+
+	p {
+		font-size: clamp(0.9375rem, 1.4vw, 1.0625rem);
+		line-height: 1.68;
+		color: var(--ink-2);
+	}
+}
+
+.section-head {
+	display: flex;
+	align-items: baseline;
+	gap: 1rem;
+	padding-bottom: 0.625rem;
+	border-bottom: 1px solid var(--ink);
+	margin-bottom: 1.25rem;
+
+	h2 {
+		font-size: 1rem;
+		font-weight: 600;
+		letter-spacing: -0.01em;
+		margin: 0;
+	}
+
+	p {
+		margin: 0;
+		font-size: 0.875rem;
+		color: var(--ink-3);
+	}
+
+	a {
+		margin-inline-start: auto;
+		font-size: 0.8125rem;
+		color: var(--ink-3);
+		white-space: nowrap;
+	}
+}
+
+.page-section {
+	margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.page-foot {
+	margin-top: clamp(2rem, 5vw, 3.5rem);
+	padding-top: 1rem;
+	border-top: 1px solid var(--rule);
+	font-size: 0.8125rem;
+	color: var(--ink-3);
+	display: flex;
+	gap: 0.75rem 1.5rem;
+	flex-wrap: wrap;
+	align-items: baseline;
+
+	nav {
+		margin-inline-start: auto;
+		display: flex;
+		gap: 1.25rem;
+		flex-wrap: wrap;
+	}
+}
+
+.plate {
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	background: var(--paper-sunk);
+	border: 1px solid var(--rule-soft);
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+}
+
+.stackline {
+	font-size: 0.8125rem;
+	color: var(--ink-3);
+	margin: 0;
+}
+
+.work-grid {
+	display: grid;
+	gap: clamp(1.25rem, 3vw, 2.25rem);
+
+	@media (min-width: 68rem) {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	article {
+		min-width: 0;
+	}
+
+	h3 {
+		font-size: 1.125rem;
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		margin: 0.75rem 0 0.35rem;
+		display: flex;
+		align-items: baseline;
+		gap: 0.75rem;
+	}
+
+	h3 time {
+		margin-inline-start: auto;
+		font-size: 0.75rem;
+		font-weight: 400;
+		color: var(--ink-3);
+		font-variant-numeric: tabular-nums;
+	}
+
+	p {
+		font-size: 0.9375rem;
+		line-height: 1.6;
+		color: var(--ink-2);
+		margin-bottom: 0.5rem;
+	}
+}
+
+.release-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+	li {
+		display: grid;
+		gap: 0.25rem 1.5rem;
+		padding: 0.8rem 0;
+		border-bottom: 1px solid var(--rule-soft);
+
+		@media (min-width: 52rem) {
+			grid-template-columns: minmax(0, 1fr) auto;
+			align-items: baseline;
+		}
+	}
+
+	h3 {
+		font-size: 1rem;
+		font-weight: 500;
+		line-height: 1.35;
+		margin: 0;
+	}
+
+	p {
+		font-size: 0.875rem;
+		color: var(--ink-3);
+		line-height: 1.5;
+		margin: 0.15rem 0 0;
+	}
+
+	time {
+		font-size: 0.8125rem;
+		color: var(--ink-3);
+		white-space: nowrap;
+		font-variant-numeric: tabular-nums;
+	}
+}
+
+.about {
+	display: grid;
+	gap: clamp(1.5rem, 4vw, 3rem);
+	align-items: start;
+
+	@media (min-width: 62rem) {
+		grid-template-columns: minmax(0, 1fr) 15rem;
+	}
+}
+
+.about-portrait {
+	margin: 0;
+
+	img {
+		width: 100%;
+		height: auto;
+		display: block;
+		border: 1px solid var(--rule-soft);
+	}
+}
+
+.contact {
+	display: grid;
+	gap: clamp(1.5rem, 4vw, 3rem);
+	align-items: start;
+
+	@media (min-width: 60rem) {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
+	}
+
+	p {
+		font-size: 1rem;
+		line-height: 1.7;
+		color: var(--ink-2);
+		max-width: 46ch;
+	}
+}
+
+.contact-form {
+	display: grid;
+	gap: 0.875rem;
+
+	.form-label {
+		font-size: 0.8125rem;
+		color: var(--ink-3);
+		margin-bottom: 0.25rem;
+	}
+}
+
+.facts {
+	display: grid;
+	border-top: 1px solid var(--ink);
+	max-width: 34rem;
+	margin: 0 0 1.5rem;
+
+	> div {
+		display: grid;
+		grid-template-columns: 7.5rem minmax(0, 1fr);
+		gap: 1.25rem;
+		padding: 0.5rem 0;
+		border-bottom: 1px solid var(--rule-soft);
+	}
+
+	dt {
+		font-size: 0.8125rem;
+		color: var(--ink-3);
+		font-weight: 400;
+	}
+
+	dd {
+		margin: 0;
+		font-size: 0.875rem;
+		line-height: 1.5;
+	}
+}
+
+// --- long-form article ---------------------------------------------------
+
+.copy {
+	max-width: 68ch;
+	font-size: 1.0625rem;
+	line-height: 1.72;
+	color: var(--ink-2);
+
+	h1, h2, h3, h4 {
+		color: var(--ink);
+		letter-spacing: -0.02em;
+		margin: 2.25rem 0 0.75rem;
+	}
+
+	h1 { font-size: 1.75rem; }
+	h2 { font-size: 1.4375rem; }
+	h3 { font-size: 1.1875rem; }
+	h4 { font-size: 1.0625rem; }
+
+	p, ul, ol, blockquote, table, pre {
+		margin-bottom: 1.15rem;
+	}
+
+	ul, ol {
+		padding-inline-start: 1.4rem;
+	}
+
+	li {
+		margin-bottom: 0.4rem;
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+		border: 1px solid var(--rule-soft);
+	}
+
+	figcaption,
+	table caption {
+		font-size: 0.8125rem;
+		color: var(--ink-3);
+	}
+
+	th, td {
+		padding: 0.5rem 0.75rem;
+		border-bottom: 1px solid var(--rule-soft);
+		text-align: start;
+	}
+
+	th {
+		color: var(--ink);
+	}
+
+	hr {
+		border: 0;
+		border-top: 1px solid var(--rule);
+		margin: 2rem 0;
+	}
+}
+
+// --- press releases ------------------------------------------------------
+//
+// One set of furniture, two attributions: a release Ryan wrote gets a byline
+// and his signature, one written about him gets a dateline and boilerplate.
+
+.release-back {
+	font-size: 0.8125rem;
+	color: var(--ink-3);
+	margin-bottom: 1.5rem;
+}
+
+.release-head {
+	max-width: 54ch;
+	margin-bottom: 1.75rem;
+
+	h1 {
+		font-size: clamp(1.75rem, 3.8vw, 2.625rem);
+		font-weight: 600;
+		letter-spacing: -0.032em;
+		line-height: 1.1;
+		margin-bottom: 0.875rem;
+	}
+}
+
+.release-lede {
+	font-size: clamp(1rem, 1.6vw, 1.1875rem);
+	line-height: 1.6;
+	color: var(--ink-2);
+	margin-bottom: 1rem;
+}
+
+.release-by {
+	font-size: 0.8125rem;
+	color: var(--ink-3);
+	padding-top: 0.625rem;
+	border-top: 1px solid var(--rule);
+	margin: 0;
+}
+
+.release-updated::before {
+	content: ' · ';
+}
+
+.release-plate {
+	margin-bottom: 1.75rem;
+	max-width: 60rem;
+}
+
+.release-dateline {
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.8125rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--ink);
+	margin-bottom: 0.75rem;
+}
+
+.release-first .release-body {
+	max-width: 62ch;
+}
+
+.release-third .release-body {
+	max-width: 70ch;
+}
+
+.boilerplate {
+	max-width: 62ch;
+	margin-top: 2.5rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--ink);
+
+	h2 {
+		font-size: 0.875rem;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		margin-bottom: 0.5rem;
+	}
+
+	p {
+		font-size: 0.875rem;
+		line-height: 1.65;
+		color: var(--ink-2);
+		margin: 0;
+	}
+}
+
+.release-sign {
+	margin-top: 2.5rem;
+	padding-top: 1.25rem;
+	border-top: 1px solid var(--rule);
+
+	img {
+		height: auto;
+		max-width: 13.75rem;
+		opacity: 0.85;
+	}
+}
+
+.release-share {
+	margin-top: 1.75rem;
+	font-size: 0.8125rem;
+	color: var(--ink-3);
+}
+
+// --- mobile: the column folds up into a bar ------------------------------
+
+@media (max-width: 52rem) {
+	.sidebar {
+		position: sticky;
+		inset: 0 0 auto 0;
+		width: auto;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.75rem 1rem;
+		padding: 0.875rem 1.25rem;
+		border-right: 0;
+		border-bottom: 1px solid var(--rule);
+	}
+
+	.shell.is-collapsed .sidebar {
+		padding-inline: 1.25rem;
+		align-items: center;
+	}
+
+	.main-column {
+		margin-inline-start: 0;
+	}
+
+	.sidebar-blurb,
+	.sidebar-reach {
+		display: none;
+	}
+
+	.sidebar-toggle {
+		margin-inline-start: auto;
+		align-self: center;
+	}
+
+	.sidebar-nav {
+		flex-direction: row;
+		width: 100%;
+		border-top: 0;
+
+		a {
+			flex: 1;
+			justify-content: center;
+			min-height: 2.25rem;
+			padding-inline-start: 0;
+			border-bottom: 0;
+			font-size: 0.875rem;
+		}
+
+		a::before {
+			inset: auto 0 0 0;
+			width: auto;
+			height: 3px;
+		}
+	}
+
+	.shell.is-collapsed {
+		.sidebar-id svg {
+			height: 1.75rem;
+		}
+
+		.sidebar-id b {
+			display: none;
+		}
+
+		.sidebar-nav {
+			width: 100%;
+
+			a {
+				min-height: 4px;
+				font-size: 0;
+			}
+
+			a::before {
+				width: auto;
+				height: 4px;
+				opacity: 1;
+			}
+		}
+	}
+}
+
+@media print {
+	.sidebar,
+	.page-foot {
+		display: none;
+	}
+
+	.main-column {
+		margin-inline-start: 0;
+		padding: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sidebar,
+	.main-column,
+	.sidebar-nav,
+	.sidebar-nav a,
+	.sidebar-nav a::before,
+	.sidebar-id svg,
+	.sidebar-blurb,
+	.sidebar-reach,
+	.sidebar-id b {
+		transition-duration: 0.01ms;
+		transition-delay: 0s;
+	}
+}

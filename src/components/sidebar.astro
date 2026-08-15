@@ -1,0 +1,58 @@
+---
+import Monogram from './monogram.astro';
+import { navLinks } from '../utils/navigation';
+
+const { currentPath } = Astro.props;
+
+const isCurrent = (href: string) => {
+	if (href.includes('#')) return false;
+	return href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+};
+---
+
+<div class="sidebar">
+	<div class="sidebar-id">
+		<a href="/" class="no-rainbow" aria-label="Ryan Mullin, home">
+			<Monogram />
+		</a>
+		<b>Ryan<br />Mullin</b>
+		<button
+			type="button"
+			class="sidebar-toggle no-rainbow"
+			data-shell-toggle
+			aria-expanded="true"
+			aria-label="Collapse navigation"
+		>
+			<i class="bi bi-chevron-double-left" aria-hidden="true"></i>
+		</button>
+	</div>
+
+	<div class="sidebar-blurb">
+		<p>
+			I like to build cool things using cool tools, and sometimes I make things that
+			make me laugh. I hope you do too.
+		</p>
+	</div>
+
+	<nav class="sidebar-nav" aria-label="Primary">
+		{
+			navLinks.map((link) => (
+				<a
+					href={link.href}
+					class:list={['no-rainbow', { 'is-here': isCurrent(link.href) }]}
+					style={`--mark: var(--grad-${link.mark})`}
+					aria-current={isCurrent(link.href) ? 'page' : undefined}
+				>
+					<span>{link.name}</span>
+				</a>
+			))
+		}
+	</nav>
+
+	<div class="sidebar-reach">
+		<b><a href="mailto:rpmullin17@gmail.com">rpmullin17@gmail.com</a></b>
+		Boston, MA &amp; Philadelphia, PA<br />
+		<a href="https://github.com/hiteacheryouare">GitHub</a> ·
+		<a href="https://linkedin.com/in/ryanpmullin">LinkedIn</a>
+	</div>
+</div>

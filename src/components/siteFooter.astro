@@ -1,0 +1,41 @@
+---
+import { sample } from '../utils/arrayRandomItem';
+import { giraffeFacts, hedgehogFacts } from '../utils/animalFacts';
+import { socialLinks } from '../utils/socialContacts';
+
+const year = new Date().getFullYear();
+const animalFact =
+	Math.random() < 0.5
+		? `${sample(giraffeFacts)} 🦒`
+		: `${sample(hedgehogFacts)} 🦔`;
+---
+
+<div class="page-foot">
+	<small>
+		© {year} Ryan Mullin. Boston, MA &amp; Philadelphia, PA.<br />
+		Website built with ❤️ by <a href="/freelance/">Ryan Mullin</a>.
+	</small>
+	<small class="page-foot-fact">// {animalFact}</small>
+	<nav>
+		{
+			socialLinks.map((link) => (
+				<a href={link.href} aria-label={link.text}>
+					<i class={`bi bi-${link.icon}`} aria-hidden="true" />
+				</a>
+			))
+		}
+	</nav>
+</div>
+
+<style>
+	.page-foot-fact {
+		font-family: 'JetBrains Mono', monospace;
+		flex-basis: 100%;
+		order: 3;
+	}
+
+	.page-foot nav {
+		gap: 0.875rem;
+		font-size: 1rem;
+	}
+</style>
