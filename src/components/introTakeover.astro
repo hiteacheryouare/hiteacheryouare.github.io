@@ -8,8 +8,10 @@ import Monogram from './monogram.astro';
 </div>
 
 <script>
-	const DRAW = 950;
-	const RETRACT = 600;
+	// Draw, fill, then hold filled for a beat before the monogram and the
+	// backdrop leave together.
+	const SETTLED = 2400;
+	const RETRACT = 850;
 
 	const playIntro = () => {
 		const bands = document.querySelector<HTMLElement>('[data-takeover]');
@@ -37,12 +39,12 @@ import Monogram from './monogram.astro';
 			bands.classList.add('is-retracting');
 			mark.classList.add('is-retracting');
 			document.body.classList.remove('is-taken-over');
-		}, DRAW);
+		}, SETTLED);
 
 		setTimeout(() => {
 			bands.hidden = true;
 			mark.hidden = true;
-		}, DRAW + RETRACT);
+		}, SETTLED + RETRACT);
 	};
 
 	playIntro();

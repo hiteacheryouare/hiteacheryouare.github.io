@@ -77,7 +77,11 @@ const currentPath = Astro.url.pathname;
 		</div>
 
 		<script>
-			const WIPE_MS = 340;
+			const WIPE_MS = 520;
+			const IMAGE_WAIT_CAP = 900;
+
+			let markerAt = { top: 0, height: 0 };
+			let markerContract = 0;
 
 			const isCurrentHref = (href: string, path: string) => {
 				if (href === '/') return path === '/';
@@ -95,17 +99,35 @@ const currentPath = Astro.url.pathname;
 				const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('a'));
 				const rootStyles = getComputedStyle(document.documentElement);
 
+				// The marker stretches to span where it is and where it's going, then
+				// contracts onto the target, so it reads as one elastic piece rather
+				// than a block sliding.
 				const moveTo = (link: HTMLAnchorElement | undefined) => {
 					if (!link) {
 						marker.style.opacity = '0';
 						return;
 					}
+
+					const to = { top: link.offsetTop, height: link.offsetHeight };
+					const span = {
+						top: Math.min(markerAt.top, to.top),
+						bottom: Math.max(markerAt.top + markerAt.height, to.top + to.height),
+					};
+
 					marker.style.opacity = '1';
-					marker.style.height = `${link.offsetHeight}px`;
-					marker.style.transform = `translateY(${link.offsetTop}px)`;
 					marker.style.backgroundColor = rootStyles
 						.getPropertyValue(`--grad-${link.dataset.mark}`)
 						.trim();
+					marker.style.transform = `translateY(${span.top}px)`;
+					marker.style.height = `${span.bottom - span.top}px`;
+
+					window.clearTimeout(markerContract);
+					markerContract = window.setTimeout(() => {
+						marker.style.transform = `translateY(${to.top}px)`;
+						marker.style.height = `${to.height}px`;
+					}, 150);
+
+					markerAt = to;
 				};
 
 				const settle = () => {
@@ -143,8 +165,30 @@ const currentPath = Astro.url.pathname;
 				};
 			});
 
+			// Don't pull the cover back over a page that is still loading its
+			// pictures — wait for the ones above the fold, with a cap so a slow
+			// image can never strand the reader behind a rainbow.
+			const imagesReady = () => {
+				const pending = Array.from(document.images)
+					.filter((image) => !image.complete && image.getBoundingClientRect().top < window.innerHeight)
+					.map(
+						(image) =>
+							new Promise((resolve) => {
+								image.addEventListener('load', resolve, { once: true });
+								image.addEventListener('error', resolve, { once: true });
+							})
+					);
+				if (pending.length === 0) return Promise.resolve();
+				return Promise.race([
+					Promise.all(pending),
+					new Promise((resolve) => setTimeout(resolve, IMAGE_WAIT_CAP)),
+				]);
+			};
+
 			document.addEventListener('astro:after-swap', () => {
-				requestAnimationFrame(() => wipe()?.classList.remove('is-covering'));
+				imagesReady().then(() =>
+					requestAnimationFrame(() => wipe()?.classList.remove('is-covering'))
+				);
 			});
 
 			document.addEventListener('astro:page-load', setupMarker);
