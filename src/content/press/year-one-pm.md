@@ -1,8 +1,9 @@
 ---
-layout: "../../layouts/blogPost.astro"
+layout: "../../layouts/pressRelease.astro"
 title: "Year One: A Postmortem, a Week of Ship, and What's Next"
 description: "A look back at my first year at Northeastern — what it cost, what it gave me, how development came alive again, and where I'm headed next."
 author: "Ryan Mullin"
+voice: "first" #"first" (by Ryan) or "third" (about Ryan)
 pubDate: "May 1 2026"
 heroImage:
     src: "/nu.jpg"

@@ -1,5 +1,5 @@
 ---
-layout: "../../layouts/blogPost.astro" #dont touch
+layout: "../../layouts/pressRelease.astro" #dont touch
 title: "High School Parties Might Just Be The Stupidest Thing Ever" #Required
 description: "Four years of deep reflection and observation has led to the creation of my full stance on Party Culture" #Required
 author: "Ryan Mullin" #Required

@@ -1,5 +1,5 @@
 ---
-layout: "../../layouts/blogPost.astro" #dont touch
+layout: "../../layouts/pressRelease.astro" #dont touch
 title: "A Formal Position on Alcohol Consumption" #Required
 description: "Ryan Mullin's Full and Unabridged Stance on Alcohol" #Required
 author: "Ryan Mullin" #Required

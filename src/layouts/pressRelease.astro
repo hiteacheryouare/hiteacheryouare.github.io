@@ -1,0 +1,110 @@
+---
+import Layout from './Layout.astro';
+import { Image } from 'astro:assets';
+import signature from '../../public/signature-blue.png';
+
+const data = Astro.props.content ?? Astro.props.frontmatter;
+const {
+	title,
+	description,
+	author = 'Ryan Mullin',
+	pubDate,
+	updatedDate,
+	heroImage,
+	voice = 'first',
+	dateline = 'BOSTON, MASS.',
+} = data;
+
+const isThirdPerson = voice === 'third';
+
+const formatDate = (value: string) =>
+	new Date(value).toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+	});
+---
+
+<Layout
+	title={title}
+	description={description}
+	image={heroImage?.src ?? '/waves.png'}
+	imageAlt={heroImage?.alt ?? 'multicolored waves'}
+>
+	<article class:list={['release', isThirdPerson ? 'release-third' : 'release-first']}>
+		<p class="release-back"><a href="/press">← All releases</a></p>
+
+		<header class="release-head">
+			<h1 transition:name={title}>{title}</h1>
+			<p class="release-lede">{description}</p>
+			<p class="release-by">
+				{isThirdPerson ? `Filed by ${author}` : `By ${author}`}
+				{
+					pubDate && (
+						<>
+							{' · '}
+							<time datetime={pubDate} transition:name={pubDate}>
+								{formatDate(pubDate)}
+							</time>
+						</>
+					)
+				}
+				{updatedDate && <span class="release-updated">Updated {formatDate(updatedDate)}</span>}
+			</p>
+		</header>
+
+		{
+			heroImage?.src && (
+				<div class="plate release-plate">
+					<img
+						src={heroImage.src}
+						alt={heroImage.alt ?? title}
+						transition:name={heroImage.alt ?? 'image'}
+					/>
+				</div>
+			)
+		}
+
+		{
+			isThirdPerson && pubDate && (
+				<p class="release-dateline">
+					{dateline} — {formatDate(pubDate)}
+				</p>
+			)
+		}
+
+		<div class="copy release-body">
+			<slot />
+		</div>
+
+		{
+			isThirdPerson ? (
+				<aside class="boilerplate">
+					<h2>About Ryan Mullin</h2>
+					<p>
+						Ryan Mullin is a computer science and business student at Northeastern
+						University who builds websites and browser extensions. He is based between
+						Boston, MA and Philadelphia, PA, and can be reached at{' '}
+						<a href="mailto:rpmullin17@gmail.com">rpmullin17@gmail.com</a>.
+					</p>
+				</aside>
+			) : (
+				<div class="release-sign">
+					<Image src={signature} alt="Ryan Mullin's signature" width={220} />
+				</div>
+			)
+		}
+
+		<p class="release-share">
+			Wanna share? <a
+				href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.request.url)}`}
+				target="_blank"
+				rel="noopener noreferrer">X</a
+			> · <a
+				href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.request.url)}`}
+				target="_blank"
+				rel="noopener noreferrer">LinkedIn</a
+			>
+		</p>
+	</article>
+</Layout>

@@ -1,13 +1,18 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 const schema = z;
-const blog = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.md', base: "./src/content/blog" }),
+
+// `voice` decides attribution: 'first' is Ryan writing, 'third' is someone
+// writing about him.
+const press = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: "./src/content/press" }),
   schema: z.object({
     title: z.string(),
     author: z.string().default("Ryan Mullin"),
     description: z.string(),
     pubDate: z.string(),
+    voice: z.enum(['first', 'third']).default('first'),
+    dateline: z.string().default('BOSTON, MASS.'),
     heroImage: z.object({
         src: z.string().default("/waves.png"),
         alt: z.string().default("multicolored waves"),
@@ -43,4 +48,4 @@ const research = defineCollection({
   })
 })
 
-export const collections = { blog, portfolio, research };
+export const collections = { press, portfolio, research };
