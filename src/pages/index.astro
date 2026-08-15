@@ -1,12 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import IntroTakeover from '../components/introTakeover.astro';
 import { getCollection } from 'astro:content';
 
 const projects = await getCollection('portfolio');
 projects.sort(
 	(a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
 );
+const featuredProjects = projects.slice(0, 4);
 
 const releases = await getCollection('press');
 releases.sort(
@@ -16,34 +16,32 @@ const recentReleases = releases.slice(0, 3);
 ---
 
 <Layout title="Home" description="Ryan Mullin builds websites and browser extensions.">
-	<IntroTakeover />
-
 	<section class="hero">
 		<div>
 			<h1>I like to build cool things using cool tools.</h1>
 			<p>And sometimes I make things that make me laugh. I hope you do too.</p>
 		</div>
 		<figure class="hero-figure">
-			<img src="/IMG_1577.webp" alt="Boston at night, photographed by Ryan Mullin" />
+			<img src="https://avatars.githubusercontent.com/u/82683251" alt="Ryan Mullin" />
 		</figure>
 	</section>
 
-	<section id="work" class="page-section">
+	<section class="page-section">
 		<div class="section-head">
 			<h2>Some of my faves</h2>
-			<a href="https://github.com/hiteacheryouare">More on GitHub</a>
+			<a href="/work">All work</a>
 		</div>
 
 		<div class="work-grid">
 			{
-				projects.map((project) => (
+				featuredProjects.map((project) => (
 					<article>
-						<div class="plate">
+						<a class="plate no-rainbow" href={`/portfolio/projects/${project.id}`}>
 							<img
 								src={project.data.heroImage?.src || '/waves.png'}
 								alt={project.data.heroImage?.alt || project.data.name}
 							/>
-						</div>
+						</a>
 						<h3>
 							<a href={`/portfolio/projects/${project.id}`}>{project.data.name}</a>
 							<time>{new Date(project.data.date).getFullYear()}</time>
@@ -60,23 +58,29 @@ const recentReleases = releases.slice(0, 3);
 			<h2>Newsroom</h2>
 			<a href="/press">All of it</a>
 		</div>
-		<ul class="release-list">
+		<ul class="release-index">
 			{
 				recentReleases.map((release) => (
 					<li>
+						<a class="plate no-rainbow" href={`/press/${release.id}`}>
+							<img
+								src={release.data.heroImage?.src ?? '/waves.png'}
+								alt={release.data.heroImage?.alt ?? release.data.title}
+							/>
+						</a>
 						<div>
+							<time datetime={release.data.pubDate}>
+								{new Date(release.data.pubDate).toLocaleDateString('en-US', {
+									year: 'numeric',
+									month: 'long',
+									day: 'numeric',
+								})}
+							</time>
 							<h3>
 								<a href={`/press/${release.id}`}>{release.data.title}</a>
 							</h3>
 							<p>{release.data.description}</p>
 						</div>
-						<time datetime={release.data.pubDate}>
-							{new Date(release.data.pubDate).toLocaleDateString('en-US', {
-								year: 'numeric',
-								month: 'short',
-								day: 'numeric',
-							})}
-						</time>
 					</li>
 				))
 			}
@@ -86,10 +90,10 @@ const recentReleases = releases.slice(0, 3);
 	<section id="contact" class="page-section">
 		<div class="section-head">
 			<h2>Want to chat?</h2>
-		</div>
-		<div class="contact">
 			<p>Looking for a co-op? Have freelance work? We both know you have something to say!</p>
-			<form class="contact-form" data-contact-form>
+		</div>
+		<form class="contact-form" data-contact-form>
+			<div class="contact-row">
 				<div>
 					<label class="form-label" for="contactName">Name</label>
 					<input class="form-control" id="contactName" name="name" type="text" placeholder="Your name" />
@@ -98,13 +102,13 @@ const recentReleases = releases.slice(0, 3);
 					<label class="form-label" for="contactEmail">Email</label>
 					<input class="form-control" id="contactEmail" name="email" type="email" placeholder="your@email.com" required />
 				</div>
-				<div>
-					<label class="form-label" for="contactMessage">Message</label>
-					<textarea class="form-control" id="contactMessage" name="message" rows="4" placeholder="Tell me about your project or opportunity..."></textarea>
-				</div>
-				<button class="btn btn-primary" type="submit">Send Message</button>
-			</form>
-		</div>
+			</div>
+			<div>
+				<label class="form-label" for="contactMessage">Message</label>
+				<textarea class="form-control" id="contactMessage" name="message" rows="3" placeholder="Tell me about your project or opportunity..."></textarea>
+			</div>
+			<button class="btn btn-primary" type="submit">Send Message</button>
+		</form>
 	</section>
 </Layout>
 

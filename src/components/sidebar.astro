@@ -1,20 +1,21 @@
 ---
+import Monogram from './monogram.astro';
 import { navLinks } from '../utils/navigation';
-import lockupLight from '../img/new/rm-lockup-black.svg';
-import lockupDark from '../img/new/rm-lockup-white.svg';
 
 const { currentPath } = Astro.props;
 
+// Project pages live under /portfolio but belong to Work as far as the nav goes.
 const isCurrent = (href: string) => {
-	if (href.includes('#')) return false;
-	return href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+	if (href === '/') return currentPath === '/';
+	if (href === '/work') return currentPath.startsWith('/work') || currentPath.startsWith('/portfolio');
+	return currentPath.startsWith(href);
 };
 ---
 
 <div class="sidebar">
-	<a class="sidebar-id no-rainbow" href="/" aria-label="Ryan Mullin, home">
-		<img class="logo-light" src={lockupLight.src} alt="Ryan Mullin" />
-		<img class="logo-dark" src={lockupDark.src} alt="Ryan Mullin" />
+	<a class="sidebar-id no-rainbow" href="/">
+		<Monogram />
+		<b>Ryan Mullin</b>
 	</a>
 
 	<nav class="sidebar-nav" aria-label="Primary">

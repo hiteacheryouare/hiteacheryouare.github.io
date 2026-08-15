@@ -16,16 +16,12 @@ import lockup from '../img/new/rm-lockup-fullwhite.svg';
 		const mark = document.querySelector<HTMLElement>('[data-takeover-mark]');
 		if (!bands || !mark) return;
 
-		const skip =
-			sessionStorage.getItem('introPlayed') === '1' ||
-			window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		if (skip) {
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 			bands.remove();
 			mark.remove();
 			return;
 		}
 
-		sessionStorage.setItem('introPlayed', '1');
 		bands.hidden = false;
 		mark.hidden = false;
 		document.body.classList.add('is-taken-over');

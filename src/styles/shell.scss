@@ -11,7 +11,7 @@
 	--rule-soft: rgba(15, 16, 19, 0.08);
 
 	--side-width: 19.5rem;
-	--rail-width: 5rem;
+	--side-pad: 1.5rem;
 	--rail-mark: 10px;
 	--edge: 4px;
 	--gutter: clamp(1.5rem, 4vw, 4rem);
@@ -55,12 +55,7 @@ body {
 }
 
 .shell {
-	--side-current: var(--side-width);
 	min-height: 100vh;
-}
-
-.shell.is-collapsed {
-	--side-current: var(--rail-width);
 }
 
 // --- left column ---------------------------------------------------------
@@ -69,80 +64,61 @@ body {
 	position: fixed;
 	inset: 0 auto 0 0;
 	z-index: 40;
-	width: var(--side-current);
+	width: var(--side-width);
 	display: flex;
 	flex-direction: column;
 	gap: 1.75rem;
-	padding: 1.75rem 1.5rem;
+	padding: 1.75rem var(--side-pad);
 	overflow: hidden auto;
 	background: var(--paper-sunk);
-	transition: width var(--shell-duration) var(--shell-ease),
-		padding var(--shell-duration) var(--shell-ease);
 }
 
 // The brand edge is the column's authority: a full-height rainbow that every
 // page sits to the right of. It is also where the opening takeover lands.
 .shell-edge {
 	position: fixed;
-	inset: 0 auto 0 calc(var(--side-current) - var(--edge));
+	inset: 0 auto 0 calc(var(--side-width) - var(--edge));
 	z-index: 41;
 	width: var(--edge);
 	background: var(--rainbow);
-	transition: inset-inline-start var(--shell-duration) var(--shell-ease);
+	transition: opacity 0.3s ease;
 	pointer-events: none;
 }
 
-.shell.is-collapsed .sidebar {
-	padding-inline: 0;
-	align-items: center;
+.shell.is-collapsed .shell-edge {
+	opacity: 0;
 }
 
-// The content's distance from the viewport edge never changes, so collapsing
-// the column adds whitespace instead of reflowing the page under the reader.
 .main-column {
-	margin-inline-start: var(--side-current);
-	padding: clamp(2rem, 4vw, 3.5rem) var(--gutter) 0;
-	padding-inline-start: calc(var(--side-width) - var(--side-current) + var(--gutter));
+	margin-inline-start: var(--side-width);
+	padding: clamp(2rem, 4vw, 3.25rem) var(--gutter) 0;
 	min-width: 0;
-	transition: margin-inline-start var(--shell-duration) var(--shell-ease),
-		padding-inline-start var(--shell-duration) var(--shell-ease);
 }
 
 .sidebar-id {
 	flex-shrink: 0;
-	display: block;
+	display: flex;
+	align-items: center;
+	gap: 0.7rem;
+	color: var(--ink);
 
-	img {
-		display: block;
-		height: 2.5rem;
+	svg {
+		height: 2rem;
 		width: auto;
-		transition: height var(--shell-duration) var(--shell-ease);
+		flex-shrink: 0;
+	}
+
+	b {
+		font-size: 1.1875rem;
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		white-space: nowrap;
+		transition: opacity 0.25s ease;
 	}
 }
 
-.logo-dark {
-	display: none;
-}
-
-[data-bs-theme='dark'] {
-	.logo-light {
-		display: none;
-	}
-
-	.logo-dark {
-		display: block;
-	}
-}
-
-// Collapsed, the horizontal lockup would overflow the rail, so only the
-// monogram half of it stays visible.
-.shell.is-collapsed .sidebar-id {
-	width: 2.25rem;
-	overflow: hidden;
-
-	img {
-		height: 2.25rem;
-	}
+.shell.is-collapsed .sidebar-id b {
+	opacity: 0;
 }
 
 // --- the rainbow rail ----------------------------------------------------
@@ -157,6 +133,7 @@ body {
 	border-top: 1px solid var(--rule);
 	overflow: hidden;
 	transition: width var(--shell-duration) var(--shell-ease),
+		transform var(--shell-duration) var(--shell-ease),
 		border-color 0.22s ease;
 
 	a {
@@ -202,6 +179,7 @@ body {
 .shell.is-collapsed .sidebar-nav {
 	width: var(--rail-mark);
 	border-top-color: transparent;
+	transform: translateX(calc(var(--side-width) - var(--side-pad) - var(--rail-mark)));
 
 	a {
 		min-height: 2rem;
@@ -325,14 +303,14 @@ body.is-taken-over {
 
 .hero {
 	display: grid;
-	gap: clamp(1.5rem, 4vw, 3rem);
+	gap: clamp(1.5rem, 3vw, 2.5rem);
 	align-items: center;
-	padding-bottom: clamp(2rem, 5vw, 3.5rem);
-	margin-bottom: clamp(2rem, 5vw, 3rem);
+	padding-bottom: clamp(1.75rem, 3vw, 2.5rem);
+	margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
 	border-bottom: 1px solid var(--rule);
 
-	@media (min-width: 62rem) {
-		grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+	@media (min-width: 56rem) {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 18rem);
 	}
 
 	h1 {
@@ -354,12 +332,13 @@ body.is-taken-over {
 
 .hero-figure {
 	margin: 0;
+	max-width: 18rem;
 
 	img {
 		width: 100%;
 		height: auto;
 		display: block;
-		aspect-ratio: 4 / 3;
+		aspect-ratio: 1;
 		object-fit: cover;
 	}
 }
@@ -414,11 +393,11 @@ body.is-taken-over {
 }
 
 .page-section {
-	margin-bottom: clamp(2.5rem, 6vw, 4rem);
+	margin-bottom: clamp(2.25rem, 4vw, 3.25rem);
 }
 
 .page-foot {
-	margin-top: clamp(2.5rem, 6vw, 4rem);
+	margin-top: clamp(2rem, 4vw, 3rem);
 	padding: 1.25rem 0 2rem;
 	border-top: 1px solid var(--rule);
 	font-size: 0.875rem;
@@ -536,11 +515,11 @@ body.is-taken-over {
 	li {
 		display: grid;
 		gap: 1rem 1.75rem;
-		padding: 1.5rem 0;
+		padding: 1.25rem 0;
 		border-bottom: 1px solid var(--rule-soft);
 
 		@media (min-width: 48rem) {
-			grid-template-columns: 17rem minmax(0, 1fr);
+			grid-template-columns: 15rem minmax(0, 1fr);
 			align-items: start;
 		}
 	}
@@ -589,32 +568,29 @@ body.is-taken-over {
 	}
 }
 
-.contact {
-	display: grid;
-	gap: clamp(1.5rem, 4vw, 3rem);
-	align-items: start;
-
-	@media (min-width: 56rem) {
-		grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
-	}
-
-	p {
-		font-size: 1.0625rem;
-		line-height: 1.65;
-		color: var(--ink-2);
-		max-width: 42ch;
-	}
-}
-
 .contact-form {
 	display: grid;
 	gap: 0.875rem;
+	max-width: 44rem;
 
 	.form-label {
 		font-size: 0.875rem;
 		color: var(--ink-3);
 		margin-bottom: 0.25rem;
 	}
+}
+
+.contact-row {
+	display: grid;
+	gap: 0.875rem;
+
+	@media (min-width: 34rem) {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+.contact-form .btn {
+	justify-self: start;
 }
 
 .facts {

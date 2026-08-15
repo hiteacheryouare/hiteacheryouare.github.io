@@ -11,7 +11,7 @@ const { name, description, date, freelance, url, heroImage } = Astro.props.conte
 	imageAlt={heroImage?.alt || name}
 >
 	<article class="project centered">
-		<p class="release-back"><a href="/#work">← All work</a></p>
+		<p class="release-back"><a href="/work">← All work</a></p>
 
 		<header class="release-head">
 			<h1 transition:name={name}>{name}</h1>

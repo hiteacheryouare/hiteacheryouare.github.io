@@ -3,6 +3,7 @@ import { SEO } from 'astro-seo';
 import { ClientRouter } from 'astro:transitions';
 import Sidebar from '../components/sidebar.astro';
 import SiteFooter from '../components/siteFooter.astro';
+import IntroTakeover from '../components/introTakeover.astro';
 import '../globals.scss';
 import '../styles/bootstrap.scss';
 import '../styles/shell.scss';
@@ -63,6 +64,8 @@ const currentPath = Astro.url.pathname;
 		<script type="module" src="/themeFavicon.js"></script>
 	</head>
 	<body>
+		<IntroTakeover />
+
 		<div class="shell" data-shell>
 			<Sidebar currentPath={currentPath} />
 			<main class="main-column">
