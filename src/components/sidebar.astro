@@ -12,17 +12,19 @@ const isCurrent = (href: string) => {
 };
 ---
 
-<div class="sidebar">
+<div class="sidebar" transition:persist="sidebar">
 	<a class="sidebar-id no-rainbow" href="/">
 		<Monogram />
 		<b>Ryan Mullin</b>
 	</a>
 
 	<nav class="sidebar-nav" aria-label="Primary">
+		<span class="nav-marker" data-nav-marker aria-hidden="true"></span>
 		{
 			navLinks.map((link) => (
 				<a
 					href={link.href}
+					data-mark={link.mark}
 					class:list={['no-rainbow', { 'is-here': isCurrent(link.href) }]}
 					style={`--mark: var(--grad-${link.mark})`}
 					aria-current={isCurrent(link.href) ? 'page' : undefined}
@@ -32,16 +34,6 @@ const isCurrent = (href: string) => {
 			))
 		}
 	</nav>
-
-	<button
-		type="button"
-		class="sidebar-toggle no-rainbow"
-		data-shell-toggle
-		aria-expanded="true"
-		aria-label="Collapse navigation"
-	>
-		<i class="bi bi-chevron-double-left" aria-hidden="true"></i>
-	</button>
 </div>
 
-<div class="shell-edge" aria-hidden="true"></div>
+<div class="shell-edge" aria-hidden="true" transition:persist="edge"></div>

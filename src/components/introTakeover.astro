@@ -1,41 +1,48 @@
 ---
-import lockup from '../img/new/rm-lockup-fullwhite.svg';
+import Monogram from './monogram.astro';
 ---
 
-<div class="takeover" data-takeover hidden></div>
-<div class="takeover-mark" data-takeover-mark hidden>
-	<img src={lockup.src} alt="" />
+<div class="takeover" data-takeover transition:persist="takeover" hidden></div>
+<div class="takeover-mark" data-takeover-mark transition:persist="takeover-mark" hidden>
+	<Monogram />
 </div>
 
 <script>
-	const HOLD = 900;
-	const RETRACT = 1000;
+	const DRAW = 950;
+	const RETRACT = 600;
 
 	const playIntro = () => {
 		const bands = document.querySelector<HTMLElement>('[data-takeover]');
 		const mark = document.querySelector<HTMLElement>('[data-takeover-mark]');
-		if (!bands || !mark) return;
+		const flying = mark?.querySelector<SVGElement>('svg');
+		const seat = document.querySelector<SVGElement>('.sidebar-id svg');
+		if (!bands || !mark || !flying || !seat) return;
 
-		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-			bands.remove();
-			mark.remove();
-			return;
-		}
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
 		bands.hidden = false;
 		mark.hidden = false;
 		document.body.classList.add('is-taken-over');
 
 		setTimeout(() => {
+			// Measure the seat the monogram is flying to, then send it there.
+			const from = flying.getBoundingClientRect();
+			const to = seat.getBoundingClientRect();
+			flying.style.transform = [
+				`translate(${to.left + to.width / 2 - (from.left + from.width / 2)}px,`,
+				`${to.top + to.height / 2 - (from.top + from.height / 2)}px)`,
+				`scale(${to.height / from.height})`,
+			].join(' ');
+
 			bands.classList.add('is-retracting');
 			mark.classList.add('is-retracting');
 			document.body.classList.remove('is-taken-over');
-		}, HOLD);
+		}, DRAW);
 
 		setTimeout(() => {
-			bands.remove();
-			mark.remove();
-		}, HOLD + RETRACT);
+			bands.hidden = true;
+			mark.hidden = true;
+		}, DRAW + RETRACT);
 	};
 
 	playIntro();

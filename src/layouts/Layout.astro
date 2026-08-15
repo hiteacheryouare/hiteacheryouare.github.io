@@ -66,6 +66,8 @@ const currentPath = Astro.url.pathname;
 	<body>
 		<IntroTakeover />
 
+		<div class="page-wipe" data-page-wipe transition:persist="wipe" aria-hidden="true"></div>
+
 		<div class="shell" data-shell>
 			<Sidebar currentPath={currentPath} />
 			<main class="main-column">
@@ -75,69 +77,77 @@ const currentPath = Astro.url.pathname;
 		</div>
 
 		<script>
-			// Hysteresis: the column collapses once on the way down and comes back only
-			// near the top, so a normal read never sees it flip back and forth.
-			const COLLAPSE_BELOW = 240;
-			const EXPAND_ABOVE = 96;
-			const JUMP_QUIET_MS = 900;
+			const WIPE_MS = 340;
 
-			const setupShell = () => {
-				const shell = document.querySelector<HTMLElement>('[data-shell]');
-				const toggle = document.querySelector<HTMLButtonElement>('[data-shell-toggle]');
-				if (!shell) return;
-
-				let quietUntil = 0;
-
-				const setCollapsed = (collapsed: boolean) => {
-					shell.classList.toggle('is-collapsed', collapsed);
-					if (!toggle) return;
-					toggle.setAttribute('aria-expanded', String(!collapsed));
-					toggle.setAttribute(
-						'aria-label',
-						collapsed ? 'Expand navigation' : 'Collapse navigation'
-					);
-					toggle.firstElementChild?.classList.toggle('bi-chevron-double-left', !collapsed);
-					toggle.firstElementChild?.classList.toggle('bi-chevron-double-right', collapsed);
-				};
-
-				const onScroll = () => {
-					if (Date.now() < quietUntil) return;
-					const y = window.scrollY;
-					if (y > COLLAPSE_BELOW) setCollapsed(true);
-					else if (y < EXPAND_ABOVE) setCollapsed(false);
-				};
-
-				// Jumping to an anchor is navigation, not reading, so the column stays
-				// open rather than collapsing out from under the click.
-				const holdOpen = () => {
-					quietUntil = Date.now() + JUMP_QUIET_MS;
-					setCollapsed(false);
-				};
-
-				document.querySelectorAll<HTMLAnchorElement>('a[href*="#"]').forEach((link) => {
-					link.addEventListener('click', holdOpen);
-				});
-				window.addEventListener('hashchange', holdOpen);
-				if (window.location.hash) holdOpen();
-
-				toggle?.addEventListener('click', () => {
-					quietUntil = Date.now() + JUMP_QUIET_MS;
-					setCollapsed(!shell.classList.contains('is-collapsed'));
-				});
-
-				window.addEventListener('scroll', onScroll, { passive: true });
-				document.addEventListener(
-					'astro:before-swap',
-					() => {
-						window.removeEventListener('scroll', onScroll);
-						window.removeEventListener('hashchange', holdOpen);
-					},
-					{ once: true }
-				);
+			const isCurrentHref = (href: string, path: string) => {
+				if (href === '/') return path === '/';
+				if (href === '/work') return path.startsWith('/work') || path.startsWith('/portfolio');
+				return path.startsWith(href);
 			};
 
-			// ClientRouter fires this on the first load too, so it is the only hook needed.
-			document.addEventListener('astro:page-load', setupShell);
+			// The sidebar persists across navigations, so the marker is a single element
+			// that travels rather than six that switch on and off.
+			const setupMarker = () => {
+				const nav = document.querySelector<HTMLElement>('.sidebar-nav');
+				const marker = document.querySelector<HTMLElement>('[data-nav-marker]');
+				if (!nav || !marker) return;
+
+				const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('a'));
+				const rootStyles = getComputedStyle(document.documentElement);
+
+				const moveTo = (link: HTMLAnchorElement | undefined) => {
+					if (!link) {
+						marker.style.opacity = '0';
+						return;
+					}
+					marker.style.opacity = '1';
+					marker.style.height = `${link.offsetHeight}px`;
+					marker.style.transform = `translateY(${link.offsetTop}px)`;
+					marker.style.backgroundColor = rootStyles
+						.getPropertyValue(`--grad-${link.dataset.mark}`)
+						.trim();
+				};
+
+				const settle = () => {
+					const path = window.location.pathname;
+					links.forEach((link) => {
+						const here = isCurrentHref(link.getAttribute('href') ?? '', path);
+						link.classList.toggle('is-here', here);
+						if (here) link.setAttribute('aria-current', 'page');
+						else link.removeAttribute('aria-current');
+					});
+					moveTo(links.find((link) => link.classList.contains('is-here')));
+				};
+
+				if (!nav.dataset.wired) {
+					nav.dataset.wired = 'true';
+					links.forEach((link) => link.addEventListener('mouseenter', () => moveTo(link)));
+					nav.addEventListener('mouseleave', settle);
+				}
+
+				settle();
+			};
+
+			// Page to page, the rainbow grows out of the column to cover the content it
+			// is replacing, then pulls back to reveal the new page.
+			const wipe = () => document.querySelector<HTMLElement>('[data-page-wipe]');
+
+			document.addEventListener('astro:before-preparation', (event) => {
+				const panel = wipe();
+				if (!panel || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+				const original = (event as any).loader;
+				(event as any).loader = async () => {
+					panel.classList.add('is-covering');
+					await new Promise((resolve) => setTimeout(resolve, WIPE_MS));
+					await original();
+				};
+			});
+
+			document.addEventListener('astro:after-swap', () => {
+				requestAnimationFrame(() => wipe()?.classList.remove('is-covering'));
+			});
+
+			document.addEventListener('astro:page-load', setupMarker);
 		</script>
 	</body>
 </html>

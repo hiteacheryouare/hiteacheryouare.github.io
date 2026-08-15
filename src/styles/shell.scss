@@ -81,12 +81,7 @@ body {
 	z-index: 41;
 	width: var(--edge);
 	background: var(--rainbow);
-	transition: opacity 0.3s ease;
 	pointer-events: none;
-}
-
-.shell.is-collapsed .shell-edge {
-	opacity: 0;
 }
 
 .main-column {
@@ -108,36 +103,30 @@ body {
 		flex-shrink: 0;
 	}
 
+	// The intro does the drawing now; this copy is the one it hands off to.
+	.logo-path {
+		animation: none;
+		fill-opacity: 1;
+		stroke-opacity: 0;
+	}
+
 	b {
 		font-size: 1.1875rem;
 		font-weight: 600;
 		letter-spacing: -0.02em;
 		white-space: nowrap;
-		transition: opacity 0.25s ease;
 	}
 }
 
-.shell.is-collapsed .sidebar-id b {
-	opacity: 0;
-}
-
-// --- the rainbow rail ----------------------------------------------------
-//
-// Each nav item owns one brand colour, shown only when that item is current.
-// Collapsing levels every row to the same height and drops the dividing rules,
-// so the six markers stack edge to edge and the rainbow assembles itself.
+// --- navigation ----------------------------------------------------------
 
 .sidebar-nav {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	border-top: 1px solid var(--rule);
-	overflow: hidden;
-	transition: width var(--shell-duration) var(--shell-ease),
-		transform var(--shell-duration) var(--shell-ease),
-		border-color 0.22s ease;
 
 	a {
-		position: relative;
 		display: flex;
 		align-items: center;
 		min-height: 2.75rem;
@@ -146,84 +135,31 @@ body {
 		color: var(--ink-2);
 		white-space: nowrap;
 		border-bottom: 1px solid var(--rule-soft);
-		transition: min-height var(--shell-duration) var(--shell-ease),
-			padding var(--shell-duration) var(--shell-ease),
-			border-color 0.22s ease,
-			color 0.18s ease;
+		transition: color 0.18s ease;
 	}
 
-	a:hover {
+	a:hover,
+	a.is-here {
 		color: var(--ink);
-	}
-
-	a::before {
-		content: '';
-		position: absolute;
-		inset: 0 auto 0 0;
-		width: 3px;
-		background: var(--mark);
-		opacity: 0;
-		transition: opacity 0.3s ease, width var(--shell-duration) var(--shell-ease);
 	}
 
 	a.is-here {
-		color: var(--ink);
 		font-weight: 500;
 	}
-
-	a.is-here::before {
-		opacity: 1;
-	}
 }
 
-.shell.is-collapsed .sidebar-nav {
-	width: var(--rail-mark);
-	border-top-color: transparent;
-	transform: translateX(calc(var(--side-width) - var(--side-pad) - var(--rail-mark)));
-
-	a {
-		min-height: 2rem;
-		padding-inline-start: 0;
-		border-bottom-width: 0;
-	}
-
-	a::before {
-		width: var(--rail-mark);
-		opacity: 1;
-	}
-}
-
-// Staggered so the bar paints downward in brand order rather than snapping in.
-@for $i from 1 through 6 {
-	.sidebar-nav a:nth-child(#{$i})::before {
-		transition-delay: #{(6 - $i) * 0.035}s;
-	}
-
-	.shell.is-collapsed .sidebar-nav a:nth-child(#{$i})::before {
-		transition-delay: #{($i - 1) * 0.045}s;
-	}
-}
-
-.sidebar-toggle {
-	flex-shrink: 0;
-	margin-top: auto;
-	align-self: flex-start;
-	padding: 0.25rem;
-	border: 0;
-	background: none;
-	color: var(--ink-3);
-	font-size: 1.125rem;
-	line-height: 1;
-	cursor: pointer;
-
-	&:hover,
-	&:focus-visible {
-		color: var(--ink);
-	}
-}
-
-.shell.is-collapsed .sidebar-toggle {
-	align-self: center;
+// One marker for the whole column: it slides to whatever you are pointing at,
+// and settles on the page you land on.
+.nav-marker {
+	position: absolute;
+	inset-inline-start: 0;
+	top: 0;
+	width: 3px;
+	height: 0;
+	opacity: 0;
+	pointer-events: none;
+	transition: transform 0.3s var(--shell-ease), height 0.3s var(--shell-ease),
+		background-color 0.2s ease, opacity 0.2s ease;
 }
 
 // --- the opening takeover ------------------------------------------------
@@ -237,26 +173,9 @@ body {
 	inset: 0;
 	z-index: 100;
 	background: var(--rainbow);
-	transition: inset-inline-start 0.9s var(--shell-ease),
-		inset-inline-end 0.9s var(--shell-ease),
-		opacity 0.3s ease 0.75s;
-}
-
-.takeover-mark {
-	position: fixed;
-	inset: 0;
-	z-index: 101;
-	display: grid;
-	place-items: center;
-	padding: 2rem;
-	opacity: 0;
-	animation: takeover-mark-in 0.5s ease 0.15s forwards;
-	pointer-events: none;
-
-	img {
-		width: min(38rem, 70vw);
-		height: auto;
-	}
+	transition: inset-inline-start 0.55s var(--shell-ease),
+		inset-inline-end 0.55s var(--shell-ease),
+		opacity 0.25s ease 0.4s;
 }
 
 .takeover.is-retracting {
@@ -265,21 +184,76 @@ body {
 	opacity: 0;
 }
 
-.takeover-mark.is-retracting {
-	opacity: 0;
-	transition: opacity 0.3s ease;
-	animation: none;
+// The monogram draws itself over the rainbow, then flies to the seat it keeps
+// in the sidebar. The sidebar's own copy stays hidden until it lands.
+.takeover-mark {
+	position: fixed;
+	inset: 0;
+	z-index: 101;
+	display: grid;
+	place-items: center;
+	pointer-events: none;
+
+	svg {
+		height: min(15rem, 26vh);
+		width: auto;
+		overflow: visible;
+		transform-origin: center;
+		transition: transform 0.55s var(--shell-ease), opacity 0.2s ease 0.4s;
+	}
+
+	path {
+		fill: #ffffff;
+		stroke: #ffffff;
+		stroke-width: 7;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		fill-opacity: 0;
+		stroke-dasharray: 1;
+		stroke-dashoffset: 1;
+		animation: takeover-draw 0.85s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+	}
 }
 
-@keyframes takeover-mark-in {
-	from {
-		opacity: 0;
-		transform: translateY(0.75rem);
+.takeover-mark.is-retracting svg {
+	opacity: 0;
+}
+
+@keyframes takeover-draw {
+	0% {
+		stroke-dashoffset: 1;
+		fill-opacity: 0;
 	}
-	to {
-		opacity: 1;
-		transform: none;
+	70% {
+		stroke-dashoffset: 0;
+		fill-opacity: 0;
 	}
+	100% {
+		stroke-dashoffset: 0;
+		fill-opacity: 1;
+		stroke-opacity: 0;
+	}
+}
+
+// The sidebar monogram waits for the intro to hand it over.
+body.is-taken-over .sidebar-id svg {
+	opacity: 0;
+}
+
+// Page to page: the rainbow grows out of the column, covers the content it is
+// replacing, and pulls back once the new page is in.
+.page-wipe {
+	position: fixed;
+	inset: 0 auto 0 var(--side-width);
+	z-index: 60;
+	width: 0;
+	background: var(--rainbow);
+	transition: width 0.34s var(--shell-ease);
+	pointer-events: none;
+}
+
+.page-wipe.is-covering {
+	width: calc(100vw - var(--side-width));
 }
 
 // Author display beats the UA [hidden] rule, so state it here or the overlay
@@ -287,6 +261,12 @@ body {
 .takeover[hidden],
 .takeover-mark[hidden] {
 	display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.page-wipe {
+		display: none;
+	}
 }
 
 body.is-taken-over {
@@ -310,7 +290,7 @@ body.is-taken-over {
 	border-bottom: 1px solid var(--rule);
 
 	@media (min-width: 56rem) {
-		grid-template-columns: minmax(0, 1fr) minmax(0, 18rem);
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
 	}
 
 	h1 {
@@ -332,13 +312,12 @@ body.is-taken-over {
 
 .hero-figure {
 	margin: 0;
-	max-width: 18rem;
 
 	img {
 		width: 100%;
 		height: auto;
 		display: block;
-		aspect-ratio: 1;
+		aspect-ratio: 3 / 2;
 		object-fit: cover;
 	}
 }
@@ -417,6 +396,7 @@ body.is-taken-over {
 }
 
 .plate {
+	display: block;
 	aspect-ratio: 16 / 9;
 	overflow: hidden;
 	background: var(--paper-sunk);
@@ -808,29 +788,19 @@ body.is-taken-over {
 		background: var(--rainbow-x);
 	}
 
-	.shell.is-collapsed .sidebar {
-		padding-inline: 1.25rem;
-		align-items: center;
-	}
-
 	.main-column {
 		margin-inline-start: 0;
 		padding-inline: var(--gutter);
 	}
 
-	.sidebar-toggle {
-		margin: 0 0 0 auto;
-		align-self: center;
+	.sidebar-id svg {
+		height: 1.75rem;
 	}
 
-	.sidebar-id,
-	.shell.is-collapsed .sidebar-id {
-		width: auto;
-		overflow: visible;
-
-		img {
-			height: 1.875rem;
-		}
+	// The travelling marker is a vertical idea; on a horizontal bar each item
+	// just carries its own underline.
+	.nav-marker {
+		display: none;
 	}
 
 	.sidebar-nav {
@@ -843,37 +813,32 @@ body.is-taken-over {
 			justify-content: center;
 			min-height: 2.25rem;
 			padding-inline-start: 0;
-			border-bottom: 0;
+			border-bottom: 3px solid transparent;
 			font-size: 0.9375rem;
 		}
 
-		a::before {
-			inset: auto 0 0 0;
-			width: auto;
-			height: 3px;
+		a.is-here {
+			border-bottom-color: var(--mark);
 		}
 	}
 
-	.shell.is-collapsed .sidebar-nav {
-		width: 100%;
+	.page-wipe {
+		inset: 0 0 auto 0;
+		width: auto;
+		height: 0;
+		background: var(--rainbow-x);
+		transition: height 0.34s var(--shell-ease);
+	}
 
-		a {
-			min-height: 5px;
-			font-size: 0;
-		}
-
-		a::before {
-			width: auto;
-			height: 5px;
-			opacity: 1;
-		}
+	.page-wipe.is-covering {
+		height: 100vh;
 	}
 
 	.takeover.is-retracting {
 		inset-inline-start: 0;
 		inset-inline-end: 0;
 		inset-block-end: calc(100% - var(--edge));
-		transition: inset-block-end 0.9s var(--shell-ease), opacity 0.3s ease 0.75s;
+		transition: inset-block-end 0.55s var(--shell-ease), opacity 0.25s ease 0.4s;
 	}
 }
 
@@ -882,7 +847,8 @@ body.is-taken-over {
 	.shell-edge,
 	.page-foot,
 	.takeover,
-	.takeover-mark {
+	.takeover-mark,
+	.page-wipe {
 		display: none;
 	}
 
