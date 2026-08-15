@@ -1,4 +1,4 @@
-import shuffle from 'lodash/shuffle';
+import { shuffle } from './arrayRandomItem';
 
 type ProgressCallback = (attempts: number, currentArray: number[]) => void;
 
@@ -35,7 +35,7 @@ export const bogosort = async (
 			throw new Error('bogosort: reached maxAttempts');
 		}
 		
-		// lodash shuffle returns a NEW array, so reassign
+		// shuffle returns a NEW array, so reassign
 		arr = shuffle(arr);
 		// Small noticeable delay between attempts
 		await new Promise<void>(resolve => setTimeout(resolve, delayBetweenAttemptsMs));
