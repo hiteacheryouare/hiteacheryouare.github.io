@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import BsAlert from '../components/bsAlert.svelte';
 
 const mistakes = [
 	'Blunder', 'Mistake', 'Error', 'Fault', 'Inaccuracy', 'Omission', 'Slip', 'Slip-up', 'Miscalculation', 'Misunderstanding', 'Flaw', 'Oversight', 'Fallacy', 'Goof', 'Lapse', 'Misstep', 'Botch', 'Snafu', 'Faux pas', 'Howler', 'Catastrophe', 'Debacle', 'Fiasco', 'Misadventure', 'Calamity', 'Disaster', 'Tragedy', 'Screw-up', 'Blooper', 'Utter disaster', 'Train wreck', 'Dumpster fire', 'Gaffe', 'Bungle', 'Flub', 'Fumble', 'Mess-up', 'Cockup', 'Ballup', 'Foul-up', 'Mixup', 'Glitch', 'Hiccup', 'Misfire', 'Stumble', 'Trip-up', 'Wrong move', 'Misjudgment', 'Lapse in judgment', 'Miscue', 'Misdoing', 'Transgression', 'Boo-boo', 'Oopsie', 'Total failure', 'Mess', 'Shambles', 'Wreck', 'Breakdown', 'Flop', 'Washout'
@@ -17,63 +16,53 @@ const broVariations = [
 const exclamationIntensities = [
 	'!!', '!!!', '!!!!', '!!!!!', '!!!!!!!!', '!!!!!!!!!!', '!!!!!!!!!!!', '!!!!!!!!!!!!', '!!!!!!!!!!!!!', '!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!!!!!!!', '!!!!!!!!!!!!!!!!!!!!!!'
 ];
+
+const combinations =
+	mistakes.length * icons.length * broVariations.length * exclamationIntensities.length;
 ---
 
 <Layout title="404 not found!!!" description="nope, we cant find da page">
-	<BsAlert
-		type="info"
-		icon="info-circle"
-		text="If you see this page coming from a page that is not exactly this site (i.e. another hiteacheryouare.github.io site), you're on the wrong site because of how our URL structure works. Instead of clicking 'go home' below, click the back arrow on your browser"
-		actionLink=""
-		actionText=""
-		client:load
-	/>
-
 	<div class="notfound">
-		<i id="random-icon" class="notfound-icon animateBounce" aria-hidden="true"></i>
+		<i id="random-icon" class="notfound-icon" aria-hidden="true"></i>
 
-		<h1 id="random-mistake" class="notfound-shout"></h1>
-		<p class="notfound-code">404 — Page Not Found</p>
+		<h1 id="random-mistake"></h1>
 		<p id="random-bro" class="notfound-bro"></p>
-		<p class="notfound-nudge">Try something else?? 🤷‍♂️</p>
+		<p>Try something else?? 🤷‍♂️</p>
 
 		<p class="notfound-actions">
 			<a href="/">Go home</a> · <button type="button" data-go-back>Go back</button> ·
 			<button type="button" data-reroll>Reroll</button>
 		</p>
 
-		<dl class="facts notfound-facts">
-			<div><dt>Error code</dt><dd>404</dd></div>
-			<div><dt>Times refreshed</dt><dd id="reload-counter">1</dd></div>
-			<div><dt>Possibilities</dt><dd>1,399,464</dd></div>
-		</dl>
+		<p class="notfound-tally">
+			Error 404 · reroll <span id="reroll-count">1</span> of a possible {combinations.toLocaleString()}
+		</p>
 	</div>
 </Layout>
 
 <style>
 	.notfound {
-		max-width: 46ch;
+		max-width: 44ch;
+		margin-inline: auto;
+		text-align: center;
+		padding-block: clamp(1rem, 6vh, 4rem);
 	}
 
 	.notfound-icon {
 		font-size: 5rem;
 		color: var(--grad-red);
 		display: inline-block;
+		animation: bounce404 2s infinite;
 	}
 
-	.notfound-shout {
-		font-size: clamp(1.75rem, 4vw, 2.75rem);
+	.notfound h1 {
+		font-size: clamp(2rem, 5vw, 3.25rem);
 		font-weight: 600;
-		letter-spacing: -0.03em;
+		letter-spacing: -0.035em;
+		line-height: 1.05;
 		color: var(--grad-red);
-		margin: 0.75rem 0 0.5rem;
-	}
-
-	.notfound-code {
-		font-family: 'JetBrains Mono', monospace;
-		font-size: 0.875rem;
-		letter-spacing: 0.06em;
-		color: var(--ink-3);
+		margin: 1rem 0 0.5rem;
+		overflow-wrap: anywhere;
 	}
 
 	.notfound-bro {
@@ -81,12 +70,12 @@ const exclamationIntensities = [
 		color: var(--ink-2);
 	}
 
-	.notfound-nudge {
+	.notfound p {
 		color: var(--ink-2);
 	}
 
 	.notfound-actions {
-		margin: 1.5rem 0;
+		margin: 1.75rem 0 0;
 		color: var(--ink-3);
 	}
 
@@ -98,27 +87,48 @@ const exclamationIntensities = [
 		cursor: pointer;
 	}
 
-	.notfound-facts {
-		margin-top: 2rem;
+	.notfound-actions button:hover {
+		text-decoration: underline;
+	}
+
+	.notfound-tally {
+		margin-top: 2.5rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--rule-soft);
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.8125rem;
+		color: var(--ink-3);
+	}
+
+	@keyframes bounce404 {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(-20px); }
 	}
 </style>
 
 <script define:vars={{ mistakes, icons, broVariations, exclamationIntensities }}>
-	const randomInRange = (min, max) => Math.floor(Math.random() * (max - min) + min);
-	const randomInArray = (arr) => arr[randomInRange(0, arr.length - 1)];
+	const pick = (list) => list[Math.floor(Math.random() * list.length)];
 
-	const applyRandoms = () => {
-		document.getElementById('random-icon').className = 'notfound-icon animateBounce bi bi-' + randomInArray(icons);
-		document.getElementById('random-mistake').textContent = randomInArray(mistakes) + randomInArray(exclamationIntensities);
-		document.getElementById('random-bro').textContent = '(that means ur in the wrong spot ' + randomInArray(broVariations) + ')';
+	const icon = document.getElementById('random-icon');
+	const shout = document.getElementById('random-mistake');
+	const bro = document.getElementById('random-bro');
+	const tally = document.getElementById('reroll-count');
+
+	let rerolls = 0;
+	let shown = '';
+
+	const roll = () => {
+		if (shown) icon.classList.remove(shown);
+		shown = `bi-${pick(icons)}`;
+		icon.classList.add('bi', shown);
+		shout.textContent = pick(mistakes) + pick(exclamationIntensities);
+		bro.textContent = `(that means ur in the wrong spot ${pick(broVariations)})`;
+		rerolls += 1;
+		tally.textContent = rerolls.toString();
 	};
 
-	applyRandoms();
-
-	const reloadCount = parseInt(sessionStorage.getItem('404ReloadCount') || '0') + 1;
-	sessionStorage.setItem('404ReloadCount', reloadCount.toString());
-	document.getElementById('reload-counter').textContent = reloadCount.toString();
+	roll();
 
 	document.querySelector('[data-go-back]').addEventListener('click', () => window.history.back());
-	document.querySelector('[data-reroll]').addEventListener('click', applyRandoms);
+	document.querySelector('[data-reroll]').addEventListener('click', roll);
 </script>

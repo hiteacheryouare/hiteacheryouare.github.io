@@ -154,9 +154,18 @@ const currentPath = Astro.url.pathname;
 			// is replacing, then pulls back to reveal the new page.
 			const wipe = () => document.querySelector<HTMLElement>('[data-page-wipe]');
 
+			// Astro tags every transition:name element with a transition scope. If the
+			// link you clicked carries one, that navigation already has a morph of its
+			// own and does not want a rainbow over the top of it.
+			const morphsAlready = (source: Element | null) =>
+				!!source &&
+				(!!source.closest('[data-astro-transition-scope]') ||
+					!!source.querySelector('[data-astro-transition-scope]'));
+
 			document.addEventListener('astro:before-preparation', (event) => {
 				const panel = wipe();
 				if (!panel || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+				if (morphsAlready((event as any).sourceElement ?? null)) return;
 				const original = (event as any).loader;
 				(event as any).loader = async () => {
 					panel.classList.add('is-covering');
