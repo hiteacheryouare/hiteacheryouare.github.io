@@ -1,8 +1,9 @@
 ---
-import "../globals.scss";
-import '../styles/blog.scss';
+import '../globals.scss';
+import '../styles/shell.scss';
 ---
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -12,17 +13,24 @@ import '../styles/blog.scss';
 		<script>
 			function setBsDarkMode() {
 				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-				document.body.setAttribute('data-bs-theme', 'dark')
+					document.body.setAttribute('data-bs-theme', 'dark');
 				} else {
-				document.body.setAttribute('data-bs-theme', 'light')
+					document.body.setAttribute('data-bs-theme', 'light');
 				}
 			}
-			setBsDarkMode()
-			document.addEventListener('astro:after-swap', setBsDarkMode)
+			setBsDarkMode();
+			document.addEventListener('astro:after-swap', setBsDarkMode);
 		</script>
-		</head>
+	</head>
 	<body>
-		<div class="text-lg leading-relaxed mb-6 first-letter:text-6xl first-letter:font-bold first-letter:font-serif first-letter:selection:bg-primary dark:first-letter:selection:bg-primary-dark first-letter:selection:text-secondary p-10">
+		<div class="copy barebones">
 			<slot />
 		</div>
+
+		<style>
+			.barebones {
+				padding: 2.5rem;
+			}
+		</style>
 	</body>
+</html>

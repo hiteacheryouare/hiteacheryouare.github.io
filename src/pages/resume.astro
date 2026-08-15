@@ -1,20 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ResumeContent from '../components/ryan-mullin-resume.jsx';
+import Resume from '../components/resume.astro';
 ---
 
-<Layout title="Resume">
-  <main class="prose prose-lg dark:prose-invert mx-auto py-8 px-4 sm:px-6 lg:px-8">
-    <div class="not-prose max-w-[8.5in] mx-auto mb-4 flex justify-center print:hidden">
-      <a
-        href="/ryan-mullin-resume.pdf"
-        download="Ryan Mullin Resume.pdf"
-        class="btn btn-outline-secondary rounded-pill inline-flex items-center gap-2 no-rainbow"
-      >
-        <i class="bi bi-file-earmark-pdf-fill"></i>
-        Download as PDF
-      </a>
-    </div>
-    <ResumeContent />
-  </main>
+<Layout title="Résumé" description="Ryan Mullin's résumé, on the web and as a PDF.">
+	<div class="section-head resume-bar">
+		<h2>Résumé</h2>
+		<a href="/ryan-mullin-resume.pdf" download="Ryan Mullin Resume.pdf">Download the PDF</a>
+	</div>
+
+	<Resume />
 </Layout>
+
+<style>
+	@media print {
+		.resume-bar {
+			display: none;
+		}
+	}
+</style>

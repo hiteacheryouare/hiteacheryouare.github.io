@@ -156,48 +156,36 @@
 
 {#if allowedAccess}
 	<slot>
-		<div class="min-h-screen flex items-center justify-center px-6">
-			<div class="max-w-2xl w-full text-center space-y-8">
-				<div class="text-9xl text-red-600 animate-bounce">
+		<div class="gate">
+			<div class="gate-inner text-center">
+				<div class="gate-icon animate-bounce">
 					<i class={`bi bi-${randomInArray(icons)}`}></i>
 				</div>
-				<div class="space-y-4">
-					<h2 class="font-bold text-4xl md:text-5xl text-red-600">
-						Content Not Found
-					</h2>
-					<p class="text-lg text-gray-600 dark:text-neutral-300 font-mono">
-						The content you're looking for doesn't exist or has been removed.
-					</p>
-				</div>
+				<h2 class="fw-bold">Content Not Found</h2>
+				<p class="font-monospace">
+					The content you're looking for doesn't exist or has been removed.
+				</p>
 			</div>
 		</div>
 	</slot>
 {:else}
-	<div class="min-h-screen flex items-center justify-center px-6">
-		<div class="max-w-2xl w-full">
-			<!-- Warning Icon -->
-			<div class="text-center mb-8">
-				<div class="inline-block text-9xl text-red-600 animate-pulse">
+	<div class="gate">
+		<div class="gate-inner">
+			<div class="text-center mb-4">
+				<div class="gate-icon animate-pulse">
 					<i class={`bi bi-${selectedIcon}`}></i>
 				</div>
 			</div>
 
-			<!-- Main Card -->
-			<div class="rounded-2xl border-2 border-red-600  shadow-2xl overflow-hidden"
-			     class:shake={shakeError}>
-				<!-- Header -->
-				<div class="bg-gradient-to-r from-red-600 to-red-700 p-8 text-center">
-					<h2 class="font-bold text-3xl md:text-4xl text-white mb-3">
-						<span><i class="bi bi-lock"></i></span> Protected Content
-					</h2>
-					<p class="text-red-100 font-mono text-sm">
-						Authentication Required
-					</p>
+			<div class="gate-card" class:shake={shakeError}>
+				<div class="gate-rule"></div>
+
+				<div class="gate-head">
+					<h2 class="fw-bold"><i class="bi bi-lock"></i> Protected Content</h2>
+					<p class="font-monospace">Authentication Required</p>
 				</div>
 
-				<!-- Content -->
-				<div class="p-8 space-y-6">
-					<!-- Warning Message -->
+				<div class="gate-body">
 					{#if triesLeft < 10}
 						<BsAlert
 							type="danger"
@@ -207,88 +195,74 @@
 						/>
 					{/if}
 
-					<!-- Form -->
-					<form on:submit|preventDefault={checkAccess} class="space-y-6">
-						<div>
-							<label for="password-input" class="block text-sm font-mono text-gray-600 dark:text-neutral-300 mb-2">
-								Enter Password
-							</label>
-							<input 
-								id="password-input"
-								type="password" 
-								bind:value={currentPW} 
-								class="form-control w-full text-lg"
-								placeholder="••••••••"
-								autocomplete="off"
-							/>
-						</div>
-
-						<button 
-							type="submit" 
-							class="btn btn-primary w-full text-lg flex items-center justify-center gap-2"
-						>
+					<form on:submit|preventDefault={checkAccess}>
+						<label for="password-input" class="form-label font-monospace">Enter Password</label>
+						<input
+							id="password-input"
+							type="password"
+							bind:value={currentPW}
+							class="form-control mb-3"
+							placeholder="••••••••"
+							autocomplete="off"
+						/>
+						<button type="submit" class="btn btn-primary w-100">
 							<i class="bi bi-unlock-fill"></i>
 							Unlock Content
 						</button>
 					</form>
 
-					<!-- Lucky Numbers Gamble -->
-					<div class="space-y-4">
-						<h3 class="font-bold text-lg">Or... you could gamble your time</h3>
+					<div class="gate-gamble">
+						<h3 class="fw-bold fs-5">Or... you could gamble your time</h3>
 
-						<!-- Cheat Error Message -->
 						{#if cheatError}
-							<BsAlert type="danger" class="shake" icon="exclamation-circle-fill" text={cheatError}/>
+							<BsAlert type="danger" class="shake" icon="exclamation-circle-fill" text={cheatError} />
 						{/if}
 
-						<form on:submit|preventDefault={startGamble} class="space-y-4">
-							<div class="grid grid-cols-5 gap-3">
+						<form on:submit|preventDefault={startGamble}>
+							<div class="gate-numbers">
 								{#each luckyNumbers as num, i}
 									<div>
-										<label class="sr-only">Lucky {i + 1}</label>
+										<label class="visually-hidden" for={`lucky-${i}`}>Lucky {i + 1}</label>
 										<input
+											id={`lucky-${i}`}
 											type="number"
 											min="1"
 											max="100"
 											value={num}
 											on:input={(e) => updateNumber(i, e.target.value)}
-											class="form-control w-full text-center"
+											class="form-control text-center"
 											disabled={gambling}
 										/>
 									</div>
 								{/each}
 							</div>
 
-							<!-- Live Shuffle Visualization -->
 							{#if gambling}
-								<div class="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 space-y-3">
-									<div class="flex items-center justify-between text-sm text-gray-600 dark:text-neutral-300">
-										<span class="font-mono">Current shuffle:</span>
-										<span class="inline-flex items-center gap-1">
+								<div class="gate-shuffle">
+									<div class="d-flex align-items-center justify-content-between font-monospace">
+										<span>Current shuffle:</span>
+										<span class="d-inline-flex align-items-center gap-1">
 											<span class="spinner-border spinner-border-sm"></span>
 											Sorting...
 										</span>
 									</div>
-									<div class="flex justify-center gap-1">
-										{#each currentShuffle as num, i}
-											<div 
-												class="w-8 h-12 flex items-center justify-center text-xs font-mono rounded transition-all duration-75"
-												style="background: hsl({num * 2.4}, 70%, 60%); color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.3);"
-											>
+									<div class="gate-tiles">
+										{#each currentShuffle as num}
+											<div class="gate-tile" style={`background: hsl(${num * 2.4}, 70%, 60%)`}>
 												{num}
 											</div>
 										{/each}
 									</div>
-									<div class="text-center text-sm text-gray-700 dark:text-neutral-300 font-mono">
+									<div class="text-center font-monospace">
 										Attempts: {gambleAttempts.toLocaleString()}
 									</div>
 								</div>
 							{/if}
 
-							<div class="flex items-center gap-3">
-								<button type="submit" class="btn btn-success flex-1" disabled={gambling}>
+							<div class="d-flex align-items-center gap-3">
+								<button type="submit" class="btn btn-success flex-fill" disabled={gambling}>
 									{#if gambling}
-										<span class="inline-flex items-center gap-2">
+										<span class="d-inline-flex align-items-center gap-2">
 											<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 											Gambling...
 										</span>
@@ -304,34 +278,20 @@
 								</button>
 							</div>
 
-							<div class="text-sm text-center text-gray-600 dark:text-neutral-300">
+							<p class="gate-note">
 								Pick 10 numbers (at least 5 unique, not pre-sorted) and gamble CPU time. When bogosort finishes, access is granted.
-								<br/>
+								<br />
 								Funny thing about bogosort, it has the possibility of never finishing ever! Or it could finish instantly!
-							</div>
+							</p>
 						</form>
 					</div>
-					<!-- Help Text -->
-					<div class="pt-6 border-t border-gray-200 dark:border-gray-700">
-						<p class="text-center text-gray-600 dark:text-neutral-300 text-sm leading-relaxed">
-							Need access? 
-							<a 
-								href="mailto:rpmullin17@gmail.com?subject=Access Request&body=Hi Ryan, I'd like to request access to: ." 
-								class="text-primary hover:text-blue-900 font-medium hover:underline inline-flex items-center gap-1"
-							>
-								Contact Ryan Mullin
-								<i class="bi bi-envelope-fill"></i>
-							</a>
-						</p>
-					</div>
-				</div>
 
-				<!-- Footer Badge -->
-				<div class="bg-gray-50 dark:bg-gray-800/50 px-8 py-4 border-t border-gray-200 dark:border-gray-700">
-					<div class="flex items-center justify-center gap-2 text-sm font-mono text-gray-500 dark:text-neutral-300">
-						<i class="bi bi-shield-lock-fill"></i>
-						<span>Secure</span>
-					</div>
+					<p class="gate-help">
+						Need access?
+						<a href="mailto:rpmullin17@gmail.com?subject=Access Request&body=Hi Ryan, I'd like to request access to: .">
+							Contact Ryan Mullin
+						</a>
+					</p>
 				</div>
 			</div>
 		</div>
@@ -339,19 +299,131 @@
 {/if}
 
 <style>
+	.gate {
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1.5rem;
+	}
+
+	.gate-inner {
+		width: 100%;
+		max-width: 42rem;
+	}
+
+	.gate-icon {
+		display: inline-block;
+		font-size: 5rem;
+		color: var(--grad-red);
+	}
+
+	.gate-card {
+		border: 1px solid var(--rule);
+		overflow: hidden;
+	}
+
+	.gate-rule {
+		height: 4px;
+		background: linear-gradient(
+			to right,
+			var(--grad-yellow),
+			var(--grad-orange),
+			var(--grad-red),
+			var(--grad-purple),
+			var(--grad-blue),
+			var(--grad-green)
+		);
+	}
+
+	.gate-head {
+		padding: 1.75rem;
+		text-align: center;
+		border-bottom: 1px solid var(--rule);
+	}
+
+	.gate-head p {
+		font-size: 0.8125rem;
+		color: var(--ink-3);
+		margin: 0.5rem 0 0;
+	}
+
+	.gate-body {
+		display: grid;
+		gap: 1.5rem;
+		padding: 1.75rem;
+	}
+
+	.gate-gamble {
+		display: grid;
+		gap: 1rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--rule);
+	}
+
+	.gate-gamble form {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.gate-numbers {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 0.75rem;
+	}
+
+	.gate-shuffle {
+		display: grid;
+		gap: 0.75rem;
+		padding: 1rem;
+		background: var(--paper-sunk);
+		font-size: 0.875rem;
+	}
+
+	.gate-tiles {
+		display: flex;
+		justify-content: center;
+		gap: 0.25rem;
+	}
+
+	.gate-tile {
+		width: 2rem;
+		height: 3rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.75rem;
+		color: #ffffff;
+		text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+	}
+
+	.gate-note,
+	.gate-help {
+		font-size: 0.875rem;
+		color: var(--ink-3);
+		text-align: center;
+		margin: 0;
+	}
+
+	.gate-help {
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--rule);
+	}
+
 	@keyframes shake {
 		0%, 100% { transform: translateX(0); }
 		10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
 		20%, 40%, 60%, 80% { transform: translateX(10px); }
 	}
 	.shake { animation: shake 0.5s; }
-	
+
 	@keyframes bounce {
 		0%, 100% { transform: translateY(0); }
 		50% { transform: translateY(-20px); }
 	}
 	.animate-bounce { animation: bounce 2s infinite; }
-	
+
 	@keyframes pulse {
 		0%, 100% { opacity: 1; }
 		50% { opacity: 0.7; }

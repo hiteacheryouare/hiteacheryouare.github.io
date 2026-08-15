@@ -1,33 +1,19 @@
 ---
-import { getEntry, getCollection, render } from "astro:content";
-import Portfolio from "../../../layouts/portfolio.astro";
+import { getCollection, render } from 'astro:content';
+import Portfolio from '../../../layouts/portfolio.astro';
 
 export async function getStaticPaths() {
-  const projects = await getCollection("portfolio")
-  return projects.map((project) => {
-    return {
-      params: {
-        project: project.id
-      },
-    }
-  })
+	const projects = await getCollection('portfolio');
+	return projects.map((project) => ({
+		params: { project: project.id },
+		props: { project },
+	}));
 }
-// 1. Get the article from the incoming server request
-const { project } = Astro.params;
-if (project === undefined) {
-  throw new Error("ID is required");
-}
-// 2. Query for the entry directly using the request article
-const entry = await getEntry("portfolio", project);
-// 3. Redirect if the entry does not exist
-if (entry === undefined) {
-  Astro.response.status = 404;
-  return Astro.redirect("/404");
-}
-// 4. (Optional) Render the entry to HTML in the template
-const { Content } = await render(entry);
-import '../../../styles/bootstrap.scss'
+
+const { project } = Astro.props;
+const { Content } = await render(project);
 ---
-<Portfolio content={entry.data}>
-  <Content />
+
+<Portfolio content={project.data}>
+	<Content />
 </Portfolio>

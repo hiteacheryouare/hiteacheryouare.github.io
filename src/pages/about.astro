@@ -1,45 +1,46 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import pattern from '../img/waves.png'
 ---
 
-<Layout title="Home">
-	<main class="p-10">
-		<div class="max-w-3xl mx-auto p-8">
-			<!-- Name -->
-			<div class="flex content-center justify-center">
-				<section class="mb-6">
-					<img src="https://avatars.githubusercontent.com/u/82683251" alt="Ryan Mullin" class="p-4 w-auto h-auto rounded-full mx-auto mb-4 border border-neutral-200">
-					<h1 class="text-5xl font-bold mb-4 text-center">Ryan Mullin</h1>
-				</section>
-			</div>
+<Layout title="About" description="Who Ryan Mullin is, in the third person.">
+	<div class="page-open">
+		<h1>Bio</h1>
+	</div>
 
-			<!-- Intro Section -->
-			<section class="mb-6">
-				<h2 class="text-xl font-semibold mb-2">Bio</h2>
-				<p class="mb-3">
-					Ryan Mullin is a Computer Science and Business Administration combined-major student at Northeastern University, concentrating in Financial Technology across Khoury College of Computer Sciences and the D'Amore-McKim School of Business. He is a two-time Dean's List honoree currently maintaining a 4.0 GPA.
-				</p>
-				<p class="mb-3">
-					Ryan is the developer behind <a href="https://hiteacheryouare.github.io/arenaswap/">ArenaSwap</a>, a cross-browser extension that monitors live sports games across a user's open tabs and automatically switches the active tab to whichever game is most exciting at any given moment, scored in real time by a custom algorithm he designed called PowerScore. He also maintains <a href="https://demotivator.web.app/">(de)Motivator</a>, a long-running multi-platform side project, and has shipped freelance websites for nonprofits and community organizations including The Book Nook Project and the Deerwood Tritons.
-				</p>
-				<p class="mb-3">
-					He serves as the Sponsorship &amp; Fundraising Lead at Northeastern Electric Racing, the university's 400+ member Formula SAE Electric team, where he leads corporate outreach and partnership strategy with companies including Rivian, Tesla, and Shield AI. He is also a Husky Ambassador in Northeastern University Admissions.
-				</p>
-				<p>
-					Outside of academics, Ryan is the Head Lifeguard at Larchmont Swim Club in Mt. Laurel, NJ, and an Assistant Coach for the Larchmont Barracudas summer swim team. He is based between Boston, MA and Philadelphia, PA.
-				</p>
-			</section>
-	
-		
-	
+	<div class="about">
+		<div class="copy">
+			<p>
+				Ryan Mullin is a Computer Science and Business Administration combined-major student
+				at Northeastern University, concentrating in Financial Technology across Khoury
+				College of Computer Sciences and the D'Amore-McKim School of Business. He is a
+				two-time Dean's List honoree currently maintaining a 4.0 GPA.
+			</p>
+			<p>
+				Ryan is the developer behind <a href="https://hiteacheryouare.github.io/arenaswap/"
+					>ArenaSwap</a
+				>, a cross-browser extension that monitors live sports games across a user's open
+				tabs and automatically switches the active tab to whichever game is most exciting at
+				any given moment, scored in real time by a custom algorithm he designed called
+				PowerScore. He also maintains <a href="https://demotivator.web.app/">(de)Motivator</a
+				>, a long-running multi-platform side project, and has shipped freelance websites for
+				nonprofits and community organizations including The Book Nook Project and the
+				Deerwood Tritons.
+			</p>
+			<p>
+				He serves as the Sponsorship &amp; Fundraising Lead at Northeastern Electric Racing,
+				the university's 400+ member Formula SAE Electric team, where he leads corporate
+				outreach and partnership strategy with companies including Rivian, Tesla, and Shield
+				AI. He is also a Husky Ambassador in Northeastern University Admissions.
+			</p>
+			<p>
+				Outside of academics, Ryan is the Head Lifeguard at Larchmont Swim Club in Mt.
+				Laurel, NJ, and an Assistant Coach for the Larchmont Barracudas summer swim team. He
+				is based between Boston, MA and Philadelphia, PA.
+			</p>
 		</div>
-	</main>
-</Layout>
 
-<style>
-	#topPattern {
-		padding: 2rem;
-	}
-</style>
+		<figure class="about-portrait">
+			<img src="https://avatars.githubusercontent.com/u/82683251" alt="Ryan Mullin" />
+		</figure>
+	</div>
+</Layout>

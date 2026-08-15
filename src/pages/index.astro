@@ -1,68 +1,137 @@
 ---
-import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/hero';
-import BsAlert from '../components/bsAlert.svelte';
-const projects = await getCollection("portfolio");
+import { getCollection } from 'astro:content';
+import { techStack } from '../utils/socialContacts';
+
+const projects = await getCollection('portfolio');
 projects.sort(
-  (a, b) =>
-    new Date(b.data.date).valueOf() -
-    new Date(a.data.date).valueOf()
+	(a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
 );
+
+const releases = await getCollection('press');
+releases.sort(
+	(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+);
+const recentReleases = releases.slice(0, 3);
 ---
 
-<Layout title="Home">
-  <main class="">
-    <Hero client:only="react">
-      {projects.map((project, index) => (
-        <div
-          class="group relative rounded-2xl border border-gray-200 overflow-hidden hover:border-secondary hover:shadow-lg transition-all duration-300"
-        >
-          <div class="grid md:grid-cols-2 gap-8 p-8 md:p-12">
-            <div class="space-y-4">
-              <div class="flex items-center gap-3">
-                <div class="h-px flex-1 bg-gray-200" />
-                <span class="text-sm font-mono text-gray-500">{project.data.date || 'N/A'}</span>
-              </div>
-              <a href={`/portfolio/projects/${project.id}`} class="text-3xl leading-[3.25rem] md:text-4xl md:leading-[3.5rem] font-bold">
-                {project.data.name || 'Untitled Project'}
-              </a>
-              <p class="text-gray-600 dark:text-neutral-200 leading-relaxed">
-                {project.data.description || 'No description available.'}
-              </p>
-              <div class="flex flex-wrap gap-2 pt-4">
-                {project.data.tags?.map((tag) => (
-                  <span class="badge rounded-pill text-bg-primary">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              {project.data.url && (
-                <a 
-                  href={project.data.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="group/btn mt-4 hover:text-secondary inline-flex items-center font-medium transition-colors"
-                >
-                  View Project
-                  <i class="bi bi-chevron-right ml-2 transition-transform group-hover/btn:translate-x-1"></i>
-                </a>
-              )}
-            </div>
-            <div class="relative aspect-video rounded-xl bg-gradient-to-br from-blue-50 to-gray-100 overflow-hidden border border-gray-200 flex items-center justify-center">
-              <img
-                src={project.data.heroImage?.src || '/waves.png'}
-                alt={project.data.heroImage?.alt || project.data.name || 'Project Image'}
-                class="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      ))}
-    </Hero>
-  </main>
+<Layout title="Home" description="Ryan Mullin builds websites and browser extensions.">
+	<div class="page-open">
+		<h1>HI!!!</h1>
+		<p>
+			I'm a sophomore at Northeastern doing the combined CS &amp; Business program (Khoury +
+			D'Amore-McKim), concentrating in FinTech. Two-time Dean's List, 4.0 right now. Outside
+			of class I'm shipping software, running corporate sponsorship at Northeastern Electric
+			Racing, and head-guarding at Larchmont Swim Club.
+		</p>
+		<p class="stackline">{techStack.join(', ')}</p>
+	</div>
+
+	<section id="work" class="page-section">
+		<div class="section-head">
+			<h2>Some of my faves</h2>
+			<p>Some are for clients, some I built because I like it.</p>
+			<a href="https://github.com/hiteacheryouare">More on GitHub</a>
+		</div>
+
+		<div class="work-grid">
+			{
+				projects.map((project) => (
+					<article>
+						<div class="plate">
+							<img
+								src={project.data.heroImage?.src || '/waves.png'}
+								alt={project.data.heroImage?.alt || project.data.name}
+							/>
+						</div>
+						<h3>
+							<a href={`/portfolio/projects/${project.id}`}>{project.data.name}</a>
+							<time>{new Date(project.data.date).getFullYear()}</time>
+						</h3>
+						<p>{project.data.description}</p>
+						{project.data.tags && (
+							<p class="stackline">
+								{project.data.freelance ? 'Client work, built with ' : 'Built with '}
+								{project.data.tags.join(', ')}.
+							</p>
+						)}
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="page-section">
+		<div class="section-head">
+			<h2>Press</h2>
+			<a href="/press">All of it</a>
+		</div>
+		<ul class="release-list">
+			{
+				recentReleases.map((release) => (
+					<li>
+						<div>
+							<h3>
+								<a href={`/press/${release.id}`}>{release.data.title}</a>
+							</h3>
+							<p>{release.data.description}</p>
+						</div>
+						<time datetime={release.data.pubDate}>
+							{new Date(release.data.pubDate).toLocaleDateString('en-US', {
+								year: 'numeric',
+								month: 'short',
+								day: 'numeric',
+							})}
+						</time>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+
+	<section id="contact" class="page-section">
+		<div class="section-head">
+			<h2>Want to chat?</h2>
+		</div>
+		<div class="contact">
+			<div>
+				<p>
+					Looking for a co-op? Have freelance work? We both know you have something to say!
+				</p>
+				<p><a href="mailto:rpmullin17@gmail.com">rpmullin17@gmail.com</a></p>
+			</div>
+			<form class="contact-form" data-contact-form>
+				<div>
+					<label class="form-label" for="contactName">Name</label>
+					<input class="form-control" id="contactName" name="name" type="text" placeholder="Your name" />
+				</div>
+				<div>
+					<label class="form-label" for="contactEmail">Email</label>
+					<input class="form-control" id="contactEmail" name="email" type="email" placeholder="your@email.com" required />
+				</div>
+				<div>
+					<label class="form-label" for="contactMessage">Message</label>
+					<textarea class="form-control" id="contactMessage" name="message" rows="4" placeholder="Tell me about your project or opportunity..."></textarea>
+				</div>
+				<button class="btn btn-primary" type="submit">Send Message</button>
+			</form>
+		</div>
+	</section>
 </Layout>
 
-<style>
-
-</style>
+<script>
+	// Browsers don't reliably submit a form to a mailto: action, so compose the
+	// message into the user's mail client instead.
+	document.addEventListener('astro:page-load', () => {
+		const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+		form?.addEventListener('submit', (event) => {
+			event.preventDefault();
+			const { name, email, message } = Object.fromEntries(
+				new FormData(form).entries()
+			) as Record<string, string>;
+			const subject = encodeURIComponent(`Contact from ${name || 'the website'}`);
+			const body = encodeURIComponent(`${message}\n\nFrom: ${name}\nEmail: ${email}`);
+			window.location.href = `mailto:rpmullin17@gmail.com?subject=${subject}&body=${body}`;
+		});
+	});
+</script>
