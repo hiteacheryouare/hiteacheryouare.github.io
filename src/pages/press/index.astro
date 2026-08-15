@@ -8,42 +8,49 @@ releases.sort(
 );
 ---
 
-<Layout title="Press" description="Everything Ryan Mullin has written, and everything written about him.">
-	<div class="page__open">
-		<h1>Thoughts &amp; Ideas</h1>
-		<p>All posts organized by date.</p>
-	</div>
+<Layout
+	title="Newsroom"
+	description="Everything Ryan Mullin has written, and everything written about him."
+>
+	<div class="centered">
+		<div class="page-open">
+			<h1>Newsroom</h1>
+			<p>Everything I've written, and everything written about me.</p>
+		</div>
 
-	<div class="page__h2">
-		<h2>Releases</h2>
-		<p>{releases.length} of them</p>
+		{
+			releases.length === 0 ? (
+				<p>No posts yet. Check back soon!</p>
+			) : (
+				<ul class="release-index">
+					{releases.map((release) => (
+						<li>
+							<a class="plate no-rainbow" href={`/press/${release.id}`}>
+								<img
+									src={release.data.heroImage?.src ?? '/waves.png'}
+									alt={release.data.heroImage?.alt ?? release.data.title}
+									transition:name={release.data.heroImage?.alt ?? release.id}
+								/>
+							</a>
+							<div>
+								<time datetime={release.data.pubDate}>
+									{new Date(release.data.pubDate).toLocaleDateString('en-US', {
+										year: 'numeric',
+										month: 'long',
+										day: 'numeric',
+									})}
+								</time>
+								<h3>
+									<a href={`/press/${release.id}`} transition:name={release.data.title}>
+										{release.data.title}
+									</a>
+								</h3>
+								<p transition:name={release.data.description}>{release.data.description}</p>
+							</div>
+						</li>
+					))}
+				</ul>
+			)
+		}
 	</div>
-
-	{
-		releases.length === 0 ? (
-			<p class="stackline">No posts yet. Check back soon!</p>
-		) : (
-			<ul class="release-list">
-				{releases.map((release) => (
-					<li>
-						<div>
-							<h3>
-								<a href={`/press/${release.id}`} transition:name={release.data.title}>
-									{release.data.title}
-								</a>
-							</h3>
-							<p transition:name={release.data.description}>{release.data.description}</p>
-						</div>
-						<time datetime={release.data.pubDate}>
-							{new Date(release.data.pubDate).toLocaleDateString('en-US', {
-								year: 'numeric',
-								month: 'short',
-								day: 'numeric',
-							})}
-						</time>
-					</li>
-				))}
-			</ul>
-		)
-	}
 </Layout>

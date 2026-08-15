@@ -1,6 +1,7 @@
 ---
-import Monogram from './monogram.astro';
 import { navLinks } from '../utils/navigation';
+import lockupLight from '../img/new/rm-lockup-black.svg';
+import lockupDark from '../img/new/rm-lockup-white.svg';
 
 const { currentPath } = Astro.props;
 
@@ -11,28 +12,10 @@ const isCurrent = (href: string) => {
 ---
 
 <div class="sidebar">
-	<div class="sidebar-id">
-		<a href="/" class="no-rainbow" aria-label="Ryan Mullin, home">
-			<Monogram />
-		</a>
-		<b>Ryan<br />Mullin</b>
-		<button
-			type="button"
-			class="sidebar-toggle no-rainbow"
-			data-shell-toggle
-			aria-expanded="true"
-			aria-label="Collapse navigation"
-		>
-			<i class="bi bi-chevron-double-left" aria-hidden="true"></i>
-		</button>
-	</div>
-
-	<div class="sidebar-blurb">
-		<p>
-			I like to build cool things using cool tools, and sometimes I make things that
-			make me laugh. I hope you do too.
-		</p>
-	</div>
+	<a class="sidebar-id no-rainbow" href="/" aria-label="Ryan Mullin, home">
+		<img class="logo-light" src={lockupLight.src} alt="Ryan Mullin" />
+		<img class="logo-dark" src={lockupDark.src} alt="Ryan Mullin" />
+	</a>
 
 	<nav class="sidebar-nav" aria-label="Primary">
 		{
@@ -49,10 +32,15 @@ const isCurrent = (href: string) => {
 		}
 	</nav>
 
-	<div class="sidebar-reach">
-		<b><a href="mailto:rpmullin17@gmail.com">rpmullin17@gmail.com</a></b>
-		Boston, MA &amp; Philadelphia, PA<br />
-		<a href="https://github.com/hiteacheryouare">GitHub</a> ·
-		<a href="https://linkedin.com/in/ryanpmullin">LinkedIn</a>
-	</div>
+	<button
+		type="button"
+		class="sidebar-toggle no-rainbow"
+		data-shell-toggle
+		aria-expanded="true"
+		aria-label="Collapse navigation"
+	>
+		<i class="bi bi-chevron-double-left" aria-hidden="true"></i>
+	</button>
 </div>
+
+<div class="shell-edge" aria-hidden="true"></div>

@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import IntroTakeover from '../components/introTakeover.astro';
 import { getCollection } from 'astro:content';
-import { techStack } from '../utils/socialContacts';
 
 const projects = await getCollection('portfolio');
 projects.sort(
@@ -16,21 +16,21 @@ const recentReleases = releases.slice(0, 3);
 ---
 
 <Layout title="Home" description="Ryan Mullin builds websites and browser extensions.">
-	<div class="page-open">
-		<h1>HI!!!</h1>
-		<p>
-			I'm a sophomore at Northeastern doing the combined CS &amp; Business program (Khoury +
-			D'Amore-McKim), concentrating in FinTech. Two-time Dean's List, 4.0 right now. Outside
-			of class I'm shipping software, running corporate sponsorship at Northeastern Electric
-			Racing, and head-guarding at Larchmont Swim Club.
-		</p>
-		<p class="stackline">{techStack.join(', ')}</p>
-	</div>
+	<IntroTakeover />
+
+	<section class="hero">
+		<div>
+			<h1>I like to build cool things using cool tools.</h1>
+			<p>And sometimes I make things that make me laugh. I hope you do too.</p>
+		</div>
+		<figure class="hero-figure">
+			<img src="/IMG_1577.webp" alt="Boston at night, photographed by Ryan Mullin" />
+		</figure>
+	</section>
 
 	<section id="work" class="page-section">
 		<div class="section-head">
 			<h2>Some of my faves</h2>
-			<p>Some are for clients, some I built because I like it.</p>
 			<a href="https://github.com/hiteacheryouare">More on GitHub</a>
 		</div>
 
@@ -49,12 +49,6 @@ const recentReleases = releases.slice(0, 3);
 							<time>{new Date(project.data.date).getFullYear()}</time>
 						</h3>
 						<p>{project.data.description}</p>
-						{project.data.tags && (
-							<p class="stackline">
-								{project.data.freelance ? 'Client work, built with ' : 'Built with '}
-								{project.data.tags.join(', ')}.
-							</p>
-						)}
 					</article>
 				))
 			}
@@ -63,7 +57,7 @@ const recentReleases = releases.slice(0, 3);
 
 	<section class="page-section">
 		<div class="section-head">
-			<h2>Press</h2>
+			<h2>Newsroom</h2>
 			<a href="/press">All of it</a>
 		</div>
 		<ul class="release-list">
@@ -94,12 +88,7 @@ const recentReleases = releases.slice(0, 3);
 			<h2>Want to chat?</h2>
 		</div>
 		<div class="contact">
-			<div>
-				<p>
-					Looking for a co-op? Have freelance work? We both know you have something to say!
-				</p>
-				<p><a href="mailto:rpmullin17@gmail.com">rpmullin17@gmail.com</a></p>
-			</div>
+			<p>Looking for a co-op? Have freelance work? We both know you have something to say!</p>
 			<form class="contact-form" data-contact-form>
 				<div>
 					<label class="form-label" for="contactName">Name</label>

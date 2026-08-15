@@ -11,18 +11,18 @@ const animalFact =
 ---
 
 <div class="page-foot">
-	<small>
-		© {year} Ryan Mullin. Boston, MA &amp; Philadelphia, PA.<br />
-		Website built with ❤️ by <a href="/freelance/">Ryan Mullin</a>.
-	</small>
+	<small>© {year} Ryan Mullin</small>
 	<small class="page-foot-fact">// {animalFact}</small>
 	<nav>
+		<a class="page-foot-mail" href="mailto:rpmullin17@gmail.com">rpmullin17@gmail.com</a>
 		{
-			socialLinks.map((link) => (
-				<a href={link.href} aria-label={link.text}>
-					<i class={`bi bi-${link.icon}`} aria-hidden="true" />
-				</a>
-			))
+			socialLinks
+				.filter((link) => !link.href.startsWith('mailto:'))
+				.map((link) => (
+					<a href={link.href} aria-label={link.text}>
+						<i class={`bi bi-${link.icon}`} aria-hidden="true" />
+					</a>
+				))
 		}
 	</nav>
 </div>
@@ -36,6 +36,12 @@ const animalFact =
 
 	.page-foot nav {
 		gap: 0.875rem;
-		font-size: 1rem;
+		font-size: 1.0625rem;
+		align-items: baseline;
+	}
+
+	.page-foot-mail {
+		font-size: 0.875rem;
+		margin-inline-end: 0.5rem;
 	}
 </style>

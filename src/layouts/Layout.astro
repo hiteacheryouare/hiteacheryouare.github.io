@@ -72,15 +72,18 @@ const currentPath = Astro.url.pathname;
 		</div>
 
 		<script>
-			const COLLAPSE_AFTER = 80;
+			// Hysteresis: the column collapses once on the way down and comes back only
+			// near the top, so a normal read never sees it flip back and forth.
+			const COLLAPSE_BELOW = 240;
+			const EXPAND_ABOVE = 96;
+			const JUMP_QUIET_MS = 900;
 
 			const setupShell = () => {
 				const shell = document.querySelector<HTMLElement>('[data-shell]');
 				const toggle = document.querySelector<HTMLButtonElement>('[data-shell-toggle]');
 				if (!shell) return;
 
-				let lastScrollY = window.scrollY;
-				let pinnedOpen = false;
+				let quietUntil = 0;
 
 				const setCollapsed = (collapsed: boolean) => {
 					shell.classList.toggle('is-collapsed', collapsed);
@@ -95,28 +98,37 @@ const currentPath = Astro.url.pathname;
 				};
 
 				const onScroll = () => {
+					if (Date.now() < quietUntil) return;
 					const y = window.scrollY;
-					if (y <= COLLAPSE_AFTER) {
-						pinnedOpen = false;
-						setCollapsed(false);
-					} else if (!pinnedOpen && y > lastScrollY) {
-						setCollapsed(true);
-					} else if (!pinnedOpen && y < lastScrollY) {
-						setCollapsed(false);
-					}
-					lastScrollY = y;
+					if (y > COLLAPSE_BELOW) setCollapsed(true);
+					else if (y < EXPAND_ABOVE) setCollapsed(false);
 				};
 
-				// A deliberate click outranks scrolling until the reader returns to the top.
+				// Jumping to an anchor is navigation, not reading, so the column stays
+				// open rather than collapsing out from under the click.
+				const holdOpen = () => {
+					quietUntil = Date.now() + JUMP_QUIET_MS;
+					setCollapsed(false);
+				};
+
+				document.querySelectorAll<HTMLAnchorElement>('a[href*="#"]').forEach((link) => {
+					link.addEventListener('click', holdOpen);
+				});
+				window.addEventListener('hashchange', holdOpen);
+				if (window.location.hash) holdOpen();
+
 				toggle?.addEventListener('click', () => {
-					pinnedOpen = true;
+					quietUntil = Date.now() + JUMP_QUIET_MS;
 					setCollapsed(!shell.classList.contains('is-collapsed'));
 				});
 
 				window.addEventListener('scroll', onScroll, { passive: true });
 				document.addEventListener(
 					'astro:before-swap',
-					() => window.removeEventListener('scroll', onScroll),
+					() => {
+						window.removeEventListener('scroll', onScroll);
+						window.removeEventListener('hashchange', holdOpen);
+					},
 					{ once: true }
 				);
 			};

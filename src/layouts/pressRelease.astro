@@ -31,7 +31,7 @@ const formatDate = (value: string) =>
 	image={heroImage?.src ?? '/waves.png'}
 	imageAlt={heroImage?.alt ?? 'multicolored waves'}
 >
-	<article class:list={['release', isThirdPerson ? 'release-third' : 'release-first']}>
+	<article class:list={['release', 'centered', isThirdPerson ? 'release-third' : 'release-first']}>
 		<p class="release-back"><a href="/press">← All releases</a></p>
 
 		<header class="release-head">

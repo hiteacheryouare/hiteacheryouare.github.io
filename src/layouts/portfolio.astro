@@ -1,7 +1,7 @@
 ---
 import Layout from './Layout.astro';
 
-const { name, description, date, freelance, url, heroImage, tags } = Astro.props.content;
+const { name, description, date, freelance, url, heroImage } = Astro.props.content;
 ---
 
 <Layout
@@ -10,7 +10,7 @@ const { name, description, date, freelance, url, heroImage, tags } = Astro.props
 	image={heroImage?.src || '/waves.png'}
 	imageAlt={heroImage?.alt || name}
 >
-	<article class="project">
+	<article class="project centered">
 		<p class="release-back"><a href="/#work">← All work</a></p>
 
 		<header class="release-head">
@@ -22,7 +22,6 @@ const { name, description, date, freelance, url, heroImage, tags } = Astro.props
 			<div><dt>Year</dt><dd>{date}</dd></div>
 			<div><dt>For</dt><dd>{freelance ? 'A client' : 'Myself'}</dd></div>
 			<div><dt>Live at</dt><dd><a href={url}>{url.replace(/^https?:\/\//, '')}</a></dd></div>
-			{tags && tags.length > 0 && <div><dt>Built with</dt><dd>{tags.join(', ')}</dd></div>}
 		</dl>
 
 		{
