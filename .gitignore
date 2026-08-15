@@ -24,3 +24,6 @@ pnpm-debug.log*
 
 # design proposal scratch artifacts
 temporary/
+
+# astro generated types
+.astro/
