@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('portfolio');
+projects.sort(
+	(a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
+);
+---
+
+<Layout title="Work" description="Everything Ryan Mullin has built, client and otherwise.">
+	<div class="centered">
+		<div class="page-open">
+			<h1>Work</h1>
+			<p>Some are for clients, some I built because I like it.</p>
+		</div>
+
+		<div class="work-grid">
+			{
+				projects.map((project) => (
+					<article>
+						<a class="plate no-rainbow" href={`/portfolio/projects/${project.id}`}>
+							<img
+								src={project.data.heroImage?.src || '/waves.png'}
+								alt={project.data.heroImage?.alt || project.data.name}
+								loading="lazy"
+								decoding="async"
+								transition:name={`work-${project.id}-image`}
+							/>
+						</a>
+						<h3>
+							<a
+								href={`/portfolio/projects/${project.id}`}
+								transition:name={`work-${project.id}-title`}
+							>
+								{project.data.name}
+							</a>
+							<time>{new Date(project.data.date).getFullYear()}</time>
+						</h3>
+						<p>{project.data.description}</p>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</Layout>

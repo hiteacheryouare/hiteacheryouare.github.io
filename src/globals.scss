@@ -20,8 +20,13 @@
     --grad-orange: #f36f21ff;
     --grad-red: #c9234aff;
     --grad-purple: #645faaff;
-    --grad-blue-1: #0089cfff;
-    --grad-blue-2: #0db14bff;
+    --grad-blue: #0089cfff;
+    --grad-green: #0db14bff;
+
+    /* The gradient has always run blue then green; these names kept it honest
+       for the bar and are still referenced by it. */
+    --grad-blue-1: var(--grad-blue);
+    --grad-blue-2: var(--grad-green);
 }
 
 
@@ -39,7 +44,7 @@ a {
 
     /* animated gradient underline using ::after */
     /* Only apply to links that don't contain images or SVGs and aren't buttons */
-    &:not(:has(img)):not(:has(svg)):not(.btn)::after {
+    &:not(:has(img)):not(:has(svg)):not(.btn):not(.no-rainbow)::after {
         content: "";
         position: absolute;
         left: 0;
@@ -61,8 +66,8 @@ a {
         pointer-events: none;
     }
 
-    &:not(:has(img)):not(:has(svg)):not(.btn):hover::after,
-    &:not(:has(img)):not(:has(svg)):not(.btn):focus::after {
+    &:not(:has(img)):not(:has(svg)):not(.btn):not(.no-rainbow):hover::after,
+    &:not(:has(img)):not(:has(svg)):not(.btn):not(.no-rainbow):focus::after {
         transform: scaleX(1);
     }
 }
@@ -160,24 +165,3 @@ nav a:hover svg {
 nav a:has(svg)::after {
     display: none;
 }
-
-/* 404 page animations (moved from inline style) */
-@keyframes bounce404 {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-}
-.animateBounce { animation: bounce404 2s infinite; }
-
-@keyframes wiggle404 {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-10deg); }
-    75% { transform: rotate(10deg); }
-}
-.animateWiggle { animation: wiggle404 1s ease-in-out infinite; }
-
-@keyframes shake404 {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-    20%, 40%, 60%, 80% { transform: translateX(5px); }
-}
-.animateShakeOnLoad { animation: shake404 .5s ease-in-out; }

@@ -1,16 +1,28 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 const schema = z;
-const blog = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.md', base: "./src/content/blog" }),
+
+// `voice` decides attribution: 'first' is Ryan writing, 'third' is someone
+// writing about him.
+const press = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: "./src/content/press" }),
   schema: z.object({
     title: z.string(),
     author: z.string().default("Ryan Mullin"),
     description: z.string(),
-    pubDate: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    voice: z.enum(['first', 'third']).default('first'),
+    dateline: z.string().default('Boston, Mass.'),
     heroImage: z.object({
         src: z.string().default("/waves.png"),
         alt: z.string().default("multicolored waves"),
+        // Taller than it is wide, so the 16:9 plate would crop the subject out.
+        portrait: z.boolean().default(false),
+        // Intrinsic pixel size. The 16:9 plate reserves its own box, so this only
+        // matters for a portrait one, which sizes to the image instead.
+        width: z.number().optional(),
+        height: z.number().optional(),
     }).optional(),
     urlBase: z.string().url().optional()
   }),
@@ -43,4 +55,4 @@ const research = defineCollection({
   })
 })
 
-export const collections = { blog, portfolio, research };
+export const collections = { press, portfolio, research };

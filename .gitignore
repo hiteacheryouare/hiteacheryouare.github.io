@@ -12,9 +12,18 @@ yarn-error.log*
 pnpm-debug.log*
 
 
+.agents/
+.claude/
+
 # environment variables
 .env
 .env.production
 
 # macOS-specific files
 .DS_Store
+
+# design proposal scratch artifacts
+temporary/
+
+# astro generated types
+.astro/

@@ -1,8 +1,9 @@
 ---
-layout: "../../layouts/blogPost.astro" #dont touch
+layout: "../../layouts/pressRelease.astro" #dont touch
 title: "How I Approach Client Client Web Projects: From Idea to Reality" #Required
 description: "Get an inside look on how I work with clients to bring their ideas to reality, and all of the decisions that play into this proces." #Required
 author: "Ryan Mullin" #Required
+voice: "first" #"first" (by Ryan) or "third" (about Ryan)
 pubDate: "November 1 2025" #Required
 heroImage: 
     src: "/waves.png"

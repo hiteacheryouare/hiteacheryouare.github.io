@@ -1,0 +1,19 @@
+---
+import { getCollection, render } from 'astro:content';
+import PressRelease from '../../layouts/pressRelease.astro';
+
+export async function getStaticPaths() {
+	const releases = await getCollection('press');
+	return releases.map((release) => ({
+		params: { release: release.id },
+		props: { release },
+	}));
+}
+
+const { release } = Astro.props;
+const { Content } = await render(release);
+---
+
+<PressRelease content={release.data} id={release.id}>
+	<Content />
+</PressRelease>

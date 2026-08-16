@@ -1,12 +1,12 @@
 ---
-layout: "../../layouts/blogPost.astro"
 title: "Year One: A Postmortem, a Week of Ship, and What's Next"
 description: "A look back at my first year at Northeastern — what it cost, what it gave me, how development came alive again, and where I'm headed next."
 author: "Ryan Mullin"
+voice: "first" #"first" (by Ryan) or "third" (about Ryan)
 pubDate: "May 1 2026"
 heroImage:
     src: "/nu.jpg"
-    alt: "Centennial Common at Northeastern Univeristy"
+    alt: "Centennial Common at Northeastern University"
 ---
 
 This post is a postmortem of that year, and organized around three things: the year itself, the week I just wrapped up shipping, and what comes next. I also threw in some of my favorite Boston pictures I took while there for your enjoyment.

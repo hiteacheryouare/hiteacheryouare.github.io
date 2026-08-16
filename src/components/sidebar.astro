@@ -1,0 +1,39 @@
+---
+import Monogram from './monogram.astro';
+import { navLinks } from '../utils/navigation';
+
+const { currentPath } = Astro.props;
+
+// Project pages live under /portfolio but belong to Work as far as the nav goes.
+const isCurrent = (href: string) => {
+	if (href === '/') return currentPath === '/';
+	if (href === '/work') return currentPath.startsWith('/work') || currentPath.startsWith('/portfolio');
+	return currentPath.startsWith(href);
+};
+---
+
+<div class="sidebar" transition:persist="sidebar">
+	<a class="sidebar-id no-rainbow" href="/">
+		<Monogram />
+		<b>Ryan Mullin</b>
+	</a>
+
+	<nav class="sidebar-nav" aria-label="Primary">
+		<span class="nav-marker" data-nav-marker aria-hidden="true"></span>
+		{
+			navLinks.map((link) => (
+				<a
+					href={link.href}
+					data-mark={link.mark}
+					class:list={['no-rainbow', { 'is-here': isCurrent(link.href) }]}
+					style={`--mark: var(--grad-${link.mark})`}
+					aria-current={isCurrent(link.href) ? 'page' : undefined}
+				>
+					<span>{link.name}</span>
+				</a>
+			))
+		}
+	</nav>
+</div>
+
+<div class="shell-edge" aria-hidden="true" transition:persist="edge"></div>

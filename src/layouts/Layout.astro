@@ -1,17 +1,19 @@
 ---
-
-const { title, description } = Astro.props;
-import { SEO } from 'astro-seo'
-import '../globals.scss'
-import Footer from '../components/footer.svelte';
-import NavBar from '../components/nav.tsx';
-import '../styles/bootstrap.scss';
-import '../../node_modules/bootstrap-icons/font/bootstrap-icons.scss'
+import { SEO } from 'astro-seo';
 import { ClientRouter } from 'astro:transitions';
+import Sidebar from '../components/sidebar.astro';
+import SiteFooter from '../components/siteFooter.astro';
+import IntroTakeover from '../components/introTakeover.astro';
+import '../globals.scss';
+import '../styles/bootstrap.scss';
+import '../styles/shell.scss';
+import '../../node_modules/bootstrap-icons/font/bootstrap-icons.scss';
 
+const { title, description, image = '/waves.png', imageAlt = 'colorful, wavy rainbow waves' } = Astro.props;
+const currentPath = Astro.url.pathname;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<ClientRouter />
@@ -19,68 +21,222 @@ import { ClientRouter } from 'astro:transitions';
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/2025/RM-monogram-black-on-transparent.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description}>
+		<meta name="description" content={description} />
 		<script>
 			function setBsDarkMode() {
 				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-				document.body.setAttribute('data-bs-theme', 'dark')
+					document.body.setAttribute('data-bs-theme', 'dark');
 				} else {
-				document.body.setAttribute('data-bs-theme', 'light')
+					document.body.setAttribute('data-bs-theme', 'light');
 				}
 			}
-			setBsDarkMode()
-			document.addEventListener('astro:after-swap', setBsDarkMode)
-
+			setBsDarkMode();
+			document.addEventListener('astro:after-swap', setBsDarkMode);
 		</script>
-		<SEO 
+		<SEO
 			title={`${title} | Ryan Mullin`}
 			description={description}
-			noindex={false} 
+			noindex={false}
 			nofollow={false}
-			openGraph={
-				{
-					basic: {
-						title: `${title}`,
-						type: "website",
-						image: "/waves.png",
-						url: Astro.request.url
-					},
-					optional: {
-						description: description,
-						locale: "en-US",
-						siteName: "Ryan Mullin's Personal Website"
-					},
-					image: {
-						alt: "colorful, wavy rainbow waves"
-					}
-				}
-			}
+			openGraph={{
+				basic: {
+					title: `${title}`,
+					type: 'website',
+					image: image,
+					url: Astro.request.url,
+				},
+				optional: {
+					description: description,
+					locale: 'en-US',
+					siteName: "Ryan Mullin's Personal Website",
+				},
+				image: {
+					alt: imageAlt,
+				},
+			}}
 		/>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet"> 
-		<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=DM+Serif+Text:ital@0;1&display=swap"
+			rel="stylesheet"
+		/>
 		<script type="module" src="/themeFavicon.js"></script>
 	</head>
 	<body>
-		<nav class="">
-			<NavBar client:load />
-		</nav>
-		<main class="site-content">
-			<slot />
-		</main>
-			<Footer></Footer>
-		<style>
-			:root { --nav-offset: 4rem; }
-			.site-content { padding-top: var(--nav-offset); }
-			#pattern {
-				background-size: cover;
-				object-fit: fill;
-				width: auto;
-			}
-		</style>
+		<IntroTakeover />
+
+		<div class="page-wipe" data-page-wipe transition:persist="wipe" aria-hidden="true"></div>
+
+		<div class="shell" data-shell>
+			<Sidebar currentPath={currentPath} />
+			<main class="main-column">
+				<slot />
+				<SiteFooter />
+			</main>
+		</div>
+
+		<script>
+			const WIPE_MS = 520;
+			const IMAGE_WAIT_CAP = 900;
+
+			let markerAt = { top: 0, height: 0 };
+			let markerContract = 0;
+
+			const isCurrentHref = (href: string, path: string) => {
+				if (href === '/') return path === '/';
+				if (href === '/work') return path.startsWith('/work') || path.startsWith('/portfolio');
+				return path.startsWith(href);
+			};
+
+			// The sidebar persists across navigations, so the marker is a single element
+			// that travels rather than six that switch on and off.
+			const setupMarker = () => {
+				const nav = document.querySelector<HTMLElement>('.sidebar-nav');
+				const marker = document.querySelector<HTMLElement>('[data-nav-marker]');
+				if (!nav || !marker) return;
+
+				const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('a'));
+				const rootStyles = getComputedStyle(document.documentElement);
+
+				// The marker stretches to span where it is and where it's going, then
+				// contracts onto the target, so it reads as one elastic piece rather
+				// than a block sliding.
+				const moveTo = (link: HTMLAnchorElement | undefined) => {
+					if (!link) {
+						marker.style.opacity = '0';
+						return;
+					}
+
+					const to = { top: link.offsetTop, height: link.offsetHeight };
+					const span = {
+						top: Math.min(markerAt.top, to.top),
+						bottom: Math.max(markerAt.top + markerAt.height, to.top + to.height),
+					};
+
+					marker.style.opacity = '1';
+					marker.style.backgroundColor = rootStyles
+						.getPropertyValue(`--grad-${link.dataset.mark}`)
+						.trim();
+					marker.style.transform = `translateY(${span.top}px)`;
+					marker.style.height = `${span.bottom - span.top}px`;
+
+					window.clearTimeout(markerContract);
+					markerContract = window.setTimeout(() => {
+						marker.style.transform = `translateY(${to.top}px)`;
+						marker.style.height = `${to.height}px`;
+					}, 150);
+
+					markerAt = to;
+				};
+
+				const settle = () => {
+					const path = window.location.pathname;
+					links.forEach((link) => {
+						const here = isCurrentHref(link.getAttribute('href') ?? '', path);
+						link.classList.toggle('is-here', here);
+						if (here) link.setAttribute('aria-current', 'page');
+						else link.removeAttribute('aria-current');
+					});
+					moveTo(links.find((link) => link.classList.contains('is-here')));
+				};
+
+				if (!nav.dataset.wired) {
+					nav.dataset.wired = 'true';
+					links.forEach((link) => link.addEventListener('mouseenter', () => moveTo(link)));
+					nav.addEventListener('mouseleave', settle);
+				}
+
+				settle();
+			};
+
+			// Page to page, the rainbow grows out of the column to cover the content it
+			// is replacing, then pulls back to reveal the new page.
+			const wipe = () => document.querySelector<HTMLElement>('[data-page-wipe]');
+
+			// A transition:name element renders as a scope attribute plus a rule that
+			// hands that scope its view-transition-name. Astro hashes the scope per
+			// page, so the name in the rule is the only part two documents can share.
+			const SCOPED_NAME = /\[data-astro-transition-scope="([^"]+)"\]\s*{\s*view-transition-name:\s*([^;}]+)/g;
+
+			const morphNames = (doc: Document) => {
+				const live = new Set(
+					Array.from(doc.querySelectorAll<HTMLElement>('[data-astro-transition-scope]')).map(
+						(element) => element.dataset.astroTransitionScope
+					)
+				);
+				const names = new Set<string>();
+				doc.querySelectorAll('style').forEach((style) => {
+					for (const [, scope, name] of (style.textContent ?? '').matchAll(SCOPED_NAME)) {
+						if (live.has(scope)) names.add(name.trim());
+					}
+				});
+				return names;
+			};
+
+			// A name on both sides of the navigation is a morph, and a morph is already
+			// an animation — the rainbow stays out of its way.
+			const alreadyAnimates = (incoming: Document) => {
+				const arriving = morphNames(incoming);
+				if (arriving.size === 0) return false;
+				for (const name of morphNames(document)) {
+					if (arriving.has(name)) return true;
+				}
+				return false;
+			};
+
+			// An aborted navigation returns before the swap, so `astro:after-swap`
+			// never fires and nothing else would ever take the cover back down. A
+			// stuck cover hides the whole page, so it gets its own dead-man's switch.
+			let uncoverFallback = 0;
+			const uncover = () => {
+				clearTimeout(uncoverFallback);
+				uncoverFallback = 0;
+				wipe()?.classList.remove('is-covering');
+			};
+
+			// The page has to be in hand before we know whether it morphs, so the fetch
+			// leads and the cover follows it rather than the other way round.
+			document.addEventListener('astro:before-preparation', (event) => {
+				const panel = wipe();
+				if (!panel || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+				const original = (event as any).loader;
+				(event as any).loader = async () => {
+					await original();
+					const incoming = (event as any).newDocument as Document | undefined;
+					if (!incoming || event.defaultPrevented || alreadyAnimates(incoming)) return;
+					panel.classList.add('is-covering');
+					clearTimeout(uncoverFallback);
+					uncoverFallback = window.setTimeout(uncover, WIPE_MS + IMAGE_WAIT_CAP + 1000);
+					await new Promise((resolve) => setTimeout(resolve, WIPE_MS));
+				};
+			});
+
+			// Don't pull the cover back over a page that is still loading its
+			// pictures — wait for the ones above the fold, with a cap so a slow
+			// image can never strand the reader behind a rainbow.
+			const imagesReady = () => {
+				const pending = Array.from(document.images)
+					.filter((image) => !image.complete && image.getBoundingClientRect().top < window.innerHeight)
+					.map(
+						(image) =>
+							new Promise((resolve) => {
+								image.addEventListener('load', resolve, { once: true });
+								image.addEventListener('error', resolve, { once: true });
+							})
+					);
+				if (pending.length === 0) return Promise.resolve();
+				return Promise.race([
+					Promise.all(pending),
+					new Promise((resolve) => setTimeout(resolve, IMAGE_WAIT_CAP)),
+				]);
+			};
+
+			document.addEventListener('astro:after-swap', () => {
+				imagesReady().then(() => requestAnimationFrame(uncover));
+			});
+
+			document.addEventListener('astro:page-load', setupMarker);
+		</script>
 	</body>
 </html>

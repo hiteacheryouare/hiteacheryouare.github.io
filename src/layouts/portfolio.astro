@@ -1,281 +1,50 @@
 ---
-import { SEO } from "astro-seo";
-import Footer from "../components/footer.svelte";
-import NavBar from "../components/nav.tsx";
-import "../globals.scss";
-import '../styles/blog.scss'
-import Tag from "../components/tag.svelte";
-import { Image } from 'astro:assets';
-import pattern from '../img/waves.png'
-import FullColorFavi from '../img/2025/RM-monogram-black-on-transparent.svg'
-import WhiteLogoFavi from '../img/2025/RM-monogram-white-on-transparent.svg'
-import { ClientRouter } from 'astro:transitions';
-import '../../node_modules/bootstrap-icons/font/bootstrap-icons.scss'
+import Layout from './Layout.astro';
 
-const {
-  content: {
-    name,
-    description,
-    date,
-    freelance,
-    url,
-    heroImage,
-    tags
-  },
-} = Astro.props;
+const { name, description, date, freelance, url, heroImage } = Astro.props.content;
 
+// Matches the names the work index gives this project, so the card morphs into
+// the page. Derived from the entry id because it is unique; an alt string is not.
+const morph = `work-${Astro.props.id ?? name}`;
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <ClientRouter />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/2025/RM-monogram-black-on-transparent.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
-    <script>
-      function setBsDarkMode() {
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          document.body.setAttribute('data-bs-theme', 'dark')
-        } else {
-          document.body.setAttribute('data-bs-theme', 'light')
-        }
-      }
-      setBsDarkMode()
-      document.addEventListener('astro:after-swap', setBsDarkMode)
-		</script>
-		<SEO 
-			title={`${name} | Portfolio | Ryan Mullin`}
-			description={description}
-			noindex={false} 
-			nofollow={false}
-			openGraph={
-				{
-					basic: {
-						title: `${name}`,
-						type: "website",
-						image: heroImage.src,
-						url: Astro.request.url
-					},
-					optional: {
-						description: description,
-						locale: "en-US",
-						siteName: "Ryan Mullin",
-					},
-					image: {
-						alt: heroImage.alt
-					}
-				}
-			}
-		/>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <!-- Animated cursor follower -->
-    <div
-      id="cursor-follower"
-      class="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
-    />
+<Layout
+	title={`${name} | Portfolio`}
+	description={description}
+	image={heroImage?.src || '/waves.png'}
+	imageAlt={heroImage?.alt || name}
+>
+	<article class="project">
+		<p class="release-back"><a href="/work">← All work</a></p>
 
-    <nav class="p-10">
-      <NavBar client:load>
-        <Image 
-          src={FullColorFavi} 
-          alt='a double arrow' 
-          style={{height: '3rem'}}
-          class="logo-light"
-        />
-        <Image 
-          src={WhiteLogoFavi} 
-          alt='a double arrow' 
-          style={{height: '3rem'}}
-          class="logo-dark"
-        />
-      </NavBar>
-    </nav>
+		<header class="release-head">
+			<h1 transition:name={`${morph}-title`}>{name}</h1>
+			<p class="release-lede" transition:name={`${morph}-lede`}>{description}</p>
+		</header>
 
-    <main class="min-h-screen relative overflow-hidden">
-      <!-- Hero Header Section -->
-      <section class="px-6 md:px-12 pt-12 pb-8">
-        <div class="max-w-6xl mx-auto w-full">
-          <div class="space-y-6">
-            <!-- Breadcrumb -->
-            <a 
-              href="/#work" 
-              class="inline-flex items-center gap-2 text-sm font-mono text-gray-600 dark:text-neutral-300 hover:text-primary transition-colors group"
-            >
-              <i class="bi bi-arrow-left transition-transform group-hover:-translate-x-1"></i>
-              Back to Portfolio
-            </a>
+		<dl class="facts">
+			<div><dt>Year</dt><dd>{date}</dd></div>
+			<div><dt>For</dt><dd>{freelance ? 'A client' : 'Myself'}</dd></div>
+			<div><dt>Live at</dt><dd><a href={url}>{url.replace(/^https?:\/\//, '')}</a></dd></div>
+		</dl>
 
+		{
+			heroImage?.src && (
+				<div class="plate release-plate">
+					<img
+						src={heroImage.src}
+						alt={heroImage.alt || name}
+						decoding="async"
+						transition:name={`${morph}-image`}
+					/>
+				</div>
+			)
+		}
 
-            <!-- Project Title -->
-            <h1
-              class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
-              transition:name={name}
-            >
-              <a 
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="hover:text-primary dark:hover:text-primary-dark transition-colors inline-flex items-center gap-3 group"
-              >
-                {name}
-                <i class="bi bi-box-arrow-up-right text-3xl opacity-0 group-hover:opacity-100 transition-opacity"></i>
-              </a>
-            </h1>
+		<div class="copy">
+			<slot />
+		</div>
 
-            <div class="inline-block">
-              <span class={`px-4 py-2 rounded-full border text-sm font-mono ${
-                freelance 
-                  ? 'badge text-bg-primary' 
-                  : 'badge text-bg-secondary'
-              }`}>
-                {freelance ? '💼 Freelance Project' : '🚀 Personal Project'}
-              </span>
-            </div>
-
-
-            <!-- Metadata -->
-            <div class="flex flex-wrap items-center gap-4 text-gray-600 dark:text-neutral-200">
-                <div class="flex items-center gap-3">
-                <div class="h-px w-12 bg-primary dark:bg-primary-dark" />
-                <time class="text-sm font-mono">
-                  {date ? `Active since ${date}` : 'Recent Project'}
-                </time>
-              </div>
-            </div>
-
-            <!-- Description -->
-                <p 
-              class="text-xl md:text-2xl text-gray-700 dark:text-neutral-200 leading-relaxed max-w-4xl"
-              transition:name={description}
-            >
-              {description}
-            </p>
-
-            <!-- Tags -->
-            {tags && tags.length > 0 && (
-              <div class="flex flex-wrap gap-2 pt-4">
-                {tags.map(tag => (
-                  <Tag text={tag} transition:name={tag} client:only />
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      <!-- Hero Image Section -->
-      <section class="px-6 md:px-12 pb-16">
-        <div class="max-w-6xl mx-auto w-full">
-          <div class="aspect-video bg-gradient-to-br from-blue-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-2xl">
-            <img
-              src={!!heroImage.src ? heroImage.src : "/waves.png"}
-              alt={!!heroImage.alt ? heroImage.alt : "Multicolored abstract waves pattern"}
-              class="w-full h-full object-cover"
-              transition:name={heroImage.alt ?? "image"}
-            />
-          </div>
-        </div>
-      </section>
-
-      <!-- Project Content -->
-      <article class="px-6 md:px-12 pb-24">
-        <div class="max-w-4xl mx-auto w-full">
-          <div class="prose prose-lg dark:prose-invert max-w-none
-                      prose-headings:font-bold prose-headings:tracking-tight
-                      prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
-                      prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
-                      prose-p:text-gray-700 dark:prose-p:text-neutral-200 prose-p:leading-relaxed prose-p:mb-6
-                      prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-                      prose-strong:text-gray-900 dark:prose-strong:text-gray-100 prose-strong:font-semibold
-                      prose-code:text-primary prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
-                      prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-700 prose-pre:rounded-xl
-                      prose-img:rounded-xl prose-img:border prose-img:border-gray-200 dark:prose-img:border-gray-700
-                      prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600 dark:prose-blockquote:text-neutral-300
-                      prose-ul:list-disc prose-ul:pl-6 prose-ul:space-y-2
-                      prose-ol:list-decimal prose-ol:pl-6 prose-ol:space-y-2">
-            <slot />
-          </div>
-
-          <!-- Project Links Section -->
-          <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
-            <div class="flex flex-wrap gap-4">
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-primary flex items-center gap-2"
-              >
-                <i class="bi bi-globe"></i>
-                Visit Live Site
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Share Section -->
-          <div class="mt-12 flex items-center justify-between flex-wrap gap-4 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-            <p class="font-mono text-lg text-gray-600 dark:text-neutral-300">
-              Wanna share?
-            </p>
-            <div class="flex items-center gap-3">
-              <a
-                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(name)}&url=${encodeURIComponent(Astro.request.url)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="w-10 h-10 rounded-full border border-neutral-200 dark:border-gray-600 flex items-center justify-center hover:border-primary dark:hover:border-primary-dark hover:text-primary dark:hover:text-primary-dark transition-colors text-primary dark:text-primary-dark"
-                aria-label="Share on X"
-              >
-                <i class="bi bi-twitter-x"></i>
-              </a>
-              <a
-                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.request.url)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="w-10 h-10 rounded-full border border-neutral-200 dark:border-gray-600 flex items-center justify-center hover:border-primary dark:hover:border-primary-dark hover:text-primary dark:hover:text-primary-dark transition-colors text-primary dark:text-primary-dark"
-                aria-label="Share on LinkedIn"
-              >
-                <i class="bi bi-linkedin"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </article>
-    </main>
-
-      <Footer></Footer>
-
-		<style>
-			#pattern {
-				background-size: cover;
-				object-fit: fill;
-				width: auto;
-			}
-		</style>
-
-    <script>
-      // Cursor follower effect
-      const cursorFollower = document.getElementById('cursor-follower');
-      
-      const handleMouseMove = (e: MouseEvent) => {
-        if (cursorFollower) {
-          cursorFollower.style.background = `radial-gradient(400px at ${e.clientX}px ${e.clientY}px, rgba(3, 91, 255, 0.08), transparent 50%)`;
-        }
-      };
-
-      window.addEventListener('mousemove', handleMouseMove);
-    </script>
-	</body>
-</html>
+		<p class="release-share"><a href={url}>Visit the live site</a></p>
+	</article>
+</Layout>

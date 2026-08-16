@@ -1,0 +1,122 @@
+---
+import Layout from './Layout.astro';
+import { Image } from 'astro:assets';
+import signature from '../../public/signature-blue.png';
+import { formatArticleDate, articleDateAttr } from '../utils/articleDate';
+
+const data = Astro.props.content ?? Astro.props.frontmatter;
+const {
+	title,
+	description,
+	author = 'Ryan Mullin',
+	pubDate,
+	updatedDate,
+	heroImage,
+	voice,
+	dateline,
+} = data;
+
+const isThirdPerson = voice === 'third';
+
+// Every name has to be unique within its document and identical to the one the
+// index gives the same release, or the morph doesn't pair up. The entry id is
+// unique by construction; the opinion pages have no id and no index to morph
+// from, so their title stands in.
+const morph = `press-${Astro.props.id ?? title}`;
+
+// Rendering the slot up front gives us the body twice over: once to count for
+// the reading time, once to print. Markdown that sets this file as its `layout`
+// and pages that wrap it as a component both land here the same way.
+const body = await Astro.slots.render('default');
+const prose = body
+	.replace(/<(pre|code|figure)[\s\S]*?<\/\1>/g, ' ')
+	.replace(/<[^>]*>/g, ' ')
+	.replace(/&[a-z]+;|&#\d+;/gi, ' ');
+const words = prose.split(/\s+/).filter(Boolean).length;
+const readingMinutes = Math.max(1, Math.round(words / 220));
+---
+
+<Layout
+	title={title}
+	description={description}
+	image={heroImage?.src ?? '/waves.png'}
+	imageAlt={heroImage?.alt ?? 'multicolored waves'}
+>
+	<article class:list={['release', isThirdPerson ? 'release-third' : 'release-first']}>
+		<p class="release-back"><a href="/press">← All releases</a></p>
+
+		<header class="release-head">
+			<h1 transition:name={`${morph}-title`}>{title}</h1>
+			<p class="release-lede" transition:name={`${morph}-lede`}>{description}</p>
+			<p class="release-by">
+				{isThirdPerson ? `Filed by ${author}` : `By ${author}`}
+				{isThirdPerson && dateline && ` · ${dateline}`}
+				{
+					pubDate && (
+						<>
+							{' · '}
+							<time datetime={articleDateAttr(pubDate)} transition:name={`${morph}-date`}>
+								{formatArticleDate(pubDate)}
+							</time>
+						</>
+					)
+				}
+				{
+					updatedDate && (
+						<span class="release-updated">Updated {formatArticleDate(updatedDate)}</span>
+					)
+				}
+				{' · '}{readingMinutes} min read
+			</p>
+		</header>
+
+		{
+			heroImage?.src && (
+				<div
+					class:list={['plate', 'release-plate', heroImage.portrait && 'plate-portrait']}
+				>
+					<img
+						src={heroImage.src}
+						alt={heroImage.alt ?? title}
+						width={heroImage.width}
+						height={heroImage.height}
+						decoding="async"
+						transition:name={`${morph}-image`}
+					/>
+				</div>
+			)
+		}
+
+		<div class="copy release-body" set:html={body} />
+
+		{
+			isThirdPerson ? (
+				<aside class="boilerplate">
+					<h2>About Ryan Mullin</h2>
+					<p>
+						Ryan Mullin is a computer science and business student at Northeastern
+						University who builds websites and browser extensions. He is based between
+						Boston, MA and Philadelphia, PA, and can be reached at{' '}
+						<a href="mailto:rpmullin17@gmail.com">rpmullin17@gmail.com</a>.
+					</p>
+				</aside>
+			) : (
+				<div class="release-sign">
+					<Image src={signature} alt="Ryan Mullin's signature" width={220} />
+				</div>
+			)
+		}
+
+		<p class="release-share">
+			Wanna share? <a
+				href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.request.url)}`}
+				target="_blank"
+				rel="noopener noreferrer">X</a
+			> · <a
+				href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.request.url)}`}
+				target="_blank"
+				rel="noopener noreferrer">LinkedIn</a
+			>
+		</p>
+	</article>
+</Layout>
