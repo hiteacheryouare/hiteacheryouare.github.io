@@ -13,21 +13,23 @@ const formattedDate = new Date(publishDate).toLocaleDateString('en-US', {
 	month: 'long',
 	day: 'numeric',
 });
+
+const readingMinutes = Math.max(1, Math.round(wordCount / 220));
 ---
 
-<article class="research centered">
+<article class="research">
 	<p class="release-back"><a href="/research">← All research</a></p>
 
 	<header class="release-head">
 		<h1 transition:name={title}>{title}</h1>
 		<p class="release-by">
 			{typeLabel} · {author || 'Ryan Mullin'} ·
-			<time datetime={publishDate} transition:name={publishDate}>{formattedDate}</time> ·
-			{wordCount.toLocaleString()} words
+			<time datetime={publishDate} transition:name={publishDate}>{formattedDate}</time>
+			{` · ${wordCount.toLocaleString()} words · ${readingMinutes} min read`}
 		</p>
 	</header>
 
-	<div class="copy">
+	<div class="copy research-body">
 		<slot />
 	</div>
 

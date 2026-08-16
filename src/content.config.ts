@@ -12,10 +12,12 @@ const press = defineCollection({
     description: z.string(),
     pubDate: z.string(),
     voice: z.enum(['first', 'third']).default('first'),
-    dateline: z.string().default('BOSTON, MASS.'),
+    dateline: z.string().default('Boston, Mass.'),
     heroImage: z.object({
         src: z.string().default("/waves.png"),
         alt: z.string().default("multicolored waves"),
+        // Taller than it is wide, so the 16:9 plate would crop the subject out.
+        portrait: z.boolean().default(false),
     }).optional(),
     urlBase: z.string().url().optional()
   }),

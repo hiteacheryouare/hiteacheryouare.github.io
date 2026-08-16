@@ -23,6 +23,13 @@ const formatDate = (value: string) =>
 		month: 'long',
 		day: 'numeric',
 	});
+
+// Rendering the slot up front gives us the body twice over: once to count for
+// the reading time, once to print. Markdown that sets this file as its `layout`
+// and pages that wrap it as a component both land here the same way.
+const body = await Astro.slots.render('default');
+const words = body.replace(/<[^>]*>/g, ' ').split(/\s+/).filter(Boolean).length;
+const readingMinutes = Math.max(1, Math.round(words / 220));
 ---
 
 <Layout
@@ -31,7 +38,7 @@ const formatDate = (value: string) =>
 	image={heroImage?.src ?? '/waves.png'}
 	imageAlt={heroImage?.alt ?? 'multicolored waves'}
 >
-	<article class:list={['release', 'centered', isThirdPerson ? 'release-third' : 'release-first']}>
+	<article class:list={['release', isThirdPerson ? 'release-third' : 'release-first']}>
 		<p class="release-back"><a href="/press">← All releases</a></p>
 
 		<header class="release-head">
@@ -39,6 +46,7 @@ const formatDate = (value: string) =>
 			<p class="release-lede">{description}</p>
 			<p class="release-by">
 				{isThirdPerson ? `Filed by ${author}` : `By ${author}`}
+				{isThirdPerson && dateline && ` · ${dateline}`}
 				{
 					pubDate && (
 						<>
@@ -50,12 +58,15 @@ const formatDate = (value: string) =>
 					)
 				}
 				{updatedDate && <span class="release-updated">Updated {formatDate(updatedDate)}</span>}
+				{' · '}{readingMinutes} min read
 			</p>
 		</header>
 
 		{
 			heroImage?.src && (
-				<div class="plate release-plate">
+				<div
+					class:list={['plate', 'release-plate', heroImage.portrait && 'plate-portrait']}
+				>
 					<img
 						src={heroImage.src}
 						alt={heroImage.alt ?? title}
@@ -65,17 +76,7 @@ const formatDate = (value: string) =>
 			)
 		}
 
-		{
-			isThirdPerson && pubDate && (
-				<p class="release-dateline">
-					{dateline} — {formatDate(pubDate)}
-				</p>
-			)
-		}
-
-		<div class="copy release-body">
-			<slot />
-		</div>
+		<div class="copy release-body" set:html={body} />
 
 		{
 			isThirdPerson ? (

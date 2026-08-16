@@ -58,7 +58,7 @@ const currentPath = Astro.url.pathname;
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=DM+Serif+Text:ital@0;1&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=DM+Serif+Text:ital@0;1&display=swap"
 			rel="stylesheet"
 		/>
 		<script type="module" src="/themeFavicon.js"></script>
@@ -154,23 +154,49 @@ const currentPath = Astro.url.pathname;
 			// is replacing, then pulls back to reveal the new page.
 			const wipe = () => document.querySelector<HTMLElement>('[data-page-wipe]');
 
-			// Astro tags every transition:name element with a transition scope. If the
-			// link you clicked carries one, that navigation already has a morph of its
-			// own and does not want a rainbow over the top of it.
-			const morphsAlready = (source: Element | null) =>
-				!!source &&
-				(!!source.closest('[data-astro-transition-scope]') ||
-					!!source.querySelector('[data-astro-transition-scope]'));
+			// A transition:name element renders as a scope attribute plus a rule that
+			// hands that scope its view-transition-name. Astro hashes the scope per
+			// page, so the name in the rule is the only part two documents can share.
+			const SCOPED_NAME = /\[data-astro-transition-scope="([^"]+)"\]\s*{\s*view-transition-name:\s*([^;}]+)/g;
 
+			const morphNames = (doc: Document) => {
+				const live = new Set(
+					Array.from(doc.querySelectorAll<HTMLElement>('[data-astro-transition-scope]')).map(
+						(element) => element.dataset.astroTransitionScope
+					)
+				);
+				const names = new Set<string>();
+				doc.querySelectorAll('style').forEach((style) => {
+					for (const [, scope, name] of (style.textContent ?? '').matchAll(SCOPED_NAME)) {
+						if (live.has(scope)) names.add(name.trim());
+					}
+				});
+				return names;
+			};
+
+			// A name on both sides of the navigation is a morph, and a morph is already
+			// an animation — the rainbow stays out of its way.
+			const alreadyAnimates = (incoming: Document) => {
+				const arriving = morphNames(incoming);
+				if (arriving.size === 0) return false;
+				for (const name of morphNames(document)) {
+					if (arriving.has(name)) return true;
+				}
+				return false;
+			};
+
+			// The page has to be in hand before we know whether it morphs, so the fetch
+			// leads and the cover follows it rather than the other way round.
 			document.addEventListener('astro:before-preparation', (event) => {
 				const panel = wipe();
 				if (!panel || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-				if (morphsAlready((event as any).sourceElement ?? null)) return;
 				const original = (event as any).loader;
 				(event as any).loader = async () => {
+					await original();
+					const incoming = (event as any).newDocument as Document | undefined;
+					if (!incoming || event.defaultPrevented || alreadyAnimates(incoming)) return;
 					panel.classList.add('is-covering');
 					await new Promise((resolve) => setTimeout(resolve, WIPE_MS));
-					await original();
 				};
 			});
 
