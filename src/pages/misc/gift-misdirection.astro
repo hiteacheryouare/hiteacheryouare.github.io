@@ -10,12 +10,18 @@
 		text-align: center;
 		font-size: clamp(2.5rem, 9vw, 8rem);
 		line-height: 1.05;
-		color: #035bff;
+		color: #005a8c;
 	}
 
+	/* The page carries no layout, so it has to state its own dark canvas
+	   before the lighter blue has anything to sit on. */
 	@media (prefers-color-scheme: dark) {
+		:root {
+			background: #101216;
+		}
+
 		h1 {
-			color: #66b3ff;
+			color: #6ec9f7;
 		}
 	}
 </style>

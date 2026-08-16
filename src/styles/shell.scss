@@ -10,6 +10,14 @@
 	--rule: rgba(15, 16, 19, 0.14);
 	--rule-soft: rgba(15, 16, 19, 0.08);
 
+	// Links are the rainbow's blue taken to a readable depth, so a link in the
+	// text belongs to the same palette as the edge beside it. Hover always moves
+	// away from the paper, never toward it.
+	--link: #005a8c;
+	--link-hover: #003f63;
+	--bs-link-color-rgb: 0, 90, 140;
+	--bs-link-hover-color-rgb: 0, 63, 99;
+
 	--side-width: 19.5rem;
 	--side-pad: 1.5rem;
 	--rail-mark: 10px;
@@ -39,7 +47,7 @@
 	);
 }
 
-[data-bs-theme='dark'] {
+@mixin dark-tokens {
 	--paper: #101216;
 	--paper-sunk: #171a1f;
 	--ink: #f2f3f5;
@@ -47,11 +55,87 @@
 	--ink-3: #8c929b;
 	--rule: rgba(242, 243, 245, 0.16);
 	--rule-soft: rgba(242, 243, 245, 0.09);
+
+	--link: #6ec9f7;
+	--link-hover: #a3ddfb;
+	--bs-link-color-rgb: 110, 201, 247;
+	--bs-link-hover-color-rgb: 163, 221, 251;
+}
+
+[data-bs-theme='dark'] {
+	@include dark-tokens;
+}
+
+// The theme attribute is set by a script, so on its own it hands the first
+// paint to the light palette. Stating the same tokens against the media query
+// means dark is dark before any JavaScript runs.
+@media (prefers-color-scheme: dark) {
+	:root {
+		@include dark-tokens;
+	}
 }
 
 body {
 	background: var(--paper);
 	color: var(--ink);
+}
+
+// One statement of link colour for the whole site. It lives here because
+// shell.scss is the last sheet every layout loads; saying it anywhere else
+// means the cascade decides the palette by file order.
+a {
+	position: relative;
+	color: var(--link);
+	text-decoration: none;
+	transition: color 0.18s ease;
+
+	&:hover,
+	&:focus {
+		color: var(--link-hover);
+		outline: none;
+	}
+
+	// The gradient underline skips links that are already a picture, a button
+	// or an opted-out surface.
+	&:not(:has(img)):not(:has(svg)):not(.btn):not(.no-rainbow)::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: -2px;
+		height: 2px;
+		background: var(--rainbow-x);
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+		pointer-events: none;
+	}
+
+	&:not(:has(img)):not(:has(svg)):not(.btn):not(.no-rainbow):hover::after,
+	&:not(:has(img)):not(:has(svg)):not(.btn):not(.no-rainbow):focus::after {
+		transform: scaleX(1);
+	}
+}
+
+// A link inside an opted-out surface stays opted out. The :not() chain above
+// carries real specificity, so this has to out-weigh it rather than just
+// follow it.
+.no-rainbow a:not(:has(img)):not(:has(svg)):not(.btn)::after {
+	content: none;
+}
+
+::selection {
+	background-color: var(--link);
+	color: var(--paper);
+}
+
+blockquote {
+	margin: -10px -10px 20px;
+	padding: 10px;
+	border-radius: 5px;
+	max-width: 100%;
+	height: auto;
+	border-inline-start: 2px solid var(--link);
 }
 
 .shell {

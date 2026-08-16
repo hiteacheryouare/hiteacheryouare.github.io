@@ -87,42 +87,6 @@ table {
 		  }
 }
 
-blockquote {
-    padding: 0;
-    padding-inline-start: 16px;
-    margin: -10px -10px 20px;
-    padding: 10px;
-    border-radius: 5px;
-    max-width: 100%;
-    height: auto;
-    border-inline-start: 2px solid $primary !important;
-}
-
-@media (prefers-color-scheme: dark) {
-    blockquote {
-        padding: 0;
-        padding-inline-start: 16px;
-        margin: -10px -10px 20px;
-        padding: 10px;
-        border-radius: 5px;
-        max-width: 100%;
-        height: auto;
-		border-inline-start: 2px solid $primary-dark !important;
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-	a {
-		color: $primary-dark;
-
-		&:hover,
-		&:focus {
-			color: $primary-dark;
-			outline: none;
-		}
-	}
-}
-
 .gradient-bar-ya-ya-yah {
     display: flex;
     justify-content: center;
