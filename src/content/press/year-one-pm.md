@@ -6,7 +6,7 @@ voice: "first" #"first" (by Ryan) or "third" (about Ryan)
 pubDate: "May 1 2026"
 heroImage:
     src: "/nu.jpg"
-    alt: "Centennial Common at Northeastern Univeristy"
+    alt: "Centennial Common at Northeastern University"
 ---
 
 This post is a postmortem of that year, and organized around three things: the year itself, the week I just wrapped up shipping, and what comes next. I also threw in some of my favorite Boston pictures I took while there for your enjoyment.

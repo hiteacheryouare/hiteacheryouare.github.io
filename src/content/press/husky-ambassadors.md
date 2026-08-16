@@ -6,8 +6,10 @@ voice: "third"
 dateline: "Boston, Mass."
 pubDate: "January 5 2026"
 heroImage:
-    src: "/waves.png"
-    alt: "abstract waves"
+    src: "/ryan-husky-ambassadors.jpg"
+    alt: "Ryan Mullin smiling in a black jacket in front of a Northeastern University step-and-repeat backdrop, between a cutout of the red husky mascot and a cutout of a red foam finger"
+    width: 1400
+    height: 787
 ---
 
 Ryan Mullin has been accepted to Husky Ambassadors and begins training this month to work in Northeastern University Admissions as an admissions ambassador. Students typically join later in their time at Northeastern; Mullin was accepted in his first year.
