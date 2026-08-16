@@ -1,4 +1,6 @@
 ---
+import { formatArticleDate, articleDateAttr } from '../utils/articleDate';
+
 const { title, author, publishDate, wordCount, type } = Astro.props.content;
 
 const typeLabels: Record<string, string> = {
@@ -8,11 +10,7 @@ const typeLabels: Record<string, string> = {
 };
 const typeLabel = typeLabels[type] ?? type;
 
-const formattedDate = new Date(publishDate).toLocaleDateString('en-US', {
-	year: 'numeric',
-	month: 'long',
-	day: 'numeric',
-});
+const formattedDate = formatArticleDate(publishDate);
 
 const readingMinutes = Math.max(1, Math.round(wordCount / 220));
 ---
@@ -24,7 +22,9 @@ const readingMinutes = Math.max(1, Math.round(wordCount / 220));
 		<h1 transition:name={title}>{title}</h1>
 		<p class="release-by">
 			{typeLabel} · {author || 'Ryan Mullin'} ·
-			<time datetime={publishDate} transition:name={publishDate}>{formattedDate}</time>
+			<time datetime={articleDateAttr(publishDate)} transition:name={publishDate}>
+				{formattedDate}
+			</time>
 			{` · ${wordCount.toLocaleString()} words · ${readingMinutes} min read`}
 		</p>
 	</header>

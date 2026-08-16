@@ -2,6 +2,10 @@
 import Layout from './Layout.astro';
 
 const { name, description, date, freelance, url, heroImage } = Astro.props.content;
+
+// Matches the names the work index gives this project, so the card morphs into
+// the page. Derived from the entry id because it is unique; an alt string is not.
+const morph = `work-${Astro.props.id ?? name}`;
 ---
 
 <Layout
@@ -10,12 +14,12 @@ const { name, description, date, freelance, url, heroImage } = Astro.props.conte
 	image={heroImage?.src || '/waves.png'}
 	imageAlt={heroImage?.alt || name}
 >
-	<article class="project centered">
+	<article class="project">
 		<p class="release-back"><a href="/work">← All work</a></p>
 
 		<header class="release-head">
-			<h1 transition:name={name}>{name}</h1>
-			<p class="release-lede" transition:name={description}>{description}</p>
+			<h1 transition:name={`${morph}-title`}>{name}</h1>
+			<p class="release-lede" transition:name={`${morph}-lede`}>{description}</p>
 		</header>
 
 		<dl class="facts">
@@ -30,7 +34,8 @@ const { name, description, date, freelance, url, heroImage } = Astro.props.conte
 					<img
 						src={heroImage.src}
 						alt={heroImage.alt || name}
-						transition:name={heroImage.alt ?? 'image'}
+						decoding="async"
+						transition:name={`${morph}-image`}
 					/>
 				</div>
 			)

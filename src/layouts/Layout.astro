@@ -185,6 +185,16 @@ const currentPath = Astro.url.pathname;
 				return false;
 			};
 
+			// An aborted navigation returns before the swap, so `astro:after-swap`
+			// never fires and nothing else would ever take the cover back down. A
+			// stuck cover hides the whole page, so it gets its own dead-man's switch.
+			let uncoverFallback = 0;
+			const uncover = () => {
+				clearTimeout(uncoverFallback);
+				uncoverFallback = 0;
+				wipe()?.classList.remove('is-covering');
+			};
+
 			// The page has to be in hand before we know whether it morphs, so the fetch
 			// leads and the cover follows it rather than the other way round.
 			document.addEventListener('astro:before-preparation', (event) => {
@@ -196,6 +206,8 @@ const currentPath = Astro.url.pathname;
 					const incoming = (event as any).newDocument as Document | undefined;
 					if (!incoming || event.defaultPrevented || alreadyAnimates(incoming)) return;
 					panel.classList.add('is-covering');
+					clearTimeout(uncoverFallback);
+					uncoverFallback = window.setTimeout(uncover, WIPE_MS + IMAGE_WAIT_CAP + 1000);
 					await new Promise((resolve) => setTimeout(resolve, WIPE_MS));
 				};
 			});
@@ -221,9 +233,7 @@ const currentPath = Astro.url.pathname;
 			};
 
 			document.addEventListener('astro:after-swap', () => {
-				imagesReady().then(() =>
-					requestAnimationFrame(() => wipe()?.classList.remove('is-covering'))
-				);
+				imagesReady().then(() => requestAnimationFrame(uncover));
 			});
 
 			document.addEventListener('astro:page-load', setupMarker);

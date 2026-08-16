@@ -1,5 +1,4 @@
 ---
-layout: "../../layouts/pressRelease.astro"
 title: "Ryan Mullin Commits to Northeastern University"
 description: "Mullin will study computer science and business administration in Boston beginning this fall."
 author: "Ryan Mullin"

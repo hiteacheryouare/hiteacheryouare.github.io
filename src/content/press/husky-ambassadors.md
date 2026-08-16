@@ -1,5 +1,4 @@
 ---
-layout: "../../layouts/pressRelease.astro"
 title: "Ryan Mullin Accepted to Northeastern's Husky Ambassadors"
 description: "Mullin begins training this month as an admissions ambassador, a role most students take on later than their first year."
 author: "Ryan Mullin"

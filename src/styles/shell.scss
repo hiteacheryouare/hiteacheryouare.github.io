@@ -694,17 +694,19 @@ body.is-taken-over {
 	}
 }
 
-// --- press releases and research -----------------------------------------
+// --- press releases, research and projects -------------------------------
 //
 // One set of furniture, two attributions: a release Ryan wrote gets a byline
 // and his signature, one written about him gets a dateline and boilerplate.
-// Research borrows the same masthead.
+// Research and project pages borrow the same masthead.
 //
 // The article itself sets the measure so the centred masthead and the ragged
-// body below it share one axis; the blocks inside just fill it.
+// body below it share one axis; the blocks inside just fill it. Anything using
+// `.release-head` has to be in this list or its head and body drift apart.
 
 .release,
-.research {
+.research,
+.project {
 	max-width: var(--article-measure);
 	margin-inline: auto;
 }
@@ -712,9 +714,11 @@ body.is-taken-over {
 .release-first { --article-measure: 38rem; }
 .release-third { --article-measure: 42rem; }
 .research { --article-measure: 42rem; }
+.project { --article-measure: 42rem; }
 
 .release .copy,
 .research .copy,
+.project .copy,
 .boilerplate {
 	max-width: none;
 }

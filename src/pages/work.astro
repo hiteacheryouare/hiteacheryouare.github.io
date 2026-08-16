@@ -23,11 +23,16 @@ projects.sort(
 							<img
 								src={project.data.heroImage?.src || '/waves.png'}
 								alt={project.data.heroImage?.alt || project.data.name}
-								transition:name={project.data.heroImage?.alt ?? project.id}
+								loading="lazy"
+								decoding="async"
+								transition:name={`work-${project.id}-image`}
 							/>
 						</a>
 						<h3>
-							<a href={`/portfolio/projects/${project.id}`} transition:name={project.data.name}>
+							<a
+								href={`/portfolio/projects/${project.id}`}
+								transition:name={`work-${project.id}-title`}
+							>
 								{project.data.name}
 							</a>
 							<time>{new Date(project.data.date).getFullYear()}</time>

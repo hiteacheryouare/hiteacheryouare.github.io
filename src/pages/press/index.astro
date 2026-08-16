@@ -1,11 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { formatArticleDate, articleDateAttr, articleDateValue } from '../../utils/articleDate';
 
 const releases = await getCollection('press');
-releases.sort(
-	(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
-);
+releases.sort((a, b) => articleDateValue(b.data.pubDate) - articleDateValue(a.data.pubDate));
 ---
 
 <Layout
@@ -24,27 +23,40 @@ releases.sort(
 				<ul class="release-index">
 					{releases.map((release) => (
 						<li>
-							<a class="plate no-rainbow" href={`/press/${release.id}`}>
+							<a
+								class:list={[
+									'plate',
+									'no-rainbow',
+									release.data.heroImage?.portrait && 'plate-portrait',
+								]}
+								href={`/press/${release.id}`}
+							>
 								<img
 									src={release.data.heroImage?.src ?? '/waves.png'}
 									alt={release.data.heroImage?.alt ?? release.data.title}
-									transition:name={release.data.heroImage?.alt ?? release.id}
+									width={release.data.heroImage?.width}
+									height={release.data.heroImage?.height}
+									loading="lazy"
+									decoding="async"
+									transition:name={`press-${release.id}-image`}
 								/>
 							</a>
 							<div>
-								<time datetime={release.data.pubDate}>
-									{new Date(release.data.pubDate).toLocaleDateString('en-US', {
-										year: 'numeric',
-										month: 'long',
-										day: 'numeric',
-									})}
+								<time
+									datetime={articleDateAttr(release.data.pubDate)}
+									transition:name={`press-${release.id}-date`}
+								>
+									{formatArticleDate(release.data.pubDate)}
 								</time>
 								<h3>
-									<a href={`/press/${release.id}`} transition:name={release.data.title}>
+									<a
+										href={`/press/${release.id}`}
+										transition:name={`press-${release.id}-title`}
+									>
 										{release.data.title}
 									</a>
 								</h3>
-								<p transition:name={release.data.description}>{release.data.description}</p>
+								<p transition:name={`press-${release.id}-lede`}>{release.data.description}</p>
 							</div>
 						</li>
 					))}

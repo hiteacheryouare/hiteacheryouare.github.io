@@ -2,6 +2,7 @@
 import Layout from './Layout.astro';
 import { Image } from 'astro:assets';
 import signature from '../../public/signature-blue.png';
+import { formatArticleDate, articleDateAttr } from '../utils/articleDate';
 
 const data = Astro.props.content ?? Astro.props.frontmatter;
 const {
@@ -11,24 +12,27 @@ const {
 	pubDate,
 	updatedDate,
 	heroImage,
-	voice = 'first',
-	dateline = 'BOSTON, MASS.',
+	voice,
+	dateline,
 } = data;
 
 const isThirdPerson = voice === 'third';
 
-const formatDate = (value: string) =>
-	new Date(value).toLocaleDateString('en-US', {
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric',
-	});
+// Every name has to be unique within its document and identical to the one the
+// index gives the same release, or the morph doesn't pair up. The entry id is
+// unique by construction; the opinion pages have no id and no index to morph
+// from, so their title stands in.
+const morph = `press-${Astro.props.id ?? title}`;
 
 // Rendering the slot up front gives us the body twice over: once to count for
 // the reading time, once to print. Markdown that sets this file as its `layout`
 // and pages that wrap it as a component both land here the same way.
 const body = await Astro.slots.render('default');
-const words = body.replace(/<[^>]*>/g, ' ').split(/\s+/).filter(Boolean).length;
+const prose = body
+	.replace(/<(pre|code|figure)[\s\S]*?<\/\1>/g, ' ')
+	.replace(/<[^>]*>/g, ' ')
+	.replace(/&[a-z]+;|&#\d+;/gi, ' ');
+const words = prose.split(/\s+/).filter(Boolean).length;
 const readingMinutes = Math.max(1, Math.round(words / 220));
 ---
 
@@ -42,8 +46,8 @@ const readingMinutes = Math.max(1, Math.round(words / 220));
 		<p class="release-back"><a href="/press">← All releases</a></p>
 
 		<header class="release-head">
-			<h1 transition:name={title}>{title}</h1>
-			<p class="release-lede">{description}</p>
+			<h1 transition:name={`${morph}-title`}>{title}</h1>
+			<p class="release-lede" transition:name={`${morph}-lede`}>{description}</p>
 			<p class="release-by">
 				{isThirdPerson ? `Filed by ${author}` : `By ${author}`}
 				{isThirdPerson && dateline && ` · ${dateline}`}
@@ -51,13 +55,17 @@ const readingMinutes = Math.max(1, Math.round(words / 220));
 					pubDate && (
 						<>
 							{' · '}
-							<time datetime={pubDate} transition:name={pubDate}>
-								{formatDate(pubDate)}
+							<time datetime={articleDateAttr(pubDate)} transition:name={`${morph}-date`}>
+								{formatArticleDate(pubDate)}
 							</time>
 						</>
 					)
 				}
-				{updatedDate && <span class="release-updated">Updated {formatDate(updatedDate)}</span>}
+				{
+					updatedDate && (
+						<span class="release-updated">Updated {formatArticleDate(updatedDate)}</span>
+					)
+				}
 				{' · '}{readingMinutes} min read
 			</p>
 		</header>
@@ -70,7 +78,10 @@ const readingMinutes = Math.max(1, Math.round(words / 220));
 					<img
 						src={heroImage.src}
 						alt={heroImage.alt ?? title}
-						transition:name={heroImage.alt ?? 'image'}
+						width={heroImage.width}
+						height={heroImage.height}
+						decoding="async"
+						transition:name={`${morph}-image`}
 					/>
 				</div>
 			)

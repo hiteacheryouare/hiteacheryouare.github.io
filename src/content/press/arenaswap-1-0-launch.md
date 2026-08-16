@@ -1,5 +1,4 @@
 ---
-layout: "../../layouts/pressRelease.astro"
 title: "Ryan Mullin Ships ArenaSwap 1.0"
 description: "ArenaSwap scores every live game in a viewer's open tabs and switches the browser to whichever one is most exciting at that moment."
 author: "Ryan Mullin"

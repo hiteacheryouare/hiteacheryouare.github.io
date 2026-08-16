@@ -10,7 +10,8 @@ const press = defineCollection({
     title: z.string(),
     author: z.string().default("Ryan Mullin"),
     description: z.string(),
-    pubDate: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
     voice: z.enum(['first', 'third']).default('first'),
     dateline: z.string().default('Boston, Mass.'),
     heroImage: z.object({
@@ -18,6 +19,10 @@ const press = defineCollection({
         alt: z.string().default("multicolored waves"),
         // Taller than it is wide, so the 16:9 plate would crop the subject out.
         portrait: z.boolean().default(false),
+        // Intrinsic pixel size. The 16:9 plate reserves its own box, so this only
+        // matters for a portrait one, which sizes to the image instead.
+        width: z.number().optional(),
+        height: z.number().optional(),
     }).optional(),
     urlBase: z.string().url().optional()
   }),

@@ -106,29 +106,38 @@ const combinations =
 	}
 </style>
 
+{/* The router only ever runs an inline script once, so the work has to happen on
+	every `astro:page-load` instead — otherwise navigating away and pressing Back
+	brings the page back with none of its text filled in. The listener outlives
+	the page it was registered on, hence the bail when the markup isn't here. */}
 <script define:vars={{ mistakes, icons, broVariations, exclamationIntensities }}>
-	const pick = (list) => list[Math.floor(Math.random() * list.length)];
+	document.addEventListener('astro:page-load', () => {
+		const icon = document.getElementById('random-icon');
+		const shout = document.getElementById('random-mistake');
+		const bro = document.getElementById('random-bro');
+		const tally = document.getElementById('reroll-count');
+		if (!icon || !shout || !bro || !tally) return;
 
-	const icon = document.getElementById('random-icon');
-	const shout = document.getElementById('random-mistake');
-	const bro = document.getElementById('random-bro');
-	const tally = document.getElementById('reroll-count');
+		const pick = (list) => list[Math.floor(Math.random() * list.length)];
 
-	let rerolls = 0;
-	let shown = '';
+		let rerolls = 0;
+		let shown = '';
 
-	const roll = () => {
-		if (shown) icon.classList.remove(shown);
-		shown = `bi-${pick(icons)}`;
-		icon.classList.add('bi', shown);
-		shout.textContent = pick(mistakes) + pick(exclamationIntensities);
-		bro.textContent = `(that means ur in the wrong spot ${pick(broVariations)})`;
-		rerolls += 1;
-		tally.textContent = rerolls.toString();
-	};
+		const roll = () => {
+			if (shown) icon.classList.remove(shown);
+			shown = `bi-${pick(icons)}`;
+			icon.classList.add('bi', shown);
+			shout.textContent = pick(mistakes) + pick(exclamationIntensities);
+			bro.textContent = `(that means ur in the wrong spot ${pick(broVariations)})`;
+			rerolls += 1;
+			tally.textContent = rerolls.toString();
+		};
 
-	roll();
+		roll();
 
-	document.querySelector('[data-go-back]').addEventListener('click', () => window.history.back());
-	document.querySelector('[data-reroll]').addEventListener('click', roll);
+		document
+			.querySelector('[data-go-back]')
+			.addEventListener('click', () => window.history.back());
+		document.querySelector('[data-reroll]').addEventListener('click', roll);
+	});
 </script>
