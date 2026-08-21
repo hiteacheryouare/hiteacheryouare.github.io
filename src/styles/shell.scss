@@ -755,6 +755,11 @@ body.is-taken-over {
 		height: auto;
 	}
 
+	a {
+		overflow-wrap: break-word;
+		word-break: break-word;
+	}
+
 	figcaption,
 	table caption {
 		font-size: 0.875rem;
