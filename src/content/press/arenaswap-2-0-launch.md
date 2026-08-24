@@ -3,7 +3,7 @@ title: "Ryan Mullin Ships ArenaSwap 2.0"
 description: "The rebuilt browser extension now tracks 31 leagues instead of 12, checks each game on its own clock based on how close it is, and speaks 11 languages."
 author: "Ryan Mullin"
 voice: "third"
-dateline: "Boston, Mass."
+dateline: "Philadelphia, P.A."
 pubDate: "August 16 2026"
 heroImage:
     src: "/arenaswap-2-promo.png"
