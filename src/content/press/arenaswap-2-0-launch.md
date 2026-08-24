@@ -12,7 +12,7 @@ heroImage:
 
 Ryan Mullin has released ArenaSwap 2.0, a rebuild of the browser extension that scores the live games in a viewer's open tabs and switches to whichever is most exciting. Coverage grows from 12 leagues to 31, spanning basketball, football, hockey, baseball, softball and soccer.
 
-The scoring algorithm, PowerScore, gets a new volatility signal that tracks how much a game's win probability swings, and now defines a "close" game differently by sport instead of using one threshold for all of them. Momentum fades faster in basketball than in soccer, blowouts stop counting as close once the final minutes arrive, and the postseason scoring boost now correctly applies to tournaments like the World Cup and the Olympics, which it had missed before. M
+The scoring algorithm, PowerScore, gets a new volatility boost that tracks how much a game's win probability swings, and now defines a "close" game differently by sport instead of using one threshold for all of them. Momentum fades faster in basketball than in soccer, blowouts stop counting as close once the final minutes arrive, and the postseason scoring boost now correctly applies to tournaments like the World Cup and the Olympics, which it had missed before.
 
 The extension no longer checks every game on the same clock. A tight game gets rescored every six seconds; a quiet one drops to 25, and a league with nothing live sleeps for two to three minutes, with the timers staggered so all 31 leagues don't hit ESPN's servers at once.
 
