@@ -14,7 +14,7 @@
     "@astrojs/prefetch": "^0.4.1",
     "@porkyproductions/hat": "^1.5.0",
     "@types/react": "^19.3.0",
-    "@types/react-dom": "^19.2.3",
+    "@types/react-dom": "^19.3.0",
     "astro": "^5.16.8",
     "astro-seo": "^0.8.4",
     "bootstrap": "^5.3.8",
@@ -35,7 +35,7 @@
     "astro-robots-txt": "^1.0.0",
     "patch-package": "^8.0.1",
     "react": "^19.3.0",
-    "react-dom": "^19.2.8",
+    "react-dom": "^19.3.0",
     "svelte": "^5.57.0"
   }
 }
