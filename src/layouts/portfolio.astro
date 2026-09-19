@@ -25,7 +25,11 @@ const morph = `work-${Astro.props.id ?? name}`;
 		<dl class="facts">
 			<div><dt>Year</dt><dd>{date}</dd></div>
 			<div><dt>For</dt><dd>{freelance ? 'A client' : 'Myself'}</dd></div>
-			<div><dt>Live at</dt><dd><a href={url}>{url.replace(/^https?:\/\//, '')}</a></dd></div>
+			{
+				url && (
+					<div><dt>Live at</dt><dd><a href={url}>{url.replace(/^https?:\/\//, '')}</a></dd></div>
+				)
+			}
 		</dl>
 
 		{
@@ -45,6 +49,8 @@ const morph = `work-${Astro.props.id ?? name}`;
 			<slot />
 		</div>
 
-		<p class="release-share"><a href={url}>Visit the live site</a></p>
+		<p class="release-share">
+			{url ? <a href={url}>Visit the live site</a> : <>Available upon request — <a href="/#contact">get in touch</a></>}
+		</p>
 	</article>
 </Layout>

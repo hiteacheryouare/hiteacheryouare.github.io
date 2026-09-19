@@ -25,9 +25,8 @@ A long-running side project that does exactly one thing: lower your self-esteem 
 It started in 2021 as a single-page HTML site and has since grown into:
 
 - A web app with a steadily expanding insult library
-- **MEGAMODE**
+- **MEGAMODE**, a rapid-fire mode for people who really want to be told off
 - An account system (Firebase Auth) with a per-user counter — some users are well into the thousands
 - A mobile build, via Capacitor, wrapping the same Svelte codebase into native iOS/Android shells
-- So many other things
 
-The whole thing lives in a Turborepo monorepo so the shared insult engine, the web app, and the mobile shell can all evolve together. Probably the dumbest thing I've ever shipped, but its my first baby and so I love it!
+The whole thing lives in a Turborepo monorepo so the shared insult engine, the web app, and the mobile shell can all evolve together. Not the most serious thing I've built, but it's my longest-running project and I still enjoy maintaining it.

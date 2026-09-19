@@ -21,4 +21,4 @@ tags:
 
 The Book Nook Project is a nonprofit founded by Jamie Dunn that gets books into the hands of underprivileged children, working through partners like LUCY Outreach, Mighty Writers, the Osborn Family Health Center, Providence House, Women Against Abuse, Cradles to Crayons, Angels Outreach, and the Philadelphia District Attorney's Office.
 
-I built and shipped the website as freelance work (truly free because it was free of charge), working directly with Jamie.
+I built and shipped the website pro bono, working directly with Jamie.
