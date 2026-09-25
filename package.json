@@ -36,6 +36,6 @@
     "patch-package": "^8.0.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "svelte": "^5.57.0"
+    "svelte": "^5.57.1"
   }
 }
