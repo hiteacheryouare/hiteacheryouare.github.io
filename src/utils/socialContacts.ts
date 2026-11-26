@@ -22,6 +22,11 @@ export const socialLinks: SocialLink[] = [
 			text: '/rpmullin06'
 		},
 		{
+			href: 'https://x.com/rpmullin06',
+			icon: 'twitter-x',
+			text: '/@rpmullin06'
+		},
+		{
 			href: "https://www.facebook.com/rpmullin06/",
 			icon: "facebook",
 			text: "/rpmullin06"
